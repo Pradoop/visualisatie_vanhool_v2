@@ -1,0 +1,33 @@
+CRITICAL - 2022-03-31 10:23:12 --> foreach() argument must be of type array|object, bool given
+#0 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\app\Views\main_visualisation.php(21): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argum...', 'C:\\Users\\Yanni\\...', 21)
+#1 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\View\View.php(210): include('C:\\Users\\Yanni\\...')
+#2 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\Common.php(1089): CodeIgniter\View\View->render('main_visualisat...', Array, true)
+#4 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\app\Controllers\Home.php(26): view('main_visualisat...', Array)
+#5 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(832): App\Controllers\Home->map_view()
+#6 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-03-31 10:23:23 --> foreach() argument must be of type array|object, bool given
+#0 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\app\Views\main_visualisation.php(21): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argum...', 'C:\\Users\\Yanni\\...', 21)
+#1 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\View\View.php(210): include('C:\\Users\\Yanni\\...')
+#2 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\Common.php(1089): CodeIgniter\View\View->render('main_visualisat...', Array, true)
+#4 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\app\Controllers\Home.php(26): view('main_visualisat...', Array)
+#5 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(832): App\Controllers\Home->map_view()
+#6 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}
+CRITICAL - 2022-03-31 10:25:24 --> foreach() argument must be of type array|object, bool given
+#0 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\app\Views\main_visualisation.php(19): CodeIgniter\Debug\Exceptions->errorHandler(2, 'foreach() argum...', 'C:\\Users\\Yanni\\...', 19)
+#1 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\View\View.php(210): include('C:\\Users\\Yanni\\...')
+#2 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\View\View.php(213): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#3 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\Common.php(1089): CodeIgniter\View\View->render('main_visualisat...', Array, true)
+#4 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\app\Controllers\Home.php(27): view('main_visualisat...', Array)
+#5 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(832): App\Controllers\Home->map_view()
+#6 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(419): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\system\CodeIgniter.php(326): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\Users\Yanni\IdeaProjects\visualisatie_vanhool_v2\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 {main}

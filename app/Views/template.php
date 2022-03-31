@@ -36,10 +36,10 @@
                 <button onclick="toggleMenu();">&#9776;</button>
             </li>
             <li class="menu-item hidden">
-                <a href="<?= base_url()?>/home/chassis_home">Home</a>
+                <a href="<?= base_url()?>/home/map_view">Map View</a>
             </li>
             <li class="menu-item hidden">
-                <a href="<?= base_url()?>/home/chassis_list">Chassis list</a>
+                <a href="<?= base_url()?>/home/detailed_view">Detailed View</a>
             </li>
         </ul>
     </div>
