@@ -39,7 +39,10 @@
                 <a href="<?= base_url()?>/home/map_view">Map View</a>
             </li>
             <li class="menu-item hidden">
-                <a href="<?= base_url()?>/home/detailed_view">Detailed View</a>
+                <a href="<?= base_url()?>/home/chassis_view">Chassis View</a>
+            </li>
+            <li class="menu-item hidden">
+                <a href="<?= base_url()?>/home/analyze_view">Analyze View</a>
             </li>
         </ul>
     </div>
