@@ -1,17 +1,6 @@
-.flex-container {
-  display: flex;
-}
-.flex-child {
-  flex: 1;
-  margin-top: 15px;
-  //border: 2px solid yellow;
-}
-.flex-child:first-child {
-  margin-right: 15px;
-}
-
 #map_div {
-  margin-left: 15px;
+  text-align: center;
+  margin-top: 15px;
 }
 #map {
   height: 350px;
@@ -19,28 +8,11 @@
 }
 
 #important_div {
+  margin-left: 15px;
   margin-right: 15px;
   text-align: center;
 }
 #important_div h1 {
-  margin-left: 15px;
-  margin-right: 15px;
-  border-bottom: solid 2px black;
-}
-#list_important_chassis {
-  max-height: 250px;
-  margin-left: 15px;
-  margin-right: 15px;
-  //border: 2px solid red;
-}
-
-#all_chassis_div {
-  margin-left: 15px;
-  margin-right: 15px;
-  text-align: center;
-  //border: 2px solid yellow;
-}
-#all_chassis_div h1 {
   margin-left: 15px;
   margin-right: 15px;
   border-bottom: solid 2px black;
@@ -51,11 +23,9 @@
   margin-right: 15px;
   margin-bottom: 15px;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  //border: 2px solid yellow;
 }
 .grid-child {
   margin: 5px;
-  //border: 2px solid red;
 }
 
 p {

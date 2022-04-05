@@ -28,7 +28,7 @@
     <div class="menu">
         <ul>
             <li class="logo">
-                <a href="<?= base_url()?>/home/chassis_home">
+                <a href="<?= base_url()?>/home/map_view">
                     <img id="logo" class="site-logo" src="<?= base_url()?>/images/logo_VanHool.png" alt="...">
                 </a>
             </li>
