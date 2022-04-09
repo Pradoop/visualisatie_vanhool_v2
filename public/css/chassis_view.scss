@@ -4,7 +4,7 @@
   text-align: center;
   //border: 2px solid yellow;
 }
-#all_chassis_div h1 {
+#all_chassis_div h1, .grid-child h2 {
   margin-left: 15px;
   margin-right: 15px;
   border-bottom: solid 2px black;
@@ -14,14 +14,10 @@
   margin-left: 15px;
   margin-right: 15px;
   margin-bottom: 15px;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   //border: 2px solid yellow;
 }
 .grid-child {
   margin: 5px;
-  //border: 2px solid red;
-}
-
-p {
-  font-size: 20px;
+  border: 2px solid red;
 }

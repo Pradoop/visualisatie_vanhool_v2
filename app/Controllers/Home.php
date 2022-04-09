@@ -28,7 +28,15 @@ class Home extends BaseController
 
     public function chassis_view()
     {
-        $data2["all_chassis"] = array(5,10,15,20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100,105,110,115,120,125,130,135,140,145,150,155,160,165,170,175,180,185,190,195,200);
+        $data2["chassis_info"] = array();
+        $handle = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt","r");
+        if($handle) {
+            while(($line = fgets($handle)) !== false) {
+                $word_array = explode("/\t+/", $line);
+                $data2["chassis_info"] = $word_array;
+            }
+            fclose($handle);
+        }
 
         array_push($this->data['styles_to_load'], 'chassis_view.scss');
         $this->data['content'] = view('chassis_view', $data2);
