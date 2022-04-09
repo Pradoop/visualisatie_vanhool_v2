@@ -1,3 +1,5 @@
+//TODO: Show enkel chassis nummers + popup met meer informatie
+
 <div id="map_div">
     <img id="map" class="site-map" src="<?= base_url()?>/images/map_hal5_hal6.png" alt="...">
 </div>
@@ -6,29 +8,29 @@
     <h1>Important Chassis</h1>
     <div class="grid-container">
         <?php $div_counter = 1; ?>
-        <?php foreach($important_chassis as $c): ?>
+        <?php foreach($chassis_info as $c): ?>
 
             <?php if($div_counter == 1): ?>
                 <div class="grid-child left">
-                    <p id="<?= 'chassis_'.$c?>"> Chassis_nr <?= $c ?></p>
+                    <p id="<?= 'chassis_'.$c[1]?>"><?= $c[1] ?></p>
                 </div>
             <?php endif; ?>
 
             <?php if($div_counter == 2): ?>
                 <div class="grid-child center_left">
-                    <p id="<?= 'chassis_'.$c?>"> Chassis_nr <?= $c ?></p>
+                    <p id="<?= 'chassis_'.$c[1]?>"><?= $c[1] ?></p>
                 </div>
             <?php endif; ?>
 
             <?php if($div_counter == 3): ?>
                 <div class="grid-child center_right">
-                    <p id="<?= 'chassis_'.$c?>"> Chassis_nr <?= $c ?></p>
+                    <p id="<?= 'chassis_'.$c[1]?>"><?= $c[1] ?></p>
                 </div>
             <?php endif; ?>
 
             <?php if($div_counter == 4): ?>
                 <div class="grid-child right">
-                    <p id="<?= 'chassis_'.$c?>"> Chassis_nr <?= $c ?></p>
+                    <p id="<?= 'chassis_'.$c[1]?>"><?= $c[1] ?></p>
                 </div>
             <?php endif; ?>
 

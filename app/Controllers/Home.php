@@ -3,16 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\BurgerModel;
+use App\Models\FileHandler;
 
 class Home extends BaseController
 {
 
     private $burger_menu;
+    private $file_model;
     private $data;
 
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
+        $this->file_model = new FileHandler();
         $this->data['scripts_to_load'] = array(); //js used everywhere
         $this->data['styles_to_load'] = array(); //css used everywhere
     }
@@ -25,7 +28,11 @@ class Home extends BaseController
     public function map_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map View');
-        $data2["important_chassis"] = array(926,758,419,784,964,569,773,679,806,306,398,507,638,307,769,915,101,445);
+
+        //$file = file("C:\Users\YAGU\Documents\ChassisInKaliberIVCopy.txt");
+        //$file = file("\\ivserver\mainframe\Student\ChassisInKaliberIV.txt");
+        $file = file("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt");
+        $data2["chassis_info"] = $this->file_model->readFile($file);
 
         array_push($this->data['styles_to_load'], 'map_view.scss');
         $this->data['content'] = view('map_view', $data2);
@@ -35,18 +42,11 @@ class Home extends BaseController
     public function chassis_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis View');
-        $data2["chassis_info"] = array();
 
-        //$handle = fopen("C:\Users\YAGU\Documents\ChassisInKaliberIVCopy.txt","r");
-        //$handle = fopen("\\ivserver\mainframe\Student\ChassisInKaliberIV.txt","r");
-        $handle = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt","r");
-        if($handle) {
-            while(($line = fgets($handle)) !== false) {
-                $word_array = preg_split('/\s+/', $line);
-                $data2["chassis_info"] = $word_array;
-            }
-            fclose($handle);
-        }
+        //$file = file("C:\Users\YAGU\Documents\ChassisInKaliberIVCopy.txt");
+        //$file = file("\\ivserver\mainframe\Student\ChassisInKaliberIV.txt");
+        $file = file("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt");
+        $data2["chassis_info"] = $this->file_model->readFile($file);
 
         array_push($this->data['styles_to_load'], 'chassis_view.scss');
         $this->data['content'] = view('chassis_view', $data2);
@@ -56,6 +56,7 @@ class Home extends BaseController
     public function analyze_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze View');
+
         array_push($this->data['styles_to_load'], 'analyze_view.scss');
         $this->data['content'] = view('analyze_view');
         return view('template', $this->data);
