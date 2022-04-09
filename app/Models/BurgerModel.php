@@ -28,8 +28,9 @@ class BurgerModel extends \CodeIgniter\Model
         }
     }
 
-    public function get_menuitems()
+    public function get_menuitems($menutitle)
     {
+        $this->set_active($menutitle);
         return $this->menu_items_all;
     }
 }
