@@ -37,10 +37,11 @@
             </li>
 
             <?php foreach ($burger_menu as $menu): ?>
-                <li class="menu-item hidden">
+                <li class="menu-item">
                     <a href="<?=$menu['link']?>" title="<?= $menu['title'] ?>" class="<?=$menu['className']?> link"> <?= $menu['name'] ?></a>
                 </li>
             <?php endforeach;?>
+
         </ul>
     </div>
 </header>

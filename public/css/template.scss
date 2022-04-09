@@ -50,6 +50,14 @@ header li.menu-item a:hover, header li.menu-item a:focus {
   background-color: #10395d;
   color: white;
 }
+.active {
+  text-decoration: underline;
+  padding: 1rem;
+}
+.inactive {
+  text-decoration: none;
+  padding: 1rem;
+}
 
 @media (max-width: 629px) {
   header ul {

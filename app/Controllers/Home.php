@@ -36,6 +36,9 @@ class Home extends BaseController
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis View');
         $data2["chassis_info"] = array();
+
+        //$handle = fopen("C:\Users\YAGU\Documents\ChassisInKaliberIVCopy.txt","r");
+        //$handle = fopen("\\ivserver\mainframe\Student\ChassisInKaliberIV.txt","r");
         $handle = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt","r");
         if($handle) {
             while(($line = fgets($handle)) !== false) {
