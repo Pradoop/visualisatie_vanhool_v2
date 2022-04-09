@@ -35,15 +35,12 @@
             <li class="menu-toggle">
                 <button onclick="toggleMenu();">&#9776;</button>
             </li>
-            <li class="menu-item hidden">
-                <a href="<?= base_url()?>/home/map_view">Map View</a>
-            </li>
-            <li class="menu-item hidden">
-                <a href="<?= base_url()?>/home/chassis_view">Chassis View</a>
-            </li>
-            <li class="menu-item hidden">
-                <a href="<?= base_url()?>/home/analyze_view">Analyze View</a>
-            </li>
+
+            <?php foreach ($burger_menu as $menu): ?>
+                <li class="menu-item hidden">
+                    <a href="<?=$menu['link']?>" title="<?= $menu['title'] ?>" class="<?=$menu['className']?> link"> <?= $menu['name'] ?></a>
+                </li>
+            <?php endforeach;?>
         </ul>
     </div>
 </header>
