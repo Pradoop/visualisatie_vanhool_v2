@@ -19,6 +19,7 @@ p {
   margin-right: 15px;
   margin-bottom: 15px;
   text-align: center;
+  border: 2px solid green;
 }
 #important_div h1 {
   margin-left: 15px;
@@ -28,7 +29,7 @@ p {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   border: 2px solid red;
 }
 .grid-child {

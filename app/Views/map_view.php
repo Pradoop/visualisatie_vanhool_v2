@@ -33,9 +33,15 @@
                 </div>
             <?php endif; ?>
 
+            <?php if($div_counter == 5): ?>
+                <div class="grid-child right">
+                    <p id="<?= 'chassis_'.$chassis_info[$i][1]?>"><?= $chassis_info[$i][1] ?></p>
+                </div>
+            <?php endif; ?>
+
             <?php $i++; ?>
             <?php $div_counter++; ?>
-            <?php if($div_counter > 4): ?>
+            <?php if($div_counter > 5): ?>
                 <?php $div_counter = 1; ?>
             <?php endif; ?>
 
