@@ -34,6 +34,7 @@ class Home extends BaseController
         $file = file("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt");
         $data2["chassis_info"] = $this->file_model->readFile($file);
 
+        array_push($this->data['scripts_to_load'], 'map_view.js');
         array_push($this->data['styles_to_load'], 'map_view.scss');
         $this->data['content'] = view('map_view', $data2);
         return view('template', $this->data);
