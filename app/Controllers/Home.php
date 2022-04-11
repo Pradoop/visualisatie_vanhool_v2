@@ -55,8 +55,4 @@ class Home extends BaseController
         return view('template', $this->data);
     }
 
-    public function someFunction(){
-    //some function
-        //Test
-    }
 }
