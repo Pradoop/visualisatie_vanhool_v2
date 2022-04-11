@@ -4,7 +4,7 @@
   margin-top: 15px;
   margin-left: 15px;
   margin-right: 15px;
-  border: 2px solid green;
+  //border: 2px solid green;
 }
 #map {
   margin-top: 5px;
@@ -16,7 +16,7 @@
 #important_div {
   margin: 15px;
   text-align: center;
-  border: 2px solid green;
+  //border: 2px solid green;
 }
 .grid-container {
   display: grid;
@@ -24,14 +24,17 @@
 }
 .grid-child {
   margin: 5px;
-  border: 2px solid yellow;
+  //border: 2px solid yellow;
 }
 
 /* Algemeen */
+.popover {
+  white-space: pre-line;
+}
 p {
   font-size: 20px;
   margin: 5px;
-  border: 2px solid red;
+  //border: 2px solid red;
 }
 p:hover {
   color: #10395d;

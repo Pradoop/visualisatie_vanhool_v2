@@ -5,11 +5,11 @@
   text-align: center;
   margin-left: 15px;
   margin-right: 15px;
-  border: 2px solid green;
+  //border: 2px solid green;
 }
 .grid-child {
   margin: 5px;
-  border: 2px solid yellow;
+  //border: 2px solid yellow;
 }
 .grid-child h2 {
   font-size: 1.5em;
@@ -22,13 +22,21 @@
 /* Test Div */
 #test_div {
   text-align: center;
-  margin-top: 15px;
-  margin-left: 15px;
-  margin-right: 15px;
-  border: 2px solid green;
+  margin: 15px;
+  //border: 2px solid green;
 }
 
 /* Algemeen */
+.popover {
+  white-space: pre-line;
+}
+p {
+  margin: 5px;
+  //border: 2px solid red;
+}
+p:hover {
+  color: #10395d;
+}
 h1 {
   font-size: 2em;
   margin-left: 15px;
