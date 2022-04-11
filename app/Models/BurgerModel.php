@@ -9,9 +9,9 @@ class BurgerModel extends \CodeIgniter\Model
     public function __construct()
     {
         $this->menu_items_all= array(
-            array('name'=> 'Map View', 'title' => 'map_hover', 'link'=>'map_view', 'className'=>'active'),
-            array('name'=> 'Chassis View', 'title' => 'chassis_hover', 'link'=>'chassis_view', 'className'=>'inactive'),
-            array('name'=> 'Analyze View', 'title' => 'analyze_hover', 'link'=>'analyze_view', 'className'=>'inactive'),
+            array('name'=> 'Map', 'title' => 'map_hover', 'link'=>'map_view', 'className'=>'active'),
+            array('name'=> 'Chassis', 'title' => 'chassis_hover', 'link'=>'chassis_view', 'className'=>'inactive'),
+            array('name'=> 'Analyze', 'title' => 'analyze_hover', 'link'=>'analyze_view', 'className'=>'inactive'),
         );
     }
 

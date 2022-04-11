@@ -27,7 +27,7 @@ class Home extends BaseController
 
     public function map_view()
     {
-        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map View');
+        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map');
         $data2["chassis_info"] = $this->file_model->readFile();
 
         array_push($this->data['scripts_to_load'], 'map_view.js');
@@ -38,7 +38,7 @@ class Home extends BaseController
 
     public function chassis_view()
     {
-        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis View');
+        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis');
         $data2["chassis_info"] = $this->file_model->readFile();
 
         array_push($this->data['styles_to_load'], 'chassis_view.scss');
@@ -48,10 +48,11 @@ class Home extends BaseController
 
     public function analyze_view()
     {
-        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze View');
+        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze');
+        $data2["chassis_info"] = $this->file_model->readFile();
 
         array_push($this->data['styles_to_load'], 'analyze_view.scss');
-        $this->data['content'] = view('analyze_view');
+        $this->data['content'] = view('analyze_view', $data2);
         return view('template', $this->data);
     }
 
