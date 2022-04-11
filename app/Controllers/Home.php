@@ -54,4 +54,6 @@ class Home extends BaseController
         $this->data['content'] = view('analyze_view');
         return view('template', $this->data);
     }
+
+    public function someFunction(){}
 }
