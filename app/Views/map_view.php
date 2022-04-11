@@ -8,35 +8,35 @@
         <div class="grid-child col1">
             <?php $i = 1; ?>
             <?php while($i < sizeof($chassis_info)): ?>
-                <p><?= $chassis_info[$i][1] ?></p>
+                <p id="<?= 'chassis_'.$i?>"><?= $chassis_info[$i][1] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
         <div class="grid-child col2">
             <?php $i = 2; ?>
             <?php while($i < sizeof($chassis_info)): ?>
-                <p><?= $chassis_info[$i][1] ?></p>
+                <p id="<?= 'chassis_'.$i?>"><?= $chassis_info[$i][1] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
         <div class="grid-child col3">
             <?php $i = 3; ?>
             <?php while($i < sizeof($chassis_info)): ?>
-                <p><?= $chassis_info[$i][1] ?></p>
+                <p id="<?= 'chassis_'.$i?>"><?= $chassis_info[$i][1] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
         <div class="grid-child col4">
             <?php $i = 4; ?>
             <?php while($i < sizeof($chassis_info)): ?>
-                <p><?= $chassis_info[$i][1] ?></p>
+                <p id="<?= 'chassis_'.$i?>"><?= $chassis_info[$i][1] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
         <div class="grid-child col5">
             <?php $i = 5; ?>
             <?php while($i < sizeof($chassis_info)): ?>
-                <p><?= $chassis_info[$i][1] ?></p>
+                <p id="<?= 'chassis_'.$i?>"><?= $chassis_info[$i][1] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
