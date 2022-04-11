@@ -57,5 +57,6 @@ class Home extends BaseController
 
     public function someFunction(){
     //some function
+        //Test
     }
 }
