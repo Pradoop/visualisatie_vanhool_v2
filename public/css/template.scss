@@ -6,6 +6,7 @@ html, body {
 header {
   background-color: rgba(247, 248, 249, 1);
   padding: .4rem 0 0;
+  height: 80px;
 }
 header ul {
   margin: 0;
@@ -47,8 +48,8 @@ header li.menu-item a {
   text-align: center;
 }
 header li.menu-item a:hover, header li.menu-item a:focus {
-  background-color: #10395d;
-  color: white;
+  text-decoration: underline;
+  color: #10395d;
 }
 .active {
   text-decoration: underline;
@@ -58,32 +59,4 @@ header li.menu-item a:hover, header li.menu-item a:focus {
 .inactive {
   text-decoration: none;
   padding: 1rem;
-}
-
-@media (max-width: 629px) {
-  header ul {
-    padding: 0;
-  }
-  header .menu-toggle {
-    padding: 0 1rem;
-  }
-  header .menu-item {
-    background-color: rgba(244, 245, 246, 1);
-    border-top: 1px solid rgba(242, 242, 242, 1);
-    margin: 0 15px;
-    width: calc(100% - 30px);
-  }
-  header .menu-toggle {
-    display: block;
-  }
-  header .hidden {
-    display: none;
-  }
-  header li.menu-item a {
-    background-color: #10395d;
-  }
-  header li.menu-item a:hover, header li.menu-item a:focus {
-    background-color: #10395d;
-    color: white;
-  }
 }

@@ -3,8 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>IV Van Hool</title>
-    <meta name="description" content="Visualisation Van Hool">
+    <title>Van Hool IV</title>
+    <meta name="description" content="Visualisation Van Hool Hal5 & Hal6">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="icon" href="<?= base_url()?>/images/logo_VanHool.png" >
@@ -51,6 +51,21 @@
         <?=$content ?>
     <?php endif; ?>
 </div>
+
+<!-- Enable tooltips !-->
+<script>
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    })
+</script>
+<!-- Enable popovers !-->
+<script>
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
+    })
+</script>
 
 </body>
 </html>

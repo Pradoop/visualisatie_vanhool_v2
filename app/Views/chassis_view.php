@@ -40,3 +40,7 @@
         <p><?= $chassis_info[1][13] ?></p>
     </div>
 </div>
+
+<div id="test_div">
+    <h1>Test Area</h1>
+</div>

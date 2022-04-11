@@ -16,8 +16,8 @@ class Home extends BaseController
     {
         $this->burger_menu = new BurgerModel();
         $this->file_model = new FileHandler();
-        $this->data['scripts_to_load'] = array(); //js used everywhere
-        $this->data['styles_to_load'] = array(); //css used everywhere
+        $this->data['scripts_to_load'] = array('jquery.min.js','bootstrap.bundle.min.js'); //js used everywhere
+        $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
 
     public function index()
