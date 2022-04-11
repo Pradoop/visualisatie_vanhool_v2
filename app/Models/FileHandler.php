@@ -10,9 +10,12 @@ class FileHandler extends \CodeIgniter\Model
 
     }
 
-    public function readFile($file)
+    public function readFile()
     {
         $main_array = array();
+        //$file = file("C:\Users\YAGU\Documents\ChassisInKaliberIVCopy.txt");
+        //$file = file("\\ivserver\mainframe\Student\ChassisInKaliberIV.txt");
+        $file = file("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt");
         $count_lines = count($file);
         $i = 0;
         while($i < $count_lines) {

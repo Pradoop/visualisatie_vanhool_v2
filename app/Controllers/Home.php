@@ -28,11 +28,7 @@ class Home extends BaseController
     public function map_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map View');
-
-        //$file = file("C:\Users\YAGU\Documents\ChassisInKaliberIVCopy.txt");
-        //$file = file("\\ivserver\mainframe\Student\ChassisInKaliberIV.txt");
-        $file = file("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt");
-        $data2["chassis_info"] = $this->file_model->readFile($file);
+        $data2["chassis_info"] = $this->file_model->readFile();
 
         array_push($this->data['scripts_to_load'], 'map_view.js');
         array_push($this->data['styles_to_load'], 'map_view.scss');
@@ -43,11 +39,7 @@ class Home extends BaseController
     public function chassis_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis View');
-
-        //$file = file("C:\Users\YAGU\Documents\ChassisInKaliberIVCopy.txt");
-        //$file = file("\\ivserver\mainframe\Student\ChassisInKaliberIV.txt");
-        $file = file("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\TestFile.txt");
-        $data2["chassis_info"] = $this->file_model->readFile($file);
+        $data2["chassis_info"] = $this->file_model->readFile();
 
         array_push($this->data['styles_to_load'], 'chassis_view.scss');
         $this->data['content'] = view('chassis_view', $data2);
