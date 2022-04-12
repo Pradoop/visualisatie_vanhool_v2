@@ -82,12 +82,3 @@
         <?php endwhile; ?>
     </div>
 </div>
-
-<div id="test_div">
-    <h1>Test Area</h1>
-    <?php $i = 1; ?>
-    <?php while($i < sizeof($chassis_info)): ?>
-        <p id="<?= 'chassis_'.$i?>"><?= $chassis_info[$i][1] ?></p>
-        <?php $i++; ?>
-    <?php endwhile; ?>
-</div>
