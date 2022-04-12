@@ -3,7 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\BurgerModel;
-use App\Models\FileHandler;
+use App\Models\FileModel;
 
 class Home extends BaseController
 {
@@ -15,7 +15,7 @@ class Home extends BaseController
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
-        $this->file_model = new FileHandler();
+        $this->file_model = new FileModel();
         $this->data['scripts_to_load'] = array('jquery.min.js','bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
