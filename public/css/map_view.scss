@@ -20,10 +20,13 @@
 }
 .grid-container {
   display: grid;
+  justify-items: center;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }
 .grid-child {
-  margin: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 100px;
   //border: 2px solid yellow;
 }
 

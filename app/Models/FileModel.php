@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class FileHandler extends \CodeIgniter\Model
+class FileModel extends \CodeIgniter\Model
 {
 
     public function __construct()
