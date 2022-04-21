@@ -1,3 +1,5 @@
+<script > let chassis_info = <?php echo json_encode($chassis_info); ?>;</script>
+
 <div id="map_div">
     <h1>Hal 5 & Hal 6</h1>
     <img id="map" class="site-map" src="<?= base_url()?>/images/map_hal5_hal6.png" alt="...">
