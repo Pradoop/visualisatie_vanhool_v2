@@ -1,7 +1,20 @@
 /* Table Title div */
 #table_title {
-  text-align: center;
+  display: flex;
   margin: 15px;
+}
+#afdelingNaam {
+  width: 75%;
+}
+#filter {
+  width: 8%;
+}
+#searchBox {
+  margin-left: 15px;
+  width: 17%;
+}
+#search_input {
+  width: 210px;
 }
 
 /* Table */
