@@ -17,7 +17,7 @@ class FileModel extends \CodeIgniter\Model
         $count_lines = count($file);
         $i = 0;
         while($i < $count_lines) {
-            $array = preg_split('/\s+/', $file[$i]);
+            $array = preg_split('/\t/', $file[$i]);
             array_push($main_array, $array);
             $i++;
         }
