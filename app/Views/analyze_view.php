@@ -1,4 +1,5 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
+<script > let BASE_URL = "<?=base_url();?>";</script>
 
 
 <div id="general_information">
@@ -42,6 +43,7 @@
                             <td><?= $value; ?></td>
                         </tr>
                     <?php endforeach; ?>
+                    <?php echo base_url()?>
                 </table>
             </div>
         </div>

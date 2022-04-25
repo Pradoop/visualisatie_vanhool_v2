@@ -1,8 +1,9 @@
-document.getElementById("bar_chart").innerHTML = createPieChartWelding();
+//document.addEventListener("DOMContentLoaded", createPieChartWelding());
 
-var data = [4, 8, 15, 16, 23, 42]
+var data = [3, 10, 5, 26]
 
 function createPieChartWelding(){
+    console.log(data)
     const div = d3.create("div")
         .style("font", "10px sans-serif")
         .style("text-align", "right")
@@ -19,3 +20,19 @@ function createPieChartWelding(){
 
     return div.node();
     }
+
+
+$.ajax({
+    url: BASE_URL + '/Home/calculateWeldingData',
+    method: "GET",
+    success: function (res) {
+        console.log("SUCCESS")
+        console.log(res);
+        alert(res);
+    },
+    error: function (xhr, status, error) {
+        console.log("ERROR")
+        console.log(xhr.responseText);
+        console.log(error.responseText);
+    }
+});
