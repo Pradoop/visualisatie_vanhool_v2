@@ -53,7 +53,7 @@ class Home extends BaseController
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze');
         $data2["chassis_info"] = $this->file_model->readFile();
 
-        $total_in_production = $this->calculateTotalInProduction();
+        $total_in_production = $this->calculateTotalInProduction($data2["chassis_info"]);
         $data2["total_in_production"] = $total_in_production;
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
@@ -69,12 +69,11 @@ class Home extends BaseController
      * Explanation: Function searches based on the following statuses:
      * 38, 07, 83, 85, 86, 8, 81. If there is a match, then the chassis is in production
      */
-    public function calculateTotalInProduction(){
+    public function calculateTotalInProduction($my_array){
         $line_number = 1;
         $total_produced = 0;
-        $chassis_info = $this->file_model->readFile();
-        while ($line_number < sizeof($chassis_info)):
-            switch ($chassis_info[$line_number][14]){
+        while ($line_number < sizeof($my_array)):
+            switch ($my_array[$line_number][14]){
                 case 38:
                     $total_produced++;
                     break;
@@ -100,6 +99,10 @@ class Home extends BaseController
             $line_number++;
         endwhile;
         return $total_produced;
+    }
+
+    public function averageDelay(){
+
     }
 
 }
