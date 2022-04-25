@@ -9,8 +9,7 @@
                 <p class="information_text"> Aantal chassis in productie:</p>
                 <p class="information_value"><?= $total_in_production[0] ?> chassis</p>
             </div>
-            <div class="pie-chart" id="my_dataviz">
-
+            <div class="chart" id="bar_chart">
 
             </div>
         </div>
