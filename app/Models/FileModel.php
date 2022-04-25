@@ -12,16 +12,17 @@ class FileModel extends \CodeIgniter\Model
 
     public function readFile()
     {
-        $main_array = array();
-        $file = file("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt");
-        $count_lines = count($file);
-        $i = 0;
-        while($i < $count_lines) {
-            $array = preg_split('/\t/', $file[$i]);
-            array_push($main_array, $array);
-            $i++;
+        $file_array = array();
+        $file = fopen("", "r");
+
+        if($file) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                array_push($file_array, $line);
+            }
+            fclose($file);
         }
-        return $main_array;
+        return $file_array;
     }
 
 
