@@ -56,6 +56,7 @@ class Home extends BaseController
         $data2["total_in_production"]  = $this->file_model->calculateTotalInProduction($data2["chassis_info"]);
         $data2["average_delay"] = $this->file_model->calculateAverageDelay($data2["chassis_info"]);
         $data2["percentage_delayed"] = $this->file_model->calculatePercentageDelayed($data2["chassis_info"]);
+        $data2["welding_percentages"] = $this->file_model->calculateWeldingPercentages($data2["chassis_info"]);
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
         array_push($this->data['styles_to_load'], 'analyze_view.scss');

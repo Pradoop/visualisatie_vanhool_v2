@@ -8,18 +8,21 @@
             <div class="information_1">
                 <p class="information_text"> Aantal chassis in productie:</p>
                 <p class="information_value"><?= $total_in_production[0] ?> chassis</p>
+            </div>
+            <div class="pie-chart" id="my_dataviz">
+
 
             </div>
         </div>
         <div class="grid-child col2">
             <div class="information_2">
-                <p class="information_text"> Percentage chassis vertraagd:</p>
+                <p class="information_text"> Percentage chassis vertraagd T.O.V. contractdatum:</p>
                 <p class="information_value"><?= $percentage_delayed ?> %</p>
             </div>
         </div>
         <div class="grid-child col3">
             <div class="information_3">
-                <p class="information_text"> Gemiddeld aantal werkdagen te laat:</p>
+                <p class="information_text"> Gemiddeld aantal werkdagen te laat T.O.V. contractdatum:</p>
                 <p class="information_value"><?= $average_delay ?> dagen</p>
             </div>
 
@@ -32,7 +35,15 @@
         </div>
         <div class="grid-child col5">
             <div class="information_5">
-                <p class="information_text"> TBD</p>
+                <p class="information_text"> Gemiddelde tijd om één chassis in productie af te werken:</p>
+                <table>
+                    <?php foreach($welding_percentages as $key=>$value): ?>
+                        <tr>
+                            <td><?= $key; ?></td>
+                            <td><?= $value; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
             </div>
         </div>
     </div>

@@ -26,9 +26,9 @@ class FileModel extends \CodeIgniter\Model
 
 
     /*
-    * Function to calculate total amount of chassis in production.
+    * Function to calculate total amount of chassis in production and percentage in production.
     * Input: Array that contains all the information (so the textfile)
-    * Output: Total amount of chassis in production
+    * Output: Total amount of chassis in production and percentage of chassis in production
     * Explanation: Function searches based on the following statuses:
     * 38, 07, 83, 85, 86, 8, 81. If there is a match, then the chassis is in production and value is incremented
     */
@@ -36,28 +36,15 @@ class FileModel extends \CodeIgniter\Model
         $production_array = array();
         $line_number = 1;
         $total_in_production = 0;
-        $percentage_in_production = 0;
         while ($line_number < sizeof($my_array)):
             switch ($my_array[$line_number][14]){
-                case 38:
-                    $total_in_production++;
-                    break;
                 case 07:
-                    $total_in_production++;
-                    break;
                 case 3:
-                    $total_in_production++;
-                    break;
                 case 85:
-                    $total_in_production++;
-                    break;
                 case 86:
-                    $total_in_production++;
-                    break;
                 case 8:
-                    $total_in_production++;
-                    break;
                 case 81:
+                case 38:
                     $total_in_production++;
                     break;
             }
@@ -112,5 +99,44 @@ class FileModel extends \CodeIgniter\Model
         return round(($delayed/$line_number)*100, 2, PHP_ROUND_HALF_UP);
     }
 
+    /* Function to calculate the percentages of cars to be welded by hand, to be welded using the robot,
+     * finished welding by robot, or to be decided in general
+     * Input: Array that contains all the information (so the textfile)
+     * Output: Returns an array with the amount of chassis for each possibility
+     * Explanation: array initialized with the different possibilities, which are abbreviations of the variables
+     * based on value of the column, they are added in the list.
+     */
+    public function calculateWeldingPercentages($my_array)
+    {
+        $line_number = 1;
+        $to_be_decided = 0;
+        $manual_welding = 0;
+        $prep_robot = 0;
+        $finish_robot = 0;
 
+        while ($line_number < sizeof($my_array)):
+            switch ($my_array[$line_number][18]) {
+                case "L0":
+                    $to_be_decided++;
+                    break;
+                case "L1":
+                    $manual_welding++;
+                    break;
+                case "L2":
+                    $prep_robot++;
+                    break;
+                case "L3":
+                    $finish_robot++;
+                    break;
+            }
+            $line_number++;
+        endwhile;
+
+        return [
+            "tbd" => $to_be_decided,
+            "mw" => $manual_welding,
+            "pr" => $prep_robot,
+            "fr" => $finish_robot
+        ];
+    }
 }
