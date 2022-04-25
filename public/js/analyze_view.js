@@ -1,28 +1,38 @@
-//Enable tooltip
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-    return new bootstrap.Tooltip(tooltipTriggerEl)
-})
+//document.addEventListener("DOMContentLoaded", createPieChartWelding());
 
-//Enable Popover
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-    return new bootstrap.Popover(popoverTriggerEl)
-})
+var data = [3, 10, 5, 26]
 
-//Generate popovers
-for(let i = 1; i < chassis_info.length; i++) {
-    $('#chassis_' + i).popover({
-        trigger: 'click',
-        title: 'Chassis: ' + chassis_info[i][1],
-        content: 'DLnr: ' + chassis_info[i][2] + '\n' +
-            'Kaliber: ' + chassis_info[i][3] + ' ' + chassis_info[i][4] + '\n' +
-            'NaamFase: ' + chassis_info[i][5] + '\n' +
-            'NaamKlant: ' + chassis_info[i][6] + ' ' + chassis_info[i][7] + ' ' + chassis_info[i][8]  + '\n' +
-            'NaamType: ' + chassis_info[i][9] + '\n' +
-            'Natie: ' + chassis_info[i][10] + '\n' +
-            'StandInProd: ' + chassis_info[i][11] + '\n' +
-            'ReeksVan: ' + chassis_info[i][12] + '\n' +
-            'ReeksTot: ' + chassis_info[i][13] + '\n'
-    });
-}
+function createPieChartWelding(){
+    console.log(data)
+    const div = d3.create("div")
+        .style("font", "10px sans-serif")
+        .style("text-align", "right")
+        .style("color", "white");
+
+    div.selectAll("div")
+        .data(data)
+        .join("div")
+        .style("background", "steelblue")
+        .style("padding", "3px")
+        .style("margin", "1px")
+        .style("width", d => `${d * 10}px`)
+        .text(d => d);
+
+    return div.node();
+    }
+
+
+$.ajax({
+    url: BASE_URL + '/Home/calculateWeldingData',
+    method: "GET",
+    success: function (res) {
+        console.log("SUCCESS")
+        console.log(res);
+        alert(res);
+    },
+    error: function (xhr, status, error) {
+        console.log("ERROR")
+        console.log(xhr.responseText);
+        console.log(error.responseText);
+    }
+});
