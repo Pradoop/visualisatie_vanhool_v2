@@ -29,7 +29,7 @@ class Home extends BaseController
     public function map_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map');
-        $data2["chassis_info"] = $this->file_model->readFile();
+        $data2["chassis_info"] = $this->file_model->readFile()[0];
 
         array_push($this->data['scripts_to_load'], 'map_view.js');
         array_push($this->data['styles_to_load'], 'map_view.scss');
@@ -40,7 +40,7 @@ class Home extends BaseController
     public function chassis_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis');
-        $data2["chassis_info"] = $this->file_model->readFile();
+        $data2["chassis_info"] = $this->file_model->readFile()[0];
 
         array_push($this->data['scripts_to_load'], 'chassis_view.js');
         array_push($this->data['styles_to_load'], 'chassis_view.scss');
@@ -51,11 +51,11 @@ class Home extends BaseController
     public function analyze_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze');
-        $data2["chassis_info"] = $this->file_model->readFile();
+        $data2["chassis_info"] = $this->file_model->readFile()[0];
 
-        $data2["total_in_production"]  = $this->file_model->calculateTotalInProduction($data2["chassis_info"]);
-        $data2["average_delay"] = $this->file_model->calculateAverageDelay($data2["chassis_info"]);
-        $data2["percentage_delayed"] = $this->file_model->calculatePercentageDelayed($data2["chassis_info"]);
+        $data2["total_in_production"]  = $this->file_model->calculateTotalInProduction($this->file_model->readFile()[1]);
+        $data2["percentage_delayed"] = $this->file_model->calculatePercentageDelayed($this->file_model->readFile()[2]);
+        $data2["average_delay"] = $this->file_model->calculateAverageDelay($this->file_model->readFile()[2]);
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
         array_push($this->data['styles_to_load'], 'analyze_view.scss');
