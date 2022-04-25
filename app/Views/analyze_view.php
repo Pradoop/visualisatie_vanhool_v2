@@ -7,7 +7,7 @@
         <div class="grid-child col1">
             <div class="information_1">
                 <p class="information_text"> Aantal chassis in productie:</p>
-                <p class="information_value"><?= $total_in_production ?> chassis</p>
+                <p class="information_value"><?= $total_in_production[0] ?> chassis</p>
 
             </div>
         </div>
@@ -27,11 +27,12 @@
         <div class="grid-child col4">
             <div class="information_4">
                 <p class="information_text"> Percentage chassis in productielijn:</p>
+                <p class="information_value"><?= $total_in_production[1] ?> %</p>
             </div>
         </div>
         <div class="grid-child col5">
             <div class="information_5">
-                <p class="information_text"> TBA</p>
+                <p class="information_text"> TBD</p>
             </div>
         </div>
     </div>

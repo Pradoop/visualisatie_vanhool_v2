@@ -33,35 +33,41 @@ class FileModel extends \CodeIgniter\Model
     * 38, 07, 83, 85, 86, 8, 81. If there is a match, then the chassis is in production and value is incremented
     */
     public function calculateTotalInProduction($my_array){
+        $production_array = array();
         $line_number = 1;
-        $total_produced = 0;
+        $total_in_production = 0;
+        $percentage_in_production = 0;
         while ($line_number < sizeof($my_array)):
             switch ($my_array[$line_number][14]){
                 case 38:
-                    $total_produced++;
+                    $total_in_production++;
                     break;
                 case 07:
-                    $total_produced++;
+                    $total_in_production++;
                     break;
                 case 3:
-                    $total_produced++;
+                    $total_in_production++;
                     break;
                 case 85:
-                    $total_produced++;
+                    $total_in_production++;
                     break;
                 case 86:
-                    $total_produced++;
+                    $total_in_production++;
                     break;
                 case 8:
-                    $total_produced++;
+                    $total_in_production++;
                     break;
                 case 81:
-                    $total_produced++;
+                    $total_in_production++;
                     break;
             }
             $line_number++;
         endwhile;
-        return $total_produced;
+        $percentage_in_production = round(($total_in_production/($line_number-1))*100, 2, PHP_ROUND_HALF_UP);
+
+        $production_array[0] = $total_in_production;
+        $production_array[1] = $percentage_in_production;
+        return $production_array;
     }
 
     /*
@@ -105,5 +111,6 @@ class FileModel extends \CodeIgniter\Model
         endwhile;
         return round(($delayed/$line_number)*100, 2, PHP_ROUND_HALF_UP);
     }
+
 
 }
