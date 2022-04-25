@@ -53,12 +53,9 @@ class Home extends BaseController
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze');
         $data2["chassis_info"] = $this->file_model->readFile();
 
-        $total_in_production = $this->file_model->calculateTotalInProduction($data2["chassis_info"]);
-        $data2["total_in_production"] = $total_in_production;
-
-        //$delay_array = $data2["chassis_info"];
-        $average_delay = $this->file_model->calculateAverageDelay($data2["chassis_info"]);
-        $data2["average_delay"] = $average_delay;
+        $data2["total_in_production"]  = $this->file_model->calculateTotalInProduction($data2["chassis_info"]);
+        $data2["average_delay"] = $this->file_model->calculateAverageDelay($data2["chassis_info"]);
+        $data2["percentage_delayed"] = $this->file_model->calculatePercentageDelayed($data2["chassis_info"]);
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
         array_push($this->data['styles_to_load'], 'analyze_view.scss');

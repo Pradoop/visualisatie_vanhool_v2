@@ -7,19 +7,20 @@
         <div class="grid-child col1">
             <div class="information_1">
                 <p class="information_text"> Aantal chassis in productie:</p>
-                <p class="information_value"><?= $total_in_production ?></p>
+                <p class="information_value"><?= $total_in_production ?> chassis</p>
 
             </div>
         </div>
         <div class="grid-child col2">
             <div class="information_2">
                 <p class="information_text"> Percentage chassis vertraagd:</p>
+                <p class="information_value"><?= $percentage_delayed ?> %</p>
             </div>
         </div>
         <div class="grid-child col3">
             <div class="information_3">
                 <p class="information_text"> Gemiddeld aantal werkdagen te laat:</p>
-                <p class="information_value"><?= $average_delay ?></p>
+                <p class="information_value"><?= $average_delay ?> dagen</p>
             </div>
 
         </div>
