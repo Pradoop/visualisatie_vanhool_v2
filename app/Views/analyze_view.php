@@ -19,6 +19,7 @@
         <div class="grid-child col3">
             <div class="information_3">
                 <p class="information_text"> Gemiddeld aantal werkdagen te laat:</p>
+                <p class="information_value"><?= $average_delay ?></p>
             </div>
         </div>
         <div class="grid-child col4">

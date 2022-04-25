@@ -56,6 +56,9 @@ class Home extends BaseController
         $total_in_production = $this->calculateTotalInProduction($data2["chassis_info"]);
         $data2["total_in_production"] = $total_in_production;
 
+        $average_delay = $this->calculateAverageDelay($data2["chassis_info"]);
+        $data2["average_delay"] = $average_delay;
+
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
         array_push($this->data['styles_to_load'], 'analyze_view.scss');
         $this->data['content'] = view('analyze_view', $data2);
@@ -64,10 +67,10 @@ class Home extends BaseController
 
     /*
      * Function to calculate total amount of chassis in production.
-     * Input: Array from which is being read
+     * Input: Array that contains all the information (so the textfile)
      * Output: Total amount of chassis in production
      * Explanation: Function searches based on the following statuses:
-     * 38, 07, 83, 85, 86, 8, 81. If there is a match, then the chassis is in production
+     * 38, 07, 83, 85, 86, 8, 81. If there is a match, then the chassis is in production and value is incremented
      */
     public function calculateTotalInProduction($my_array){
         $line_number = 1;
@@ -101,8 +104,18 @@ class Home extends BaseController
         return $total_produced;
     }
 
-    public function averageDelay(){
+    public function calculateAverageDelay($my_array)
+    {
+        $line_number = 1;
+        $total_delay = 0;
+        $total_produced = 0;
 
+        while ($line_number < sizeof($my_array)):
+            $total_delay += $my_array[$line_number][14];
+            $total_produced++;
+        endwhile;
+
+        return $total_delay / $total_produced;
     }
 
 }
