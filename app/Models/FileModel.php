@@ -17,7 +17,7 @@ class FileModel extends \CodeIgniter\Model
         $total_in_production_array = array();
         $percentage_delayed_array = array();
 
-        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)/planningMontage.txt", "r");
+        $file = fopen("", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
@@ -26,13 +26,21 @@ class FileModel extends \CodeIgniter\Model
             fclose($file);
         }
 
-        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)/VanHoolTestFile.txt", "r");
-        //$file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)/planningMontage.txt", "r");
+        $file = fopen("", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
                 $array = preg_split('/\t/', $line);
                 array_push($total_in_production_array, $array[14]);
+            }
+            fclose($file);
+        }
+
+        $file = fopen("", "r");
+        if($file) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                $array = preg_split('/\t/', $line);
                 array_push($percentage_delayed_array, $array[16]);
             }
             fclose($file);

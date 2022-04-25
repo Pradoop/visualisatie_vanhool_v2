@@ -51,7 +51,8 @@ class Home extends BaseController
     public function analyze_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze');
-        $data2["chassis_info"] = $this->file_model->readFile()[0];
+
+        $data2["test"] = $this->file_model->readFile();
 
         $data2["total_in_production"]  = $this->file_model->calculateTotalInProduction($this->file_model->readFile()[1]);
         $data2["percentage_delayed"] = $this->file_model->calculatePercentageDelayed($this->file_model->readFile()[2]);
