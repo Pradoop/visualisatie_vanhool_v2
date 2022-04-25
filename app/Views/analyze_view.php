@@ -7,6 +7,8 @@
         <div class="grid-child col1">
             <div class="information_1">
                 <p class="information_text"> Aantal chassis in productie:</p>
+                <p class="information_value"><?= $total_in_production ?></p>
+
             </div>
         </div>
         <div class="grid-child col2">
