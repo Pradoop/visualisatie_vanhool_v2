@@ -1,6 +1,4 @@
 <script src="https://d3js.org/d3.v7.min.js"></script>
-<script > let BASE_URL = "<?=base_url();?>";</script>
-
 
 <div id="general_information">
     <h1>Dashboard</h1>

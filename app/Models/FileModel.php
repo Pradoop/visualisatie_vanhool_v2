@@ -18,7 +18,7 @@ class FileModel extends \CodeIgniter\Model
         $percentage_delayed_array = array();
         $welding_data_array = array();
 
-        $file = fopen("", "r");
+        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
@@ -27,7 +27,7 @@ class FileModel extends \CodeIgniter\Model
             fclose($file);
         }
 
-        $file = fopen("", "r");
+        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
@@ -37,7 +37,7 @@ class FileModel extends \CodeIgniter\Model
             fclose($file);
         }
 
-        $file = fopen("", "r");
+        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
@@ -47,7 +47,7 @@ class FileModel extends \CodeIgniter\Model
             fclose($file);
         }
 
-        $file = fopen("", "r");
+        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);

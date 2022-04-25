@@ -55,7 +55,8 @@ class Home extends BaseController
         $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->readFile()[1]);
         $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->readFile()[2]);
         $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->readFile()[2]);
-        $data2["welding_percentages"] = $this->calculateWeldingData($this->file_model->readFile()[3]);
+        $data2["welding_percentages"] = $this->calculateWeldingData();
+        $data2["chassis_phase"] = $this->calculateChassisPerPhase($this->file_model->readFile()[2]);
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
         array_push($this->data['styles_to_load'], 'analyze_view.scss');
@@ -78,7 +79,7 @@ class Home extends BaseController
         while ($line_number < sizeof($my_array)):
             switch ($my_array[$line_number]){
                 case 07:
-                case 3:
+                case 03:
                 case 85:
                 case 86:
                 case 8:
@@ -145,8 +146,9 @@ class Home extends BaseController
      * Explanation: array initialized with the different possibilities, which are abbreviations of the variables
      * based on value of the column, they are added in the list.
      */
-    public function calculateWeldingData($my_array)
+    public function calculateWeldingData()
     {
+        $my_array = $this->file_model->readFile()[3];
         $line_number = 1;
         $to_be_decided = 0;
         $manual_welding = 0;
@@ -179,5 +181,88 @@ class Home extends BaseController
         ];
     }
 
+    public function calculateChassisPerPhase($my_array){
+        $line_number = 1;
+        $verkocht = 0;
+        $studie_start = 0;
+        $studie_afgewerkt = 0;
+        $studie_gefinalizeerd = 0;
+        $start_seriploeg = 0;
+        $prognose_prefab = 0;
+        $prognose_basisserie = 0;
+        $klaar_voor_montage = 0;
+        $start_kaliber = 0;
+        $einde_kaliber = 0;
+        $start_lasrobot = 0;
+        $start_aflassen = 0;
+        $morgen_af_montage = 0;
+        $vandaag_af_montage = 0;
+
+        while ($line_number < sizeof($my_array)):
+            switch ($my_array[$line_number]){
+                case 01:
+                    $verkocht++;
+                    break;
+                case 02:
+                    $studie_start++;
+                    break;
+                case 20:
+                    $studie_afgewerkt++;
+                    break;
+                case 03:
+                    $studie_gefinalizeerd++;
+                    break;
+                case 04:
+                    $start_seriploeg++;
+                    break;
+                case 40:
+                    $prognose_prefab++;
+                    break;
+                case 39:
+                    $prognose_basisserie++;
+                    break;
+                case 38:
+                    $klaar_voor_montage++;
+                    break;
+                case 07:
+                    $start_kaliber++;
+                    break;
+                case 83:
+                    $einde_kaliber++;
+                    break;
+                case 85:
+                    $start_lasrobot++;
+                    break;
+                case 86:
+                    $start_aflassen++;
+                    break;
+                case 8:
+                    $morgen_af_montage++;
+                    break;
+                case 81:
+                    $vandaag_af_montage++;
+                    break;
+            }
+            $line_number++;
+        endwhile;
+
+        return [
+            "v" => $verkocht,
+            "stu_sta" => $studie_start,
+            "stu_af" => $studie_afgewerkt,
+            "stu_fin" => $studie_gefinalizeerd,
+            "sta_se" => $start_seriploeg,
+            "pr_pre" => $prognose_prefab,
+            "pr_bas" => $prognose_basisserie,
+            "kl_mo" => $klaar_voor_montage,
+            "s_ka" => $start_kaliber,
+            "e_ka" => $einde_kaliber,
+            "sta_las" => $start_lasrobot,
+            "sta_afl" => $start_aflassen,
+            "mo_mont" => $morgen_af_montage,
+            "va_mont" => $vandaag_af_montage,
+        ];
+
+    }
 
 }

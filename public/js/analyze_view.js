@@ -23,7 +23,7 @@ function createPieChartWelding(){
 
 $.ajax({
     url: BASE_URL + '/Home/calculateWeldingData',
-    method: "get",
+    method: "post",
     dataType: 'text',
     success: function(response) {
         console.log("SUCCESS")
