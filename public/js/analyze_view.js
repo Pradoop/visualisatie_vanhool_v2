@@ -21,14 +21,13 @@ function createPieChartWelding(){
     return div.node();
     }
 
-
 $.ajax({
     url: BASE_URL + '/Home/calculateWeldingData',
-    method: "GET",
-    success: function (res) {
+    method: "get",
+    dataType: 'text',
+    success: function(response) {
         console.log("SUCCESS")
-        console.log(res);
-        alert(res);
+        console.log(response)
     },
     error: function (xhr, status, error) {
         console.log("ERROR")

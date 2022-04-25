@@ -43,7 +43,6 @@
                             <td><?= $value; ?></td>
                         </tr>
                     <?php endforeach; ?>
-                    <?php echo base_url()?>
                 </table>
             </div>
         </div>
