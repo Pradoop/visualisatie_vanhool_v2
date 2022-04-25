@@ -12,18 +12,57 @@ class FileModel extends \CodeIgniter\Model
 
     public function readFile()
     {
-        $main_array = array();
-        $file = file("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt");
-        $count_lines = count($file);
-        $i = 0;
-        while($i < $count_lines) {
-            $array = preg_split('/\t/', $file[$i]);
-            array_push($main_array, $array);
-            $i++;
+        $all_arrays = array();
+        $file_by_line_array = array();
+        $total_in_production_array = array();
+        $percentage_delayed_array = array();
+        $welding_data_array = array();
+
+        $file = fopen("", "r");
+        if($file) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                array_push($file_by_line_array, $line);
+            }
+            fclose($file);
         }
-        return $main_array;
+
+        $file = fopen("", "r");
+        if($file) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                $array = preg_split('/\t/', $line);
+                array_push($total_in_production_array, $array[14]);
+            }
+            fclose($file);
+        }
+
+        $file = fopen("", "r");
+        if($file) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                $array = preg_split('/\t/', $line);
+                array_push($percentage_delayed_array, $array[16]);
+            }
+            fclose($file);
+        }
+
+        $file = fopen("", "r");
+        if($file) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                $array = preg_split('/\t/', $line);
+                array_push($welding_data_array, $array[18]);
+            }
+            fclose($file);
+        }
+
+        array_push($all_arrays, $file_by_line_array);
+        array_push($all_arrays, $total_in_production_array);
+        array_push($all_arrays, $percentage_delayed_array);
+        array_push($all_arrays, $welding_data_array);
+
+        return $all_arrays;
     }
-
-
 
 }

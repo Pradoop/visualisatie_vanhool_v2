@@ -28,7 +28,7 @@ class Home extends BaseController
     public function map_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map');
-        $data2["chassis_info"] = $this->file_model->readFile();
+        $data2["chassis_info"] = $this->file_model->readFile()[0];
 
         array_push($this->data['scripts_to_load'], 'map_view.js');
         array_push($this->data['styles_to_load'], 'map_view.scss');
@@ -39,7 +39,7 @@ class Home extends BaseController
     public function chassis_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis');
-        $data2["chassis_info"] = $this->file_model->readFile();
+        $data2["chassis_info"] = $this->file_model->readFile()[0];
 
         array_push($this->data['scripts_to_load'], 'chassis_view.js');
         array_push($this->data['styles_to_load'], 'chassis_view.scss');
@@ -52,10 +52,10 @@ class Home extends BaseController
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze');
         $data2["chassis_info"] = $this->file_model->readFile();
 
-        $data2["total_in_production"]  = $this->calculateTotalInProduction($data2["chassis_info"]);
-        $data2["average_delay"] = $this->calculateAverageDelay($data2["chassis_info"]);
-        $data2["percentage_delayed"] = $this->calculatePercentageDelayed($data2["chassis_info"]);
-        $data2["welding_percentages"] = $this->calculateWeldingData();
+        $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->readFile()[1]);
+        $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->readFile()[2]);
+        $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->readFile()[2]);
+        $data2["welding_percentages"] = $this->calculateWeldingData($this->file_model->readFile()[3]);
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
         array_push($this->data['styles_to_load'], 'analyze_view.scss');
@@ -76,7 +76,7 @@ class Home extends BaseController
         $line_number = 1;
         $total_in_production = 0;
         while ($line_number < sizeof($my_array)):
-            switch ($my_array[$line_number][14]){
+            switch ($my_array[$line_number]){
                 case 07:
                 case 3:
                 case 85:
@@ -97,6 +97,27 @@ class Home extends BaseController
     }
 
     /*
+    * Function to calculate the percentage of all chassis that are delayed.
+    * Input: Array that contains all the information (so the textfile)
+    * Output: Percentage of chassis that are delayed overall
+    * Explanation: Function calculates the percentage of chassis that is delayed
+    */
+    public function calculatePercentageDelayed($my_array){
+        $line_number = 1;
+        $delayed = 0;
+
+        while ($line_number < sizeof($my_array)):
+            if ($my_array[$line_number] < 0):
+                $delayed++;
+            else:
+                $delayed--;
+            endif;
+            $line_number++;
+        endwhile;
+        return round(($delayed/$line_number)*100, 2, PHP_ROUND_HALF_UP);
+    }
+
+    /*
     * Function to calculate the average delay of all chassis.
     * Input: Array that contains all the information (so the textfile)
     * Output: Average amount of delays for all chassis
@@ -109,33 +130,12 @@ class Home extends BaseController
         $total_produced = 0;
 
         while ($line_number < sizeof($my_array)):
-            $total_delay += $my_array[$line_number][16];
+            $total_delay += $my_array[$line_number];
             $total_produced++;
             $line_number++;
         endwhile;
 
         return round(($total_delay / $total_produced)*(-1), 0,PHP_ROUND_HALF_UP );
-    }
-
-    /*
-    * Function to calculate the percentage of all chassis that are delayed.
-    * Input: Array that contains all the information (so the textfile)
-    * Output: Percentage of chassis that are delayed overall
-    * Explanation: Function calculates the percentage of chassis that is delayed
-    */
-    public function calculatePercentageDelayed($my_array){
-        $line_number = 1;
-        $delayed = 0;
-
-        while ($line_number < sizeof($my_array)):
-            if ($my_array[$line_number][16] < 0):
-                $delayed++;
-            else:
-                $delayed--;
-            endif;
-            $line_number++;
-        endwhile;
-        return round(($delayed/$line_number)*100, 2, PHP_ROUND_HALF_UP);
     }
 
     /* Function to calculate the percentages of cars to be welded by hand, to be welded using the robot,
@@ -145,9 +145,8 @@ class Home extends BaseController
      * Explanation: array initialized with the different possibilities, which are abbreviations of the variables
      * based on value of the column, they are added in the list.
      */
-    public function calculateWeldingData()
+    public function calculateWeldingData($my_array)
     {
-        $my_array = $this->file_model->readFile();
         $line_number = 1;
         $to_be_decided = 0;
         $manual_welding = 0;
@@ -155,7 +154,7 @@ class Home extends BaseController
         $finish_robot = 0;
 
         while ($line_number < sizeof($my_array)):
-            switch ($my_array[$line_number][18]) {
+            switch ($my_array[$line_number]) {
                 case "L0":
                     $to_be_decided++;
                     break;
@@ -179,4 +178,6 @@ class Home extends BaseController
             "fr" => $finish_robot
         ];
     }
+
+
 }
