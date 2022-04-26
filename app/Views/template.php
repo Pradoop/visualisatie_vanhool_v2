@@ -20,6 +20,10 @@
     <?php if (isset($scripts_to_load)) foreach($scripts_to_load as $script): ?>
         <script src="<?= base_url()?>/js/<?=$script?>" defer></script>
     <?php endforeach; ?>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script > let BASE_URL = "<?=base_url();?>";</script>
+
 
 </head>
 

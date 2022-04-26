@@ -173,12 +173,14 @@ class Home extends BaseController
             $line_number++;
         endwhile;
 
-        return [
+
+        return json_encode([
             "tbd" => $to_be_decided,
             "mw" => $manual_welding,
             "pr" => $prep_robot,
             "fr" => $finish_robot
-        ];
+        ]);
+
     }
 
     public function calculateChassisPerPhase($my_array){
