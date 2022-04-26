@@ -15,9 +15,7 @@
                 <p class="information_text"> Percentage chassis vertraagd T.O.V. contractdatum:</p>
                 <p class="information_value"><?= $percentage_delayed ?> %</p>
             </div>
-            <div class="chart" id="bar_chart">
-                <canvas id="status_chart"></canvas>
-            </div>
+
         </div>
         <div class="grid-child col3">
             <div class="information_3">
@@ -46,6 +44,10 @@
 
             </div>
         </div>
+
+    </div>
+    <div class="chart" id="bar_chart">
+        <canvas id="status_chart"></canvas>
     </div>
 </div>
 

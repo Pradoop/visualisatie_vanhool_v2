@@ -173,7 +173,6 @@ class Home extends BaseController
             $line_number++;
         endwhile;
 
-
         return json_encode([
             "tbd" => $to_be_decided,
             "mw" => $manual_welding,
@@ -183,8 +182,14 @@ class Home extends BaseController
 
     }
 
+    /* Function to calculate the amount of chassis in each phase,
+     * Input: Array that contains all the information (so the textfile)
+     * Output: Returns an array with the amount of chassis for each possibility
+     * Explanation: array initialized with the different possibilities, which are abbreviations of the variables
+     * based on value of the column, they are added in the list.
+     */
     public function calculateChassisPerPhase(){
-        $my_array = $this->file_model->readFile()[4];
+        $my_array = $this->file_model->readFile()[1];
         $line_number = 1;
         $verkocht = 0;
         $studie_start = 0;
@@ -265,7 +270,16 @@ class Home extends BaseController
             "mo_mont" => $morgen_af_montage,
             "va_mont" => $vandaag_af_montage,
         ]);
-
     }
+
+
+    public function getPlannedTime(){
+        $line_number = 1;
+        $my_array = $this->file_model->readFile()[4];
+        while ($line_number < sizeof($my_array)):
+            $line_number++;
+            endwhile;
+    }
+
 
 }

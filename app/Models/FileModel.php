@@ -17,7 +17,7 @@ class FileModel extends \CodeIgniter\Model
         $total_in_production_array = array();
         $percentage_delayed_array = array();
         $welding_data_array = array();
-        $phase_array = array();
+        $planned_data_array = array();
 
         $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt", "r");
         if($file) {
@@ -63,7 +63,7 @@ class FileModel extends \CodeIgniter\Model
             while(!feof($file)) {
                 $line = fgets($file);
                 $array = preg_split('/\t/', $line);
-                array_push($phase_array, $array[14]);
+                array_push($planned_data_array, $array[3]);
             }
             fclose($file);
         }
@@ -72,7 +72,7 @@ class FileModel extends \CodeIgniter\Model
         array_push($all_arrays, $total_in_production_array);
         array_push($all_arrays, $percentage_delayed_array);
         array_push($all_arrays, $welding_data_array);
-        array_push($all_arrays, $phase_array);
+        array_push($all_arrays, $planned_data_array);
 
         return $all_arrays;
     }

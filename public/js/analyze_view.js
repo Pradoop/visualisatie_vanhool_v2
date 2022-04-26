@@ -61,12 +61,30 @@ function createWeldingChart(my_data){
         'Robot',
         'Robot+prgm af',
     ];
+
+    arrayOfObjects = labels.map(function (d, i) {
+        return{
+            label: d,
+            data: my_data[i] || 0
+        };
+    });
+    sortedArrayOfObjects = arrayOfObjects.sort(function (a, b){
+        return b.data > a.data;
+    });
+    sortedLabelArray = [];
+    sortedDataArray = [];
+
+    sortedArrayOfObjects.forEach(function(d){
+        sortedLabelArray.push(d.label);
+        sortedDataArray.push(d.data)
+    });
+
     const data = {
-        labels: labels,
+        labels: sortedLabelArray,
         datasets: [{
             label: 'Aantal chassis',
             backgroundColor: 'rgb(16, 57, 93)',
-            data: my_data,
+            data: sortedDataArray,
         }]
     };
     const config = {
@@ -132,12 +150,28 @@ function createPhaseChart(my_data){
         'Morgen af',
         'Vandaag af',
     ];
+    arrayOfObjects = labels.map(function (d, i) {
+        return{
+            label: d,
+            data: my_data[i] || 0
+        };
+    });
+    sortedArrayOfObjects = arrayOfObjects.sort(function (a, b){
+        return b.data > a.data;
+    });
+    sortedLabelArray = [];
+    sortedDataArray = [];
+
+    sortedArrayOfObjects.forEach(function(d){
+        sortedLabelArray.push(d.label);
+        sortedDataArray.push(d.data)
+    });
     const data = {
-        labels: labels,
+        labels: sortedLabelArray,
         datasets: [{
             label: 'Aantal chassis',
             backgroundColor: 'rgb(16, 57, 93)',
-            data: my_data,
+            data: sortedDataArray,
         }]
     };
     const config = {
