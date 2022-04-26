@@ -7,13 +7,16 @@
                 <p class="information_value"><?= $total_in_production[0] ?> chassis</p>
             </div>
             <div class="chart" id="bar_chart">
-                <canvas id="my_chart"></canvas>
+                <canvas id="stand_las_chart"></canvas>
             </div>
         </div>
         <div class="grid-child col2">
             <div class="information_2">
                 <p class="information_text"> Percentage chassis vertraagd T.O.V. contractdatum:</p>
                 <p class="information_value"><?= $percentage_delayed ?> %</p>
+            </div>
+            <div class="chart" id="bar_chart">
+                <canvas id="status_chart"></canvas>
             </div>
         </div>
         <div class="grid-child col3">
@@ -31,7 +34,16 @@
         </div>
         <div class="grid-child col5">
             <div class="information_5">
-                <p class="information_text"> Gemiddelde tijd om één chassis in productie af te werken:</p>
+                <p class="information_text"> DATA TESTZONE:</p>
+                <table>
+                    <?php foreach(json_decode($chassis_phase) as $key=>$value): ?>
+                        <tr>
+                            <td><?= $key; ?></td>
+                            <td><?= $value; ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
+
             </div>
         </div>
     </div>

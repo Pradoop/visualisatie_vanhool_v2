@@ -183,7 +183,8 @@ class Home extends BaseController
 
     }
 
-    public function calculateChassisPerPhase($my_array){
+    public function calculateChassisPerPhase(){
+        $my_array = $this->file_model->readFile()[4];
         $line_number = 1;
         $verkocht = 0;
         $studie_start = 0;
@@ -248,7 +249,7 @@ class Home extends BaseController
             $line_number++;
         endwhile;
 
-        return [
+        return json_encode([
             "v" => $verkocht,
             "stu_sta" => $studie_start,
             "stu_af" => $studie_afgewerkt,
@@ -263,7 +264,7 @@ class Home extends BaseController
             "sta_afl" => $start_aflassen,
             "mo_mont" => $morgen_af_montage,
             "va_mont" => $vandaag_af_montage,
-        ];
+        ]);
 
     }
 
