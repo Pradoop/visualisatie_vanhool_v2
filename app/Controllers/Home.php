@@ -279,7 +279,7 @@ class Home extends BaseController
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
-            $output_array[] = strval($my_array[$line_number]);
+            $output_array[] = strval($my_array[$line_number][3]);
             $line_number++;
         endwhile;
         return json_encode($output_array);

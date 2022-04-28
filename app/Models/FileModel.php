@@ -23,7 +23,7 @@ class FileModel extends \CodeIgniter\Model
         * Opens full txtFile and puts each file line as 1 string in array element
         */
         //$file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)/planningMontage.txt", "r");
-        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)/VanHoolTestFile.txt", "r");
+        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
