@@ -1,7 +1,8 @@
 const welding_data = [];
 const chassis_phase = [];
 const chassis_pln_date = [];
-const count_years = [];
+const chassis_per_year = [];
+const chassis_per_month = new Array(12).fill(0);;
 
 /*
  * Ajax request to retrieve the data for welding
@@ -79,8 +80,78 @@ $.ajax({
     },
     complete: function(data){
         createYearChart(chassis_pln_date);
+        createMonthChart(2022);
     }
 });
+
+function createMonthChart(my_year){
+    for (const i in chassis_pln_date){
+        if(my_year === chassis_pln_date[i].getFullYear()){
+            chassis_per_month[chassis_pln_date[i].getMonth()]++;
+        }
+    }
+    const labels = [
+        'Januari',
+        'Februari',
+        'Maart',
+        'April',
+        'Mei',
+        'Juni',
+        'Juli',
+        'Augustus',
+        'September',
+        'Oktober',
+        'November',
+        'December'
+    ];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Aantal chassis',
+            backgroundColor: 'rgb(16, 57, 93)',
+            data: chassis_per_month,
+        }]
+    };
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    display: true,
+                    title:{
+                        display:true,
+                        text: "Aantal chassis"
+                    }
+                },
+                x:{
+                    display: true,
+                    title:{
+                        display:true,
+                        text: "Maand"
+                    }
+                }
+            },
+            plugins:{
+                title:{
+                    display: true,
+                    text: 'Aantal chassis per maand'
+                },
+                legend:{
+                    display: true,
+                    position: "right",
+                    align: "center",
+                    labels:{
+                        boxWidth: 10,
+                        boxHeight: 10,
+                    }
+                }
+            }
+        },
+    }
+    const myChart = new Chart(document.getElementById('month_chart'), config);
+}
 
 /*
  * Function to create a chart based on the dates that are plannedd
@@ -90,13 +161,13 @@ $.ajax({
 function createYearChart(my_array){
     for (const i in my_array){
         let yearDiff = my_array[i].getFullYear() - new Date().getFullYear();
-        if (yearDiff >= count_years.length){
-            count_years[yearDiff] = 0;
+        if (yearDiff >= chassis_per_year.length){
+            chassis_per_year[yearDiff] = 0;
         }
-        count_years[yearDiff]++;
+        chassis_per_year[yearDiff]++;
     }
     const labels = [];
-    for (const i in count_years){
+    for (const i in chassis_per_year){
         labels[i] = (new Date().getFullYear() + +i).toString();
     }
     const data = {
@@ -104,7 +175,7 @@ function createYearChart(my_array){
         datasets: [{
             label: 'Aantal chassis',
             backgroundColor: 'rgb(16, 57, 93)',
-            data: count_years,
+            data: chassis_per_year,
         }]
     };
     const config = {

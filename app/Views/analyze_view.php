@@ -52,6 +52,9 @@
     <div class="chart" id="bar_chart">
         <canvas id="year_chart"></canvas>
     </div>
+    <div class="chart" id="bar_chart">
+        <canvas id="month_chart"></canvas>
+    </div>
 </div>
 
 
