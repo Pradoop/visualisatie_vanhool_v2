@@ -55,6 +55,7 @@ class Home extends BaseController
         $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->readFile()[1]);
         $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->readFile()[2]);
         $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->readFile()[2]);
+
         $data2["welding_percentages"] = $this->calculateWeldingData();
         $data2["chassis_phase"] = $this->calculateChassisPerPhase();
         $data2["planned_dates"] = $this->getPlannedTime();
@@ -78,7 +79,7 @@ class Home extends BaseController
         $line_number = 1;
         $total_in_production = 0;
         while ($line_number < sizeof($my_array)):
-            switch ($my_array[$line_number]){
+            switch ($my_array[$line_number][14]){
                 case 07:
                 case 03:
                 case 85:
@@ -109,7 +110,7 @@ class Home extends BaseController
         $delayed = 0;
 
         while ($line_number < sizeof($my_array)):
-            if ($my_array[$line_number] < 0):
+            if ($my_array[$line_number][16] < 0):
                 $delayed++;
             else:
                 $delayed--;
@@ -132,7 +133,7 @@ class Home extends BaseController
         $total_produced = 0;
 
         while ($line_number < sizeof($my_array)):
-            $total_delay += $my_array[$line_number];
+            $total_delay += $my_array[$line_number][16];
             $total_produced++;
             $line_number++;
         endwhile;
@@ -157,7 +158,7 @@ class Home extends BaseController
         $finish_robot = 0;
 
         while ($line_number < sizeof($my_array)):
-            switch ($my_array[$line_number]) {
+            switch ($my_array[$line_number][18]) {
                 case "L0":
                     $to_be_decided++;
                     break;
@@ -208,7 +209,7 @@ class Home extends BaseController
         $vandaag_af_montage = 0;
 
         while ($line_number < sizeof($my_array)):
-            switch ($my_array[$line_number]){
+            switch ($my_array[$line_number][14]){
                 case 01:
                     $verkocht++;
                     break;

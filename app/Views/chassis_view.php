@@ -35,16 +35,7 @@
         $index = 1;
         while($index < sizeof($chassis_info) - 1) {
             $array = preg_split('/\t/', $chassis_info[$index]);
-            unset($array[1]);
-            unset($array[4]);
-            unset($array[6]);
-            unset($array[8]);
-            unset($array[11]);
-            unset($array[12]);
-            unset($array[13]);
-            unset($array[15]);
-            unset($array[18]);
-            unset($array[19]);
+            unset($array[1],$array[4],$array[6],$array[8],$array[11],$array[12],$array[13],$array[15],$array[18],$array[19]);
             array_push($chassis_array, $array);
             $index++;
         }
