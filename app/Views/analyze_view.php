@@ -49,6 +49,9 @@
     <div class="chart" id="bar_chart">
         <canvas id="status_chart"></canvas>
     </div>
+    <div class="chart" id="bar_chart">
+        <canvas id="year_chart"></canvas>
+    </div>
 </div>
 
 

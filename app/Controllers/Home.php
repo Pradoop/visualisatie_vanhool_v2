@@ -56,7 +56,8 @@ class Home extends BaseController
         $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->readFile()[2]);
         $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->readFile()[2]);
         $data2["welding_percentages"] = $this->calculateWeldingData();
-        $data2["chassis_phase"] = $this->calculateChassisPerPhase($this->file_model->readFile()[2]);
+        $data2["chassis_phase"] = $this->calculateChassisPerPhase();
+        $data2["planned_dates"] = $this->getPlannedTime();
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
         array_push($this->data['styles_to_load'], 'analyze_view.scss');
@@ -272,14 +273,15 @@ class Home extends BaseController
         ]);
     }
 
-
     public function getPlannedTime(){
-        $line_number = 1;
         $my_array = $this->file_model->readFile()[4];
+        $output_array = array();
+        $line_number = 1;
         while ($line_number < sizeof($my_array)):
+            $output_array[] = strval($my_array[$line_number]);
             $line_number++;
-            endwhile;
+        endwhile;
+        return json_encode($output_array);
     }
-
 
 }
