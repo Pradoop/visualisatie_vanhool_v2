@@ -32,7 +32,7 @@
         </div>
         <div class="grid-child col5">
             <div class="information_5">
-                <p class="information_text"> DATA TESTZONE:</p>
+                <p class="information_text"> Aantal chassis voor vandaag gepland:</p>
                 <table>
                     <?php foreach(json_decode($chassis_phase) as $key=>$value): ?>
                         <tr>
@@ -57,6 +57,9 @@
     </div>
     <div class="chart" id="bar_chart">
         <canvas id="week_chart"></canvas>
+    </div>
+    <div class="chart" id="bar_chart">
+        <canvas id="day_chart"></canvas>
     </div>
 </div>
 

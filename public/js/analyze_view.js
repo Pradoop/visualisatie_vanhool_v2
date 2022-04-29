@@ -4,6 +4,7 @@ const chassis_pln_date = [];
 const chassis_per_year = [];
 const chassis_per_month = new Array(12).fill(0);
 const chassis_per_week = new Array(4).fill(0);
+const chassis_per_dag = new Array(7).fill(0);
 const months = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December']
 
 /*
@@ -84,9 +85,117 @@ $.ajax({
         createYearChart(chassis_pln_date);
         createMonthChart(2022, chassis_pln_date);
         createWeekChart(2022, 6, chassis_pln_date);
+        createDateChart(2022, 6, 1, chassis_pln_date);
     }
 });
 
+
+/*
+ * Function to create a chart for the amount of chassis per day
+ * in a given year, month and starting date for the next seven days
+ * Input: array that contains the data with the different dates and the year that is required to calculate
+ * the year, month and starting date that you want a chart to be created for
+ * Output: Vertical bart chart with the amount of chassis that are planned per year
+ */
+function createDateChart(my_year, my_month, my_date, my_data){
+    my_month--;
+    let day_diff;
+    let day1, day2, day3, day4, day5, day6, day7;
+    for (const i in my_data){
+        if(my_year === my_data[i].getFullYear() && (my_month - my_data[i].getMonth() === 0)){
+            day_diff = my_data[i].getDate() - my_date;
+            switch (day_diff){
+                case 0:
+                    chassis_per_dag[0]++;
+                break;
+                case 1:
+                    chassis_per_dag[1]++;
+                    break;
+                case 2:
+                    chassis_per_dag[2]++;
+                    break;
+                case 3:
+                    chassis_per_dag[3]++;
+                    break;
+                case 4:
+                    chassis_per_dag[4]++;
+                    break;
+                case 5:
+                    chassis_per_dag[5]++;
+                    break;
+                case 6:
+                    chassis_per_dag[6]++;
+                    break;
+
+            }
+        }
+    }
+    day1 = (my_date).toString() + "/" + my_month.toString() + "/" + my_year.toString();
+    day2 = (my_date + 1).toString() + "/" + my_month.toString() + "/" + my_year.toString();
+    day3 = (my_date + 2).toString() + "/" + my_month.toString() + "/" + my_year.toString();
+    day4 = (my_date + 3).toString() + "/" + my_month.toString() + "/" + my_year.toString();
+    day5 = (my_date + 4).toString() + "/" + my_month.toString() + "/" + my_year.toString();
+    day6 = (my_date + 5).toString() + "/" + my_month.toString() + "/" + my_year.toString();
+    day7 = (my_date + 6).toString() + "/" + my_month.toString() + "/" + my_year.toString();
+    const labels = [day1, day2, day3, day4, day5, day6, day7];
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Aantal chassis',
+            backgroundColor: 'rgb(16, 57, 93)',
+            data: chassis_per_dag,
+        }]
+    };
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    ticks:{
+                        precision: 0
+                    },
+                    beginAtZero: true,
+                    display: true,
+                    title:{
+                        display:true,
+                        text: "Aantal geplande chassis"
+                    }
+                },
+                x:{
+                    display: true,
+                    title:{
+                        display:true,
+                        text: "Datum"
+                    }
+                }
+            },
+            plugins:{
+                title:{
+                    display: true,
+                    text: 'Aantal geplande chassis per week voor de week van: ' + day1 + ' tot: ' + day7
+                },
+                legend:{
+                    display: true,
+                    position: "right",
+                    align: "center",
+                    labels:{
+                        boxWidth: 10,
+                        boxHeight: 10,
+                    }
+                }
+            }
+        },
+    }
+    const myChart = new Chart(document.getElementById('day_chart'), config);
+}
+
+/*
+ * Function to create a chart for the amount of chassis per week in a given month and year
+ * Input: array that contains the data with the different dates and the year that is required to calculate
+ * the year and the month that you want a chart to be created for
+ * Output: Vertical bart chart with the amount of chassis that are planned per year
+ */
 function createWeekChart(my_year, my_month, my_data){
     my_month--;
     let week1, week2, week3, week4;
@@ -131,11 +240,14 @@ function createWeekChart(my_year, my_month, my_data){
         options: {
             scales: {
                 y: {
+                    ticks:{
+                        precision: 0
+                    },
                     beginAtZero: true,
                     display: true,
                     title:{
                         display:true,
-                        text: "Aantal chassis"
+                        text: "Aantal geplande chassis"
                     }
                 },
                 x:{
@@ -149,7 +261,7 @@ function createWeekChart(my_year, my_month, my_data){
             plugins:{
                 title:{
                     display: true,
-                    text: 'Aantal chassis per week voor: ' + months[my_month - 1] + " " + my_year.toString()
+                    text: 'Aantal geplande chassis per week in de maand: ' + months[my_month - 1] + " " + my_year.toString()
                 },
                 legend:{
                     display: true,
@@ -181,7 +293,7 @@ function createMonthChart(my_year, my_data){
     const data = {
         labels: months,
         datasets: [{
-            label: 'Aantal chassis',
+            label: 'Aantal geplande chassis',
             backgroundColor: 'rgb(16, 57, 93)',
             data: chassis_per_month,
         }]
@@ -196,7 +308,7 @@ function createMonthChart(my_year, my_data){
                     display: true,
                     title:{
                         display:true,
-                        text: "Aantal chassis"
+                        text: "Aantal geplande chassis"
                     }
                 },
                 x:{
@@ -210,7 +322,7 @@ function createMonthChart(my_year, my_data){
             plugins:{
                 title:{
                     display: true,
-                    text: 'Aantal chassis per maand'
+                    text: 'Aantal geplande chassis per maand in het jaar: ' + my_year.toString()
                 },
                 legend:{
                     display: true,
@@ -247,7 +359,7 @@ function createYearChart(my_data){
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Aantal chassis',
+            label: 'Aantal geplande chassis',
             backgroundColor: 'rgb(16, 57, 93)',
             data: chassis_per_year,
         }]
@@ -262,7 +374,7 @@ function createYearChart(my_data){
                     display: true,
                     title:{
                         display:true,
-                        text: "Aantal chassis"
+                        text: "Aantal geplande chassis"
                     }
                 },
                 x:{
@@ -276,7 +388,7 @@ function createYearChart(my_data){
             plugins:{
                 title:{
                     display: true,
-                    text: 'Aantal chassis per jaar'
+                    text: 'Aantal geplande chassis per jaar'
                 },
                 legend:{
                     display: true,
