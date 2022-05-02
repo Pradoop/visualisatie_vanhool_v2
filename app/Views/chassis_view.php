@@ -8,7 +8,7 @@
 </div>
 
 <div id="table_content">
-    <table>
+    <table class="table table-striped table-hover">
         <?php $title_array = preg_split('/\t/', $chassis_info[0]); ?>
         <thead>
             <tr>
