@@ -130,6 +130,7 @@ function createDateChart(my_year, my_month, my_date, my_data){
             }
         }
     }
+    my_month++;
     day1 = (my_date).toString() + "/" + my_month.toString() + "/" + my_year.toString();
     day2 = (my_date + 1).toString() + "/" + my_month.toString() + "/" + my_year.toString();
     day3 = (my_date + 2).toString() + "/" + my_month.toString() + "/" + my_year.toString();
