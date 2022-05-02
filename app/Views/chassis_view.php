@@ -5,14 +5,9 @@
     <div id="searchBox">
         <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">
     </div>
-    <div id="filter">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownFilter" data-bs-toggle="dropdown" aria-expanded="false">
-            Filters
-        </button>
-    </div>
 </div>
 
-<div class="grid-container">
+<div id="table_content">
     <table>
         <?php $title_array = preg_split('/\t/', $chassis_info[0]); ?>
         <thead>
@@ -41,7 +36,7 @@
         }
         ?>
 
-        <tbody>
+        <tbody id="myTable">
             <?php
             foreach ($chassis_array as $row) {
                 echo '<tr>';
