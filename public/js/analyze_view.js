@@ -128,7 +128,11 @@ $.ajax({
 });
 
 
-
+/*
+ * Function to create a table for the amount of chassis that are planned today
+ * Input: array that contains the data with the different dates and the year that is required to calculate
+ * Output: The different chassis numbers that are planned for that day
+ */
 function createTableChassisPlannedToday(my_data){
     const today = new Date();
     let totalToday = 0;
