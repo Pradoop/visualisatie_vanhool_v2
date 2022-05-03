@@ -74,21 +74,24 @@ class Home extends BaseController
     * Explanation: Function searches based on the following statuses:
     * 38, 07, 83, 85, 86, 8, 81. If there is a match, then the chassis is in production and value is incremented
     */
-    public function calculateTotalInProduction($my_array){
+    public function calculateTotalInProduction($my_array)
+    {
         $production_array = array();
         $line_number = 1;
         $total_in_production = 0;
         while ($line_number < sizeof($my_array)):
-            switch ($my_array[$line_number][14]){
-                case 07:
-                case 03:
-                case 85:
-                case 86:
-                case 8:
-                case 81:
-                case 38:
-                    $total_in_production++;
-                    break;
+            if(isset($my_array[$line_number][14])) {
+                switch ($my_array[$line_number][14]){
+                    case 07:
+                    case 03:
+                    case 85:
+                    case 86:
+                    case 8:
+                    case 81:
+                    case 38:
+                        $total_in_production++;
+                        break;
+                }
             }
             $line_number++;
         endwhile;
@@ -105,12 +108,13 @@ class Home extends BaseController
     * Output: Percentage of chassis that are delayed overall
     * Explanation: Function calculates the percentage of chassis that is delayed
     */
-    public function calculatePercentageDelayed($my_array){
+    public function calculatePercentageDelayed($my_array)
+    {
         $line_number = 1;
         $delayed = 0;
 
         while ($line_number < sizeof($my_array)):
-            if ($my_array[$line_number][16] < 0):
+            if (isset($my_array[$line_number][16]) && $my_array[$line_number][16] < 0):
                 $delayed++;
             else:
                 $delayed--;
@@ -133,7 +137,9 @@ class Home extends BaseController
         $total_produced = 0;
 
         while ($line_number < sizeof($my_array)):
-            $total_delay += $my_array[$line_number][16];
+            if(isset($my_array[$line_number][16])) {
+                $total_delay += (int) $my_array[$line_number][16];
+            }
             $total_produced++;
             $line_number++;
         endwhile;
@@ -158,19 +164,21 @@ class Home extends BaseController
         $finish_robot = 0;
 
         while ($line_number < sizeof($my_array)):
-            switch ($my_array[$line_number][18]) {
-                case "L0":
-                    $to_be_decided++;
-                    break;
-                case "L1":
-                    $manual_welding++;
-                    break;
-                case "L2":
-                    $prep_robot++;
-                    break;
-                case "L3":
-                    $finish_robot++;
-                    break;
+            if(isset($my_array[$line_number][18])) {
+                switch ($my_array[$line_number][18]) {
+                    case "L0":
+                        $to_be_decided++;
+                        break;
+                    case "L1":
+                        $manual_welding++;
+                        break;
+                    case "L2":
+                        $prep_robot++;
+                        break;
+                    case "L3":
+                        $finish_robot++;
+                        break;
+                }
             }
             $line_number++;
         endwhile;
@@ -190,7 +198,8 @@ class Home extends BaseController
      * Explanation: array initialized with the different possibilities, which are abbreviations of the variables
      * based on value of the column, they are added in the list.
      */
-    public function calculateChassisPerPhase(){
+    public function calculateChassisPerPhase()
+    {
         $my_array = $this->file_model->readFile()[1];
         $line_number = 1;
         $verkocht = 0;
@@ -209,49 +218,51 @@ class Home extends BaseController
         $vandaag_af_montage = 0;
 
         while ($line_number < sizeof($my_array)):
-            switch ($my_array[$line_number][14]){
-                case 01:
-                    $verkocht++;
-                    break;
-                case 02:
-                    $studie_start++;
-                    break;
-                case 20:
-                    $studie_afgewerkt++;
-                    break;
-                case 03:
-                    $studie_gefinalizeerd++;
-                    break;
-                case 04:
-                    $start_seriploeg++;
-                    break;
-                case 40:
-                    $prognose_prefab++;
-                    break;
-                case 39:
-                    $prognose_basisserie++;
-                    break;
-                case 38:
-                    $klaar_voor_montage++;
-                    break;
-                case 07:
-                    $start_kaliber++;
-                    break;
-                case 83:
-                    $einde_kaliber++;
-                    break;
-                case 85:
-                    $start_lasrobot++;
-                    break;
-                case 86:
-                    $start_aflassen++;
-                    break;
-                case 8:
-                    $morgen_af_montage++;
-                    break;
-                case 81:
-                    $vandaag_af_montage++;
-                    break;
+            if(isset($my_array[$line_number][14])) {
+                switch ($my_array[$line_number][14]){
+                    case 01:
+                        $verkocht++;
+                        break;
+                    case 02:
+                        $studie_start++;
+                        break;
+                    case 20:
+                        $studie_afgewerkt++;
+                        break;
+                    case 03:
+                        $studie_gefinalizeerd++;
+                        break;
+                    case 04:
+                        $start_seriploeg++;
+                        break;
+                    case 40:
+                        $prognose_prefab++;
+                        break;
+                    case 39:
+                        $prognose_basisserie++;
+                        break;
+                    case 38:
+                        $klaar_voor_montage++;
+                        break;
+                    case 07:
+                        $start_kaliber++;
+                        break;
+                    case 83:
+                        $einde_kaliber++;
+                        break;
+                    case 85:
+                        $start_lasrobot++;
+                        break;
+                    case 86:
+                        $start_aflassen++;
+                        break;
+                    case 8:
+                        $morgen_af_montage++;
+                        break;
+                    case 81:
+                        $vandaag_af_montage++;
+                        break;
+                }
             }
             $line_number++;
         endwhile;
@@ -274,12 +285,15 @@ class Home extends BaseController
         ]);
     }
 
-    public function getPlannedTime(){
+    public function getPlannedTime()
+    {
         $my_array = $this->file_model->readFile()[4];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
-            $output_array[] = strval($my_array[$line_number][3]);
+            if(isset($my_array[$line_number][3])) {
+                $output_array[] = strval($my_array[$line_number][3]);
+            }
             $line_number++;
         endwhile;
         return json_encode($output_array);
