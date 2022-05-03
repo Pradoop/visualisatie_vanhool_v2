@@ -32,14 +32,8 @@
         </div>
         <div class="grid-child col5">
             <div class="information_5">
-                <p class="information_text"> Aantal chassis voor vandaag gepland:</p>
-                <table>
-                    <?php foreach(json_decode($chassis_phase) as $key=>$value): ?>
-                        <tr>
-                            <td><?= $key; ?></td>
-                            <td><?= $value; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
+                <p class="information_text">Chassis voor vandaag gepland:</p>
+                <table id="chassis-today-table">
                 </table>
 
             </div>

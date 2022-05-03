@@ -1,5 +1,6 @@
 const welding_data = [];
 const chassis_phase = [];
+const chassisnr_pln_date = [];
 const chassis_pln_date = [];
 const chassis_per_year = [];
 const chassis_per_month = new Array(12).fill(0);
@@ -86,9 +87,72 @@ $.ajax({
         createMonthChart(2022, chassis_pln_date);
         createWeekChart(2022, 6, chassis_pln_date);
         createDateChart(2022, 6, 1, chassis_pln_date);
+        createTableChassisPlannedToday(chassis_pln_date);
     }
 });
 
+/*
+ * Ajax request to retrieve all the dtmGepland
+ * This call also executes the createPhaseChart() function based on the data that is retrieved
+ */
+$.ajax({
+    url: BASE_URL + '/Home/getPlannedChassisAndTime',
+    method: "get",
+    dataType: 'text',
+    success: function(response) {
+        const responseObject = JSON.parse(response);
+        let year = "";
+        const tempYear = "";
+        for(let i = 0; i < responseObject.length; i++){
+            if (i % 2 !== 0 ){
+                const temp = responseObject[i];
+                year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
+                const month = temp.substring(2, 4);
+                const day = temp.substring(4, 6);
+                const date = new Date(year, month - 1, day);
+                chassisnr_pln_date.push(date);
+            }
+            else{
+                chassisnr_pln_date.push(responseObject[i]);
+            }
+        }
+    },
+    error: function (xhr, status, error) {
+        console.log("ERROR")
+        console.log(xhr.responseText);
+        console.log(error.responseText);
+    },
+    complete: function(data){
+        createTableChassisPlannedToday(chassisnr_pln_date);
+    }
+});
+
+
+
+function createTableChassisPlannedToday(my_data){
+    const today = new Date();
+    let totalToday = 0;
+    let temp;
+    const data = [];
+    for (let i = 1; i <= my_data.length; i = i+ 2){
+        if ((today.getFullYear() === my_data[i].getFullYear()) && (today.getMonth() === my_data[i].getMonth()) && (today.getDate() === my_data[i].getDate())){
+            temp = my_data[i - 1];
+            totalToday++;
+            data.push(temp);
+        }
+    }
+    let table = document.createElement('table');
+    let thead = document.createElement('thead');
+    let tbody = document.createElement('tbody');
+    table.appendChild(thead);
+    table.appendChild(tbody);
+
+    // Adding the entire table to the body tag
+    document.getElementById('chassis-today-table').appendChild(table);
+    for (const i in data){
+        table.append(data[i] + "; ");
+    }
+}
 
 /*
  * Function to create a chart for the amount of chassis per day
@@ -460,14 +524,14 @@ function createWeldingChart(my_data){
                     display: true,
                     title:{
                         display:true,
-                        text: "Jaar"
+                        text: "Stand las"
                     }
                 }
             },
             plugins:{
                 title:{
                     display: true,
-                    text: 'Aantal chassis per jaar'
+                    text: 'Aantal chassis per per stand las'
                 },
                 legend:{
                     display: true,

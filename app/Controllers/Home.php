@@ -59,6 +59,8 @@ class Home extends BaseController
         $data2["welding_percentages"] = $this->calculateWeldingData();
         $data2["chassis_phase"] = $this->calculateChassisPerPhase();
         $data2["planned_dates"] = $this->getPlannedTime();
+        $data2["chassis_planned_dates"] = $this->getPlannedChassisAndTime();
+
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
         array_push($this->data['styles_to_load'], 'analyze_view.scss');
@@ -291,6 +293,23 @@ class Home extends BaseController
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
+            if(isset($my_array[$line_number][3])) {
+                $output_array[] = strval($my_array[$line_number][3]);
+            }
+            $line_number++;
+        endwhile;
+        return json_encode($output_array);
+    }
+
+    public function getPlannedChassisAndTime()
+    {
+        $my_array = $this->file_model->readFile()[5];
+        $output_array = array();
+        $line_number = 1;
+        while ($line_number < sizeof($my_array)):
+            if(isset($my_array[$line_number][0])) {
+                $output_array[] = strval($my_array[$line_number][0]);
+            }
             if(isset($my_array[$line_number][3])) {
                 $output_array[] = strval($my_array[$line_number][3]);
             }
