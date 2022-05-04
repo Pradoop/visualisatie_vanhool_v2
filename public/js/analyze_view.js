@@ -69,11 +69,11 @@ $.ajax({
         let year = "";
         const tempYear = "";
         for(const c in responseObject){
-            const temp = responseObject[c];
+            let temp = responseObject[c];
             year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
-            const month = temp.substring(2, 4);
-            const day = temp.substring(4, 6);
-            const date = new Date(year, month - 1, day);
+            let month = temp.substring(2, 4);
+            let day = temp.substring(4, 6);
+            let date = new Date(year, month - 1, day);
             chassis_pln_date.push(date);
         }
     },
@@ -87,6 +87,7 @@ $.ajax({
         createMonthChart(2022, chassis_pln_date);
         createWeekChart(2022, 6, chassis_pln_date);
         createDateChart(2022, 6, 1, chassis_pln_date);
+        createCurrentWeekChart(chassis_pln_date);
         createTableChassisPlannedToday(chassis_pln_date);
     }
 });
@@ -109,7 +110,7 @@ $.ajax({
                 year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
                 const month = temp.substring(2, 4);
                 const day = temp.substring(4, 6);
-                const date = new Date(year, month - 1, day);
+                let date = new Date(year, month - 1, day);
                 chassisnr_pln_date.push(date);
             }
             else{
@@ -127,6 +128,12 @@ $.ajax({
     }
 });
 
+function calculateWeekNumber(my_date){
+    //To calculate week number
+    let oneJan = new Date(my_date.getFullYear(), 0, 1);
+    let numberOfDays = Math.floor((my_date - oneJan) / (24 * 60 * 60 * 1000));
+    return Math.ceil((my_date.getDay() + 1 + numberOfDays) / 7)
+}
 
 /*
  * Function to create a table for the amount of chassis that are planned today
@@ -157,6 +164,87 @@ function createTableChassisPlannedToday(my_data){
             table.append(data[i] + "; ");
         }
     }
+}
+
+/*
+ * Function to create a chart for the amount of chassis per for the current week
+ * Input: array that contains the data with the different dates and the year that is required to calculate
+ * the year, month and starting date that you want a chart to be created for
+ * Output: Vertical bart chart with the amount of chassis that are planned per year
+ */
+function createCurrentWeekChart(my_data){
+    const curr = new Date; // get current date
+    const first = curr.getDate() - curr.getDay() + 1;
+    const second = first + 1, third = first + 2, fourth = first + 3,
+        fifth = first + 4, sixth = first + 5, last = first + 6;
+
+    let firstDay = new Date(curr.setDate(first));
+    let secondDay = new Date(curr.setDate(second));
+    let thirdDay = new Date(curr.setDate(third));
+    let fourthDay = new Date(curr.setDate(fourth));
+    let fifthDay = new Date(curr.setDate(fifth));
+    let sixthDay = new Date(curr.setDate(sixth));
+    let lastDay = new Date(curr.setDate(last));
+
+
+    for (const i in my_data){
+        var temp = calculateWeekNumber(my_data[i]);
+        if(temp === calculateWeekNumber(firstDay)){
+        }
+    }
+
+/*
+    const data = {
+        labels: labels,
+        datasets: [{
+            label: 'Aantal chassis',
+            backgroundColor: 'rgb(16, 57, 93)',
+            data: chassis_per_dag,
+        }]
+    };
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    ticks:{
+                        precision: 0
+                    },
+                    beginAtZero: true,
+                    display: true,
+                    title:{
+                        display:true,
+                        text: "Aantal geplande chassis"
+                    }
+                },
+                x:{
+                    display: true,
+                    title:{
+                        display:true,
+                        text: "Datum"
+                    }
+                }
+            },
+            plugins:{
+                title:{
+                    display: true,
+                    text: 'Aantal geplande chassis per week voor de week van: ' + day1 + ' tot: ' + day7
+                },
+                legend:{
+                    display: true,
+                    position: "right",
+                    align: "center",
+                    labels:{
+                        boxWidth: 10,
+                        boxHeight: 10,
+                    }
+                }
+            }
+        },
+    }
+    const myChart = new Chart(document.getElementById('day_chart'), config);
+    */
 }
 
 /*
