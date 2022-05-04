@@ -99,7 +99,7 @@ function sorterCheck(i) {
     }
 
     //Change sorting status
-    if(status === 0) {//DOWN
+    if(status === 0) {//DOWN (z naar a)
         console.log('Column ' + current_column + ' clicked 1 time: ' + status + " (DOWN)");
         let img_down = document.createElement('img');
         img_down.setAttribute('id', 'down_logo');
@@ -108,6 +108,8 @@ function sorterCheck(i) {
         img_down.setAttribute('alt', '...');
         document.getElementById('th' + current_column).appendChild(img_down);
         status++;
+
+        sortTableZA(current_column);
     }
     else if(status === 1) {//UP
         console.log('Column ' + current_column + ' clicked 2 times: ' + status + " (UP)");
@@ -120,12 +122,60 @@ function sorterCheck(i) {
         img_up.setAttribute('alt', '...');
         document.getElementById('th' + current_column).appendChild(img_up);
         status++;
+
+        sortTableAZ(current_column);
     }
     else {//ORIGINAL
         console.log('Column ' + current_column + ' clicked 3 times: ' + status + " (ORIGINAL)");
         let remove = document.getElementById('up_logo');
         remove.parentNode.removeChild(remove);
         status = 0;
+
+        //TODO : create the original table
+    }
+
+}
+
+function sortTableZA(current_column) {
+
+    //TODO : create table from Z to A
+
+}
+
+function sortTableAZ(column) {
+
+    let table, rows, switching, i, x, y, shouldSwitch;
+    table = document.getElementById("chassis_table");
+    switching = true;
+
+    while(switching) {
+        switching = false;
+        rows = table.rows;
+
+        for(i = 1; i < (rows.length - 1); i++) {
+            shouldSwitch = false;
+            x = rows[i].getElementsByTagName("TD")[column];
+            y = rows[i + 1].getElementsByTagName("TD")[column];
+
+            if(column === 3 || column === 4) {
+                if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+            else {
+                if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                    shouldSwitch = true;
+                    break;
+                }
+            }
+        }
+
+        if (shouldSwitch) {
+            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+            switching = true;
+        }
+
     }
 
 }
