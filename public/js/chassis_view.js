@@ -8,6 +8,74 @@ $(document).ready(function(){
     });
 });
 
+//Popovers
+$('#th0').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'De constructienummer'
+});
+$('#th1').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: ' Het aantal wagens dat in de reeks zit waartoe dit wagennummer behoort'
+});
+$('#th2').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'Huidige datum gepland af in montage (datum formaat = jjmmdd)'
+});
+$('#th3').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'Omschrijving van het wagentype nummer'
+});
+$('#th4').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'Klant naam'
+});
+$('#th5').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'Nummer van de productielijn'
+});
+$('#th6').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'Reekshoofd'
+});
+
+$('#th7').popover({
+    trigger: 'hover',
+    placement: 'top',
+    title: 'Code met de huidige productiestand',
+    content: '01 => Verkocht voertuig' + '\n' +
+        '02 => Studie is gestart' + '\n' +
+        '20 => Studie chassis is afgewerkt' + '\n' +
+        '03 => Studie volledig klaar, klaar voor werkvoorbereiding' + '\n' +
+        '04 => Serieploeg is gestart' + '\n' +
+        '40 => Prognosedatum prefab is bepaald' + '\n' +
+        '39 => Prognosedatum voor basisserie is bepaald' + '\n' +
+        '38 => Basisserieploeg en prefab klaar voor montage' + '\n' +
+        '07 => Gestart in de samenstelkaliber' + '\n' +
+        '83 => Uit de samenstelkaliber' + '\n' +
+        '85 => Gestart in de lasrobot' + '\n' +
+        '86 => Gestart met aflassen' + '\n' +
+        '8  => Morgen af in de montage afdeling' + '\n' +
+        '81 => Vandaag af in de montage afdeling' + '\n'
+});
+
+$('#th8').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'Aantal werkdagen dat de wagen op dit moment voor of achter staat ten opzichte van de contractdatum (= het verschil in werkdagen tussen de contractdatum en de dag waarop fase 13 gepland af is)'
+});
+$('#th9').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'Het aantal werkdagen dat de wagen reeds in de montage staat (= het verschil in werkdagen tussen de huidige dag en de dag waarop fase 4 opzetten is afgemeld)'
+});
+
 //Variables
 let current_column = -1;
 let status = 0;
