@@ -135,16 +135,15 @@ $.ajax({
  */
 function createTableChassisPlannedToday(my_data){
     const today = new Date();
-    let totalToday = 0;
     let temp;
     const data = [];
-    for (let i = 1; i <= my_data.length; i = i+ 2){
+    for (let i = 1; i <= my_data.length; i += 2){
         if ((today.getFullYear() === my_data[i].getFullYear()) && (today.getMonth() === my_data[i].getMonth()) && (today.getDate() === my_data[i].getDate())){
             temp = my_data[i - 1];
-            totalToday++;
             data.push(temp);
         }
     }
+    //console.log(data)
     let table = document.createElement('table');
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody');
@@ -154,7 +153,9 @@ function createTableChassisPlannedToday(my_data){
     // Adding the entire table to the body tag
     document.getElementById('chassis-today-table').appendChild(table);
     for (const i in data){
-        table.append(data[i] + "; ");
+        if(!(data[i] instanceof Date)){
+            table.append(data[i] + "; ");
+        }
     }
 }
 
