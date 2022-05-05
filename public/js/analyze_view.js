@@ -85,7 +85,6 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        console.log('here');
         createCurrentWeekChart(chassis_pln_date);
         createYearChart(chassis_pln_date);
         createMonthChart(2022, chassis_pln_date);
@@ -177,7 +176,6 @@ function createTableChassisPlannedToday(my_data){
  * Output: Vertical bart chart with the amount of chassis that are planned per year
  */
 function createCurrentWeekChart(my_data){
-    console.log('here from createCurrentWeekChart');
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
     const second = first + 1, third = first + 2, fourth = first + 3,
@@ -199,6 +197,15 @@ function createCurrentWeekChart(my_data){
     lastDay.setHours(0, 0, 0, 0);
 
     const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
+    const labels = [
+        firstDay.getDate() + '/' + firstDay.getMonth() + '/' + firstDay.getFullYear(),
+        secondDay.getDate() + '/' + secondDay.getMonth() + '/' + secondDay.getFullYear(),
+        thirdDay.getDate() + '/' + thirdDay.getMonth() + '/' + thirdDay.getFullYear(),
+        fourthDay.getDate() + '/' + fourthDay.getMonth() + '/' + fourthDay.getFullYear(),
+        fifthDay.getDate() + '/' + fifthDay.getMonth() + '/' + fifthDay.getFullYear(),
+        sixthDay.getDate() + '/' + sixthDay.getMonth() + '/' + sixthDay.getFullYear(),
+        lastDay.getDate() + '/' + lastDay.getMonth() + '/' + lastDay.getFullYear(),
+    ]
 
     for (const i in my_data){
         for (const j in thisWeek){
@@ -207,8 +214,6 @@ function createCurrentWeekChart(my_data){
             }
         }
     }
-
-    console.log(chassis_deze_week);
 
     const data = {
         labels: labels,
@@ -260,7 +265,6 @@ function createCurrentWeekChart(my_data){
         },
     }
     const myChart = new Chart(document.getElementById('this_week_chart'), config);
-
 }
 
 /*
