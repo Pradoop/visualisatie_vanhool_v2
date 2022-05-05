@@ -41,6 +41,9 @@
 
     </div>
     <div class="chart" id="bar_chart">
+        <canvas id="this_week_chart"></canvas>
+    </div>
+    <div class="chart" id="bar_chart">
         <canvas id="status_chart"></canvas>
     </div>
     <div class="chart" id="bar_chart">

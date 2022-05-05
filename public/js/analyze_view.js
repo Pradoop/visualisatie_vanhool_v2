@@ -5,6 +5,7 @@ const chassis_pln_date = [];
 const chassis_per_year = [];
 const chassis_per_month = new Array(12).fill(0);
 const chassis_per_week = new Array(4).fill(0);
+const chassis_deze_week = new Array(7).fill(0);
 const chassis_per_dag = new Array(7).fill(0);
 const months = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December']
 
@@ -74,6 +75,7 @@ $.ajax({
             let month = temp.substring(2, 4);
             let day = temp.substring(4, 6);
             let date = new Date(year, month - 1, day);
+            date.setHours(0, 0, 0, 0);
             chassis_pln_date.push(date);
         }
     },
@@ -83,11 +85,12 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
+        console.log('here');
+        createCurrentWeekChart(chassis_pln_date);
         createYearChart(chassis_pln_date);
         createMonthChart(2022, chassis_pln_date);
         createWeekChart(2022, 6, chassis_pln_date);
         createDateChart(2022, 6, 1, chassis_pln_date);
-        createCurrentWeekChart(chassis_pln_date);
         createTableChassisPlannedToday(chassis_pln_date);
     }
 });
@@ -111,6 +114,7 @@ $.ajax({
                 const month = temp.substring(2, 4);
                 const day = temp.substring(4, 6);
                 let date = new Date(year, month - 1, day);
+                date.setHours(0, 0, 0, 0);
                 chassisnr_pln_date.push(date);
             }
             else{
@@ -173,33 +177,45 @@ function createTableChassisPlannedToday(my_data){
  * Output: Vertical bart chart with the amount of chassis that are planned per year
  */
 function createCurrentWeekChart(my_data){
+    console.log('here from createCurrentWeekChart');
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
     const second = first + 1, third = first + 2, fourth = first + 3,
         fifth = first + 4, sixth = first + 5, last = first + 6;
 
     let firstDay = new Date(curr.setDate(first));
+    firstDay.setHours(0, 0, 0, 0);
     let secondDay = new Date(curr.setDate(second));
+    secondDay.setHours(0, 0, 0, 0);
     let thirdDay = new Date(curr.setDate(third));
+    thirdDay.setHours(0, 0, 0, 0);
     let fourthDay = new Date(curr.setDate(fourth));
+    fourthDay.setHours(0, 0, 0, 0);
     let fifthDay = new Date(curr.setDate(fifth));
+    fifthDay.setHours(0, 0, 0, 0);
     let sixthDay = new Date(curr.setDate(sixth));
+    sixthDay.setHours(0, 0, 0, 0);
     let lastDay = new Date(curr.setDate(last));
+    lastDay.setHours(0, 0, 0, 0);
 
+    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
 
     for (const i in my_data){
-        var temp = calculateWeekNumber(my_data[i]);
-        if(temp === calculateWeekNumber(firstDay)){
+        for (const j in thisWeek){
+            if ((my_data[i].getFullYear() === thisWeek[j].getFullYear()) && (my_data[i].getMonth() === thisWeek[j].getMonth()) && (my_data[i].getDate() === thisWeek[j].getDate())){
+                chassis_deze_week[j]++;
+            }
         }
     }
 
-/*
+    console.log(chassis_deze_week);
+
     const data = {
         labels: labels,
         datasets: [{
             label: 'Aantal chassis',
             backgroundColor: 'rgb(16, 57, 93)',
-            data: chassis_per_dag,
+            data: chassis_deze_week,
         }]
     };
     const config = {
@@ -229,7 +245,7 @@ function createCurrentWeekChart(my_data){
             plugins:{
                 title:{
                     display: true,
-                    text: 'Aantal geplande chassis per week voor de week van: ' + day1 + ' tot: ' + day7
+                    text: 'Aantal geplande chassis voor deze week'
                 },
                 legend:{
                     display: true,
@@ -243,8 +259,8 @@ function createCurrentWeekChart(my_data){
             }
         },
     }
-    const myChart = new Chart(document.getElementById('day_chart'), config);
-    */
+    const myChart = new Chart(document.getElementById('this_week_chart'), config);
+
 }
 
 /*
