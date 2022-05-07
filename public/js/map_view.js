@@ -12,11 +12,10 @@ var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 
 //Functions
 $(document).ready(function() {
-
-    for(let i = 1; i < file_lines.length; i++) {
+    for(let i = 1; i < file_lines.length - 1; i++) {
 
         //Split the current line
-        let line = file_lines[i].split(/\t/);
+        let line = file_lines[i].toString().split(/\t/);
 
         //Make a dot
         let dot = document.createElement('span');
@@ -118,3 +117,24 @@ $(document).ready(function() {
 
     }
 });
+
+//Generate popover
+for(let i = 1; i < file_lines.length; i++) {
+
+    let titles = file_titles.split(/\t/);
+    let line = file_lines[i].toString().split(/\t/);
+
+    $('#chassis_' + i).popover({
+        trigger: 'click',
+        title: titles[0] + ': ' + line[0],
+        content: titles[1] + ': ' + line[1] + '\n' +
+            titles[2] + ': ' + line[2] + '\n' +
+            titles[3] + ': ' + line[3] + '\n' +
+            titles[4] + ': ' + line[4] + '\n' +
+            titles[5] + ': ' + line[5] + '\n' +
+            titles[6] + ': ' + line[6] + '\n' +
+            titles[7] + ': ' + line[7] + '\n' +
+            titles[8] + ': ' + line[8] + '\n' +
+            titles[9] + ': ' + line[9] + '\n'
+    });
+}

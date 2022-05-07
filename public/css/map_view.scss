@@ -39,9 +39,9 @@
 
 /* Round dots */
 .dot {
-  height: 15px;
-  width: 15px;
-  background-color: blue;
+  height: 13px;
+  width: 13px;
+  background-color: #10395d;
   border-radius: 50%;
   display: inline-block;
 }
@@ -57,6 +57,7 @@ p {
 }
 p:hover {
   color: #10395d;
+  cursor: pointer;
 }
 h1 {
   font-size: 2em;

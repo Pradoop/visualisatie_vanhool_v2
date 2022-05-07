@@ -1,4 +1,5 @@
 <script > let file_lines = <?php echo json_encode($file_lines); ?>;</script>
+<script > let file_titles = <?php echo json_encode($file_lines[0]); ?>;</script>
 
 <div id="map_div">
     <h1>Hal 5 & Hal 6</h1>
