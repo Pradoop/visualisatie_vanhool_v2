@@ -10,7 +10,7 @@
 <div id="table_content">
     <table id="chassis_table" class="table table-striped table-hover">
 
-        <?php $title_array = preg_split('/\t/', $chassis_info[0]); ?>
+        <?php $title_array = preg_split('/\t/', $file_lines[0]); ?>
         <thead>
             <tr>
                 <th id="th0" onclick="showSortIcons(0)"><?= $title_array[0] ?></th>
@@ -29,8 +29,8 @@
         <?php
         $chassis_array = array();
         $index = 1;
-        while($index < sizeof($chassis_info) - 1) {
-            $array = preg_split('/\t/', $chassis_info[$index]);
+        while($index < sizeof($file_lines) - 1) {
+            $array = preg_split('/\t/', $file_lines[$index]);
             unset($array[1],$array[4],$array[6],$array[8],$array[11],$array[12],$array[13],$array[15],$array[18],$array[19]);
             array_push($chassis_array, $array);
             $index++;

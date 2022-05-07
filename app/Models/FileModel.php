@@ -10,10 +10,48 @@ class FileModel extends \CodeIgniter\Model
 
     }
 
+    /*
+    * Opens txtFile and puts each file line as 1 string in array element
+    */
     public function readFile()
     {
+        $files_array = array();
+
+        /*
+        * Large txtFile with columns: Wagen,Ew,Aantal,dtmGepland,wagtyp,naamWagTyp,KlantNr,naamKlant,Land,LijnNr,ReeksVan,Afdeling,Galva,DLnr,Status,CntrDtm,wdTeLaat,wdInMont,standLas
+        */
+        $planningMontage_array = array();
+        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)/planningMontage.txt", "r");
+        if($file) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                array_push($planningMontage_array, $line);
+            }
+            fclose($file);
+        }
+
+        /*
+        * Small txtFile with columns: wagen,DLnr,Kaliber,NaamFase,NaamKlant,NaamType,Natie,StandInProd,ReeksVan,ReeksTot
+        */
+        $chassisInKaliberIV_array = array();
+        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)/ChassisInKaliberIV.txt", "r");
+        if($file) {
+            while(!feof($file)) {
+                $line = fgets($file);
+                array_push($chassisInKaliberIV_array, $line);
+            }
+            fclose($file);
+        }
+
+        array_push($files_array, $planningMontage_array);
+        array_push($files_array, $chassisInKaliberIV_array);
+
+        return $files_array;
+    }
+
+    public function fileColumnArrays($file_by_line_array)
+    {
         $main_arrays = array();
-        $file_by_line_array = array();
         $status_array = array();
         $wdTeLaat_array = array();
         $standLas_array = array();
@@ -21,19 +59,7 @@ class FileModel extends \CodeIgniter\Model
         $wagennr_dtmGepland_array = array();
 
         /*
-        * Opens full txtFile and puts each file line as 1 string in array element
-        */
-        $file = fopen(realpath('C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt'), "r");
-        if($file) {
-            while(!feof($file)) {
-                $line = fgets($file);
-                array_push($file_by_line_array, $line);
-            }
-            fclose($file);
-        }
-
-        /*
-        * Opens small txtFile and gets the status of each line in array
+        * Gets the status of each line in array
         */
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
@@ -42,7 +68,7 @@ class FileModel extends \CodeIgniter\Model
         }
 
         /*
-        * Opens small txtFile and gets the wdTeLaat of each line in array
+        * Gets the wdTeLaat of each line in array
         */
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
@@ -51,7 +77,7 @@ class FileModel extends \CodeIgniter\Model
         }
 
         /*
-        * Opens small txtFile and gets the standLas of each line in array
+        * Gets the standLas of each line in array
         */
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
@@ -60,7 +86,7 @@ class FileModel extends \CodeIgniter\Model
         }
 
         /*
-        * Opens small txtFile and gets the dtmGepland of each line in array
+        * Gets the dtmGepland of each line in array
         */
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
@@ -69,7 +95,7 @@ class FileModel extends \CodeIgniter\Model
         }
 
         /*
-        * Opens small txtFile and gets the wagennr and dtmGepland of each line in array
+        * Gets the wagennr and dtmGepland of each line in array
         */
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
@@ -77,7 +103,6 @@ class FileModel extends \CodeIgniter\Model
             array_push($wagennr_dtmGepland_array, $array);
         }
 
-        array_push($main_arrays, $file_by_line_array);
         array_push($main_arrays, $status_array);
         array_push($main_arrays, $wdTeLaat_array);
         array_push($main_arrays, $standLas_array);

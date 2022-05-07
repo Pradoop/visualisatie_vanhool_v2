@@ -28,7 +28,7 @@ class Home extends BaseController
     public function map_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map');
-        $data2["chassis_info"] = $this->file_model->readFile()[0];
+        $data2["file_lines"] = $this->file_model->readFile()[1];
 
         array_push($this->data['scripts_to_load'], 'map_view.js');
         array_push($this->data['styles_to_load'], 'map_view.scss');
@@ -39,7 +39,7 @@ class Home extends BaseController
     public function chassis_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis');
-        $data2["chassis_info"] = $this->file_model->readFile()[0];
+        $data2["file_lines"] = $this->file_model->readFile()[0];
 
         array_push($this->data['scripts_to_load'], 'chassis_view.js');
         array_push($this->data['styles_to_load'], 'chassis_view.scss');
@@ -50,11 +50,11 @@ class Home extends BaseController
     public function analyze_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze');
-        $data2["chassis_info"] = $this->file_model->readFile();
+        $data2["file_lines"] = $this->file_model->readFile()[0];
 
-        $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->readFile()[1]);
-        $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->readFile()[2]);
-        $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->readFile()[2]);
+        $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->fileColumnArrays($data2["file_lines"])[0]);
+        $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
+        $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
 
         $data2["welding_percentages"] = $this->calculateWeldingData();
         $data2["chassis_phase"] = $this->calculateChassisPerPhase();
@@ -158,7 +158,8 @@ class Home extends BaseController
      */
     public function calculateWeldingData()
     {
-        $my_array = $this->file_model->readFile()[3];
+        $line_array = $this->file_model->readFile()[0];
+        $my_array = $this->file_model->fileColumnArrays($line_array)[2];
         $line_number = 1;
         $to_be_decided = 0;
         $manual_welding = 0;
@@ -202,7 +203,8 @@ class Home extends BaseController
      */
     public function calculateChassisPerPhase()
     {
-        $my_array = $this->file_model->readFile()[1];
+        $line_array = $this->file_model->readFile()[0];
+        $my_array = $this->file_model->fileColumnArrays($line_array)[0];
         $line_number = 1;
         $verkocht = 0;
         $studie_start = 0;
@@ -289,7 +291,8 @@ class Home extends BaseController
 
     public function getPlannedTime()
     {
-        $my_array = $this->file_model->readFile()[4];
+        $line_array = $this->file_model->readFile()[0];
+        $my_array = $this->file_model->fileColumnArrays($line_array)[3];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
@@ -303,7 +306,8 @@ class Home extends BaseController
 
     public function getPlannedChassisAndTime()
     {
-        $my_array = $this->file_model->readFile()[5];
+        $line_array = $this->file_model->readFile()[0];
+        $my_array = $this->file_model->fileColumnArrays($line_array)[4];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):

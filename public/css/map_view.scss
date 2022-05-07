@@ -1,15 +1,22 @@
 /* Map */
 #map_div {
+  position: relative;
   text-align: center;
   margin-top: 15px;
   margin-left: 15px;
   margin-right: 15px;
-  //border: 2px solid green;
+  border: 2px solid green;
 }
 #map {
   margin-top: 5px;
   height: 100%;
   width: 100%;
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
 }
 
 /* Lijst chassis */
@@ -28,6 +35,15 @@
   margin-bottom: 5px;
   width: 100px;
   //border: 2px solid yellow;
+}
+
+/* Round dots */
+.dot {
+  height: 15px;
+  width: 15px;
+  background-color: blue;
+  border-radius: 50%;
+  display: inline-block;
 }
 
 /* Algemeen */
