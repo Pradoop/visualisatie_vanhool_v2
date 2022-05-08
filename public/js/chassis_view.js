@@ -1,5 +1,4 @@
 //Variables
-let original_table = document.getElementById("chassis_table");
 let current_column = -1;
 let status = 0;
 
@@ -131,6 +130,30 @@ function showSortIcons(i) {
         status = 0;
 
         //TODO : create the original table
+        originalTable();
+    }
+}
+
+function originalTable() {
+
+    let table = document.getElementById("chassis_table");
+    let rows = table.rows;
+
+    console.log(file_lines);
+
+    for(let i = 1; i < rows.length; i++) {
+
+        let cells = rows[i].cells;
+        cells[0].innerHTML = file_lines[i-1][0];
+        cells[1].innerHTML = file_lines[i-1][2];
+        cells[2].innerHTML = file_lines[i-1][3];
+        cells[3].innerHTML = file_lines[i-1][5];
+        cells[4].innerHTML = file_lines[i-1][7];
+        cells[5].innerHTML = file_lines[i-1][9];
+        cells[6].innerHTML = file_lines[i-1][10];
+        cells[7].innerHTML = file_lines[i-1][14];
+        cells[8].innerHTML = file_lines[i-1][16];
+        cells[9].innerHTML = file_lines[i-1][17];
     }
 }
 

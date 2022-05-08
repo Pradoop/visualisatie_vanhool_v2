@@ -37,6 +37,8 @@
         }
         ?>
 
+        <script > let file_lines = <?php echo json_encode($chassis_array); ?>;</script>
+
         <tbody id="myTable">
             <?php
             foreach ($chassis_array as $row) {
