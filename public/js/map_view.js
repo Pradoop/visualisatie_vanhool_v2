@@ -22,7 +22,7 @@ $(document).ready(function() {
         let dot = document.createElement('span');
         dot.setAttribute('id', line[0]);
         dot.setAttribute('class', 'dot');
-        document.getElementById('map_div').appendChild(dot);
+        document.getElementById('image_div').appendChild(dot);
 
         document.getElementById(line[0]).style.position = 'absolute';
 
@@ -31,70 +31,86 @@ $(document).ready(function() {
             case "Kal S01  ":
                 document.getElementById(line[0]).style.bottom = '10%';
                 document.getElementById(line[0]).style.left = '24%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S02  ":
                 document.getElementById(line[0]).style.bottom = '10%';
                 document.getElementById(line[0]).style.left = '32%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S03  ":
                 document.getElementById(line[0]).style.bottom = '10%';
                 document.getElementById(line[0]).style.left = '40%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S04  ":
                 document.getElementById(line[0]).style.bottom = '10%';
-                document.getElementById(line[0]).style.left = '46%';
+                document.getElementById(line[0]).style.left = '46.9%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S05  ":
-                document.getElementById(line[0]).style.bottom = '30%';
+                document.getElementById(line[0]).style.bottom = '35%';
                 document.getElementById(line[0]).style.left = '32%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S06  ":
-                document.getElementById(line[0]).style.bottom = '30%';
+                document.getElementById(line[0]).style.bottom = '35%';
                 document.getElementById(line[0]).style.left = '40%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S07  ":
-                document.getElementById(line[0]).style.bottom = '50%';
-                document.getElementById(line[0]).style.left = '45%';
+                document.getElementById(line[0]).style.bottom = '59%';
+                document.getElementById(line[0]).style.left = '45.75%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S08  ":
-                document.getElementById(line[0]).style.bottom = '72%';
-                document.getElementById(line[0]).style.left = '45%';
+                document.getElementById(line[0]).style.bottom = '83%';
+                document.getElementById(line[0]).style.left = '45.75%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S10  ":
-                document.getElementById(line[0]).style.bottom = '72%';
-                document.getElementById(line[0]).style.left = '60%';
+                document.getElementById(line[0]).style.bottom = '83%';
+                document.getElementById(line[0]).style.left = '60.25%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal S11  ":
-                document.getElementById(line[0]).style.bottom = '72%';
-                document.getElementById(line[0]).style.left = '54%';
+                document.getElementById(line[0]).style.bottom = '83%';
+                document.getElementById(line[0]).style.left = '54.75%';
+                document.getElementById(line[0]).style.backgroundColor = 'green';
                 break;
             case "Kal L01  "://TODO : correct location
-                document.getElementById(line[0]).style.top = '10px';
-                document.getElementById(line[0]).style.left = '10px';
+                document.getElementById(line[0]).style.bottom = '41%';
+                document.getElementById(line[0]).style.left = '56.5%';
+                document.getElementById(line[0]).style.backgroundColor = 'yellow';
                 break;
             case "Kal L02  "://TODO : correct location
-                document.getElementById(line[0]).style.top = '10px';
-                document.getElementById(line[0]).style.left = '10px';
+                document.getElementById(line[0]).style.bottom = '41%';
+                document.getElementById(line[0]).style.left = '66%';
+                document.getElementById(line[0]).style.backgroundColor = 'yellow';
                 break;
             case "Kal L03  "://TODO : correct location
-                document.getElementById(line[0]).style.top = '10px';
-                document.getElementById(line[0]).style.left = '10px';
+                document.getElementById(line[0]).style.bottom = '90%';
+                document.getElementById(line[0]).style.left = '76.25%';
+                document.getElementById(line[0]).style.backgroundColor = 'yellow';
                 break;
             case "Kal L04  "://TODO : correct location
-                document.getElementById(line[0]).style.top = '10px';
-                document.getElementById(line[0]).style.left = '10px';
+
+                document.getElementById(line[0]).style.backgroundColor = 'yellow';
                 break;
             case "Kal L05  "://TODO : correct location
-                document.getElementById(line[0]).style.top = '10px';
-                document.getElementById(line[0]).style.left = '10px';
+                document.getElementById(line[0]).style.bottom = '90%';
+                document.getElementById(line[0]).style.left = '85%';
+                document.getElementById(line[0]).style.backgroundColor = 'yellow';
                 break;
             case "Kal L06  "://TODO : correct location
-                document.getElementById(line[0]).style.top = '10px';
-                document.getElementById(line[0]).style.left = '10px';
+                document.getElementById(line[0]).style.bottom = '41%';
+                document.getElementById(line[0]).style.left = '85%';
+                document.getElementById(line[0]).style.backgroundColor = 'yellow';
                 break;
             case "Kal L07  "://TODO : correct location
-                document.getElementById(line[0]).style.top = '10px';
-                document.getElementById(line[0]).style.left = '10px';
+                document.getElementById(line[0]).style.bottom = '7%';
+                document.getElementById(line[0]).style.left = '94.5%';
+                document.getElementById(line[0]).style.backgroundColor = 'yellow';
         }
 
     }

@@ -3,7 +3,9 @@
 
 <div id="map_div">
     <h1>Hal 5 & Hal 6</h1>
-    <img id="map" class="site-map" src="<?= base_url()?>/images/map_hal5_hal6.png" alt="...">
+    <div id="image_div">
+        <img id="map" class="site-map" src="<?= base_url()?>/images/map_hal5_hal6.png" alt="...">
+    </div>
 </div>
 
 <div id="important_div">
