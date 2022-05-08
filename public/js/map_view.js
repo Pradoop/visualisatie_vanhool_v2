@@ -122,9 +122,11 @@ function focusDot(line_nr) {
 
         let line = file_lines[i].toString().split(/\t/);
         if(line_nr === i) {
+            document.getElementById('chassis_' + i).style.color = '#10395d';
             document.getElementById(line[0]).style.display = 'block';
         }
         else {
+            document.getElementById('chassis_' + i).style.color = 'var(--bs-body-color)';
             document.getElementById(line[0]).style.display = 'none';
         }
     }
