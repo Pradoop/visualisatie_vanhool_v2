@@ -1,17 +1,18 @@
 //Enable tooltip
-var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
-var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+let tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+let tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
     return new bootstrap.Tooltip(tooltipTriggerEl)
 })
 
 //Enable Popover
-var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
-var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+let popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
 })
 
 //Functions
 $(document).ready(function() {
+
     for(let i = 1; i < file_lines.length - 1; i++) {
 
         //Split the current line
@@ -23,96 +24,77 @@ $(document).ready(function() {
         dot.setAttribute('class', 'dot');
         document.getElementById('map_div').appendChild(dot);
 
+        document.getElementById(line[0]).style.position = 'absolute';
+
         //Put it on the right place
-        if(line[2] === "Kal S01  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '320px';
-            document.getElementById(line[0]).style.left = '340px';
-        }
-        else if(line[2] === "Kal S02  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '320px';
-            document.getElementById(line[0]).style.left = '455px';
-        }
-        else if(line[2] === "Kal S03  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '320px';
-            document.getElementById(line[0]).style.left = '570px';
-        }
-        else if(line[2] === "Kal S04  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '320px';
-            document.getElementById(line[0]).style.left = '665px';
-        }
-        else if(line[2] === "Kal S05  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '245px';
-            document.getElementById(line[0]).style.left = '455px';
-        }
-        else if(line[2] === "Kal S06  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '245px';
-            document.getElementById(line[0]).style.left = '570px';
-        }
-        else if(line[2] === "Kal S07  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '165px';
-            document.getElementById(line[0]).style.left = '650px';
-        }
-        else if(line[2] === "Kal S08  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '650px';
-        }
-        else if(line[2] === "Kal S09  ") {
-
-        }
-        else if(line[2] === "Kal S10  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '860px';
-        }
-        else if(line[2] === "Kal S11  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '780px';
-        }
-
-        //TODO : zet juiste locatie (nu dummy)
-        else if(line[2] === "Kal L01  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '50px';
-        }
-        else if(line[2] === "Kal L02  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '50px';
-        }
-        else if(line[2] === "Kal L03  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '50px';
-        }
-        else if(line[2] === "Kal L04  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '50px';
-        }
-        else if(line[2] === "Kal L05  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '50px';
-        }
-        else if(line[2] === "Kal L06  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '50px';
-        }
-        else if(line[2] === "Kal L07  ") {
-            document.getElementById(line[0]).style.position = 'absolute';
-            document.getElementById(line[0]).style.top = '90px';
-            document.getElementById(line[0]).style.left = '50px';
+        switch(line[2]) {
+            case "Kal S01  ":
+                document.getElementById(line[0]).style.top = '320px';
+                document.getElementById(line[0]).style.left = '340px';
+                break;
+            case "Kal S02  ":
+                document.getElementById(line[0]).style.top = '320px';
+                document.getElementById(line[0]).style.left = '455px';
+                break;
+            case "Kal S03  ":
+                document.getElementById(line[0]).style.top = '320px';
+                document.getElementById(line[0]).style.left = '570px';
+                break;
+            case "Kal S04  ":
+                document.getElementById(line[0]).style.top = '320px';
+                document.getElementById(line[0]).style.left = '665px';
+                break;
+            case "Kal S05  ":
+                document.getElementById(line[0]).style.top = '245px';
+                document.getElementById(line[0]).style.left = '455px';
+                break;
+            case "Kal S06  ":
+                document.getElementById(line[0]).style.top = '245px';
+                document.getElementById(line[0]).style.left = '570px';
+                break;
+            case "Kal S07  ":
+                document.getElementById(line[0]).style.top = '165px';
+                document.getElementById(line[0]).style.left = '650px';
+                break;
+            case "Kal S08  ":
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '650px';
+                break;
+            case "Kal S10  ":
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '860px';
+                break;
+            case "Kal S11  ":
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '780px';
+                break;
+            case "Kal L01  "://TODO : correct location
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '50px';
+                break;
+            case "Kal L02  "://TODO : correct location
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '50px';
+                break;
+            case "Kal L03  "://TODO : correct location
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '50px';
+                break;
+            case "Kal L04  "://TODO : correct location
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '50px';
+                break;
+            case "Kal L05  "://TODO : correct location
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '50px';
+                break;
+            case "Kal L06  "://TODO : correct location
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '50px';
+                break;
+            case "Kal L07  "://TODO : correct location
+                document.getElementById(line[0]).style.top = '90px';
+                document.getElementById(line[0]).style.left = '50px';
         }
 
     }
