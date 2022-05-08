@@ -116,7 +116,22 @@ $(document).ready(function() {
     }
 });
 
+function focusDot(line_nr) {
+
+    for(let i = 1; i < file_lines.length - 1; i++) {
+
+        let line = file_lines[i].toString().split(/\t/);
+        if(line_nr === i) {
+            document.getElementById(line[0]).style.display = 'block';
+        }
+        else {
+            document.getElementById(line[0]).style.display = 'none';
+        }
+    }
+}
+
 //Generate popover
+/*
 for(let i = 1; i < file_lines.length; i++) {
 
     let titles = file_titles.split(/\t/);
@@ -136,3 +151,5 @@ for(let i = 1; i < file_lines.length; i++) {
             titles[9] + ': ' + line[9] + '\n'
     });
 }
+
+ */

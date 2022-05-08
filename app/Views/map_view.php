@@ -15,7 +15,7 @@
             <?php $i = 1; ?>
             <?php while($i < sizeof($file_lines)): ?>
                 <?php $line_array = preg_split('/\t/', $file_lines[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>"><?= $line_array[0] ?></p>
+                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
@@ -23,7 +23,7 @@
             <?php $i = 2; ?>
             <?php while($i < sizeof($file_lines)): ?>
                 <?php $line_array = preg_split('/\t/', $file_lines[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>"><?= $line_array[0] ?></p>
+                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
@@ -31,7 +31,7 @@
             <?php $i = 3; ?>
             <?php while($i < sizeof($file_lines)): ?>
                 <?php $line_array = preg_split('/\t/', $file_lines[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>"><?= $line_array[0] ?></p>
+                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
@@ -39,7 +39,7 @@
             <?php $i = 4; ?>
             <?php while($i < sizeof($file_lines)): ?>
                 <?php $line_array = preg_split('/\t/', $file_lines[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>"><?= $line_array[0] ?></p>
+                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
@@ -47,7 +47,7 @@
             <?php $i = 5; ?>
             <?php while($i < sizeof($file_lines)): ?>
                 <?php $line_array = preg_split('/\t/', $file_lines[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>"><?= $line_array[0] ?></p>
+                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
