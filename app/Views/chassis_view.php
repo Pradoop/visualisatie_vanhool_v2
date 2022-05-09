@@ -13,16 +13,16 @@
         <?php $title_array = preg_split('/\t/', $file_lines[0]); ?>
         <thead>
             <tr>
-                <th id="th0" onclick="showSortIcons(0)"><?= $title_array[0] ?></th>
-                <th id="th1" onclick="showSortIcons(1)"><?= $title_array[2] ?></th>
-                <th id="th2" onclick="showSortIcons(2)"><?= $title_array[3] ?></th>
-                <th id="th3" onclick="showSortIcons(3)"><?= $title_array[5] ?></th>
-                <th id="th4" onclick="showSortIcons(4)"><?= $title_array[7] ?></th>
-                <th id="th5" onclick="showSortIcons(5)"><?= $title_array[9] ?></th>
-                <th id="th6" onclick="showSortIcons(6)"><?= $title_array[10] ?></th>
-                <th id="th7" onclick="showSortIcons(7)"><?= $title_array[14] ?></th>
-                <th id="th8" onclick="showSortIcons(8)"><?= $title_array[16] ?></th>
-                <th id="th9" onclick="showSortIcons(9)"><?= $title_array[17] ?></th>
+                <th id="th0" onclick="showSortIcons(0)"><?= $title_array[0] ?></th> <!-- Wagen !-->
+                <th id="th1" onclick="showSortIcons(1)"><?= $title_array[2] ?></th> <!-- Aantal !-->
+                <th id="th2" onclick="showSortIcons(2)"><?= $title_array[5] ?></th> <!-- NaamWagen !-->
+                <th id="th3" onclick="showSortIcons(3)"><?= $title_array[7] ?></th> <!-- NaamKlant !-->
+                <th id="th4" onclick="showSortIcons(4)"><?= $title_array[10] ?></th> <!-- ReeksVan !-->
+                <th id="th5" onclick="showSortIcons(5)"><?= $title_array[12] ?></th> <!-- Galva !-->
+                <th id="th6" onclick="showSortIcons(6)"><?= $title_array[14] ?></th> <!-- Status !-->
+                <th id="th7" onclick="showSortIcons(7)"><?= $title_array[3] ?></th> <!-- dtmGepland !-->
+                <th id="th8" onclick="showSortIcons(8)"><?= $title_array[17] ?></th> <!-- wdInMont !-->
+                <th id="th9" onclick="showSortIcons(9)">Dagen tot gepland</th> <!-- huidige datum tov geplande datum !-->
             </tr>
         </thead>
 
@@ -31,8 +31,26 @@
         $index = 1;
         while($index < sizeof($file_lines) - 1) {
             $array = preg_split('/\t/', $file_lines[$index]);
-            unset($array[1],$array[4],$array[6],$array[8],$array[11],$array[12],$array[13],$array[15],$array[18],$array[19]);
-            array_push($chassis_array, $array);
+            $line_array = array();
+            array_push($line_array, $array[0]);
+            array_push($line_array, $array[2]);
+            array_push($line_array, $array[5]);
+            array_push($line_array, $array[7]);
+            array_push($line_array, $array[10]);
+            array_push($line_array, $array[12]);
+            array_push($line_array, $array[14]);
+            array_push($line_array, $array[3]);
+            array_push($line_array, $array[17]);
+
+            //Convert to correct format
+            $today = date("Y-m-d");
+            $parts = str_split($array[3], 2);
+            $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
+            $diff = strtotime($planned_date) - strtotime($today);
+
+            array_push($line_array, round($diff / 86400));
+
+            array_push($chassis_array, $line_array);
             $index++;
         }
         ?>
