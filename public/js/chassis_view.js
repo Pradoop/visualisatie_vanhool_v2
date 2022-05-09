@@ -1,3 +1,7 @@
+//Variables
+let current_column = -1;
+let status = 0;
+
 //Search Box
 $(document).ready(function(){
     $("#search_input").on("keyup", function() {
@@ -44,7 +48,6 @@ $('#th6').popover({
     placement: 'top',
     content: 'Reekshoofd'
 });
-
 $('#th7').popover({
     trigger: 'hover',
     placement: 'top',
@@ -64,7 +67,6 @@ $('#th7').popover({
         '8  => Morgen af in de montage afdeling' + '\n' +
         '81 => Vandaag af in de montage afdeling' + '\n'
 });
-
 $('#th8').popover({
     trigger: 'hover',
     placement: 'top',
@@ -76,12 +78,8 @@ $('#th9').popover({
     content: 'Het aantal werkdagen dat de wagen reeds in de montage staat (= het verschil in werkdagen tussen de huidige dag en de dag waarop fase 4 opzetten is afgemeld)'
 });
 
-//Variables
-let current_column = -1;
-let status = 0;
-
 //Functions
-function sorterCheck(i) {
+function showSortIcons(i) {
 
     if(current_column !== i) {
         //Remove all
@@ -99,7 +97,7 @@ function sorterCheck(i) {
     }
 
     //Change sorting status
-    if(status === 0) {//DOWN (z naar a)
+    if(status === 0) {//DOWN
         console.log('Column ' + current_column + ' clicked 1 time: ' + status + " (DOWN)");
         let img_down = document.createElement('img');
         img_down.setAttribute('id', 'down_logo');
@@ -109,7 +107,7 @@ function sorterCheck(i) {
         document.getElementById('th' + current_column).appendChild(img_down);
         status++;
 
-        sortTableZA(current_column);
+        sortTable(current_column, 'down');
     }
     else if(status === 1) {//UP
         console.log('Column ' + current_column + ' clicked 2 times: ' + status + " (UP)");
@@ -123,7 +121,7 @@ function sorterCheck(i) {
         document.getElementById('th' + current_column).appendChild(img_up);
         status++;
 
-        sortTableAZ(current_column);
+        sortTable(current_column, 'up');
     }
     else {//ORIGINAL
         console.log('Column ' + current_column + ' clicked 3 times: ' + status + " (ORIGINAL)");
@@ -132,17 +130,34 @@ function sorterCheck(i) {
         status = 0;
 
         //TODO : create the original table
+        originalTable();
     }
-
 }
 
-function sortTableZA(current_column) {
+function originalTable() {
 
-    //TODO : create table from Z to A
+    let table = document.getElementById("chassis_table");
+    let rows = table.rows;
 
+    console.log(file_lines);
+
+    for(let i = 1; i < rows.length; i++) {
+
+        let cells = rows[i].cells;
+        cells[0].innerHTML = file_lines[i-1][0];
+        cells[1].innerHTML = file_lines[i-1][2];
+        cells[2].innerHTML = file_lines[i-1][3];
+        cells[3].innerHTML = file_lines[i-1][5];
+        cells[4].innerHTML = file_lines[i-1][7];
+        cells[5].innerHTML = file_lines[i-1][9];
+        cells[6].innerHTML = file_lines[i-1][10];
+        cells[7].innerHTML = file_lines[i-1][14];
+        cells[8].innerHTML = file_lines[i-1][16];
+        cells[9].innerHTML = file_lines[i-1][17];
+    }
 }
 
-function sortTableAZ(column) {
+function sortTable(column, state) {
 
     let table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("chassis_table");
@@ -158,15 +173,31 @@ function sortTableAZ(column) {
             y = rows[i + 1].getElementsByTagName("TD")[column];
 
             if(column === 3 || column === 4) {
-                if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                    shouldSwitch = true;
-                    break;
+                if(state === 'up') {
+                    if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                else if(state === 'down') {
+                    if(x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
             }
             else {
-                if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                    shouldSwitch = true;
-                    break;
+                if(state === 'up') {
+                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+                else if(state === 'down') {
+                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
+                        shouldSwitch = true;
+                        break;
+                    }
                 }
             }
         }
@@ -175,7 +206,5 @@ function sortTableAZ(column) {
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
         }
-
     }
-
 }
