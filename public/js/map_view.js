@@ -89,6 +89,11 @@ $(document).ready(function() {
                 document.getElementById(id).style.left = '45.75%';
                 document.getElementById(id).style.backgroundColor = 'green';
                 break;
+            case "Kal S09  "://TODO : correct location
+                document.getElementById(id).style.bottom = '50%';
+                document.getElementById(id).style.left = '50%';
+                document.getElementById(line[0]).style.backgroundColor = 'red';
+                break;
             case "Kal S10  ":
                 document.getElementById(id).style.bottom = '83%';
                 document.getElementById(id).style.left = '60.25%';
@@ -99,36 +104,37 @@ $(document).ready(function() {
                 document.getElementById(id).style.left = '54.75%';
                 document.getElementById(id).style.backgroundColor = 'green';
                 break;
-            case "Kal L01  "://TODO : correct location
+            case "Kal L01  ":
                 document.getElementById(id).style.bottom = '41%';
                 document.getElementById(id).style.left = '56.5%';
                 document.getElementById(id).style.backgroundColor = 'yellow';
                 break;
-            case "Kal L02  "://TODO : correct location
+            case "Kal L02  ":
                 document.getElementById(id).style.bottom = '41%';
                 document.getElementById(id).style.left = '66%';
                 document.getElementById(id).style.backgroundColor = 'yellow';
                 break;
-            case "Kal L03  "://TODO : correct location
-                document.getElementById(id).style.bottom = '90%';
-                document.getElementById(id).style.left = '76.25%';
-                document.getElementById(id).style.backgroundColor = 'yellow';
-                break;
-            case "Kal L04  "://TODO : correct location
-
-                document.getElementById(line[0]).style.backgroundColor = 'yellow';
-                break;
-            case "Kal L05  "://TODO : correct location
-                document.getElementById(id).style.bottom = '90%';
-                document.getElementById(id).style.left = '85%';
-                document.getElementById(id).style.backgroundColor = 'yellow';
-                break;
-            case "Kal L06  "://TODO : correct location
+            case "Kal L03  ":
                 document.getElementById(id).style.bottom = '41%';
                 document.getElementById(id).style.left = '85%';
                 document.getElementById(id).style.backgroundColor = 'yellow';
                 break;
-            case "Kal L07  "://TODO : correct location
+            case "Kal L04  "://TODO : correct location
+                document.getElementById(id).style.bottom = '50%';
+                document.getElementById(id).style.left = '50%';
+                document.getElementById(line[0]).style.backgroundColor = 'red';
+                break;
+            case "Kal L05  ":
+                document.getElementById(id).style.bottom = '90%';
+                document.getElementById(id).style.left = '76.25%';
+                document.getElementById(id).style.backgroundColor = 'yellow';
+                break;
+            case "Kal L06  ":
+                document.getElementById(id).style.bottom = '90%';
+                document.getElementById(id).style.left = '85%';
+                document.getElementById(id).style.backgroundColor = 'yellow';
+                break;
+            case "Kal L07  ":
                 document.getElementById(id).style.bottom = '7%';
                 document.getElementById(id).style.left = '94.5%';
                 document.getElementById(id).style.backgroundColor = 'yellow';
