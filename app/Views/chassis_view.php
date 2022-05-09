@@ -32,23 +32,25 @@
         while($index < sizeof($file_lines) - 1) {
             $array = preg_split('/\t/', $file_lines[$index]);
             $line_array = array();
-            array_push($line_array, $array[0]);
-            array_push($line_array, $array[2]);
-            array_push($line_array, $array[5]);
-            array_push($line_array, $array[7]);
-            array_push($line_array, $array[10]);
-            array_push($line_array, $array[12]);
-            array_push($line_array, $array[14]);
-            array_push($line_array, $array[3]);
-            array_push($line_array, $array[17]);
+            if(isset($array[2]) && isset($array[5]) && isset($array[7]) && isset($array[10]) && isset($array[12]) && isset($array[14]) && isset($array[3]) && isset($array[17])) {
+                array_push($line_array, $array[0]);
+                array_push($line_array, $array[2]);
+                array_push($line_array, $array[5]);
+                array_push($line_array, $array[7]);
+                array_push($line_array, $array[10]);
+                array_push($line_array, $array[12]);
+                array_push($line_array, $array[14]);
+                array_push($line_array, $array[3]);
+                array_push($line_array, $array[17]);
 
-            //Convert to correct format
-            $today = date("Y-m-d");
-            $parts = str_split($array[3], 2);
-            $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
-            $diff = strtotime($planned_date) - strtotime($today);
+                //Convert to correct format
+                $today = date("Y-m-d");
+                $parts = str_split($array[3], 2);
+                $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
+                $diff = strtotime($planned_date) - strtotime($today);
 
-            array_push($line_array, round($diff / 86400));
+                array_push($line_array, round($diff / 86400));
+            }
 
             array_push($chassis_array, $line_array);
             $index++;
