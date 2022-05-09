@@ -2,10 +2,16 @@
 <script > let file_titles = <?php echo json_encode($file_lines[0]); ?>;</script>
 
 <div id="map_div">
-    <h1>Hal 5 & Hal 6</h1>
-    <div id="image_div">
-        <img id="map" class="site-map" src="<?= base_url()?>/images/map_hal5_hal6.png" alt="...">
+    <div id="afdelingNaam">
+        <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
     </div>
+    <div id="searchBox">
+        <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">
+    </div>
+</div>
+
+<div id="image_div">
+    <img id="map" class="site-map" src="<?= base_url()?>/images/map_hal5_hal6.png" alt="...">
 </div>
 
 <div id="important_div">

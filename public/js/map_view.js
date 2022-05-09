@@ -10,6 +10,10 @@ let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
 })
 
+//Variables
+let focus = 0;
+let focus_dot = -1;
+
 //Functions
 $(document).ready(function() {
 
@@ -17,100 +21,117 @@ $(document).ready(function() {
 
         //Split the current line
         let line = file_lines[i].toString().split(/\t/);
+        let id = line[0].trim();
 
         //Make a dot
         let dot = document.createElement('span');
-        dot.setAttribute('id', line[0]);
+        dot.setAttribute('id', id);
         dot.setAttribute('class', 'dot');
         document.getElementById('image_div').appendChild(dot);
 
-        document.getElementById(line[0]).style.position = 'absolute';
+        //popover
+        let titles = file_titles.split(/\t/);
+        $('#' + id).popover({
+            trigger: 'click',
+            title: titles[0] + ': ' + line[0],
+            content: titles[1] + ': ' + line[1] + '\n' +
+                titles[2] + ': ' + line[2] + '\n' +
+                titles[3] + ': ' + line[3] + '\n' +
+                titles[4] + ': ' + line[4] + '\n' +
+                titles[5] + ': ' + line[5] + '\n' +
+                titles[6] + ': ' + line[6] + '\n' +
+                titles[7] + ': ' + line[7] + '\n' +
+                titles[8] + ': ' + line[8] + '\n' +
+                titles[9] + ': ' + line[9] + '\n'
+        });
+
+        document.getElementById(id).style.position = 'absolute';
 
         //Put it on the right place
         switch(line[2]) {
             case "Kal S01  ":
-                document.getElementById(line[0]).style.bottom = '10%';
-                document.getElementById(line[0]).style.left = '24%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '10%';
+                document.getElementById(id).style.left = '24%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S02  ":
-                document.getElementById(line[0]).style.bottom = '10%';
-                document.getElementById(line[0]).style.left = '32%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '10%';
+                document.getElementById(id).style.left = '32%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S03  ":
-                document.getElementById(line[0]).style.bottom = '10%';
-                document.getElementById(line[0]).style.left = '40%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '10%';
+                document.getElementById(id).style.left = '40%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S04  ":
-                document.getElementById(line[0]).style.bottom = '10%';
-                document.getElementById(line[0]).style.left = '46.9%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '10%';
+                document.getElementById(id).style.left = '46.9%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S05  ":
-                document.getElementById(line[0]).style.bottom = '35%';
-                document.getElementById(line[0]).style.left = '32%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '35%';
+                document.getElementById(id).style.left = '32%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S06  ":
-                document.getElementById(line[0]).style.bottom = '35%';
-                document.getElementById(line[0]).style.left = '40%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '35%';
+                document.getElementById(id).style.left = '40%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S07  ":
-                document.getElementById(line[0]).style.bottom = '59%';
-                document.getElementById(line[0]).style.left = '45.75%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '59%';
+                document.getElementById(id).style.left = '45.75%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S08  ":
-                document.getElementById(line[0]).style.bottom = '83%';
-                document.getElementById(line[0]).style.left = '45.75%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '83%';
+                document.getElementById(id).style.left = '45.75%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S10  ":
-                document.getElementById(line[0]).style.bottom = '83%';
-                document.getElementById(line[0]).style.left = '60.25%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '83%';
+                document.getElementById(id).style.left = '60.25%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal S11  ":
-                document.getElementById(line[0]).style.bottom = '83%';
-                document.getElementById(line[0]).style.left = '54.75%';
-                document.getElementById(line[0]).style.backgroundColor = 'green';
+                document.getElementById(id).style.bottom = '83%';
+                document.getElementById(id).style.left = '54.75%';
+                document.getElementById(id).style.backgroundColor = 'green';
                 break;
             case "Kal L01  "://TODO : correct location
-                document.getElementById(line[0]).style.bottom = '41%';
-                document.getElementById(line[0]).style.left = '56.5%';
-                document.getElementById(line[0]).style.backgroundColor = 'yellow';
+                document.getElementById(id).style.bottom = '41%';
+                document.getElementById(id).style.left = '56.5%';
+                document.getElementById(id).style.backgroundColor = 'yellow';
                 break;
             case "Kal L02  "://TODO : correct location
-                document.getElementById(line[0]).style.bottom = '41%';
-                document.getElementById(line[0]).style.left = '66%';
-                document.getElementById(line[0]).style.backgroundColor = 'yellow';
+                document.getElementById(id).style.bottom = '41%';
+                document.getElementById(id).style.left = '66%';
+                document.getElementById(id).style.backgroundColor = 'yellow';
                 break;
             case "Kal L03  "://TODO : correct location
-                document.getElementById(line[0]).style.bottom = '90%';
-                document.getElementById(line[0]).style.left = '76.25%';
-                document.getElementById(line[0]).style.backgroundColor = 'yellow';
+                document.getElementById(id).style.bottom = '90%';
+                document.getElementById(id).style.left = '76.25%';
+                document.getElementById(id).style.backgroundColor = 'yellow';
                 break;
             case "Kal L04  "://TODO : correct location
 
                 document.getElementById(line[0]).style.backgroundColor = 'yellow';
                 break;
             case "Kal L05  "://TODO : correct location
-                document.getElementById(line[0]).style.bottom = '90%';
-                document.getElementById(line[0]).style.left = '85%';
-                document.getElementById(line[0]).style.backgroundColor = 'yellow';
+                document.getElementById(id).style.bottom = '90%';
+                document.getElementById(id).style.left = '85%';
+                document.getElementById(id).style.backgroundColor = 'yellow';
                 break;
             case "Kal L06  "://TODO : correct location
-                document.getElementById(line[0]).style.bottom = '41%';
-                document.getElementById(line[0]).style.left = '85%';
-                document.getElementById(line[0]).style.backgroundColor = 'yellow';
+                document.getElementById(id).style.bottom = '41%';
+                document.getElementById(id).style.left = '85%';
+                document.getElementById(id).style.backgroundColor = 'yellow';
                 break;
             case "Kal L07  "://TODO : correct location
-                document.getElementById(line[0]).style.bottom = '7%';
-                document.getElementById(line[0]).style.left = '94.5%';
-                document.getElementById(line[0]).style.backgroundColor = 'yellow';
+                document.getElementById(id).style.bottom = '7%';
+                document.getElementById(id).style.left = '94.5%';
+                document.getElementById(id).style.backgroundColor = 'yellow';
         }
 
     }
@@ -118,40 +139,31 @@ $(document).ready(function() {
 
 function focusDot(line_nr) {
 
-    for(let i = 1; i < file_lines.length - 1; i++) {
+    if(focus_dot !== line_nr) {
+        focus = 0;
+        focus_dot = line_nr;
+    }
 
-        let line = file_lines[i].toString().split(/\t/);
-        if(line_nr === i) {
-            document.getElementById('chassis_' + i).style.color = '#10395d';
-            document.getElementById(line[0]).style.display = 'block';
+    if(focus === 0) {
+        for(let i = 1; i < file_lines.length - 1; i++) {
+            let line = file_lines[i].toString().split(/\t/);
+            if(line_nr === i) {
+                document.getElementById('chassis_' + i).style.color = '#10395d';
+                document.getElementById(line[0].trim()).style.display = 'block';
+            }
+            else {
+                document.getElementById('chassis_' + i).style.color = 'var(--bs-body-color)';
+                document.getElementById(line[0].trim()).style.display = 'none';
+            }
         }
-        else {
+        focus = 1;
+    }
+    else {
+        for(let i = 1; i < file_lines.length - 1; i++) {
+            let line = file_lines[i].toString().split(/\t/);
             document.getElementById('chassis_' + i).style.color = 'var(--bs-body-color)';
-            document.getElementById(line[0]).style.display = 'none';
+            document.getElementById(line[0].trim()).style.display = 'block';
         }
+        focus = 0;
     }
 }
-
-//Generate popover
-/*
-for(let i = 1; i < file_lines.length; i++) {
-
-    let titles = file_titles.split(/\t/);
-    let line = file_lines[i].toString().split(/\t/);
-
-    $('#chassis_' + i).popover({
-        trigger: 'click',
-        title: titles[0] + ': ' + line[0],
-        content: titles[1] + ': ' + line[1] + '\n' +
-            titles[2] + ': ' + line[2] + '\n' +
-            titles[3] + ': ' + line[3] + '\n' +
-            titles[4] + ': ' + line[4] + '\n' +
-            titles[5] + ': ' + line[5] + '\n' +
-            titles[6] + ': ' + line[6] + '\n' +
-            titles[7] + ': ' + line[7] + '\n' +
-            titles[8] + ': ' + line[8] + '\n' +
-            titles[9] + ': ' + line[9] + '\n'
-    });
-}
-
- */
