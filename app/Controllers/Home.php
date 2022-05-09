@@ -91,6 +91,7 @@ class Home extends BaseController
                     case 8:
                     case 81:
                     case 38:
+                    case 83:
                         $total_in_production++;
                         break;
                 }
