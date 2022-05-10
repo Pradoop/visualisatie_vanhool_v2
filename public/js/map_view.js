@@ -17,10 +17,10 @@ let focus_dot = -1;
 //Functions
 $(document).ready(function() {
 
-    for(let i = 1; i < file_lines.length - 1; i++) {
+    for(let i = 1; i < ChassisInKaliberIV_lines.length - 1; i++) {
 
         //Split the current line
-        let line = file_lines[i].toString().split(/\t/);
+        let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
         let id = line[0].trim();
 
         //Make a dot
@@ -30,7 +30,7 @@ $(document).ready(function() {
         document.getElementById('image_div').appendChild(dot);
 
         //popover
-        let titles = file_titles.split(/\t/);
+        let titles = ChassisInKaliberIV_titles.split(/\t/);
         $('#' + id).popover({
             trigger: 'click',
             title: titles[0] + ': ' + line[0],
@@ -151,8 +151,8 @@ function focusDot(line_nr) {
     }
 
     if(focus === 0) {
-        for(let i = 1; i < file_lines.length - 1; i++) {
-            let line = file_lines[i].toString().split(/\t/);
+        for(let i = 1; i < ChassisInKaliberIV_lines.length - 1; i++) {
+            let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
             if(line_nr === i) {
                 document.getElementById('chassis_' + i).style.color = '#10395d';
                 document.getElementById(line[0].trim()).style.display = 'block';
@@ -165,8 +165,8 @@ function focusDot(line_nr) {
         focus = 1;
     }
     else {
-        for(let i = 1; i < file_lines.length - 1; i++) {
-            let line = file_lines[i].toString().split(/\t/);
+        for(let i = 1; i < ChassisInKaliberIV_lines.length - 1; i++) {
+            let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
             document.getElementById('chassis_' + i).style.color = 'var(--bs-body-color)';
             document.getElementById(line[0].trim()).style.display = 'block';
         }
