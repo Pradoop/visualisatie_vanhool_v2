@@ -17,7 +17,7 @@ let focus_dot = -1;
 //Functions
 $(document).ready(function() {
 
-    for(let i = 1; i < ChassisInKaliberIV_lines.length - 1; i++) {
+    for(let i = 1; i < ChassisInKaliberIV_lines.length; i++) {
 
         //Split the current line
         let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
@@ -122,7 +122,7 @@ $(document).ready(function() {
             case "Kal L04  "://TODO : correct location
                 document.getElementById(id).style.bottom = '50%';
                 document.getElementById(id).style.left = '50%';
-                document.getElementById(line[0]).style.backgroundColor = 'red';
+                document.getElementById(id).style.backgroundColor = 'red';
                 break;
             case "Kal L05  ":
                 document.getElementById(id).style.bottom = '90%';
@@ -151,7 +151,7 @@ function focusDot(line_nr) {
     }
 
     if(focus === 0) {
-        for(let i = 1; i < ChassisInKaliberIV_lines.length - 1; i++) {
+        for(let i = 1; i < ChassisInKaliberIV_lines.length; i++) {
             let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
             if(line_nr === i) {
                 document.getElementById('chassis_' + i).style.color = '#10395d';
@@ -165,7 +165,7 @@ function focusDot(line_nr) {
         focus = 1;
     }
     else {
-        for(let i = 1; i < ChassisInKaliberIV_lines.length - 1; i++) {
+        for(let i = 1; i < ChassisInKaliberIV_lines.length; i++) {
             let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
             document.getElementById('chassis_' + i).style.color = 'var(--bs-body-color)';
             document.getElementById(line[0].trim()).style.display = 'block';
