@@ -17,7 +17,7 @@ let focus_dot = -1;
 //Functions
 $(document).ready(function() {
 
-    for(let i = 1; i < ChassisInKaliberIV_lines.length; i++) {
+    for(let i = 1; i < ChassisInKaliberIV_lines.length - 2; i++) {
 
         //Split the current line
         let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
@@ -30,7 +30,7 @@ $(document).ready(function() {
         document.getElementById('image_div').appendChild(dot);
 
         //popover
-        let titles = ChassisInKaliberIV_titles.split(/\t/);
+        let titles = ChassisInKaliberIV_lines[0].split(/\t/);
         $('#' + id).popover({
             trigger: 'click',
             title: titles[0] + ': ' + line[0],
@@ -151,7 +151,7 @@ function focusDot(line_nr) {
     }
 
     if(focus === 0) {
-        for(let i = 1; i < ChassisInKaliberIV_lines.length; i++) {
+        for(let i = 1; i < ChassisInKaliberIV_lines.length - 2; i++) {
             let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
             if(line_nr === i) {
                 document.getElementById('chassis_' + i).style.color = '#10395d';
@@ -165,7 +165,7 @@ function focusDot(line_nr) {
         focus = 1;
     }
     else {
-        for(let i = 1; i < ChassisInKaliberIV_lines.length; i++) {
+        for(let i = 1; i < ChassisInKaliberIV_lines.length - 2; i++) {
             let line = ChassisInKaliberIV_lines[i].toString().split(/\t/);
             document.getElementById('chassis_' + i).style.color = 'var(--bs-body-color)';
             document.getElementById(line[0].trim()).style.display = 'block';

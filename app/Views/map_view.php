@@ -1,5 +1,4 @@
 <script > let ChassisInKaliberIV_lines = <?php echo json_encode($ChassisInKaliberIV); ?>;</script>
-<script > let ChassisInKaliberIV_titles = <?php echo json_encode($ChassisInKaliberIV[0]); ?>;</script>
 
 <div id="map_div">
     <div id="afdelingNaam">
