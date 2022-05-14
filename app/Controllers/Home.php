@@ -28,6 +28,7 @@ class Home extends BaseController
     public function map_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map');
+        $data2["planningMontage"] = $this->file_model->readFile()[0];
         $data2["ChassisInKaliberIV"] = $this->file_model->readFile()[1];
 
         array_push($this->data['scripts_to_load'], 'map_view.js');
@@ -319,6 +320,20 @@ class Home extends BaseController
             }
             $line_number++;
         endwhile;
+        return json_encode($output_array);
+    }
+
+    public function getChassisInMontage()
+    {
+        $line_array = $this->file_model->readFile()[0];
+        $output_array = array();
+        foreach($line_array as $line) {
+            $array = preg_split('/\t/', $line);
+            if($array[17] != '  ') {
+                array_push($output_array, $line);
+            }
+        }
+
         return json_encode($output_array);
     }
 

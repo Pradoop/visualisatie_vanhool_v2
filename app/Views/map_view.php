@@ -1,4 +1,4 @@
-<script > let ChassisInKaliberIV_lines = <?php echo json_encode($ChassisInKaliberIV); ?>;</script>
+<script> let ChassisInKaliberIV_lines = <?php echo json_encode($ChassisInKaliberIV); ?>;</script>
 
 <div id="map_div">
     <div id="afdelingNaam">
@@ -18,41 +18,51 @@
     <div class="grid-container">
         <div class="grid-child col1">
             <?php $i = 1; ?>
-            <?php while($i < sizeof($ChassisInKaliberIV)): ?>
-                <?php $line_array = preg_split('/\t/', $ChassisInKaliberIV[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+            <?php while($i < sizeof($planningMontage)): ?>
+                <?php $line_array = preg_split('/\t/', $planningMontage[$i]); ?>
+                    <?php if($line_array[17] != '  '): ?>
+                        <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+                    <?php endif; ?>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
         <div class="grid-child col2">
             <?php $i = 2; ?>
-            <?php while($i < sizeof($ChassisInKaliberIV)): ?>
-                <?php $line_array = preg_split('/\t/', $ChassisInKaliberIV[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+            <?php while($i < sizeof($planningMontage)): ?>
+                <?php $line_array = preg_split('/\t/', $planningMontage[$i]); ?>
+                <?php if($line_array[17] != '  '): ?>
+                    <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+                <?php endif; ?>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
         <div class="grid-child col3">
             <?php $i = 3; ?>
-            <?php while($i < sizeof($ChassisInKaliberIV)): ?>
-                <?php $line_array = preg_split('/\t/', $ChassisInKaliberIV[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+            <?php while($i < sizeof($planningMontage)): ?>
+                <?php $line_array = preg_split('/\t/', $planningMontage[$i]); ?>
+                <?php if($line_array[17] != '  '): ?>
+                    <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+                <?php endif; ?>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
         <div class="grid-child col4">
             <?php $i = 4; ?>
-            <?php while($i < sizeof($ChassisInKaliberIV)): ?>
-                <?php $line_array = preg_split('/\t/', $ChassisInKaliberIV[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+            <?php while($i < sizeof($planningMontage)): ?>
+                <?php $line_array = preg_split('/\t/', $planningMontage[$i]); ?>
+                <?php if($line_array[17] != '  '): ?>
+                    <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+                <?php endif; ?>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
         <div class="grid-child col5">
             <?php $i = 5; ?>
-            <?php while($i < sizeof($ChassisInKaliberIV)): ?>
-                <?php $line_array = preg_split('/\t/', $ChassisInKaliberIV[$i]); ?>
-                <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+            <?php while($i < sizeof($planningMontage)): ?>
+                <?php $line_array = preg_split('/\t/', $planningMontage[$i]); ?>
+                <?php if($line_array[17] != '  '): ?>
+                    <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
+                <?php endif; ?>
                 <?php $i = $i + 5; ?>
             <?php endwhile; ?>
         </div>
