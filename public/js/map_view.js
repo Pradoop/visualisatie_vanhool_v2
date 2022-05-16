@@ -17,6 +17,14 @@ let focus_dot = -1;
 //Functions
 $(document).ready(function() {
 
+    //Search box
+    $("#search_input").on("keyup", function() {
+        let value = $(this).val();
+        $("#important_div p").filter(function() {
+            $(this).toggle($(this).text().indexOf(value) > -1)
+        });
+    });
+
     for(let i = 1; i < ChassisInMontage_lines.length; i++) {
 
         //Split the current line
