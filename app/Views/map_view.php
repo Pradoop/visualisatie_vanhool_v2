@@ -1,6 +1,18 @@
 <script> let ChassisInKaliberIV_lines = <?php echo json_encode($ChassisInKaliberIV); ?>;</script>
 <script> let ChassisInMontage_lines = <?php echo json_encode($chassisInMontage_array); ?>;</script>
 
+<?php
+    $chassisImportant_array = array();
+    foreach($chassisInMontage_array as $chassis) {
+        $array = preg_split('/\t/', $chassis);
+        if(6 <= intval($array[17])) {
+            array_push($chassisImportant_array, $chassis);
+        }
+    }
+?>
+
+<script> let ChassisImportant_lines = <?php echo json_encode($chassisImportant_array); ?>;</script>
+
 <div id="map_div">
     <div id="afdelingNaam">
         <h1>Industriële Voertuigen: hal 5 en hal 6</h1>

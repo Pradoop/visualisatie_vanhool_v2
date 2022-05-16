@@ -25,12 +25,22 @@ $(document).ready(function() {
         });
     });
 
+    //Create dots and give elements colours
     for(let i = 1; i < ChassisInMontage_lines.length; i++) {
 
         //Split the current line
         let line = ChassisInMontage_lines[i].toString().split(/\t/);
         let id = line[0].trim();
         let position = line[17].trim();
+
+        //Give colour orange when wdInMontage between 6 and 8
+        if(6 <= parseInt(position) && parseInt(position) <= 8) {
+            document.getElementById('chassis_' + i).style.color = 'orange';
+        }
+        //Give colour red when wdInMontage more than 9
+        else if(9 <= parseInt(position)) {
+            document.getElementById('chassis_' + i).style.color = 'red';
+        }
 
         //Check ChassisInKaliberIV file
         for(let j = 1; j < ChassisInKaliberIV_lines.length; j++) {
@@ -49,7 +59,7 @@ $(document).ready(function() {
         //popover
         let titles = ChassisInMontage_lines[0].toString().split(/\t/);
         $('#' + id).popover({
-            trigger: 'click',
+            trigger: 'hover',
             title: titles[0] + ': ' + line[0],
             content: titles[1] + ': ' + line[1] + '\n' +
                 titles[2] + ': ' + line[2] + '\n' +
