@@ -329,7 +329,7 @@ class Home extends BaseController
         $output_array = array();
         foreach($line_array as $line) {
             $array = preg_split('/\t/', $line);
-            if($array[17] != '  ') {
+            if(isset($array[17]) && $array[17] != '  ') {
                 array_push($output_array, $line);
             }
         }
