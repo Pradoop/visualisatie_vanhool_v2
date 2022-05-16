@@ -17,70 +17,55 @@ let focus_dot = -1;
 //Functions
 $(document).ready(function() {
 
-    //AJAX call to get the array of chassis in montage
-    $.ajax({
-        url: BASE_URL + '/Home/getChassisInMontage',
-        method: "get",
-        dataType: 'text',
-        success: function(response) {
-            const responseObject = JSON.parse(response);
-            for(let i = 1; i < responseObject.length; i++) {
+    for(let i = 1; i < ChassisInMontage_lines.length; i++) {
 
-                //Split the current line
-                let line = responseObject[i].toString().split(/\t/);
-                let id = line[0].trim();
-                let position = line[17].trim();
+        //Split the current line
+        let line = ChassisInMontage_lines[i].toString().split(/\t/);
+        let id = line[0].trim();
+        let position = line[17].trim();
 
-                //Check ChassisInKaliberIV file
-                for(let j = 1; j < ChassisInKaliberIV_lines.length; j++) {
-                    let line_compare = ChassisInKaliberIV_lines[j].toString().split(/\t/);
-                    if(line_compare[0].trim() === id) {
-                        position = line_compare[2];
-                    }
-                }
-
-                //Make a dot
-                let dot = document.createElement('span');
-                dot.setAttribute('id', id);
-                dot.setAttribute('class', 'dot');
-                document.getElementById('image_div').appendChild(dot);
-
-                //popover
-                let titles = responseObject[0].toString().split(/\t/);
-                $('#' + id).popover({
-                    trigger: 'click',
-                    title: titles[0] + ': ' + line[0],
-                    content: titles[1] + ': ' + line[1] + '\n' +
-                        titles[2] + ': ' + line[2] + '\n' +
-                        titles[3] + ': ' + line[3] + '\n' +
-                        titles[4] + ': ' + line[4] + '\n' +
-                        titles[5] + ': ' + line[5] + '\n' +
-                        titles[6] + ': ' + line[6] + '\n' +
-                        titles[7] + ': ' + line[7] + '\n' +
-                        titles[8] + ': ' + line[8] + '\n' +
-                        titles[9] + ': ' + line[9] + '\n' +
-                        titles[10] + ': ' + line[10] + '\n' +
-                        titles[11] + ': ' + line[11] + '\n' +
-                        titles[12] + ': ' + line[12] + '\n' +
-                        titles[13] + ': ' + line[13] + '\n' +
-                        titles[14] + ': ' + line[14] + '\n' +
-                        titles[15] + ': ' + line[15] + '\n' +
-                        titles[16] + ': ' + line[16] + '\n' +
-                        titles[17] + ': ' + line[17] + '\n' +
-                        titles[18] + ': ' + line[18] + '\n'
-                });
-
-                //place the dot
-                placeDot(id, position);
-
+        //Check ChassisInKaliberIV file
+        for(let j = 1; j < ChassisInKaliberIV_lines.length; j++) {
+            let line_compare = ChassisInKaliberIV_lines[j].toString().split(/\t/);
+            if(line_compare[0].trim() === id) {
+                position = line_compare[2];
             }
-        },
-        error: function (xhr, status, error) {
-            console.log("ERROR")
-            console.log(xhr.responseText);
-            console.log(error.responseText);
         }
-    });
+
+        //Make a dot
+        let dot = document.createElement('span');
+        dot.setAttribute('id', id);
+        dot.setAttribute('class', 'dot');
+        document.getElementById('image_div').appendChild(dot);
+
+        //popover
+        let titles = ChassisInMontage_lines[0].toString().split(/\t/);
+        $('#' + id).popover({
+            trigger: 'click',
+            title: titles[0] + ': ' + line[0],
+            content: titles[1] + ': ' + line[1] + '\n' +
+                titles[2] + ': ' + line[2] + '\n' +
+                titles[3] + ': ' + line[3] + '\n' +
+                titles[4] + ': ' + line[4] + '\n' +
+                titles[5] + ': ' + line[5] + '\n' +
+                titles[6] + ': ' + line[6] + '\n' +
+                titles[7] + ': ' + line[7] + '\n' +
+                titles[8] + ': ' + line[8] + '\n' +
+                titles[9] + ': ' + line[9] + '\n' +
+                titles[10] + ': ' + line[10] + '\n' +
+                titles[11] + ': ' + line[11] + '\n' +
+                titles[12] + ': ' + line[12] + '\n' +
+                titles[13] + ': ' + line[13] + '\n' +
+                titles[14] + ': ' + line[14] + '\n' +
+                titles[15] + ': ' + line[15] + '\n' +
+                titles[16] + ': ' + line[16] + '\n' +
+                titles[17] + ': ' + line[17] + '\n' +
+                titles[18] + ': ' + line[18] + '\n'
+        });
+
+        //place the dot
+        placeDot(id, position);
+    }
 
 });
 
@@ -251,38 +236,24 @@ function focusDot(line_nr) {
         focus_dot = line_nr;
     }
 
-    $.ajax({
-        url: BASE_URL + '/Home/getChassisInMontage',
-        method: "get",
-        dataType: 'text',
-        success: function(response) {
-            const responseObject = JSON.parse(response);
-
-            if(focus === 0) {
-                for(let i = 1; i < responseObject.length; i++) {
-                    let line = responseObject[i].toString().split(/\t/);
-                    if(line_nr === i) {
-                        document.getElementById(line[0].trim()).style.display = 'block';
-                    }
-                    else {
-                        document.getElementById(line[0].trim()).style.display = 'none';
-                    }
-                    focus = 1;
-                }
+    if(focus === 0) {
+        for(let i = 1; i < ChassisInMontage_lines.length; i++) {
+            let line = ChassisInMontage_lines[i].toString().split(/\t/);
+            if(line_nr === i) {
+                document.getElementById(line[0].trim()).style.display = 'block';
             }
             else {
-                for(let i = 1; i < responseObject.length; i++) {
-                    let line = responseObject[i].toString().split(/\t/);
-                    document.getElementById(line[0].trim()).style.display = 'block';
-                }
-                focus = 0;
+                document.getElementById(line[0].trim()).style.display = 'none';
             }
-        },
-        error: function (xhr, status, error) {
-            console.log("ERROR")
-            console.log(xhr.responseText);
-            console.log(error.responseText);
+            focus = 1;
         }
-    });
+    }
+    else {
+        for(let i = 1; i < ChassisInMontage_lines.length; i++) {
+            let line = ChassisInMontage_lines[i].toString().split(/\t/);
+            document.getElementById(line[0].trim()).style.display = 'block';
+        }
+        focus = 0;
+    }
 
 }

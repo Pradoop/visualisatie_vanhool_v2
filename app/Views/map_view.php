@@ -1,11 +1,12 @@
 <script> let ChassisInKaliberIV_lines = <?php echo json_encode($ChassisInKaliberIV); ?>;</script>
+<script> let ChassisInMontage_lines = <?php echo json_encode($chassisInMontage_array); ?>;</script>
 
 <div id="map_div">
     <div id="afdelingNaam">
         <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
     </div>
     <div id="searchBox">
-        <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">
+        <input id="search_input" type="text" class="form-control" placeholder="Typ wagennummer om te zoeken">
     </div>
 </div>
 
@@ -13,15 +14,9 @@
     <img id="map" class="site-map" src="<?= base_url()?>/images/map_hal5_hal6.png" alt="...">
 </div>
 
-<?php
-    $chassisInMontage_array = array();
-    foreach($planningMontage as $chassis) {
-        $line_array = preg_split('/\t/', $chassis);
-        if(isset($line_array[17]) && $line_array[17] != '  ') {
-            array_push($chassisInMontage_array, $chassis);
-        }
-    }
-?>
+<div id="count_chassis">
+    <p>Aantal wagens in montage: <?= sizeof($chassisInMontage_array) - 1 ?></p>
+</div>
 
 <div id="important_div">
     <h1>Important Chassis</h1>
