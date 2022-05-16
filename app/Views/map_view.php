@@ -17,7 +17,7 @@
     $chassisInMontage_array = array();
     foreach($planningMontage as $chassis) {
         $line_array = preg_split('/\t/', $chassis);
-        if($line_array[17] != '  ') {
+        if(isset($line_array[17]) && $line_array[17] != '  ') {
             array_push($chassisInMontage_array, $chassis);
         }
     }
