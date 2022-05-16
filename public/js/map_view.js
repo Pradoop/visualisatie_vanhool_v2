@@ -35,11 +35,11 @@ $(document).ready(function() {
 
         //Give colour orange when wdInMontage between 6 and 8
         if(6 <= parseInt(position) && parseInt(position) <= 8) {
-            document.getElementById('chassis_' + i).style.color = 'orange';
+            //document.getElementById('chassis_' + i).style.color = 'orange';
         }
         //Give colour red when wdInMontage more than 9
         else if(9 <= parseInt(position)) {
-            document.getElementById('chassis_' + i).style.color = 'red';
+            //document.getElementById('chassis_' + i).style.color = 'red';
         }
 
         //Check ChassisInKaliberIV file
@@ -134,8 +134,8 @@ function placeDot(id, position) {
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S09  "://TODO : correct location
-            document.getElementById(id).style.bottom = '26%';
-            document.getElementById(id).style.right = '4.5%';
+            document.getElementById(id).style.bottom = '5%';
+            document.getElementById(id).style.left = '3%';
             document.getElementById(id).style.backgroundColor = 'red';
             break;
         case "Kal S10  ":
@@ -163,10 +163,10 @@ function placeDot(id, position) {
             document.getElementById(id).style.right = '14%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
-        case "Kal L04  "://TODO : correct location
-            document.getElementById(id).style.bottom = '26%';
+        case "Kal L04  ":
+            document.getElementById(id).style.bottom = '7%';
             document.getElementById(id).style.right = '4.5%';
-            document.getElementById(id).style.backgroundColor = 'red';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L05  ":
             document.getElementById(id).style.top = '4.5%';
@@ -178,10 +178,10 @@ function placeDot(id, position) {
             document.getElementById(id).style.right = '14.5%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
-        case "Kal L07  ":
-            document.getElementById(id).style.bottom = '7%';
-            document.getElementById(id).style.right = '4.5%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+        case "Kal L07  "://TODO : correct location
+            document.getElementById(id).style.bottom = '5%';
+            document.getElementById(id).style.left = '3%';
+            document.getElementById(id).style.backgroundColor = 'red';
             break;
         //Buffers
         case "-":
@@ -249,18 +249,24 @@ function placeDot(id, position) {
 
 function focusDot(line_nr) {
 
+    let chassis_nr = 0;
+
     if(focus_dot !== line_nr) {
         focus = 0;
         focus_dot = line_nr;
     }
 
     if(focus === 0) {
-        for(let i = 1; i < ChassisInMontage_lines.length; i++) {
-            let line = ChassisInMontage_lines[i].toString().split(/\t/);
+        for(let i = 1; i < ChassisImportant_lines.length; i++) {
+            let line = ChassisImportant_lines[i].toString().split(/\t/);
             if(line_nr === i) {
+                chassis_nr = line[0].trim();
                 document.getElementById(line[0].trim()).style.display = 'block';
             }
-            else {
+        }
+        for(let i = 1; i < ChassisInMontage_lines.length; i++) {
+            let line = ChassisInMontage_lines[i].toString().split(/\t/);
+            if(line[0].trim() !== chassis_nr) {
                 document.getElementById(line[0].trim()).style.display = 'none';
             }
             focus = 1;
