@@ -184,6 +184,7 @@ function createWeekChartPlanned(my_data, next_week){
     const week_chassis = new Array(7).fill(0);
 
     let graph_id = 'this_week_chart';
+    let graph_title = "Aantal geplande chassis voor deze week";
 
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
@@ -191,9 +192,10 @@ function createWeekChartPlanned(my_data, next_week){
     firstDay.setHours(0, 0, 0, 0);
 
     if (next_week === 1){
-        firstDay.setDate(firstDay.getDate() + 28)
+        firstDay.setDate(firstDay.getDate() + 7);
         firstDay.setHours(0, 0, 0, 0);
-        graph_id = 'next_week_chart'
+        graph_id = 'next_week_chart';
+        graph_title = "Aantal geplande chassis voor volgende week"
     }
 
     let secondDay = new Date();
@@ -258,7 +260,7 @@ function createWeekChartPlanned(my_data, next_week){
             },
             plugins:{
                 title:{
-                    display: true, text: 'Aantal geplande chassis voor deze week'
+                    display: true, text: graph_title
                 },
                 legend:{
                     display: true, position: "right", align: "center", labels:{
