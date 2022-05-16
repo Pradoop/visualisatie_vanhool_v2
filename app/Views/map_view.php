@@ -5,7 +5,7 @@
     $chassisImportant_array = array();
     foreach($chassisInMontage_array as $chassis) {
         $array = preg_split('/\t/', $chassis);
-        if(6 <= intval($array[17])) {
+        if($wdInMontageLimit <= intval($array[17])) {
             array_push($chassisImportant_array, $chassis);
         }
     }

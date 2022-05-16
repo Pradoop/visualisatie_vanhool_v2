@@ -17,6 +17,9 @@ let focus_dot = -1;
 //Functions
 $(document).ready(function() {
 
+    let min_wdInMontage = 999;
+    let max_wdInMontage = -999;
+
     //Search box
     $("#search_input").on("keyup", function() {
         let value = $(this).val();
@@ -25,7 +28,7 @@ $(document).ready(function() {
         });
     });
 
-    //Create dots and give elements colours
+    //Create dots
     for(let i = 1; i < ChassisInMontage_lines.length; i++) {
 
         //Split the current line
@@ -33,13 +36,11 @@ $(document).ready(function() {
         let id = line[0].trim();
         let position = line[17].trim();
 
-        //Give colour orange when wdInMontage between 6 and 8
-        if(6 <= parseInt(position) && parseInt(position) <= 8) {
-            //document.getElementById('chassis_' + i).style.color = 'orange';
+        if(min_wdInMontage > parseInt(position)) {
+            min_wdInMontage = parseInt(position);
         }
-        //Give colour red when wdInMontage more than 9
-        else if(9 <= parseInt(position)) {
-            //document.getElementById('chassis_' + i).style.color = 'red';
+        if(max_wdInMontage < parseInt(position)) {
+            max_wdInMontage = parseInt(position);
         }
 
         //Check ChassisInKaliberIV file
@@ -83,6 +84,22 @@ $(document).ready(function() {
 
         //place the dot
         placeDot(id, position);
+    }
+
+    //Give p elements color based on wdInMontage
+    let interval = Math.round((max_wdInMontage - min_wdInMontage)/3);
+    let orange_start = interval;
+    let red_start = interval*2;
+
+    for(let i = 1; i < ChassisImportant_lines.length; i++) {
+        let line = ChassisImportant_lines[i].toString().split(/\t/);
+        if(orange_start <= parseInt(line[17].trim()) && parseInt(line[17].trim()) <= red_start) {
+            document.getElementById('chassis_' + i).style.color = 'orange';
+        }
+        else if(red_start < parseInt(line[17].trim())) {
+            document.getElementById('chassis_' + i).style.color = 'red';
+        }
+
     }
 
 });
