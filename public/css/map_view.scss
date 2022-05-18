@@ -47,6 +47,10 @@
   margin-bottom: 1%;
   //border: 2px solid green;
 }
+#important_div p:hover {
+  color: #10395d;
+  cursor: pointer;
+}
 .grid-container {
   display: grid;
   justify-items: center;
@@ -76,10 +80,6 @@ p {
   font-size: 20px;
   margin: 5px;
   //border: 2px solid red;
-}
-p:hover {
-  color: #10395d;
-  cursor: pointer;
 }
 h1 {
   font-size: 2em;

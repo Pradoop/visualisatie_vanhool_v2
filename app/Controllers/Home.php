@@ -30,6 +30,7 @@ class Home extends BaseController
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map');
         $data2["ChassisInKaliberIV"] = $this->file_model->readFile()[1];
         $data2["chassisInMontage_array"] = $this->getChassisInMontage();
+        $data2["wdInMontageLimit"] = 5;
 
         array_push($this->data['scripts_to_load'], 'map_view.js');
         array_push($this->data['styles_to_load'], 'map_view.scss');
@@ -330,7 +331,7 @@ class Home extends BaseController
         $output_array = array();
         foreach($line_array as $line) {
             $array = preg_split('/\t/', $line);
-            if($array[17] != '  ') {
+            if(isset($array[17]) && $array[17] != '  ') {
                 array_push($output_array, $line);
             }
         }
