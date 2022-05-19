@@ -10,15 +10,20 @@ let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
 })
 
+//popover
+$('#icon_i_aantalWagens').popover({
+    trigger: 'hover',
+    content: 'In de bufferzones kunnen meerdere chassis liggen.' +
+             'Chassis die niet in een specifieke samenstelkaliber liggen zijn elk in een random bufferzone geplaatst.' +
+             'Locatie L07 is nog niet geimplementeerd, chassis in dit samenstelkaliber zijn in het rood weergegeven.'
+});
+
 //Variables
 let focus = 0;
 let focus_dot = -1;
 
 //Functions
 $(document).ready(function() {
-
-    let min_wdInMontage = 999;
-    let max_wdInMontage = -999;
 
     //Search box
     $("#search_input").on("keyup", function() {
@@ -35,13 +40,6 @@ $(document).ready(function() {
         let line = ChassisInMontage_lines[i].toString().split(/\t/);
         let id = line[0].trim();
         let position = line[17].trim();
-
-        if(min_wdInMontage > parseInt(position)) {
-            min_wdInMontage = parseInt(position);
-        }
-        if(max_wdInMontage < parseInt(position)) {
-            max_wdInMontage = parseInt(position);
-        }
 
         //Check ChassisInKaliberIV file
         for(let j = 1; j < ChassisInKaliberIV_lines.length; j++) {
@@ -87,9 +85,8 @@ $(document).ready(function() {
     }
 
     //Give p elements color based on wdInMontage
-    let interval = Math.round((max_wdInMontage - min_wdInMontage)/3);
-    let orange_start = interval;
-    let red_start = interval*2;
+    let orange_start = 7;
+    let red_start = 9;
 
     for(let i = 1; i < ChassisImportant_lines.length; i++) {
         let line = ChassisImportant_lines[i].toString().split(/\t/);
@@ -150,11 +147,6 @@ function placeDot(id, position) {
             document.getElementById(id).style.left = '45.75%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
-        case "Kal S09  "://TODO : correct location
-            document.getElementById(id).style.bottom = '5%';
-            document.getElementById(id).style.left = '3%';
-            document.getElementById(id).style.backgroundColor = 'red';
-            break;
         case "Kal S10  ":
             document.getElementById(id).style.top = '12%';
             document.getElementById(id).style.right = '39%';
@@ -204,57 +196,57 @@ function placeDot(id, position) {
         case "-":
             document.getElementById(id).style.bottom = '35%';
             document.getElementById(id).style.left = '46.9%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "0":
             document.getElementById(id).style.bottom = '26%';
             document.getElementById(id).style.right = '44.5%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "1":
             document.getElementById(id).style.bottom = '26%';
             document.getElementById(id).style.right = '37.5%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "2":
             document.getElementById(id).style.bottom = '26%';
             document.getElementById(id).style.right = '31%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "3":
             document.getElementById(id).style.bottom = '26%';
             document.getElementById(id).style.right = '25%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "4":
             document.getElementById(id).style.bottom = '26%';
             document.getElementById(id).style.right = '20.25%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "5":
             document.getElementById(id).style.bottom = '26%';
             document.getElementById(id).style.right = '15.25%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "6":
             document.getElementById(id).style.bottom = '26%';
             document.getElementById(id).style.right = '10.5%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "7":
             document.getElementById(id).style.top = '22%';
             document.getElementById(id).style.right = '23.5%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "8":
             document.getElementById(id).style.top = '22%';
             document.getElementById(id).style.right = '17%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "9":
             document.getElementById(id).style.top = '22%';
             document.getElementById(id).style.right = '10.5%';
-            document.getElementById(id).style.backgroundColor = 'orange';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         //Default
         default :

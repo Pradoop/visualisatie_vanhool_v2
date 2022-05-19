@@ -27,7 +27,8 @@
 </div>
 
 <div id="count_chassis">
-    <p>Aantal wagens in montage: <?= sizeof($chassisInMontage_array) - 1 ?></p>
+    <label>Aantal wagens in montage: <?= sizeof($chassisInMontage_array) - 1 ?></label>
+    <input type="image" id="icon_i_aantalWagens" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
 </div>
 
 <div id="important_div">
