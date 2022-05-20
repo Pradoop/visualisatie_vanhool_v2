@@ -106,7 +106,7 @@ function showSortIcons(i) {
         document.getElementById('th' + current_column).appendChild(img_down);
         status++;
 
-        sortTable(current_column, 'down');
+        //sortTable(current_column, 'down');
     }
     else if(status === 1) {//UP
         console.log('Column ' + current_column + ' clicked 2 times: ' + status + " (UP)");
@@ -120,7 +120,7 @@ function showSortIcons(i) {
         document.getElementById('th' + current_column).appendChild(img_up);
         status++;
 
-        sortTable(current_column, 'up');
+        //sortTable(current_column, 'up');
     }
     else {//ORIGINAL
         console.log('Column ' + current_column + ' clicked 3 times: ' + status + " (ORIGINAL)");
@@ -128,7 +128,7 @@ function showSortIcons(i) {
         remove.parentNode.removeChild(remove);
         status = 0;
 
-        originalTable();
+        //originalTable();
     }
 }
 
