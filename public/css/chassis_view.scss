@@ -1,19 +1,6 @@
 /* Table Title div */
 #table_title {
-  display: flex;
-  margin: 1% 1% 0.5%;
-}
-#afdelingNaam {
-  float: left;
-  width: 80%;
-}
-#searchBox {
-  float: right;
-  width: 20%;
-}
-#search_input {
-  float: right;
-  //width: 28%;
+  margin: 1%;
 }
 
 /* Table content div */
@@ -27,7 +14,6 @@ table {
 th {
   padding: 0.5rem 1.5rem;
   text-transform: uppercase;
-
 }
 th:hover {
   cursor: pointer;
