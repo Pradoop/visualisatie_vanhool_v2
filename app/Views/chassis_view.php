@@ -2,25 +2,22 @@
     <div id="afdelingNaam">
         <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
     </div>
-    <div id="searchBox">
-        <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">
-    </div>
 </div>
 
 <div id="table_content">
     <table id="chassis_table" class="table table-striped table-hover">
         <thead>
         <tr>
-            <th id="th0" onclick="showSortIcons(0)">Wagen</th> <!-- Wagen !-->
-            <th id="th1" onclick="showSortIcons(1)">Aantal</th> <!-- Aantal !-->
-            <th id="th2" onclick="showSortIcons(2)">NaamWagenTyp</th> <!-- NaamWagen !-->
-            <th id="th3" onclick="showSortIcons(3)">NaamKlant</th> <!-- NaamKlant !-->
-            <th id="th4" onclick="showSortIcons(4)">ReeksVan</th> <!-- ReeksVan !-->
-            <th id="th5" onclick="showSortIcons(5)">Galva</th> <!-- Galva !-->
-            <th id="th6" onclick="showSortIcons(6)">Status</th> <!-- Status !-->
-            <th id="th7" onclick="showSortIcons(7)">dtmGepland</th> <!-- dtmGepland !-->
-            <th id="th8" onclick="showSortIcons(8)">wdInMont</th> <!-- wdInMont !-->
-            <th id="th9" onclick="showSortIcons(9)">Dagen tot gepland</th> <!-- huidige datum tov geplande datum !-->
+            <th id="th0">Wagen</th>
+            <th id="th1">Aantal</th>
+            <th id="th2">NaamWagenTyp</th>
+            <th id="th3">NaamKlant</th>
+            <th id="th4">ReeksVan</th>
+            <th id="th5">Galva</th>
+            <th id="th6">Status</th>
+            <th id="th7">dtmGepland</th>
+            <th id="th8">wdInMont</th>
+            <th id="th9">Dagen tot gepland</th>
         </tr>
         </thead>
 

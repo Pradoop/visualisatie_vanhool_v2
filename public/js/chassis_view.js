@@ -1,7 +1,3 @@
-//Variables
-let current_column = -1;
-let status = 0;
-
 //Search Box
 $(document).ready(function(){
     $("#search_input").on("keyup", function() {
@@ -10,6 +6,11 @@ $(document).ready(function(){
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
     });
+});
+
+//Table
+$(document).ready( function () {
+    $('#chassis_table').DataTable();
 });
 
 //Popovers
@@ -76,121 +77,3 @@ $('#th9').popover({
     placement: 'top',
     content: 'Het aantal dagen tussen de huidige dag en de geplande dag (Negatief aantal betekend dat geplande datum gepaseerd is'
 });
-
-//Functions
-function showSortIcons(i) {
-
-    if(current_column !== i) {
-        //Remove all
-        if(document.getElementById('arrow') !== null) {
-            let remove = document.getElementById('arrow');
-            remove.parentNode.removeChild(remove);
-        }
-        //Reset variables
-        current_column = i;
-        status = 0;
-    }
-
-    //Change sorting status
-    if(status === 0) {//DOWN
-        console.log('Column ' + current_column + ' clicked 1 time: ' + status + " (DOWN)");
-        let arrow = document.createElement('img');
-        arrow.setAttribute('id', 'arrow');
-        arrow.setAttribute('class', 'arrow');
-        arrow.setAttribute('src', BASE_URL + '/images/icons8-down-arrow-15.png');
-        arrow.setAttribute('alt', '...');
-        document.getElementById('th' + current_column).appendChild(arrow);
-        status++;
-
-        //sortTable(current_column, 'down');
-    }
-    else if(status === 1) {//UP
-        console.log('Column ' + current_column + ' clicked 2 times: ' + status + " (UP)");
-        let arrow = document.getElementById('arrow');
-        arrow.setAttribute('src', BASE_URL + '/images/icons8-up-arrow-15.png');
-        status++;
-
-        //sortTable(current_column, 'up');
-    }
-    else {//ORIGINAL
-        console.log('Column ' + current_column + ' clicked 3 times: ' + status + " (ORIGINAL)");
-        let remove = document.getElementById('arrow');
-        remove.parentNode.removeChild(remove);
-        status = 0;
-
-        //originalTable();
-    }
-}
-
-function originalTable() {
-
-    let table = document.getElementById("chassis_table");
-    let rows = table.rows;
-
-    for(let i = 1; i < rows.length; i++) {
-
-        let cells = rows[i].cells;
-        cells[0].innerHTML = file_lines[i-1][0];
-        cells[1].innerHTML = file_lines[i-1][1];
-        cells[2].innerHTML = file_lines[i-1][2];
-        cells[3].innerHTML = file_lines[i-1][3];
-        cells[4].innerHTML = file_lines[i-1][4];
-        cells[5].innerHTML = file_lines[i-1][5];
-        cells[6].innerHTML = file_lines[i-1][6];
-        cells[7].innerHTML = file_lines[i-1][7];
-        cells[8].innerHTML = file_lines[i-1][8];
-        cells[9].innerHTML = file_lines[i-1][9];
-    }
-}
-
-function sortTable(column, state) {
-
-    let table, rows, switching, i, x, y, shouldSwitch;
-    table = document.getElementById("chassis_table");
-    switching = true;
-
-    while(switching) {
-        switching = false;
-        rows = table.rows;
-
-        for(i = 1; i < (rows.length - 1); i++) {
-            shouldSwitch = false;
-            x = rows[i].getElementsByTagName("TD")[column];
-            y = rows[i + 1].getElementsByTagName("TD")[column];
-
-            if(column === 3 || column === 4) {
-                if(state === 'up') {
-                    if(x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-                else if(state === 'down') {
-                    if(x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-            else {
-                if(state === 'up') {
-                    if (Number(x.innerHTML) > Number(y.innerHTML)) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-                else if(state === 'down') {
-                    if (Number(x.innerHTML) < Number(y.innerHTML)) {
-                        shouldSwitch = true;
-                        break;
-                    }
-                }
-            }
-        }
-
-        if (shouldSwitch) {
-            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
-            switching = true;
-        }
-    }
-}

@@ -16,7 +16,7 @@ class Home extends BaseController
     {
         $this->burger_menu = new BurgerModel();
         $this->file_model = new FileModel();
-        $this->data['scripts_to_load'] = array('jquery.min.js','bootstrap.bundle.min.js'); //js used everywhere
+        $this->data['scripts_to_load'] = array('jquery-3.6.0.min.js','bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
 
@@ -43,8 +43,8 @@ class Home extends BaseController
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis');
         $data2["file_lines"] = $this->getChassisInfo();
 
-        array_push($this->data['scripts_to_load'], 'chassis_view.js');
-        array_push($this->data['styles_to_load'], 'chassis_view.scss');
+        array_push($this->data['scripts_to_load'], 'chassis_view.js', 'jquery.dataTables.min.js');
+        array_push($this->data['styles_to_load'], 'chassis_view.scss', 'jquery.dataTables.min.css');
         $this->data['content'] = view('chassis_view', $data2);
         return view('template', $this->data);
     }
