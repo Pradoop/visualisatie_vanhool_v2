@@ -347,7 +347,7 @@ class Home extends BaseController
         while($line_number < sizeof($line_array)) {
             $array = preg_split('/\t/', $line_array[$line_number]);
             if(isset($array[2]) && isset($array[5]) && isset($array[7]) && isset($array[10]) && isset($array[12]) && isset($array[14]) && isset($array[3]) && isset($array[17])) {
-                //Convert to correct format
+
                 $today = date("Y-m-d");
                 $parts = str_split($array[3], 2);
                 $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
@@ -356,7 +356,6 @@ class Home extends BaseController
                 $new_string = $array[0].'!'.$array[2].'!'.$array[5].'!'.$array[7].'!'.$array[10].'!'.$array[12].'!'.$array[14].'!'.$array[3].'!'.$array[17].'!'.round($diff / 86400);
                 array_push($output_array, $new_string);
             }
-
             $line_number++;
         }
 
