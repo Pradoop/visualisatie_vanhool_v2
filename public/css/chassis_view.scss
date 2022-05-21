@@ -1,24 +1,24 @@
 /* Table Title div */
 #table_title {
   display: flex;
-  margin: 15px;
+  margin: 1% 1% 0.5%;
 }
 #afdelingNaam {
   float: left;
-  width: 42%;
+  width: 80%;
 }
 #searchBox {
   float: right;
-  width: 58%;
+  width: 20%;
 }
 #search_input {
   float: right;
-  width: 28%;
+  //width: 28%;
 }
 
 /* Table content div */
 #table_content {
-  margin: 15px;
+  margin: 1%;
 }
 table {
   text-align: center;
@@ -27,6 +27,10 @@ table {
 th {
   padding: 0.5rem 1.5rem;
   text-transform: uppercase;
+
+}
+th:hover {
+  cursor: pointer;
 }
 td {
   padding: 0.5rem 1.5rem;

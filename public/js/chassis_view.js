@@ -82,12 +82,8 @@ function showSortIcons(i) {
 
     if(current_column !== i) {
         //Remove all
-        if(document.getElementById('up_logo') !== null) {
-            let remove = document.getElementById('up_logo');
-            remove.parentNode.removeChild(remove);
-        }
-        if(document.getElementById('down_logo') !== null) {
-            let remove = document.getElementById('down_logo');
+        if(document.getElementById('arrow') !== null) {
+            let remove = document.getElementById('arrow');
             remove.parentNode.removeChild(remove);
         }
         //Reset variables
@@ -98,33 +94,27 @@ function showSortIcons(i) {
     //Change sorting status
     if(status === 0) {//DOWN
         console.log('Column ' + current_column + ' clicked 1 time: ' + status + " (DOWN)");
-        let img_down = document.createElement('img');
-        img_down.setAttribute('id', 'down_logo');
-        img_down.setAttribute('class', 'down_logo');
-        img_down.setAttribute('src', BASE_URL + '/images/icons8-down-arrow-15.png');
-        img_down.setAttribute('alt', '...');
-        document.getElementById('th' + current_column).appendChild(img_down);
+        let arrow = document.createElement('img');
+        arrow.setAttribute('id', 'arrow');
+        arrow.setAttribute('class', 'arrow');
+        arrow.setAttribute('src', BASE_URL + '/images/icons8-down-arrow-15.png');
+        arrow.setAttribute('alt', '...');
+        document.getElementById('th' + current_column).appendChild(arrow);
         status++;
 
         //sortTable(current_column, 'down');
     }
     else if(status === 1) {//UP
         console.log('Column ' + current_column + ' clicked 2 times: ' + status + " (UP)");
-        let remove = document.getElementById('down_logo');
-        remove.parentNode.removeChild(remove);
-        let img_up = document.createElement('img');
-        img_up.setAttribute('id', 'up_logo');
-        img_up.setAttribute('class', 'up_logo');
-        img_up.setAttribute('src', BASE_URL + '/images/icons8-up-arrow-15.png');
-        img_up.setAttribute('alt', '...');
-        document.getElementById('th' + current_column).appendChild(img_up);
+        let arrow = document.getElementById('arrow');
+        arrow.setAttribute('src', BASE_URL + '/images/icons8-up-arrow-15.png');
         status++;
 
         //sortTable(current_column, 'up');
     }
     else {//ORIGINAL
         console.log('Column ' + current_column + ' clicked 3 times: ' + status + " (ORIGINAL)");
-        let remove = document.getElementById('up_logo');
+        let remove = document.getElementById('arrow');
         remove.parentNode.removeChild(remove);
         status = 0;
 
