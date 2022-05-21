@@ -1,6 +1,19 @@
 /* Table Title div */
 #table_title {
-  margin: 1%;
+  display: flex;
+  margin: 1% 1% 0.5%;
+}
+#afdelingNaam {
+  float: left;
+  width: 80%;
+}
+#searchBox {
+  float: right;
+  width: 20%;
+}
+#search_input {
+  float: right;
+  //width: 28%;
 }
 
 /* Table content div */

@@ -1,5 +1,10 @@
 <div id="table_title">
-    <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
+    <div id="afdelingNaam">
+        <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
+    </div>
+    <div id="searchBox">
+        <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">
+    </div>
 </div>
 
 <div id="table_content">
