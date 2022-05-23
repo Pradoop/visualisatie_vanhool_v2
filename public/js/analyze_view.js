@@ -77,6 +77,8 @@ $.ajax({
             date.setHours(0, 0, 0, 0);
             chassis_pln_date.push(date);
         }
+
+
     },
     error: function (xhr, status, error) {
         console.log("ERROR")
@@ -84,12 +86,17 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
+        let today = new Date();
+        let currentYear = today.getFullYear();
+        let currentMonth = today.getMonth() + 1;
+        let currentDate = today.getDate() + 1;
+
         createWeekChartPlanned(chassis_pln_date, 0);
         createWeekChartPlanned(chassis_pln_date, 1);
         createYearChart(chassis_pln_date);
-        createMonthChart(2022, chassis_pln_date);
-        createWeekChart(2022, 6, chassis_pln_date);
-        createDateChart(2022, 6, 1, chassis_pln_date);
+        createMonthChart(currentYear, chassis_pln_date);
+        createWeekChart(currentYear, currentMonth, chassis_pln_date);
+        createDateChart(currentYear, currentMonth, currentDate, chassis_pln_date);
     }
 });
 

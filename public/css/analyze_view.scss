@@ -21,20 +21,37 @@ h1 {
   margin-top: 5px;
   margin-bottom: 5px;
   width: 100%;
-  border: 2px solid yellow;
+  //border: 2px solid yellow;
 }
 
 /* Algemene info bovenaan pagina */
 .information_1, .information_2, .information_3, .information_4, .information_5 {
-  border: 2px solid green;
+  //border: 2px solid green;
   width: 100%;
   max-width: 100%;
-  text-align: left;
+  text-align: center;
 }
 
 .information_text {
-  font-size: 1em;
+  font-size: 125%;
   color: #10395d;
 }
 
+.information_value{
+  font-size: 250%;
+}
+
+.card {
+  border-radius: 10px; /* 5px rounded corners */
+  padding-left: 5px;
+  background-color: rgba(227, 228, 229, 0.5);
+  height: 40%;
+  width: 98%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+p{
+  margin: 0;
+}
 
