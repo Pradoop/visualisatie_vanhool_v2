@@ -57,6 +57,7 @@ class FileModel extends \CodeIgniter\Model
         $standLas_array = array();
         $dtmGepland_array = array();
         $wagennr_dtmGepland_array = array();
+        $wdInMont_array = array();
 
         /*
         * Gets the status of each line in array
@@ -74,6 +75,15 @@ class FileModel extends \CodeIgniter\Model
             $array = preg_split('/\t/', $line);
             unset($array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[17],$array[18],$array[19]);
             array_push($wdTeLaat_array, $array);
+        }
+
+        /*
+        * Gets the wdInMont of each line in array
+        */
+        foreach($file_by_line_array as $line) {
+            $array = preg_split('/\t/', $line);
+            unset($array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[16],$array[18],$array[19]);
+            array_push($wdInMont_array, $array);
         }
 
         /*
@@ -108,6 +118,7 @@ class FileModel extends \CodeIgniter\Model
         array_push($main_arrays, $standLas_array);
         array_push($main_arrays, $dtmGepland_array);
         array_push($main_arrays, $wagennr_dtmGepland_array);
+        array_push($main_arrays, $wdInMont_array);
 
         return $main_arrays;
     }

@@ -6,7 +6,7 @@ const chassis_per_year = [];
 const chassis_per_month = new Array(12).fill(0);
 const chassis_per_week = new Array(4).fill(0);
 const chassis_per_dag = new Array(7).fill(0);
-const months = ['Januari', 'Februari', 'Maart', 'April', 'Mei', 'Juni', 'Juli', 'Augustus', 'September', 'Oktober', 'November', 'December']
+const months = ['Jan', 'Feb', 'Ma', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Dec']
 
 /*
  * Ajax request to retrieve the data for welding
@@ -226,13 +226,13 @@ function createWeekChartPlanned(my_data, next_week){
 
     const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
     const labels = [
-        firstDay.getDate() + '/' + (firstDay.getMonth() + 1) + '/' + firstDay.getFullYear(),
-        secondDay.getDate() + '/' + (secondDay.getMonth() + 1) + '/' + secondDay.getFullYear(),
-        thirdDay.getDate() + '/' + (thirdDay.getMonth() + 1) + '/' + thirdDay.getFullYear(),
-        fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1) + '/' + fourthDay.getFullYear(),
-        fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1) + '/' + fifthDay.getFullYear(),
-        sixthDay.getDate() + '/' + (sixthDay.getMonth() + 1) + '/' + sixthDay.getFullYear(),
-        lastDay.getDate() + '/' + (lastDay.getMonth() + 1) + '/' + lastDay.getFullYear(),
+        firstDay.getDate() + '/' + (firstDay.getMonth() + 1),
+        secondDay.getDate() + '/' + (secondDay.getMonth() + 1),
+        thirdDay.getDate() + '/' + (thirdDay.getMonth() + 1),
+        fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
+        fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
+        sixthDay.getDate() + '/' + (sixthDay.getMonth() + 1),
+        lastDay.getDate() + '/' + (lastDay.getMonth() + 1),
     ]
 
     for (const i in my_data){
@@ -256,12 +256,18 @@ function createWeekChartPlanned(my_data, next_week){
                         precision: 0
                     },
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal geplande chassis"
+                        display:true, text: "Aantal chassis"
+                    },
+                    grid: {
+                        display: false,
                     }
                 },
                 x:{
                     display: true, title:{
                         display:true, text: "Datum"
+                    },
+                    grid: {
+                        display: false,
                     }
                 }
             },
@@ -273,7 +279,7 @@ function createWeekChartPlanned(my_data, next_week){
                     display: true, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
                     }
-                }
+                },
             }
         },
     }
@@ -321,13 +327,13 @@ function createDateChart(my_year, my_month, my_date, my_data){
         }
     }
     my_month++;
-    day1 = (my_date).toString() + "/" + my_month.toString() + "/" + my_year.toString();
-    day2 = (my_date + 1).toString() + "/" + my_month.toString() + "/" + my_year.toString();
-    day3 = (my_date + 2).toString() + "/" + my_month.toString() + "/" + my_year.toString();
-    day4 = (my_date + 3).toString() + "/" + my_month.toString() + "/" + my_year.toString();
-    day5 = (my_date + 4).toString() + "/" + my_month.toString() + "/" + my_year.toString();
-    day6 = (my_date + 5).toString() + "/" + my_month.toString() + "/" + my_year.toString();
-    day7 = (my_date + 6).toString() + "/" + my_month.toString() + "/" + my_year.toString();
+    day1 = (my_date).toString() + "/" + my_month.toString();
+    day2 = (my_date + 1).toString() + "/" + my_month.toString();
+    day3 = (my_date + 2).toString() + "/" + my_month.toString();
+    day4 = (my_date + 3).toString() + "/" + my_month.toString();
+    day5 = (my_date + 4).toString() + "/" + my_month.toString() ;
+    day6 = (my_date + 5).toString() + "/" + my_month.toString();
+    day7 = (my_date + 6).toString() + "/" + my_month.toString();
     const labels = [day1, day2, day3, day4, day5, day6, day7];
     const data = {
         labels: labels,
@@ -345,12 +351,18 @@ function createDateChart(my_year, my_month, my_date, my_data){
                         precision: 0
                     },
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal geplande chassis"
+                        display:true, text: "Aantal chassis"
+                    },
+                    grid: {
+                        display: false,
                     }
                 },
                 x:{
                     display: true, title:{
                         display:true, text: "Datum"
+                    },
+                    grid: {
+                        display: false,
                     }
                 }
             },
@@ -396,14 +408,10 @@ function createWeekChart(my_year, my_month, my_data){
         }
     }
     my_month++;
-    week1 = "1/" + my_month.toString() + "/" + my_year.toString() +
-        " tot " + "7/" + my_month.toString() + "/" + my_year.toString();
-    week2 = "8/" + my_month.toString() + "/" + my_year.toString() +
-        " tot " + "14/" + my_month.toString() + "/" + my_year.toString();
-    week3 = "15/" + my_month.toString() + "/" + my_year.toString() +
-        " tot " + "21/" + my_month.toString() + "/" + my_year.toString();
-    week4 = "22/" + my_month.toString() + "/" + my_year.toString() +
-        " tot " + "31/" + my_month.toString() + "/" + my_year.toString();
+    week1 = "1/" + my_month.toString() + " - " + "7/" + my_month.toString();
+    week2 = "8/" + my_month.toString() + " - " + "14/" + my_month.toString();
+    week3 = "15/" + my_month.toString() + " - " + "21/" + my_month.toString();
+    week4 = "22/" + my_month.toString() + " - " + "31/" + my_month.toString();
     const labels = [week1, week2, week3, week4];
     const data = {
         labels: labels,
@@ -423,12 +431,18 @@ function createWeekChart(my_year, my_month, my_data){
                         precision: 0
                     },
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal geplande chassis"
+                        display:true, text: "Aantal chassis"
+                    },
+                    grid: {
+                        display: false,
                     }
                 },
                 x:{
                     display: true, title:{
                         display:true, text: "Week"
+                    },
+                    grid: {
+                        display: false,
                     }
                 }
             },
@@ -462,7 +476,7 @@ function createMonthChart(my_year, my_data){
     const data = {
         labels: months,
         datasets: [{
-            label: 'Aantal geplande chassis',
+            label: 'Aantal chassis',
             backgroundColor: 'rgb(16, 57, 93)',
             data: chassis_per_month,
         }]
@@ -472,12 +486,18 @@ function createMonthChart(my_year, my_data){
             scales: {
                 y: {
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal geplande chassis"
+                        display:true, text: "Aantal chassis"
+                    },
+                    grid: {
+                        display: false,
                     }
                 },
                 x:{
                     display: true, title:{
                         display:true, text: "Maand"
+                    },
+                    grid: {
+                        display: false,
                     }
                 }
             },
@@ -488,7 +508,8 @@ function createMonthChart(my_year, my_data){
                 legend:{
                     display: true, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
-                    }
+                    },
+
                 }
             }
         },
@@ -516,7 +537,8 @@ function createYearChart(my_data){
     const data = {
         labels: labels,
         datasets: [{
-            label: 'Aantal geplande chassis',
+            label: 'Aantal ' +
+                'chassis',
             backgroundColor: 'rgb(16, 57, 93)',
             data: chassis_per_year,
         }]
@@ -526,12 +548,19 @@ function createYearChart(my_data){
             scales: {
                 y: {
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal geplande chassis"
+                        display:true, text: "Aantal" +
+                            " chassis"
+                    },
+                    grid: {
+                        display: false,
                     }
                 },
                 x:{
                     display: true, title:{
                         display:true, text: "Jaar"
+                    },
+                    grid: {
+                        display: false,
                     }
                 }
             },
@@ -577,33 +606,38 @@ function createWeldingChart(my_data){
     const data = {
         labels: sortedLabelArray, datasets: [{
             label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: sortedDataArray,
+            datalabels: {
+                labels: {
+                    value: {
+                        color: 'green'
+                    }
+                }
+            }
         }]
     };
     const config = {
         type: 'bar', data: data, options: {
             scales: {
                 y: {
-                    beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal chassis"
+                    beginAtZero: true, display: true, title: {
+                        display: true, text: "Aantal chassis"
+                    },
+                    grid: {
+                        display: false,
                     }
                 },
-                x:{
-                    display: true, title:{
-                        display:true, text: "Stand las"
+                x: {
+                    display: true, title: {
+                        display: true, text: "Stand las"
+                    },
+                    grid: {
+                        display: false,
                     }
                 }
             },
-            plugins:{
-                title:{
-                    display: true, text: 'Aantal chassis per per stand las'
-                },
-                legend:{
-                    display: true, position: "right", align: "center", labels:{
-                        boxWidth: 10, boxHeight: 10,
-                    }
-                }
-            }
-        },
+            plugins: [ChartDataLabels],
+            options: {}
+        }
     }
     const myChart = new Chart(document.getElementById('stand_las_chart'), config);
 }
@@ -646,11 +680,17 @@ function createPhaseChart(my_data){
                 y: {
                     beginAtZero: true, display: true, title:{
                         display:true, text: "Aantal chassis"
+                    },
+                    grid: {
+                        display: false,
                     }
                 },
                 x:{
                     display: true, title:{
                         display:true, text: "Status"
+                    },
+                    grid: {
+                        display: false,
                     }
                 }
             },

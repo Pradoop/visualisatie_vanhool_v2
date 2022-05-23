@@ -57,7 +57,7 @@ class Home extends BaseController
         $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->fileColumnArrays($data2["file_lines"])[0]);
         $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
         $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
-
+        $data2["avg_mont"] = $this->calculateAverageWdInMont($this->file_model->fileColumnArrays($data2["file_lines"])[5]);
         $data2["welding_percentages"] = $this->calculateWeldingData();
         $data2["chassis_phase"] = $this->calculateChassisPerPhase();
         $data2["planned_dates"] = $this->getPlannedTime();
@@ -127,6 +127,28 @@ class Home extends BaseController
             $line_number++;
         endwhile;
         return round(($delayed/$line_number)*100, 2, PHP_ROUND_HALF_UP);
+    }
+
+    /*
+    * Function to calculate the average delay of all chassis.
+    * Input: Array that contains all the information (so the textfile)
+    * Output: Average amount of delays for all chassis
+    * Explanation: Function calculates the average delay
+    */
+    public function calculateAverageWdInMont($my_array)
+    {
+        $line_number = 1;
+        $total_delay = 0;
+        $total_mont = 0;
+        while ($line_number < sizeof($my_array)):
+            if(isset($my_array[$line_number][17]) && $my_array[$line_number][17] >= 0) {
+                $total_delay += (int) $my_array[$line_number][17];
+                $total_mont++;
+            }
+            $line_number++;
+        endwhile;
+
+        return round(($total_delay / $total_mont), 0,PHP_ROUND_HALF_UP );
     }
 
     /*
@@ -338,5 +360,6 @@ class Home extends BaseController
 
         return $output_array;
     }
+
 
 }

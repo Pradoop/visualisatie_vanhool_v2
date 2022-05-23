@@ -15,8 +15,8 @@
         <div class="grid-child col2">
             <div class="card">
                 <div class="information_2">
-                    <p class="information_value"><?= $percentage_delayed ?> %</p>
-                    <p class="information_text"> Percentage chassis vertraagd T.O.V. contractdatum</p>
+                    <p class="information_value"><?= $percentage_delayed ?>%</p>
+                    <p class="information_text"> vertraagd tov contractdatum</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -26,8 +26,8 @@
         <div class="grid-child col3">
             <div class="card">
                 <div class="information_3">
-                    <p class="information_value"><?= $average_delay ?> dagen</p>
-                    <p class="information_text"> Gemiddeld aantal werkdagen te laat T.O.V. contractdatum</p>
+                    <p class="information_value"><?= $average_delay ?> werkdagen</p>
+                    <p class="information_text"> laat tov contractdatum</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -37,7 +37,7 @@
         <div class="grid-child col4">
             <div class="card">
                 <div class="information_4">
-                    <p class="information_value"><?= $total_in_production[1] ?> %</p>
+                    <p class="information_value"><?= $total_in_production[1] ?>%</p>
                     <p class="information_text"> in productielijn</p>
                 </div>
             </div>
@@ -48,9 +48,9 @@
         <div class="grid-child col5">
             <div class="card">
                 <div class="information_5">
-                    <table id="chassis-today-table">
-                    </table>
-                    <p class="information_text">Chassis voor vandaag gepland</p>
+                    <p class="information_value"><?= $avg_mont?> dagen</p>
+                    <p class="information_text"> gemiddeld in montage</p>
+
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -64,7 +64,11 @@
     <div class="chart" id="bar_chart">
         <canvas id="day_chart"></canvas>
     </div>
-
+    <div class="somediv">
+        <table id="chassis-today-table">
+        </table>
+        <p class="information_text">Chassis voor vandaag gepland</p>
+    </div>
     <div class="chart" id="bar_chart">
         <canvas id="stand_las_chart"></canvas>
     </div>
