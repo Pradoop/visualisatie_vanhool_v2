@@ -32,8 +32,8 @@ class Home extends BaseController
         $data2["chassisInMontage_array"] = $this->getChassisInMontage();
         $data2["wdInMontageLimit"] = 5;
 
-        array_push($this->data['scripts_to_load'], 'map_view.js');
-        array_push($this->data['styles_to_load'], 'map_view.scss');
+        $this->data['scripts_to_load'][] = 'map_view.js';
+        $this->data['styles_to_load'][] = 'map_view.scss';
         $this->data['content'] = view('map_view', $data2);
         return view('template', $this->data);
     }
@@ -41,7 +41,9 @@ class Home extends BaseController
     public function chassis_view()
     {
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis');
-        $data2["file_lines"] = $this->getChassisInfo();
+        $data2["file_lines"] = $this->getChassisInfo()[0];
+        $data2["extra_file_lines"] = $this->getChassisInfo()[1];
+        $data2["galva_list"] = $this->file_model->fileColumnArrays($this->file_model->readFile()[0])[5];
 
         array_push($this->data['scripts_to_load'], 'chassis_view.js', 'jquery.dataTables.min.js');
         array_push($this->data['styles_to_load'], 'chassis_view.scss', 'jquery.dataTables.min.css');
@@ -342,22 +344,32 @@ class Home extends BaseController
     {
         $line_array = $this->file_model->readFile()[0];
         $output_array = array();
+        $primary_array = array();
+        $secondary_array = array();
 
         $line_number = 1;
         while($line_number < sizeof($line_array)) {
             $array = preg_split('/\t/', $line_array[$line_number]);
-            if(isset($array[2]) && isset($array[5]) && isset($array[7]) && isset($array[10]) && isset($array[12]) && isset($array[14]) && isset($array[3]) && isset($array[17])) {
 
+            //Primary
+            if(isset($array[3]) && isset($array[4]) && isset($array[5]) && isset($array[6]) && isset($array[7]) && isset($array[10]) && isset($array[14]) && isset($array[17])) {
                 $today = date("Y-m-d");
                 $parts = str_split($array[3], 2);
                 $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
                 $diff = strtotime($planned_date) - strtotime($today);
-
-                $new_string = $array[0].'!'.$array[2].'!'.$array[5].'!'.$array[7].'!'.$array[10].'!'.$array[12].'!'.$array[14].'!'.$array[3].'!'.$array[17].'!'.round($diff / 86400);
-                array_push($output_array, $new_string);
+                $primary_string = $array[0].'!'.$array[5].' ('.$array[4].')'.'!'.$array[7].' ('.$array[6].')'.'!'.$array[10].'!'.$array[3].'!'.round($diff / 86400).'!'.$array[17].'!'.$array[14];
+                array_push($primary_array, $primary_string);
+            }
+            //Secondary
+            if(isset($array[1]) && isset($array[8]) && isset($array[9]) && isset($array[11]) && isset($array[13]) && isset($array[15]) && isset($array[16]) && isset($array[18])) {
+                $secondary_string = $array[1].'!'.$array[8].'!'.$array[9].'!'.$array[11].'!'.$array[13].'!'.$array[15].'!'.$array[16].'!'.$array[18];
+                array_push($secondary_array, $secondary_string);
             }
             $line_number++;
         }
+
+        array_push($output_array, $primary_array);
+        array_push($output_array, $secondary_array);
 
         return $output_array;
     }
