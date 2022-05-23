@@ -9,6 +9,10 @@
     </div>
 </div>
 
+<div id="info_div">
+    <p>Gegalvaniseerde wagens zijn in het groen aangeduid</p>
+</div>
+
 <?php
     $primary_array = array();
     $secondary_array = array();
@@ -92,6 +96,9 @@
                                 break;
                             case "81":
                                 echo "<td>Vandaag af in de montage afdeling ({$primary_array[$row_id][7]})</td>";
+                                break;
+                            default:
+                                echo "<td>TODO ({$primary_array[$row_id][7]})</td>";
                         }
                     ?>
                 </tr>

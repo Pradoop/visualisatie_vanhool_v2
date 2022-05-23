@@ -20,7 +20,7 @@ $(document).ready(function(){
 //Colors for galva
 $(document).ready(function(){
     for(let i = 1; i < galva_lines.length; i++) {
-        if(galva_lines[i] === "y" || galva_lines[i] === "m") {
+        if(galva_lines[i][12] === "y" || galva_lines[i][12] === "m") {
             document.getElementById('primary_'+ (i-1)).style.background = 'green';
         }
     }
