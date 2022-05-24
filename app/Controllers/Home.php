@@ -58,7 +58,8 @@ class Home extends BaseController
         $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
         $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
         $data2["avg_mont"] = $this->calculateAverageWdInMont($this->file_model->fileColumnArrays($data2["file_lines"])[5]);
-        $data2["welding_percentages"] = $this->calculateWeldingData();
+        $data2["total_welding_info"] = $this->getWeldingData();
+        $data2["welding_info"] = $this->calculateTotalWeldingData();
         $data2["chassis_phase"] = $this->calculateChassisPerPhase();
         $data2["planned_dates"] = $this->getPlannedTime();
         $data2["chassis_planned_dates"] = $this->getPlannedChassisAndTime();
@@ -174,14 +175,14 @@ class Home extends BaseController
         return round(($total_delay / $total_produced)*(-1), 0,PHP_ROUND_HALF_UP );
     }
 
-    /* Function to calculate the percentages of cars to be welded by hand, to be welded using the robot,
+    /* Function to calculate the amount of cars to be welded by hand, to be welded using the robot,
      * finished welding by robot, or to be decided in general
      * Input: Array that contains all the information (so the textfile)
      * Output: Returns an array with the amount of chassis for each possibility
      * Explanation: array initialized with the different possibilities, which are abbreviations of the variables
      * based on value of the column, they are added in the list.
      */
-    public function calculateWeldingData()
+    public function calculateTotalWeldingData()
     {
         $line_array = $this->file_model->readFile()[0];
         $my_array = $this->file_model->fileColumnArrays($line_array)[2];
@@ -323,6 +324,22 @@ class Home extends BaseController
         while ($line_number < sizeof($my_array)):
             if(isset($my_array[$line_number][3])) {
                 $output_array[] = strval($my_array[$line_number][3]);
+            }
+            $line_number++;
+        endwhile;
+        return json_encode($output_array);
+    }
+
+    public function getWeldingData()
+    {
+        $line_array = $this->file_model->readFile()[0];
+        $my_array = $this->file_model->fileColumnArrays($line_array)[6];
+        $output_array = array();
+        $line_number = 1;
+        while ($line_number < sizeof($my_array)):
+            if(isset($my_array[$line_number][0]) && isset($my_array[$line_number][3]) && isset($my_array[$line_number][18])) {
+                $temp = array("chassis_nr"=>strval($my_array[$line_number][0]), "dtm_gepland"=>strval($my_array[$line_number][3]), "stand_las"=>strval($my_array[$line_number][18]));
+                $output_array[] = $temp;
             }
             $line_number++;
         endwhile;

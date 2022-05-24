@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="information_1">
                     <p class="information_value"><?= $total_in_production[0] ?></p>
-                    <p class="information_text"> Chassis in productie</p>
+                    <p class="information_text"> chassis in productie</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -14,9 +14,9 @@
         </div>
         <div class="grid-child col2">
             <div class="card">
-                <div class="information_2">
-                    <p class="information_value"><?= $percentage_delayed ?>%</p>
-                    <p class="information_text"> vertraagd tov contractdatum</p>
+                <div class="information_4">
+                    <p class="information_value"><?= $total_in_production[1] ?>%</p>
+                    <p class="information_text"> in productie</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -25,9 +25,9 @@
         </div>
         <div class="grid-child col3">
             <div class="card">
-                <div class="information_3">
-                    <p class="information_value"><?= $average_delay ?> werkdagen</p>
-                    <p class="information_text"> laat tov contractdatum</p>
+                <div class="information_5">
+                    <p class="information_value"><?= $avg_mont?> Werkdagen</p>
+                    <p class="information_text"> gemiddeld in montage</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -36,10 +36,11 @@
         </div>
         <div class="grid-child col4">
             <div class="card">
-                <div class="information_4">
-                    <p class="information_value"><?= $total_in_production[1] ?>%</p>
-                    <p class="information_text"> in productielijn</p>
+                <div class="information_3">
+                    <p class="information_value"><?= $average_delay ?> Werkdagen</p>
+                    <p class="information_text"> laat tov contractdatum</p>
                 </div>
+
             </div>
             <div class="chart" id="bar_chart">
                 <canvas id="this_week_chart"></canvas>
@@ -47,10 +48,9 @@
         </div>
         <div class="grid-child col5">
             <div class="card">
-                <div class="information_5">
-                    <p class="information_value"><?= $avg_mont?> dagen</p>
-                    <p class="information_text"> gemiddeld in montage</p>
-
+                <div class="information_2">
+                    <p class="information_value"><?= $percentage_delayed ?>%</p>
+                    <p class="information_text"> vertraagd tov contractdatum</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">

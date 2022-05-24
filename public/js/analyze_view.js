@@ -1,4 +1,5 @@
 const welding_data = [];
+const total_welding_data = [];
 const chassis_phase = [];
 const chassisnr_pln_date = [];
 const chassis_pln_date = [];
@@ -8,12 +9,22 @@ const chassis_per_week = new Array(4).fill(0);
 const chassis_per_dag = new Array(7).fill(0);
 const months = ['Jan', 'Feb', 'Ma', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Dec']
 
+
+/*
+ * Registration of the chartjs-plugin-datalabels plugin. Is required to make it work
+ * Changing default options as well for the text in the bars
+ */
+Chart.register(ChartDataLabels);
+Chart.defaults.set('plugins.datalabels', {
+    color: 'white'
+});
+
 /*
  * Ajax request to retrieve the data for welding
  * This call also executes the createWeldingChart() function based on the data that is retrieved
  */
 $.ajax({
-    url: BASE_URL + '/Home/calculateWeldingData',
+    url: BASE_URL + '/Home/calculateTotalWeldingData',
     method: "get",
     dataType: 'text',
     success: function(response) {
@@ -29,6 +40,32 @@ $.ajax({
     },
     complete: function(data){
         createWeldingChart(welding_data);
+    }
+});
+
+/*
+ * Ajax request to retrieve the data for welding
+ * This call also executes the createWeldingChart() function based on the data that is retrieved
+ */
+$.ajax({
+    url: BASE_URL + '/Home/getWeldingData',
+    method: "get",
+    dataType: 'text',
+    success: function(response) {
+        const responseObject = JSON.parse(response);
+        for(const c in responseObject){
+            //console.log(responseObject);
+            total_welding_data.push(responseObject[c]);
+        }
+    },
+    error: function (xhr, status, error) {
+        console.log("ERROR")
+        console.log(xhr.responseText);
+        console.log(error.responseText);
+    },
+    complete: function(data){
+        console.log(total_welding_data);
+        //createWeldingChart(total_welding_data);
     }
 });
 
@@ -253,14 +290,17 @@ function createWeekChartPlanned(my_data, next_week){
             scales: {
                 y: {
                     ticks:{
-                        precision: 0
+                        precision: 0,
+                        display: false
                     },
                     beginAtZero: true, display: true, title:{
                         display:true, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
+
                 },
                 x:{
                     display: true, title:{
@@ -268,6 +308,7 @@ function createWeekChartPlanned(my_data, next_week){
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 }
             },
@@ -348,13 +389,15 @@ function createDateChart(my_year, my_month, my_date, my_data){
             scales: {
                 y: {
                     ticks:{
-                        precision: 0
+                        precision: 0,
+                        display: false
                     },
                     beginAtZero: true, display: true, title:{
                         display:true, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 },
                 x:{
@@ -363,6 +406,7 @@ function createDateChart(my_year, my_month, my_date, my_data){
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 }
             },
@@ -428,13 +472,15 @@ function createWeekChart(my_year, my_month, my_data){
             scales: {
                 y: {
                     ticks:{
-                        precision: 0
+                        precision: 0,
+                        display: false
                     },
                     beginAtZero: true, display: true, title:{
                         display:true, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 },
                 x:{
@@ -443,6 +489,7 @@ function createWeekChart(my_year, my_month, my_data){
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 }
             },
@@ -485,11 +532,16 @@ function createMonthChart(my_year, my_data){
         type: 'bar', data: data, options: {
             scales: {
                 y: {
+                    ticks:{
+                        precision: 0,
+                        display: false
+                    },
                     beginAtZero: true, display: true, title:{
                         display:true, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 },
                 x:{
@@ -498,6 +550,7 @@ function createMonthChart(my_year, my_data){
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 }
             },
@@ -547,12 +600,17 @@ function createYearChart(my_data){
         type: 'bar', data: data, options: {
             scales: {
                 y: {
+                    ticks:{
+                        precision: 0,
+                        display: false
+                    },
                     beginAtZero: true, display: true, title:{
                         display:true, text: "Aantal" +
                             " chassis"
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 },
                 x:{
@@ -561,6 +619,7 @@ function createYearChart(my_data){
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 }
             },
@@ -606,38 +665,45 @@ function createWeldingChart(my_data){
     const data = {
         labels: sortedLabelArray, datasets: [{
             label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: sortedDataArray,
-            datalabels: {
-                labels: {
-                    value: {
-                        color: 'green'
-                    }
-                }
-            }
         }]
     };
     const config = {
         type: 'bar', data: data, options: {
             scales: {
                 y: {
-                    beginAtZero: true, display: true, title: {
-                        display: true, text: "Aantal chassis"
+                    ticks:{
+                        precision: 0,
+                        display: false
+                    },
+                    beginAtZero: true, display: true, title:{
+                        display:true, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 },
-                x: {
-                    display: true, title: {
-                        display: true, text: "Stand las"
+                x:{
+                    display: true, title:{
+                        display:true, text: "Stand las"
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 }
             },
-            plugins: [ChartDataLabels],
-            options: {}
-        }
+            plugins:{
+                title:{
+                    display: true, text: 'Aantal chassis per per stand las'
+                },
+                legend:{
+                    display: true, position: "right", align: "center", labels:{
+                        boxWidth: 10, boxHeight: 10,
+                    }
+                }
+            }
+        },
     }
     const myChart = new Chart(document.getElementById('stand_las_chart'), config);
 }
@@ -678,11 +744,16 @@ function createPhaseChart(my_data){
         type: 'bar', data: data, options: {
             scales: {
                 y: {
+                    ticks:{
+                        precision: 0,
+                        display: false
+                    },
                     beginAtZero: true, display: true, title:{
                         display:true, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 },
                 x:{
@@ -691,6 +762,7 @@ function createPhaseChart(my_data){
                     },
                     grid: {
                         display: false,
+                        drawBorder: false,
                     }
                 }
             },
