@@ -59,7 +59,7 @@ class Home extends BaseController
         $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->fileColumnArrays($data2["file_lines"])[0]);
         $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
         $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
-        $data2["avg_mont"] = $this->calculateAverageWdInMont($this->file_model->fileColumnArrays($data2["file_lines"])[5]);
+        $data2["avg_mont"] = $this->calculateAverageWdInMont($this->file_model->fileColumnArrays($data2["file_lines"])[6]);
         $data2["total_welding_info"] = $this->getWeldingData();
         $data2["welding_info"] = $this->calculateTotalWeldingData();
         $data2["chassis_phase"] = $this->calculateChassisPerPhase();
@@ -143,13 +143,14 @@ class Home extends BaseController
         $line_number = 1;
         $total_delay = 0;
         $total_mont = 0;
-        while ($line_number < sizeof($my_array)):
-            if(isset($my_array[$line_number][17]) && $my_array[$line_number][17] >= 0) {
-                $total_delay += (int) $my_array[$line_number][17];
-                $total_mont++;
-            }
-            $line_number++;
-        endwhile;
+            while ($line_number < sizeof($my_array)):
+                if(isset($my_array[$line_number][17]) && $my_array[$line_number][17] >= 0) {
+                    $total_delay += (int) $my_array[$line_number][17];
+                    $total_mont++;
+                }
+                $line_number++;
+            endwhile;
+
 
         return round(($total_delay / $total_mont), 0,PHP_ROUND_HALF_UP );
     }
@@ -335,7 +336,7 @@ class Home extends BaseController
     public function getWeldingData()
     {
         $line_array = $this->file_model->readFile()[0];
-        $my_array = $this->file_model->fileColumnArrays($line_array)[6];
+        $my_array = $this->file_model->fileColumnArrays($line_array)[7];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):

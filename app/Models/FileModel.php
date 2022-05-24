@@ -139,8 +139,8 @@ class FileModel extends \CodeIgniter\Model
         $main_arrays[] = $dtmGepland_array;
         $main_arrays[] = $wagennr_dtmGepland_array;
         $main_arrays[] = $galva_array;
-        array_push($main_arrays, $wdInMont_array);
-        array_push($main_arrays, $wagennr_dtmGepland_standLas_array);
+        $main_arrays[] = $wdInMont_array;
+        $main_arrays[] = $wagennr_dtmGepland_standLas_array;
 
 
         return $main_arrays;
