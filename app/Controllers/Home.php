@@ -318,7 +318,7 @@ class Home extends BaseController
         ]);
     }
 
-    public function getPlannedTime()
+    public function getPlannedTime(): bool|string
     {
         $line_array = $this->file_model->readFile()[0];
         $my_array = $this->file_model->fileColumnArrays($line_array)[3];
@@ -333,14 +333,14 @@ class Home extends BaseController
         return json_encode($output_array);
     }
 
-    public function getWeldingData()
+    public function getWeldingData(): bool|string
     {
         $line_array = $this->file_model->readFile()[0];
         $my_array = $this->file_model->fileColumnArrays($line_array)[7];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
-            if(isset($my_array[$line_number][0]) && isset($my_array[$line_number][3]) && isset($my_array[$line_number][18])) {
+            if(isset($my_array[$line_number][0]) && isset($my_array[$line_number][3]) && isset($my_array[$line_number][18]) && strlen(trim($my_array[$line_number][18])) > 0) {
                 $temp = array("chassis_nr"=>strval($my_array[$line_number][0]), "dtm_gepland"=>strval($my_array[$line_number][3]), "stand_las"=>strval($my_array[$line_number][18]));
                 $output_array[] = $temp;
             }
@@ -349,7 +349,7 @@ class Home extends BaseController
         return json_encode($output_array);
     }
 
-    public function getPlannedChassisAndTime()
+    public function getPlannedChassisAndTime(): bool|string
     {
         $line_array = $this->file_model->readFile()[0];
         $my_array = $this->file_model->fileColumnArrays($line_array)[4];
@@ -367,21 +367,21 @@ class Home extends BaseController
         return json_encode($output_array);
     }
 
-    public function getChassisInMontage()
+    public function getChassisInMontage(): array
     {
         $line_array = $this->file_model->readFile()[0];
         $output_array = array();
         foreach($line_array as $line) {
             $array = preg_split('/\t/', $line);
             if(isset($array[17]) && $array[17] != '  ') {
-                array_push($output_array, $line);
+                $output_array[] = $line;
             }
         }
 
         return $output_array;
     }
 
-    public function getChassisInfo()
+    public function getChassisInfo(): array
     {
         $line_array = $this->file_model->readFile()[0];
         $output_array = array();
@@ -399,18 +399,18 @@ class Home extends BaseController
                 $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
                 $diff = strtotime($planned_date) - strtotime($today);
                 $primary_string = $array[0].'!'.$array[5].' ('.$array[4].')'.'!'.$array[7].' ('.$array[6].')'.'!'.$array[10].'!'.$array[3].'!'.round($diff / 86400).'!'.$array[17].'!'.$array[14];
-                array_push($primary_array, $primary_string);
+                $primary_array[] = $primary_string;
             }
             //Secondary
             if(isset($array[1]) && isset($array[8]) && isset($array[9]) && isset($array[11]) && isset($array[13]) && isset($array[15]) && isset($array[16]) && isset($array[18])) {
                 $secondary_string = $array[1].'!'.$array[8].'!'.$array[9].'!'.$array[11].'!'.$array[13].'!'.$array[15].'!'.$array[16].'!'.$array[18];
-                array_push($secondary_array, $secondary_string);
+                $secondary_array[] = $secondary_string;
             }
             $line_number++;
         }
 
-        array_push($output_array, $primary_array);
-        array_push($output_array, $secondary_array);
+        $output_array[] = $primary_array;
+        $output_array[] = $secondary_array;
 
         return $output_array;
     }

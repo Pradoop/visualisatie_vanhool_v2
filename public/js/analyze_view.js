@@ -4,6 +4,10 @@ const chassis_phase = [];
 const chassisnr_pln_date = [];
 const chassis_pln_date = [];
 const chassis_per_year = [];
+const stand_las_0 = [];
+const stand_las_1 = [];
+const stand_las_2 = [];
+const stand_las_3 = [];
 const chassis_per_month = new Array(12).fill(0);
 const chassis_per_week = new Array(4).fill(0);
 const chassis_per_dag = new Array(7).fill(0);
@@ -19,6 +23,7 @@ Chart.defaults.set('plugins.datalabels', {
     color: 'white'
 });
 
+
 /*
  * Ajax request to retrieve the data for welding
  * This call also executes the createWeldingChart() function based on the data that is retrieved
@@ -31,7 +36,7 @@ $.ajax({
         const responseObject = JSON.parse(response);
         for(const c in responseObject){
             welding_data.push(responseObject[c]);
-            }
+        }
     },
     error: function (xhr, status, error) {
         console.log("ERROR")
@@ -44,7 +49,7 @@ $.ajax({
 });
 
 /*
- * Ajax request to retrieve the data for welding
+ * Ajax request to retrieve all the data for welding
  * This call also executes the createWeldingChart() function based on the data that is retrieved
  */
 $.ajax({
@@ -53,9 +58,21 @@ $.ajax({
     dataType: 'text',
     success: function(response) {
         const responseObject = JSON.parse(response);
+        let year = "";
+        const tempYear = "";
         for(const c in responseObject){
-            //console.log(responseObject);
-            total_welding_data.push(responseObject[c]);
+
+            let temp = responseObject[c].dtm_gepland;
+
+            //reformat date
+            year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
+            let month = temp.substring(2, 4);
+            let day = temp.substring(4, 6);
+            let date = new Date(year, month - 1, day);
+            date.setHours(0, 0, 0, 0);
+            responseObject[c].dtm_gepland = date;
+            total_welding_data.push(responseObject[c])
+
         }
     },
     error: function (xhr, status, error) {
@@ -64,8 +81,7 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        console.log(total_welding_data);
-        //createWeldingChart(total_welding_data);
+        createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart');
     }
 });
 
@@ -106,16 +122,17 @@ $.ajax({
         let year = "";
         const tempYear = "";
         for(const c in responseObject){
+
+            //reformat date
             let temp = responseObject[c];
             year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
             let month = temp.substring(2, 4);
             let day = temp.substring(4, 6);
             let date = new Date(year, month - 1, day);
             date.setHours(0, 0, 0, 0);
+
             chassis_pln_date.push(date);
         }
-
-
     },
     error: function (xhr, status, error) {
         console.log("ERROR")
@@ -128,12 +145,12 @@ $.ajax({
         let currentMonth = today.getMonth() + 1;
         let currentDate = today.getDate() + 1;
 
-        createWeekChartPlanned(chassis_pln_date, 0);
-        createWeekChartPlanned(chassis_pln_date, 1);
+        createWeekBarChart(chassis_pln_date, 0, 'this_week_chart', "Aantal geplande chassis voor deze week");
+        createWeekBarChart(chassis_pln_date, 1, 'next_week_chart', "Aantal geplande chassis voor volgende week");
         createYearChart(chassis_pln_date);
         createMonthChart(currentYear, chassis_pln_date);
         createWeekChart(currentYear, currentMonth, chassis_pln_date);
-        createDateChart(currentYear, currentMonth, currentDate, chassis_pln_date);
+        //createDateChart(currentYear, currentMonth, currentDate, chassis_pln_date);
     }
 });
 
@@ -218,17 +235,16 @@ function createTableChassisPlannedToday(my_data, my_date){
     }
 }
 
+
+
 /*
  * Function to create a chart for the amount of chassis for the current week and the next week
  * Input: array that contains the data with the different dates and the year that is required to calculate
  * the year, month and starting date that you want a chart to be created for
  * Output: Vertical bart chart with the amount of chassis that are planned per year
  */
-function createWeekChartPlanned(my_data, next_week){
+function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
     const week_chassis = new Array(7).fill(0);
-
-    let graph_id = 'this_week_chart';
-    let graph_title = "Aantal geplande chassis voor deze week";
 
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
@@ -238,8 +254,6 @@ function createWeekChartPlanned(my_data, next_week){
     if (next_week === 1){
         firstDay.setDate(firstDay.getDate() + 7);
         firstDay.setHours(0, 0, 0, 0);
-        graph_id = 'next_week_chart';
-        graph_title = "Aantal geplande chassis voor volgende week"
     }
 
     let secondDay = new Date();
@@ -279,7 +293,6 @@ function createWeekChartPlanned(my_data, next_week){
             }
         }
     }
-
     const data = {
         labels: labels, datasets: [{
             label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: week_chassis,
@@ -314,7 +327,7 @@ function createWeekChartPlanned(my_data, next_week){
             },
             plugins:{
                 title:{
-                    display: true, text: graph_title
+                    display: true, text: my_graph_title
                 },
                 legend:{
                     display: true, position: "right", align: "center", labels:{
@@ -324,7 +337,7 @@ function createWeekChartPlanned(my_data, next_week){
             }
         },
     }
-    const myChart = new Chart(document.getElementById(graph_id), config);
+    const myChart = new Chart(document.getElementById(my_graph_id), config);
 }
 
 /*
@@ -333,7 +346,7 @@ function createWeekChartPlanned(my_data, next_week){
  * Input: array that contains the data with the different dates and the year that is required to calculate
  * the year, month and starting date that you want a chart to be created for
  * Output: Vertical bart chart with the amount of chassis that are planned per year
- */
+
 function createDateChart(my_year, my_month, my_date, my_data){
     my_month--;
     let day_diff;
@@ -424,6 +437,7 @@ function createDateChart(my_year, my_month, my_date, my_data){
     }
     const myChart = new Chart(document.getElementById('day_chart'), config);
 }
+*/
 
 /*
  * Function to create a chart for the amount of chassis per week in a given month and year
@@ -634,8 +648,168 @@ function createYearChart(my_data){
                 }
             }
         },
-    }
+    };
     const myChart = new Chart(document.getElementById('year_chart'), config);
+}
+
+function createWeekWeldingChart(my_data, next_week, my_graph_id){
+    for (const i in my_data){
+        switch (my_data[i].stand_las){
+            case "L0":
+                stand_las_0.push(my_data[i]);
+                break;
+            case "L1":
+                stand_las_1.push(my_data[i]);
+                break;
+            case "L2":
+                stand_las_2.push(my_data[i]);
+                break;
+            case "L3":
+                stand_las_3.push(my_data[i]);
+                break;
+        }
+    }
+    console.log(stand_las_0)
+    console.log(stand_las_1)
+
+    const week_stand_las_0 = new Array(7).fill(0);
+    const week_stand_las_1 = new Array(7).fill(0);
+    const week_stand_las_2 = new Array(7).fill(0);
+    const week_stand_las_3 = new Array(7).fill(0);
+
+    const curr = new Date; // get current date
+    const first = curr.getDate() - curr.getDay() + 1;
+    let firstDay = new Date(curr.setDate(first));
+    firstDay.setHours(0, 0, 0, 0);
+
+    if (next_week === 1){
+        firstDay.setDate(firstDay.getDate() + 7);
+        firstDay.setHours(0, 0, 0, 0);
+    }
+
+    let secondDay = new Date();
+    secondDay.setDate(firstDay.getDate() + 1);
+    secondDay.setHours(0, 0, 0, 0);
+    let thirdDay = new Date();
+    thirdDay.setDate(firstDay.getDate() + 2);
+    thirdDay.setHours(0, 0, 0, 0);
+    let fourthDay = new Date();
+    fourthDay.setDate(firstDay.getDate() + 3);
+    fourthDay.setHours(0, 0, 0, 0);
+    let fifthDay = new Date();
+    fifthDay.setDate(firstDay.getDate() + 4);
+    fifthDay.setHours(0, 0, 0, 0);
+    let sixthDay = new Date();
+    sixthDay.setDate(firstDay.getDate() + 5);
+    sixthDay.setHours(0, 0, 0, 0);
+    let lastDay = new Date();
+    lastDay.setDate(firstDay.getDate() + 6);
+    lastDay.setHours(0, 0, 0, 0);
+
+    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
+    const labels = [
+        firstDay.getDate() + '/' + (firstDay.getMonth() + 1),
+        secondDay.getDate() + '/' + (secondDay.getMonth() + 1),
+        thirdDay.getDate() + '/' + (thirdDay.getMonth() + 1),
+        fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
+        fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
+        sixthDay.getDate() + '/' + (sixthDay.getMonth() + 1),
+        lastDay.getDate() + '/' + (lastDay.getMonth() + 1),
+    ]
+
+    for (const i in stand_las_0){
+        for (const j in thisWeek){
+            if ((stand_las_0[i].dtm_gepland.getFullYear() === thisWeek[j].getFullYear()) && (stand_las_0[i].dtm_gepland.getMonth() === thisWeek[j].getMonth()) && (stand_las_0[i].dtm_gepland.getDate() === thisWeek[j].getDate())){
+                week_stand_las_0[j]++;
+            }
+        }
+    }
+
+    for (const i in stand_las_1){
+        for (const j in thisWeek){
+            if ((stand_las_1[i].dtm_gepland.getFullYear() === thisWeek[j].getFullYear()) && (stand_las_1[i].dtm_gepland.getMonth() === thisWeek[j].getMonth()) && (stand_las_1[i].dtm_gepland.getDate() === thisWeek[j].getDate())){
+                week_stand_las_1[j]++;
+            }
+        }
+    }
+
+    for (const i in stand_las_2){
+        for (const j in thisWeek){
+            if ((stand_las_2[i].dtm_gepland.getFullYear() === thisWeek[j].getFullYear()) && (stand_las_2[i].dtm_gepland.getMonth() === thisWeek[j].getMonth()) && (stand_las_2[i].dtm_gepland.getDate() === thisWeek[j].getDate())){
+                week_stand_las_2[j]++;
+            }
+        }
+    }
+
+    for (const i in stand_las_3){
+        for (const j in thisWeek){
+            if ((stand_las_3[i].dtm_gepland.getFullYear() === thisWeek[j].getFullYear()) && (stand_las_3[i].dtm_gepland.getMonth() === thisWeek[j].getMonth()) && (stand_las_3[i].dtm_gepland.getDate() === thisWeek[j].getDate())){
+                week_stand_las_3[j]++;
+            }
+        }
+    }
+
+    console.log(week_stand_las_0)
+    console.log(week_stand_las_1)
+    console.log(week_stand_las_2)
+    console.log(week_stand_las_3)
+
+
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'L0',
+                data: week_stand_las_0,
+                backgroundColor: 'rgb(16, 57, 93)',
+                stack: 'Stack 0',
+            },
+            {
+                label: 'L1',
+                data: week_stand_las_1,
+                backgroundColor: 'rgb(16, 57, 93)',
+                stack: 'Stack 1',
+            },
+            {
+                label: 'L2',
+                data: week_stand_las_2,
+                backgroundColor: 'rgb(16, 57, 93)',
+                stack: 'Stack 2',
+            },
+            {
+                label: 'L3',
+                data: week_stand_las_3,
+                backgroundColor: 'rgb(16, 57, 93)',
+                stack: 'Stack 3',
+            },
+        ]
+    };
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Chart.js Bar Chart - Stacked'
+                },
+            },
+            responsive: true,
+            interaction: {
+                intersect: false,
+            },
+            scales: {
+                x: {
+                    stacked: true,
+                },
+                y: {
+                    stacked: true
+                }
+            }
+        }
+    };
+    const myChart = new Chart(document.getElementById(my_graph_id), config);
+
 }
 
 /*
@@ -644,7 +818,7 @@ function createYearChart(my_data){
  * Output: Vertical bart chart with the amount of chassis per stand las
  */
 function createWeldingChart(my_data){
-    const labels = ['TBD', 'Hand', 'Robot', 'Robot+prgm af',];
+    const labels = ['TBD', 'Hand', 'Robot', 'Robot+prgm af'];
     let arrayOfObjects = labels.map(function (d, i) {
         return {
             label: d,

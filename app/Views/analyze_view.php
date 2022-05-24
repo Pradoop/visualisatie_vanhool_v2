@@ -72,7 +72,9 @@
     <div class="chart" id="bar_chart">
         <canvas id="stand_las_chart"></canvas>
     </div>
-
+    <div class="chart" id="bar_chart">
+        <canvas id="next_week_welding_chart"></canvas>
+    </div>
 </div>
 
 
