@@ -42,7 +42,7 @@ h1 {
 }
 
 .card {
-  border-radius: 10px; /* 5px rounded corners */
+  border-radius: 5px; /* 10px rounded corners */
   padding-left: 5px;
   background-color: rgba(227, 228, 229, 0.5);
   height: 40%;
@@ -51,7 +51,25 @@ h1 {
   flex-wrap: wrap;
 }
 
+.grid-container-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 
+.week-chart{
+  border-radius: 5px; /* 10px rounded corners */
+  height: auto;
+  padding-left: 5px;
+  width: 98%;
+  border: 1px solid #5c636a;
+}
+
+.chart-2{
+  border-radius: 10px; /* 10px rounded corners */
+  width: 98%;
+  height: 50%;
+  border: 1px solid #5c636a;
+}
 
 p{
   margin: 0;

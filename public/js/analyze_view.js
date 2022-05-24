@@ -23,7 +23,6 @@ Chart.defaults.set('plugins.datalabels', {
     color: 'white'
 });
 
-
 /*
  * Ajax request to retrieve the data for welding
  * This call also executes the createWeldingChart() function based on the data that is retrieved
@@ -81,7 +80,9 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart');
+        createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Chassis per stand las - volgende week');
+        createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Chassis per stand las - deze week');
+
     }
 });
 
@@ -313,7 +314,6 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                         display: false,
                         drawBorder: false,
                     }
-
                 },
                 x:{
                     display: true, title:{
@@ -475,7 +475,7 @@ function createWeekChart(my_year, my_month, my_data){
         labels: labels,
         datasets: [{
             label: 'Aantal chassis',
-            backgroundColor: 'rgb(16, 57, 93)',
+            backgroundColor: 'rgb(16,57,93)',
             data: chassis_per_week,
         }]
     };
@@ -652,7 +652,7 @@ function createYearChart(my_data){
     const myChart = new Chart(document.getElementById('year_chart'), config);
 }
 
-function createWeekWeldingChart(my_data, next_week, my_graph_id){
+function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title){
     for (const i in my_data){
         switch (my_data[i].stand_las){
             case "L0":
@@ -669,9 +669,6 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id){
                 break;
         }
     }
-    console.log(stand_las_0)
-    console.log(stand_las_1)
-
     const week_stand_las_0 = new Array(7).fill(0);
     const week_stand_las_1 = new Array(7).fill(0);
     const week_stand_las_2 = new Array(7).fill(0);
@@ -748,38 +745,31 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id){
             }
         }
     }
-
-    console.log(week_stand_las_0)
-    console.log(week_stand_las_1)
-    console.log(week_stand_las_2)
-    console.log(week_stand_las_3)
-
-
     const data = {
         labels: labels,
         datasets: [
             {
-                label: 'L0',
+                label: 'Nog te bepalen',
                 data: week_stand_las_0,
                 backgroundColor: 'rgb(16, 57, 93)',
                 stack: 'Stack 0',
             },
             {
-                label: 'L1',
+                label: 'Handlas',
                 data: week_stand_las_1,
-                backgroundColor: 'rgb(16, 57, 93)',
+                backgroundColor: 'rgb(90,16,93)',
                 stack: 'Stack 1',
             },
             {
-                label: 'L2',
+                label: 'In robot',
                 data: week_stand_las_2,
-                backgroundColor: 'rgb(16, 57, 93)',
+                backgroundColor: 'rgb(93,52,16)',
                 stack: 'Stack 2',
             },
             {
-                label: 'L3',
+                label: 'In robot en programma af',
                 data: week_stand_las_3,
-                backgroundColor: 'rgb(16, 57, 93)',
+                backgroundColor: 'rgb(19,93,16)',
                 stack: 'Stack 3',
             },
         ]
@@ -791,7 +781,7 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id){
             plugins: {
                 title: {
                     display: true,
-                    text: 'Chart.js Bar Chart - Stacked'
+                    text: my_graph_title
                 },
             },
             responsive: true,
@@ -800,10 +790,27 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id){
             },
             scales: {
                 x: {
-                    stacked: true,
+                    stacked: true, beginAtZero: true, display: true,
+                    title:{
+                        display:true, text: "Datum"
+                    },
+                    grid: {
+                        display: false,
+                        drawBorder: false,
+                    }
                 },
                 y: {
-                    stacked: true
+                    stacked: true, beginAtZero: true, display: true, ticks:{
+                        precision: 0,
+                        display: false
+                    },
+                    title:{
+                        display:true, text: "Aantal chassis"
+                    },
+                    grid: {
+                        display: false,
+                        drawBorder: false,
+                    }
                 }
             }
         }
