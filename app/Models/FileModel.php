@@ -25,7 +25,7 @@ class FileModel extends \CodeIgniter\Model
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
-                array_push($planningMontage_array, $line);
+                $planningMontage_array[] = $line;
             }
             fclose($file);
         }
@@ -38,13 +38,13 @@ class FileModel extends \CodeIgniter\Model
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
-                array_push($chassisInKaliberIV_array, $line);
+                $chassisInKaliberIV_array[] = $line;
             }
             fclose($file);
         }
 
-        array_push($files_array, $planningMontage_array);
-        array_push($files_array, $chassisInKaliberIV_array);
+        $files_array[] = $planningMontage_array;
+        $files_array[] = $chassisInKaliberIV_array;
 
         return $files_array;
     }
@@ -59,6 +59,7 @@ class FileModel extends \CodeIgniter\Model
         $wagennr_dtmGepland_array = array();
         $wdInMont_array = array();
         $wagennr_dtmGepland_standLas_array = array();
+        $galva_array = array();
 
         /*
         * Gets the status of each line in array
@@ -66,7 +67,7 @@ class FileModel extends \CodeIgniter\Model
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
             unset($array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[15],$array[16],$array[17],$array[18],$array[19]);
-            array_push($status_array, $array);
+            $status_array[] = $array;
         }
 
         /*
@@ -75,7 +76,7 @@ class FileModel extends \CodeIgniter\Model
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
             unset($array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[17],$array[18],$array[19]);
-            array_push($wdTeLaat_array, $array);
+            $wdTeLaat_array[] = $array;
         }
 
         /*
@@ -93,7 +94,7 @@ class FileModel extends \CodeIgniter\Model
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
             unset($array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[16],$array[17],$array[19]);
-            array_push($standLas_array, $array);
+            $standLas_array[] = $array;
         }
 
         /*
@@ -102,7 +103,7 @@ class FileModel extends \CodeIgniter\Model
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
             unset($array[0],$array[1],$array[2],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[16],$array[17],$array[18],$array[19]);
-            array_push($dtmGepland_array, $array);
+            $dtmGepland_array[] = $array;
         }
 
         /*
@@ -111,7 +112,16 @@ class FileModel extends \CodeIgniter\Model
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
             unset($array[1],$array[2],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[16],$array[17],$array[18],$array[19]);
-            array_push($wagennr_dtmGepland_array, $array);
+            $wagennr_dtmGepland_array[] = $array;
+        }
+
+        /*
+        * Gets the galva of each line in array
+        */
+        foreach($file_by_line_array as $line) {
+            $array = preg_split('/\t/', $line);
+            unset($array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[13],$array[14],$array[15],$array[16],$array[17],$array[18],$array[19]);
+            $galva_array[] = $array;
         }
 
         /*
@@ -123,11 +133,12 @@ class FileModel extends \CodeIgniter\Model
             array_push($wagennr_dtmGepland_standLas_array, $array);
         }
 
-        array_push($main_arrays, $status_array);
-        array_push($main_arrays, $wdTeLaat_array);
-        array_push($main_arrays, $standLas_array);
-        array_push($main_arrays, $dtmGepland_array);
-        array_push($main_arrays, $wagennr_dtmGepland_array);
+        $main_arrays[] = $status_array;
+        $main_arrays[] = $wdTeLaat_array;
+        $main_arrays[] = $standLas_array;
+        $main_arrays[] = $dtmGepland_array;
+        $main_arrays[] = $wagennr_dtmGepland_array;
+        $main_arrays[] = $galva_array;
         array_push($main_arrays, $wdInMont_array);
         array_push($main_arrays, $wagennr_dtmGepland_standLas_array);
 
