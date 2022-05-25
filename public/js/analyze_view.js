@@ -80,8 +80,8 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Chassis per stand las - volgende week');
-        createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Chassis per stand las - deze week');
+        createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Aantal chassis per stand las - volgende week');
+        createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Aantal chassis per stand las - deze week');
 
     }
 });
@@ -308,7 +308,7 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                         display: false
                     },
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal chassis"
+                        display:false, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
@@ -330,7 +330,7 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                     display: true, text: my_graph_title
                 },
                 legend:{
-                    display: true, position: "right", align: "center", labels:{
+                    display: false, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
                     }
                 },
@@ -428,7 +428,7 @@ function createDateChart(my_year, my_month, my_date, my_data){
                     display: true, text: 'Aantal geplande chassis per week voor de week van: ' + day1 + ' tot: ' + day7
                 },
                 legend:{
-                    display: true, position: "right", align: "center", labels:{
+                    display: false, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
                     }
                 }
@@ -490,7 +490,7 @@ function createWeekChart(my_year, my_month, my_data){
                         display: false
                     },
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal chassis"
+                        display:false, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
@@ -512,7 +512,7 @@ function createWeekChart(my_year, my_month, my_data){
                     display: true, text: 'Aantal geplande chassis per week in de maand: ' + months[my_month - 1] + " " + my_year.toString()
                 },
                 legend:{
-                    display: true, position: "right", align: "center", labels:{
+                    display: false, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
                     }
                 }
@@ -551,7 +551,7 @@ function createMonthChart(my_year, my_data){
                         display: false
                     },
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal chassis"
+                        display:false, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
@@ -573,7 +573,7 @@ function createMonthChart(my_year, my_data){
                     display: true, text: 'Aantal geplande chassis per maand in het jaar: ' + my_year.toString()
                 },
                 legend:{
-                    display: true, position: "right", align: "center", labels:{
+                    display: false, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
                     },
 
@@ -619,8 +619,7 @@ function createYearChart(my_data){
                         display: false
                     },
                     beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal" +
-                            " chassis"
+                        display:false, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
@@ -642,7 +641,7 @@ function createYearChart(my_data){
                     display: true, text: 'Aantal geplande chassis per jaar'
                 },
                 legend:{
-                    display: true, position: "right", align: "center", labels:{
+                    display: false, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
                     }
                 }
@@ -784,13 +783,12 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                     text: my_graph_title
                 },
             },
-            responsive: true,
             interaction: {
                 intersect: false,
             },
             scales: {
                 x: {
-                    stacked: true, beginAtZero: true, display: true,
+                    stacked: true, beginAtZero: true, display: true, categoryPercentage: 0.0, barPercentage: 0.0,
                     title:{
                         display:true, text: "Datum"
                     },
@@ -805,7 +803,7 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                         display: false
                     },
                     title:{
-                        display:true, text: "Aantal chassis"
+                        display:false, text: "Aantal chassis"
                     },
                     grid: {
                         display: false,
@@ -879,7 +877,7 @@ function createWeldingChart(my_data){
                     display: true, text: 'Aantal chassis per per stand las'
                 },
                 legend:{
-                    display: true, position: "right", align: "center", labels:{
+                    display: false, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
                     }
                 }
@@ -952,7 +950,7 @@ function createPhaseChart(my_data){
                     display: true, text: 'Aantal chassis per status'
                 },
                 legend:{
-                    display: true, position: "right", align: "center", labels:{
+                    display: false, position: "right", align: "center", labels:{
                         boxWidth: 10, boxHeight: 10,
                     }
                 }

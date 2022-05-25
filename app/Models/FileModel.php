@@ -21,7 +21,7 @@ class FileModel extends \CodeIgniter\Model
         * Large txtFile with columns: Wagen,Ew,Aantal,dtmGepland,wagtyp,naamWagTyp,KlantNr,naamKlant,Land,LijnNr,ReeksVan,Afdeling,Galva,DLnr,Status,CntrDtm,wdTeLaat,wdInMont,standLas
         */
         $planningMontage_array = array();
-        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\VanHoolTestFile.txt", "r");
+        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\planningMontage.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);

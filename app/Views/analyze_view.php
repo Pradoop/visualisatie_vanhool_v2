@@ -59,11 +59,11 @@
         </div>
     </div>
     <div class="grid-container-2">
-        <div class="chart-2" id="bar_chart">
-            <canvas id="this_week_welding_chart"></canvas>
+        <div  id="bar_chart">
+            <canvas class="chart-2" id="this_week_welding_chart"></canvas>
         </div>
-        <div class="chart-2" id="bar_chart">
-            <canvas id="next_week_welding_chart"></canvas>
+        <div id="bar_chart">
+            <canvas class="chart-2" id="next_week_welding_chart"></canvas>
         </div>
     </div>
     <div class="chart" id="bar_chart">
