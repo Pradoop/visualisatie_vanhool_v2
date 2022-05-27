@@ -1,5 +1,5 @@
 <div id="general_information">
-    <h1>Dashboard</h1>
+    <h1>Algemene Planning</h1>
     <div class="grid-container">
         <div class="grid-child col1">
             <div class="card">
@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="chart" id="bar_chart">
-                <canvas class="week-chart" id="year_chart"></canvas>
+                <canvas class="week-chart" id="month_chart"></canvas>
             </div>
         </div>
         <div class="grid-child col2">
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <div class="chart" id="bar_chart">
-                <canvas class="week-chart" id="month_chart"></canvas>
+                <canvas class="week-chart" id="week_chart"></canvas>
             </div>
         </div>
         <div class="grid-child col3">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="chart" id="bar_chart">
-                <canvas class="week-chart" id="week_chart"></canvas>
+                <canvas class="week-chart" id="this_week_chart"></canvas>
             </div>
         </div>
         <div class="grid-child col4">
@@ -43,7 +43,7 @@
 
             </div>
             <div class="chart" id="bar_chart">
-                <canvas class="week-chart" id="this_week_chart"></canvas>
+                <canvas class="week-chart" id="next_week_chart"></canvas>
             </div>
         </div>
         <div class="grid-child col5">
@@ -54,18 +54,19 @@
                 </div>
             </div>
             <div class="chart" id="bar_chart">
-                <canvas class="week-chart" id="next_week_chart"></canvas>
+                <canvas class="week-chart" id="fortnight_chart"></canvas>
             </div>
         </div>
     </div>
     <div class="grid-container-2">
-        <div  id="bar_chart">
+        <div id="bar_chart">
             <canvas class="chart-2" id="this_week_welding_chart"></canvas>
         </div>
         <div id="bar_chart">
-            <canvas class="chart-2" id="next_week_welding_chart"></canvas>
+            <canvas id="next_week_welding_chart"></canvas>
         </div>
     </div>
+
     <div class="chart" id="bar_chart">
         <canvas id="status_chart"></canvas>
     </div>
@@ -80,6 +81,10 @@
     <div class="chart" id="bar_chart">
         <canvas id="stand_las_chart"></canvas>
     </div>
+    <div class="chart" id="bar_chart">
+        <canvas class="week-chart" id="year_chart"></canvas>
+    </div>
+
 
 </div>
 

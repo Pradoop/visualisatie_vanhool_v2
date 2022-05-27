@@ -1,18 +1,10 @@
-const welding_data = [];
-const total_welding_data = [];
-const chassis_phase = [];
-const chassisnr_pln_date = [];
-const chassis_pln_date = [];
-const chassis_per_year = [];
-const stand_las_0 = [];
-const stand_las_1 = [];
-const stand_las_2 = [];
-const stand_las_3 = [];
+const welding_data = [], total_welding_data = [], chassis_phase = [];
+const chassisnr_pln_date = [], chassis_pln_date = [], chassis_per_year = [];
+const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [];
 const chassis_per_month = new Array(12).fill(0);
 const chassis_per_week = new Array(4).fill(0);
 const chassis_per_dag = new Array(7).fill(0);
 const months = ['Jan', 'Feb', 'Ma', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Dec']
-
 
 /*
  * Registration of the chartjs-plugin-datalabels plugin. Is required to make it work
@@ -146,8 +138,9 @@ $.ajax({
         let currentMonth = today.getMonth() + 1;
         let currentDate = today.getDate() + 1;
 
-        createWeekBarChart(chassis_pln_date, 0, 'this_week_chart', "Aantal geplande chassis voor deze week");
-        createWeekBarChart(chassis_pln_date, 1, 'next_week_chart', "Aantal geplande chassis voor volgende week");
+        createWeekBarChart(chassis_pln_date, 0, 'this_week_chart', "Aantal geplande chassis: deze week");
+        createWeekBarChart(chassis_pln_date, 1, 'next_week_chart', "Aantal geplande chassis: volgende week");
+        createWeekBarChart(chassis_pln_date, 2, 'fortnight_chart', "Aantal geplande chassis in twee weken");
         createYearChart(chassis_pln_date);
         createMonthChart(currentYear, chassis_pln_date);
         createWeekChart(currentYear, currentMonth, chassis_pln_date);
@@ -246,34 +239,39 @@ function createTableChassisPlannedToday(my_data, my_date){
  */
 function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
     const week_chassis = new Array(7).fill(0);
-
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
     let firstDay = new Date(curr.setDate(first));
     firstDay.setHours(0, 0, 0, 0);
 
-    if (next_week === 1){
-        firstDay.setDate(firstDay.getDate() + 7);
-        firstDay.setHours(0, 0, 0, 0);
+    switch (next_week){
+        case 1:
+            firstDay.setDate(firstDay.getDate() + 7);
+            firstDay.setHours(0, 0, 0, 0);
+            break;
+        case 2:
+            firstDay.setDate(firstDay.getDate() + 14);
+            firstDay.setHours(0, 0, 0, 0);
+            break;
     }
 
     let secondDay = new Date();
-    secondDay.setDate(firstDay.getDate() + 1);
+    secondDay.setTime(firstDay.getTime() + 864e5);
     secondDay.setHours(0, 0, 0, 0);
     let thirdDay = new Date();
-    thirdDay.setDate(firstDay.getDate() + 2);
+    thirdDay.setTime(firstDay.getTime() + (2*864e5));
     thirdDay.setHours(0, 0, 0, 0);
     let fourthDay = new Date();
-    fourthDay.setDate(firstDay.getDate() + 3);
+    fourthDay.setTime(firstDay.getTime() + (3*864e5));
     fourthDay.setHours(0, 0, 0, 0);
     let fifthDay = new Date();
-    fifthDay.setDate(firstDay.getDate() + 4);
+    fifthDay.setTime(firstDay.getTime() + (4*864e5));
     fifthDay.setHours(0, 0, 0, 0);
     let sixthDay = new Date();
-    sixthDay.setDate(firstDay.getDate() + 5);
+    sixthDay.setTime(firstDay.getTime() + (5*864e5));
     sixthDay.setHours(0, 0, 0, 0);
     let lastDay = new Date();
-    lastDay.setDate(firstDay.getDate() + 6);
+    lastDay.setTime(firstDay.getTime() + (6*864e5));
     lastDay.setHours(0, 0, 0, 0);
 
     const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
