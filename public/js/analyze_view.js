@@ -74,7 +74,6 @@ $.ajax({
     complete: function(data){
         createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Aantal chassis per stand las - volgende week');
         createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Aantal chassis per stand las - deze week');
-
     }
 });
 
@@ -182,6 +181,10 @@ $.ajax({
     },
     complete: function(data){
         createTableChassisPlannedToday(chassisnr_pln_date, 0);
+        createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table');
+        createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table');
+        createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table');
+
     }
 });
 
@@ -190,6 +193,105 @@ function calculateWeekNumber(my_date){
     let oneJan = new Date(my_date.getFullYear(), 0, 1);
     let numberOfDays = Math.floor((my_date - oneJan) / (24 * 60 * 60 * 1000));
     return Math.ceil((my_date.getDay() + 1 + numberOfDays) / 7)
+}
+
+function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id){
+    const week_chassis = [[], [], [], [], [], [], []];
+    const curr = new Date; // get current date
+    const first = curr.getDate() - curr.getDay() + 1;
+    let firstDay = new Date(curr.setDate(first));
+    firstDay.setHours(0, 0, 0, 0);
+
+    switch (next_week){
+        case 1:
+            firstDay.setDate(firstDay.getDate() + 7);
+            firstDay.setHours(0, 0, 0, 0);
+            break;
+        case 2:
+            firstDay.setDate(firstDay.getDate() + 14);
+            firstDay.setHours(0, 0, 0, 0);
+            break;
+    }
+
+    const weekNumber = calculateWeekNumber(firstDay);
+
+    let secondDay = new Date();
+    secondDay.setTime(firstDay.getTime() + 864e5);
+    secondDay.setHours(0, 0, 0, 0);
+    let thirdDay = new Date();
+    thirdDay.setTime(firstDay.getTime() + (2*864e5));
+    thirdDay.setHours(0, 0, 0, 0);
+    let fourthDay = new Date();
+    fourthDay.setTime(firstDay.getTime() + (3*864e5));
+    fourthDay.setHours(0, 0, 0, 0);
+    let fifthDay = new Date();
+    fifthDay.setTime(firstDay.getTime() + (4*864e5));
+    fifthDay.setHours(0, 0, 0, 0);
+    let sixthDay = new Date();
+    sixthDay.setTime(firstDay.getTime() + (5*864e5));
+    sixthDay.setHours(0, 0, 0, 0);
+    let lastDay = new Date();
+    lastDay.setTime(firstDay.getTime() + (6*864e5));
+    lastDay.setHours(0, 0, 0, 0);
+
+    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
+    const labels = [
+        firstDay.getDate() + '/' + (firstDay.getMonth() + 1),
+        secondDay.getDate() + '/' + (secondDay.getMonth() + 1),
+        thirdDay.getDate() + '/' + (thirdDay.getMonth() + 1),
+        fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
+        fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
+        sixthDay.getDate() + '/' + (sixthDay.getMonth() + 1),
+        lastDay.getDate() + '/' + (lastDay.getMonth() + 1),
+    ]
+
+    for (let i = 1; i <= my_data.length; i += 2) {
+        for (const j in thisWeek) {
+            if ((thisWeek[j].getFullYear() === my_data[i].getFullYear()) && (thisWeek[j].getMonth() === my_data[i].getMonth()) && (thisWeek[j].getDate() === my_data[i].getDate())) {
+                week_chassis[j].push(my_data[i - 1]);
+            }
+        }
+    }
+    let table = document.createElement('table');
+    let thead = document.createElement('thead');
+    let tbody = document.createElement('tbody');
+    table.appendChild(thead);
+    table.appendChild(tbody);
+
+    let row_1 = document.createElement('tr');
+    let heading_1 = document.createElement('th');
+    heading_1.innerHTML = "Datum";
+    let heading_2 = document.createElement('th');
+    heading_2.innerHTML = "Wagennr";
+    row_1.appendChild(heading_1);
+    row_1.appendChild(heading_2);
+    thead.appendChild(row_1);
+
+
+    // Adding the entire table to the body tag
+    document.getElementById(my_table_id).appendChild(table);
+
+    for (const i in week_chassis){
+        let new_row = document.createElement('tr');
+        for (const j in week_chassis[i]){
+            let new_row_data = document.createElement('td');
+            if (j == 0){
+                let row_date = document.createElement('td');
+                row_date.innerHTML = labels[i];
+                new_row.appendChild(row_date);
+                new_row_data.innerHTML = week_chassis[i][j] + ";";
+                new_row.appendChild(new_row_data);
+            }
+            else{
+                new_row_data.innerHTML = week_chassis[i][j] + ";";
+                new_row.appendChild(new_row_data);
+            }
+        }
+        tbody.appendChild(new_row);
+    }
+
+
+
 }
 
 /*
@@ -255,6 +357,10 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
             break;
     }
 
+    const weekNumber = calculateWeekNumber(firstDay);
+    my_graph_title = my_graph_title + " (week " + weekNumber + ")"
+
+
     let secondDay = new Date();
     secondDay.setTime(firstDay.getTime() + 864e5);
     secondDay.setHours(0, 0, 0, 0);
@@ -315,7 +421,7 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                 },
                 x:{
                     display: true, title:{
-                        display:true, text: "Datum"
+                        display:true, text: "Weeknumer " + weekNumber + " - Datum"
                     },
                     grid: {
                         display: false,

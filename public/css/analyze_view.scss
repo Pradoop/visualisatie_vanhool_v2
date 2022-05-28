@@ -70,4 +70,28 @@ p{
 }
 
 
+th{
+  border-bottom: 1px solid #ddd;
+}
+
+tbody {
+  display:inline-block; /* whatever, just  reset table layout display to go further */
+}
+
+tr {
+  display:flex;
+  flex-wrap:wrap; /* allow to wrap on multiple rows */
+  border-bottom: 1px solid #ddd;
+}
+
+td {
+  display:block;
+  flex:1; /* to evenly distribute flex elements */
+}
+
+.table-container{
+  width: 25%;
+}
+
+
 

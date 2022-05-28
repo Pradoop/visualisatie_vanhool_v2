@@ -58,6 +58,22 @@
             </div>
         </div>
     </div>
+
+    <div class="all-table-container">
+        <div class="table-container">
+            <table class="data-table" id="chassis-this-week-table"></table>
+            <p class="information_text">Chassis deze week gepland</p>
+        </div>
+        <div class="table-container">
+            <table class="data-table" id="chassis-next-week-table"></table>
+            <p class="information_text">Chassis volgende week gepland</p>
+        </div>
+        <div class="table-container">
+            <table class="data-table" id="chassis-two-weeks-table"></table>
+            <p class="information_text">Chassis in twee weken gepland</p>
+        </div>
+    </div>
+
     <div class="grid-container-2">
         <div id="bar_chart">
             <canvas class="chart-2" id="this_week_welding_chart"></canvas>
@@ -74,10 +90,10 @@
         <canvas id="day_chart"></canvas>
     </div>
     <div class="somediv">
-        <table id="chassis-today-table">
-        </table>
+        <table id="chassis-today-table"></table>
         <p class="information_text">Chassis voor vandaag gepland</p>
     </div>
+
     <div class="chart" id="bar_chart">
         <canvas id="stand_las_chart"></canvas>
     </div>
