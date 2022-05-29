@@ -777,22 +777,22 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
     }
 
     let secondDay = new Date();
-    secondDay.setDate(firstDay.getDate() + 1);
+    secondDay.setTime(firstDay.getTime() + 864e5);
     secondDay.setHours(0, 0, 0, 0);
     let thirdDay = new Date();
-    thirdDay.setDate(firstDay.getDate() + 2);
+    thirdDay.setTime(firstDay.getTime() + (2*864e5));
     thirdDay.setHours(0, 0, 0, 0);
     let fourthDay = new Date();
-    fourthDay.setDate(firstDay.getDate() + 3);
+    fourthDay.setTime(firstDay.getTime() + (3*864e5));
     fourthDay.setHours(0, 0, 0, 0);
     let fifthDay = new Date();
-    fifthDay.setDate(firstDay.getDate() + 4);
+    fifthDay.setTime(firstDay.getTime() + (4*864e5));
     fifthDay.setHours(0, 0, 0, 0);
     let sixthDay = new Date();
-    sixthDay.setDate(firstDay.getDate() + 5);
+    sixthDay.setTime(firstDay.getTime() + (5*864e5));
     sixthDay.setHours(0, 0, 0, 0);
     let lastDay = new Date();
-    lastDay.setDate(firstDay.getDate() + 6);
+    lastDay.setTime(firstDay.getTime() + (6*864e5));
     lastDay.setHours(0, 0, 0, 0);
 
     const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
