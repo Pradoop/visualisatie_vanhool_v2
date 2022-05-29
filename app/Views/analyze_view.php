@@ -37,8 +37,8 @@
         <div class="grid-child col4">
             <div class="card">
                 <div class="information_3">
-                    <p class="information_value"><?= $average_delay ?> Werkdagen</p>
-                    <p class="information_text"> laat tov contractdatum</p>
+                    <p class="information_value" id="chassis-planned-today"> chassis</p>
+                    <p class="information_text"> vandaag gepland</p>
                 </div>
 
             </div>
@@ -61,15 +61,15 @@
 
     <div class="all-table-container">
         <div class="table-container">
-            <p class="information_text">Chassis deze week gepland</p>
+            <p class="table-title" id="chassis-this-week-table-title"></p>
             <table class="data-table" id="chassis-this-week-table"></table>
         </div>
         <div class="table-container">
-            <p class="information_text">Chassis volgende week gepland</p>
+            <p class="table-title" id="chassis-next-week-table-title"></p>
             <table class="data-table" id="chassis-next-week-table"></table>
         </div>
         <div class="table-container">
-            <p class="information_text">Chassis in twee weken gepland</p>
+            <p class="table-title" id="chassis-two-weeks-table-title"></p>
             <table class="data-table" id="chassis-two-weeks-table"></table>
         </div>
     </div>
@@ -88,10 +88,6 @@
     </div>
     <div class="chart" id="bar_chart">
         <canvas id="day_chart"></canvas>
-    </div>
-    <div class="somediv">
-        <table id="chassis-today-table"></table>
-        <p class="information_text">Chassis voor vandaag gepland</p>
     </div>
 
     <div class="chart" id="bar_chart">

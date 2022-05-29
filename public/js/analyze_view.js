@@ -180,10 +180,10 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        createTableChassisPlannedToday(chassisnr_pln_date, 0);
-        createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table');
-        createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table');
-        createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table');
+        calculateChassisPlannedToday(chassisnr_pln_date, 0);
+        createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
+        createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
+        createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
 
     }
 });
@@ -195,7 +195,7 @@ function calculateWeekNumber(my_date){
     return Math.ceil((my_date.getDay() + 1 + numberOfDays) / 7)
 }
 
-function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id){
+function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id, my_title){
     const week_chassis = [[], [], [], [], [], [], []];
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
@@ -214,6 +214,9 @@ function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id){
     }
 
     const weekNumber = calculateWeekNumber(firstDay);
+    my_title = my_title + " (week " + weekNumber + ")";
+    let table_title = document.getElementById(my_table_id + "-title");
+    table_title.innerHTML = my_title;
 
     let secondDay = new Date();
     secondDay.setTime(firstDay.getTime() + 864e5);
@@ -275,21 +278,19 @@ function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id){
 
     for (const i in week_chassis){
         let new_row = document.createElement('tr');
+        let row_date = document.createElement('td');
+        row_date.innerHTML = labels[i];
+        row_date.style.cssText = "font-style:italic;border-right:2px#10395d;";
+        new_row.appendChild(row_date);
+        let next_row = document.createElement('tr');
         for (const j in week_chassis[i]){
             let new_row_data = document.createElement('td');
-            if (j == 0){
-                let row_date = document.createElement('td');
-                row_date.innerHTML = labels[i];
-                new_row.appendChild(row_date);
-                new_row_data.innerHTML = week_chassis[i][j] + ";";
-                new_row.appendChild(new_row_data);
-            }
-            else{
-                new_row_data.innerHTML = week_chassis[i][j] + ";";
-                new_row.appendChild(new_row_data);
-            }
+            new_row_data.innerHTML = week_chassis[i][j] + ";";
+            next_row.appendChild(new_row_data);
         }
         tbody.appendChild(new_row);
+        new_row.appendChild(next_row);
+        next_row.style.cssText = "margin-left:10%;"
     }
 
 
@@ -297,42 +298,20 @@ function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id){
 }
 
 /*
- * Function to create a table for the amount of chassis that are planned today
- * Input: array that contains the data with the different dates and the year that is required to calculate
- * Output: The different chassis numbers that are planned for that day
+ * Function calculate the amount of chassis that are planned today
+ * Input: array that contains the data with the different dates
+ * Output: Amount of chassis that are planned for that day
  */
-function createTableChassisPlannedToday(my_data, my_date){
-    let today;
-    if (my_date === 0){
-        today = new Date();
-    }
-    else{
-        today = my_date;
-    }
-    let temp;
-    const data = [];
+function calculateChassisPlannedToday(my_data){
+    let today = new Date();
+    let count = 0;
     for (let i = 1; i <= my_data.length; i += 2){
         if ((today.getFullYear() === my_data[i].getFullYear()) && (today.getMonth() === my_data[i].getMonth()) && (today.getDate() === my_data[i].getDate())){
-            temp = my_data[i - 1];
-            data.push(temp);
+            count++;
         }
     }
-    //console.log(data)
-    let table = document.createElement('table');
-    let thead = document.createElement('thead');
-    let tbody = document.createElement('tbody');
-    table.appendChild(thead);
-    table.appendChild(tbody);
-
-    // Adding the entire table to the body tag
-    document.getElementById('chassis-today-table').appendChild(table);
-    for (const i in data){
-        if(!(data[i] instanceof Date)){
-            table.append(data[i] + "; ");
-        }
-    }
+    document.getElementById('chassis-planned-today').innerHTML = count+ " chassis";
 }
-
 
 
 /*

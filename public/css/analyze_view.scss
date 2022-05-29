@@ -65,10 +65,17 @@ h1 {
   border-left: 1px dotted #10395d;
 }
 
+.table-title{
+  color: #10395d;
+}
+
 p{
   margin: 0;
 }
 
+thead{
+  border-bottom: 1px solid #ddd;
+}
 
 th{
   margin-right: 25%;
@@ -81,12 +88,18 @@ tbody {
 tr {
   display:flex;
   flex-wrap:wrap; /* allow to wrap on multiple rows */
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px dotted #ddd;
+
+}
+
+.test-tr{
+  flex-wrap: unset;
 }
 
 td {
   display:contents;
   flex:1; /* to evenly distribute flex elements */
+  margin-left: 10%;
 }
 
 .table-container{
