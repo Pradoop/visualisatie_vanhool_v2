@@ -132,6 +132,7 @@ class Home extends BaseController
         return round(($delayed/$line_number)*100, 2, PHP_ROUND_HALF_UP);
     }
 
+
     /*
     * Function to calculate the average delay of all chassis.
     * Input: Array that contains all the information (so the textfile)
@@ -414,6 +415,7 @@ class Home extends BaseController
 
         return $output_array;
     }
+
 
 
 }

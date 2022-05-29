@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="information_1">
                     <p class="information_value"><?= $total_in_production[0] ?></p>
-                    <p class="information_text"> chassis in productie</p>
+                    <p class="information_text">chassis in productie</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -16,7 +16,7 @@
             <div class="card">
                 <div class="information_4">
                     <p class="information_value"><?= $total_in_production[1] ?>%</p>
-                    <p class="information_text"> in productie</p>
+                    <p class="information_text">in productie</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="information_5">
                     <p class="information_value"><?= $avg_mont?> Werkdagen</p>
-                    <p class="information_text"> gemiddeld in montage</p>
+                    <p class="information_text">gemiddeld in montage</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">
@@ -37,8 +37,8 @@
         <div class="grid-child col4">
             <div class="card">
                 <div class="information_3">
-                    <p class="information_value" id="chassis-planned-today"> chassis</p>
-                    <p class="information_text"> vandaag gepland</p>
+                    <p class="information_value" id="chassis-planned-today"></p>
+                    <p class="information_text">vandaag gepland</p>
                 </div>
 
             </div>
@@ -49,8 +49,8 @@
         <div class="grid-child col5">
             <div class="card">
                 <div class="information_2">
-                    <p class="information_value"><?= $percentage_delayed ?>%</p>
-                    <p class="information_text"> vertraagd tov contractdatum</p>
+                    <p class="information_value" id="chassis-delayed"></p>
+                    <p class="information_text">te laat</p>
                 </div>
             </div>
             <div class="chart" id="bar_chart">

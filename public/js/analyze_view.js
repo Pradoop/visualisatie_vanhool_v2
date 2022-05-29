@@ -180,11 +180,11 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        calculateChassisPlannedToday(chassisnr_pln_date, 0);
+        calculateChassisPlannedToday(chassisnr_pln_date);
+        calculateAmountDelayed(chassisnr_pln_date);
         createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
         createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
         createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
-
     }
 });
 
@@ -292,13 +292,10 @@ function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id, my_ti
         new_row.appendChild(next_row);
         next_row.style.cssText = "margin-left:10%;"
     }
-
-
-
 }
 
 /*
- * Function calculate the amount of chassis that are planned today
+ * Function to calculate the amount of chassis that are planned today
  * Input: array that contains the data with the different dates
  * Output: Amount of chassis that are planned for that day
  */
@@ -311,6 +308,17 @@ function calculateChassisPlannedToday(my_data){
         }
     }
     document.getElementById('chassis-planned-today').innerHTML = count+ " chassis";
+}
+
+function calculateAmountDelayed(my_data){
+    let today = new Date();
+    let count = 0;
+    for (let i = 1; i <= my_data.length; i += 2){
+        if (today.getTime() > my_data[i].getTime()){
+            count++;
+        }
+    }
+    document.getElementById('chassis-delayed').innerHTML = count+ " chassis";
 }
 
 
