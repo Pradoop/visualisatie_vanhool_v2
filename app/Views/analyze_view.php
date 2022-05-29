@@ -83,19 +83,23 @@
         </div>
     </div>
 
+<!--
     <div class="chart" id="bar_chart">
         <canvas id="status_chart"></canvas>
     </div>
-    <div class="chart" id="bar_chart">
-        <canvas id="day_chart"></canvas>
-    </div>
 
-    <div class="chart" id="bar_chart">
-        <canvas id="stand_las_chart"></canvas>
-    </div>
-    <div class="chart" id="bar_chart">
-        <canvas class="week-chart" id="year_chart"></canvas>
-    </div>
+
+<div class="chart" id="bar_chart">
+    <canvas id="day_chart"></canvas>
+</div>
+<div class="chart" id="bar_chart">
+    <canvas id="stand_las_chart"></canvas>
+</div>
+
+<div class="chart" id="bar_chart">
+    <canvas class="week-chart" id="year_chart"></canvas>
+</div>
+-->
 
 
 </div>

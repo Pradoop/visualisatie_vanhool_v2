@@ -35,7 +35,7 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        createWeldingChart(welding_data);
+        //createWeldingChart(welding_data);
     }
 });
 
@@ -97,7 +97,7 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        createPhaseChart(chassis_phase);
+        //createPhaseChart(chassis_phase);
     }
 });
 
@@ -140,7 +140,7 @@ $.ajax({
         createWeekBarChart(chassis_pln_date, 0, 'this_week_chart', "Aantal geplande chassis: deze week");
         createWeekBarChart(chassis_pln_date, 1, 'next_week_chart', "Aantal geplande chassis: volgende week");
         createWeekBarChart(chassis_pln_date, 2, 'fortnight_chart', "Aantal geplande chassis in twee weken");
-        createYearChart(chassis_pln_date);
+        //createYearChart(chassis_pln_date);
         createMonthChart(currentYear, chassis_pln_date);
         createWeekChart(currentYear, currentMonth, chassis_pln_date);
         //createDateChart(currentYear, currentMonth, currentDate, chassis_pln_date);
