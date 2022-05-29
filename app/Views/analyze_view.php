@@ -61,16 +61,16 @@
 
     <div class="all-table-container">
         <div class="table-container">
-            <table class="data-table" id="chassis-this-week-table"></table>
             <p class="information_text">Chassis deze week gepland</p>
+            <table class="data-table" id="chassis-this-week-table"></table>
         </div>
         <div class="table-container">
-            <table class="data-table" id="chassis-next-week-table"></table>
             <p class="information_text">Chassis volgende week gepland</p>
+            <table class="data-table" id="chassis-next-week-table"></table>
         </div>
         <div class="table-container">
-            <table class="data-table" id="chassis-two-weeks-table"></table>
             <p class="information_text">Chassis in twee weken gepland</p>
+            <table class="data-table" id="chassis-two-weeks-table"></table>
         </div>
     </div>
 

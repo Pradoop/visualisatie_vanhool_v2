@@ -252,6 +252,8 @@ function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id){
             }
         }
     }
+
+
     let table = document.createElement('table');
     let thead = document.createElement('thead');
     let tbody = document.createElement('tbody');
@@ -421,7 +423,7 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                 },
                 x:{
                     display: true, title:{
-                        display:true, text: "Weeknumer " + weekNumber + " - Datum"
+                        display:true, text: "Datum"
                     },
                     grid: {
                         display: false,
