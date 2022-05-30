@@ -1,8 +1,10 @@
 <script> let galva_lines = <?php echo json_encode($galva_list); ?>;</script>
 
 <div id="table_title">
-    <div id="afdelingNaam">
-        <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
+    <div id="afdelingNaam_div">
+        <div id="afdelingNaam">
+            <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
+        </div>
     </div>
     <div id="searchBox">
         <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">

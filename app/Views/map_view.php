@@ -14,8 +14,10 @@
 <script> let ChassisImportant_lines = <?php echo json_encode($chassisImportant_array); ?>;</script>
 
 <div id="map_div">
-    <div id="afdelingNaam">
-        <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
+    <div id="afdelingNaam_div">
+        <div id="afdelingNaam">
+            <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
+        </div>
     </div>
     <div id="searchBox">
         <input id="search_input" type="text" class="form-control" placeholder="Typ wagennummer om te zoeken">

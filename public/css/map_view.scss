@@ -2,21 +2,20 @@
 #map_div {
   display: flex;
   margin: 1% 1% 0.5%;
-  //border: 2px solid green;
 }
-#afdelingNaam {
+#afdelingNaam_div {
   float: left;
   width: 80%;
-  //border: 2px solid red;
+}
+#afdelingNaam {
+  display: inline-block
 }
 #searchBox {
   float: right;
   width: 20%;
-  //border: 2px solid red;
 }
 #search_input {
   float: right;
-  //width: 28%;
 }
 
 #image_div {

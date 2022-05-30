@@ -3,9 +3,12 @@
   display: flex;
   margin: 1% 1% 0.5%;
 }
-#afdelingNaam {
+#afdelingNaam_div {
   float: left;
   width: 80%;
+}
+#afdelingNaam {
+  display: inline-block
 }
 #searchBox {
   float: right;

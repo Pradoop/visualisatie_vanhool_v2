@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Van Hool IV</title>
+    <title><?=$title_tab ?></title>
     <meta name="description" content="Visualisation Van Hool Hal5 & Hal6">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 

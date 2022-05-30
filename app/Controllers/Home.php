@@ -27,7 +27,8 @@ class Home extends BaseController
 
     public function map_view()
     {
-        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Map');
+        $this->data['title_tab'] = 'Plattegrond';
+        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Plattegrond');
         $data2["ChassisInKaliberIV"] = $this->file_model->readFile()[1];
         $data2["chassisInMontage_array"] = $this->getChassisInMontage();
         $data2["wdInMontageLimit"] = 5;
@@ -40,7 +41,8 @@ class Home extends BaseController
 
     public function chassis_view()
     {
-        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Chassis');
+        $this->data['title_tab'] = 'Overzicht';
+        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Overzicht');
         $data2["file_lines"] = $this->getChassisInfo()[0];
         $data2["extra_file_lines"] = $this->getChassisInfo()[1];
         $data2["galva_list"] = $this->file_model->fileColumnArrays($this->file_model->readFile()[0])[5];
@@ -53,7 +55,8 @@ class Home extends BaseController
 
     public function analyze_view()
     {
-        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Analyze');
+        $this->data['title_tab'] = 'Dashboard';
+        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Dashboard');
         $data2["file_lines"] = $this->file_model->readFile()[0];
 
         $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->fileColumnArrays($data2["file_lines"])[0]);
