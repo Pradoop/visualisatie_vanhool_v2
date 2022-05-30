@@ -32,7 +32,7 @@
 </div>
 
 <div id="important_div">
-    <h1>Important Chassis</h1>
+    <h1>Belangrijke Chassis</h1>
     <div class="grid-container">
         <div class="grid-child col1">
             <?php $i = 1; ?>
