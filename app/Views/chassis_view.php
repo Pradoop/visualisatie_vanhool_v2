@@ -38,7 +38,7 @@
                 <th id="th4">Gepland</th>
                 <th id="th5">DagenTot</th>
                 <th id="th6">WdInMont</th>
-                <th id="th7">Status</th>
+                <th id="th7">Status (nr)</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -100,19 +100,6 @@
                             default:
                                 echo "<td>TODO ({$primary_array[$row_id][7]})</td>";
                         }
-                    ?>
-                </tr>
-
-                <tr id="<?= 'secondary_'.$row_id?>" class="hidden_row">
-                    <?php
-                        echo "<td>{$secondary_array[$row_id][0]}</td>";
-                        echo "<td>{$secondary_array[$row_id][1]}</td>";
-                        echo "<td>{$secondary_array[$row_id][2]}</td>";
-                        echo "<td>{$secondary_array[$row_id][3]}</td>";
-                        echo "<td>{$secondary_array[$row_id][4]}</td>";
-                        echo "<td>{$secondary_array[$row_id][5]}</td>";
-                        echo "<td>{$secondary_array[$row_id][6]}</td>";
-                        echo "<td>{$secondary_array[$row_id][7]}</td>";
                     ?>
                 </tr>
 

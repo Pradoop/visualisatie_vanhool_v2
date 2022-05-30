@@ -26,8 +26,6 @@ $(document).ready(function(){
     }
 });
 
-galva_lines
-
 //Popovers
 $('#th0').popover({
     trigger: 'hover',
