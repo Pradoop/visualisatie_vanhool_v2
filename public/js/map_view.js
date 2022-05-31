@@ -179,10 +179,10 @@ function placeDot(id, position) {
             document.getElementById(id).style.right = '14.5%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
-        case "Kal L07  "://TODO : correct location
-            document.getElementById(id).style.bottom = '5%';
-            document.getElementById(id).style.left = '3%';
-            document.getElementById(id).style.backgroundColor = 'red';
+        case "Kal L07  ":
+            document.getElementById(id).style.top = '4.5%'
+            document.getElementById(id).style.right = '7%';
+            document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         //Buffers
         case "-":
