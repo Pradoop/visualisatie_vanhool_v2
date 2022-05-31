@@ -22,10 +22,10 @@
     $index = 0;
     while($index < sizeof($file_lines)) {
         $array = preg_split('/!/', $file_lines[$index]);
-        array_push($primary_array, $array);
+        $primary_array[] = $array;
 
         $array2 = preg_split('/!/', $extra_file_lines[$index]);
-        array_push($secondary_array, $array2);
+        $secondary_array[] = $array2;
         $index++;
     }
 ?>
@@ -35,8 +35,8 @@
         <thead>
             <tr>
                 <th id="th0">Wagen</th>
-                <th id="th1">WagenTyp (nr)</th>
-                <th id="th2">Klant (nr)</th>
+                <th id="th1">Wagentype</th>
+                <th id="th2">Klant</th>
                 <th id="th3">Reeks</th>
                 <th id="th4">Gepland</th>
                 <th id="th5">DagenTot</th>
@@ -57,52 +57,25 @@
                         echo "<td>{$primary_array[$row_id][4]}</td>";
                         echo "<td>{$primary_array[$row_id][5]}</td>";
                         echo "<td>{$primary_array[$row_id][6]}</td>";
-                        switch($primary_array[$row_id][7]) {
-                            case "01":
-                                echo "<td>Verkocht voertuig ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "02":
-                                echo "<td>Studie is gestart ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "20":
-                                echo "<td>Studie chassis is afgewerkt ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "03":
-                                echo "<td>Studie volledig klaar, klaar voor werkvoorbereiding ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "04":
-                                echo "<td>Serieploeg is gestart ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "40":
-                                echo "<td>Prognosedatum prefab is bepaald ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "39":
-                                echo "<td>Prognosedatum voor basisserie is bepaald ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "38":
-                                echo "<td>Basisserieploeg en prefab klaar voor montage ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "07":
-                                echo "<td>Gestart in de samenstelkaliber ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "83":
-                                echo "<td>Uit de samenstelkaliber ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "85":
-                                echo "<td>Gestart in de lasrobot ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "86":
-                                echo "<td>Gestart met aflassen ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "8":
-                                echo "<td>Morgen af in de montage afdeling ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            case "81":
-                                echo "<td>Vandaag af in de montage afdeling ({$primary_array[$row_id][7]})</td>";
-                                break;
-                            default:
-                                echo "<td>TODO ({$primary_array[$row_id][7]})</td>";
-                        }
+                        echo match ($primary_array[$row_id][7]) {
+                            "01" => "<td>Verkocht voertuig</td>",
+                            "02" => "<td>Studie is gestart</td>",
+                            "20" => "<td>Studie chassis is afgewerkt</td>",
+                            "03" => "<td>Studie volledig klaar, klaar voor werkvoorbereiding</td>",
+                            "04" => "<td>Serieploeg is gestart</td>",
+                            "40" => "<td>Prognosedatum prefab is bepaald</td>",
+                            "39" => "<td>Prognosedatum voor basisserie is bepaald</td>",
+                            "38" => "<td>Basisserieploeg en prefab klaar voor montage</td>",
+                            "07" => "<td>Gestart in de samenstelkaliber</td>",
+                            "83" => "<td>Uit de samenstelkaliber</td>",
+                            "85" => "<td>Gestart in de lasrobot</td>",
+                            "86" => "<td>Gestart met aflassen</td>",
+                            "8" => "<td>Morgen af in de montage afdeling</td>",
+                            "81" => "<td>Vandaag af in de montage afdeling</td>",
+                            "10" => "<td>Vloer afwerking chassis is voorbij montage</td>",
+                            "12" => "<td>Keuring chassis is voorbij montage</td>",
+                            default => "<td>Nog te implementeren</td>",
+                        };
                     ?>
                 </tr>
 

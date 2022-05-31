@@ -44,6 +44,7 @@ class Home extends BaseController
     {
         $this->data['title_tab'] = 'Overzicht';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Overzicht');
+
         $data2["file_lines"] = $this->getChassisInfo()[0];
         $data2["extra_file_lines"] = $this->getChassisInfo()[1];
         $data2["galva_list"] = $this->file_model->fileColumnArrays($this->file_model->readFile()[0])[5];
@@ -398,12 +399,12 @@ class Home extends BaseController
             $array = preg_split('/\t/', $line_array[$line_number]);
 
             //Primary
-            if(isset($array[3]) && isset($array[4]) && isset($array[5]) && isset($array[6]) && isset($array[7]) && isset($array[10]) && isset($array[14]) && isset($array[17])) {
+            if(isset($array[3]) && isset($array[5]) && isset($array[7]) && isset($array[10]) && isset($array[14]) && isset($array[17])) {
                 $today = date("Y-m-d");
                 $parts = str_split($array[3], 2);
                 $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
                 $diff = strtotime($planned_date) - strtotime($today);
-                $primary_string = $array[0].'!'.$array[5].' ('.$array[4].')'.'!'.$array[7].' ('.$array[6].')'.'!'.$array[10].'!'.$array[3].'!'.round($diff / 86400).'!'.$array[17].'!'.$array[14];
+                $primary_string = $array[0].'!'.$array[5].'!'.$array[7].'!'.$array[10].'!'.$array[3].'!'.round($diff / 86400).'!'.$array[17].'!'.$array[14];
                 $primary_array[] = $primary_string;
             }
             //Secondary
