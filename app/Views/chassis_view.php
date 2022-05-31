@@ -1,5 +1,3 @@
-<script> let galva_lines = <?php echo json_encode($galva_list); ?>;</script>
-
 <div id="table_title">
     <div id="afdelingNaam_div">
         <div id="afdelingNaam">
@@ -9,11 +7,6 @@
     <div id="searchBox">
         <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">
     </div>
-</div>
-
-<div id="info_div">
-    <p>Gegalvaniseerde wagens zijn in het groen aangeduid.</p>
-    <p>Gemetaliseerde wagens zijn in het geel aangeduid.</p>
 </div>
 
 <?php
@@ -34,14 +27,15 @@
     <table id="chassis_table" class="table table-striped table-hover">
         <thead>
             <tr>
-                <th id="th0">Wagen</th>
-                <th id="th1">Wagentype</th>
-                <th id="th2">Klant</th>
-                <th id="th3">Reeks</th>
-                <th id="th4">Gepland</th>
-                <th id="th5">DagenTot</th>
-                <th id="th6">WdInMont</th>
-                <th id="th7">Status (nr)</th>
+                <th id="th0">Gepland</th>
+                <th id="th1">Wagen</th>
+                <th id="th2">Wagentype</th>
+                <th id="th3">Klant</th>
+                <th id="th4">Reeks</th>
+                <th id="th5">Galva</th>
+                <th id="th6">DagenTot</th>
+                <th id="th7">WdInMont</th>
+                <th id="th8">Status</th>
             </tr>
         </thead>
         <tbody id="myTable">
@@ -57,7 +51,8 @@
                         echo "<td>{$primary_array[$row_id][4]}</td>";
                         echo "<td>{$primary_array[$row_id][5]}</td>";
                         echo "<td>{$primary_array[$row_id][6]}</td>";
-                        echo match ($primary_array[$row_id][7]) {
+                        echo "<td>{$primary_array[$row_id][7]}</td>";
+                        echo match ($primary_array[$row_id][8]) {
                             "01" => "<td>Verkocht voertuig</td>",
                             "02" => "<td>Studie is gestart</td>",
                             "20" => "<td>Studie chassis is afgewerkt</td>",

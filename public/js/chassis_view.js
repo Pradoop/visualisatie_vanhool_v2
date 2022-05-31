@@ -17,50 +17,43 @@ $(document).ready(function(){
     });
 });
 
-//Colors for galva
-$(document).ready(function(){
-    for(let i = 1; i < galva_lines.length; i++) {
-        if(galva_lines[i][12] === "y") {
-            document.getElementById('primary_'+ (i-1)).style.background = '#dff5e0';
-        }
-        else if(galva_lines[i][12] === "m") {
-            document.getElementById('primary_'+ (i-1)).style.background = '#f5f4df';
-        }
-    }
-});
-
 //Popovers
 $('#th0').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'De constructienummer'
+    content: 'Huidige datum gepland af in montage (datum formaat = dd/mm/yy)'
 });
 $('#th1').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Omschrijving van het wagentype + nummer'
+    content: 'De constructienummer'
 });
 $('#th2').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Klant naam + nummer'
+    content: 'Omschrijving van het wagentype'
 });
 $('#th3').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Reekshoofd'
+    content: 'Naam van de klant'
 });
 $('#th4').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Huidige datum gepland af in montage (datum formaat = jjmmdd)'
+    content: 'Reekshoofd'
 });
 $('#th5').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Het aantal dagen tussen de huidige dag en de geplande dag (negatief aantal betekend dat geplande datum gepaseerd is)'
+    content: 'Indien hier “y” staat gaat het om een gegalvaniseerde wagen, "m" voor een gemetalliseerde wagen'
 });
 $('#th6').popover({
+    trigger: 'hover',
+    placement: 'top',
+    content: 'Het aantal dagen tussen de huidige dag en de geplande dag (negatief aantal betekend dat geplande datum gepaseerd is)'
+});
+$('#th7').popover({
     trigger: 'hover',
     placement: 'top',
     content: 'Het aantal werkdagen dat de wagen reeds in de montage staat (= het verschil in werkdagen tussen de huidige dag en de dag waarop fase 4 opzetten is afgemeld)'
