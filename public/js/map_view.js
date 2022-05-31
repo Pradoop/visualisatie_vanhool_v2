@@ -10,30 +10,40 @@ let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
     return new bootstrap.Popover(popoverTriggerEl)
 })
 
-//popover
+//Information popovers
 $('#icon_i_aantalWagens').popover({
     trigger: 'hover',
-    content: 'In de bufferzones kunnen meerdere chassis liggen.' +
-             'Chassis die niet in een specifieke samenstelkaliber liggen zijn elk in een random bufferzone geplaatst.' +
-             'Locatie L07 is nog niet geimplementeerd, chassis in dit samenstelkaliber zijn in het rood weergegeven.'
+    content: 'In de bufferzones kunnen meerdere chassis liggen. ' +
+        'Chassis die niet in een specifieke samenstelkaliber liggen zijn elk in een random bufferzone geplaatst. ' +
+        'Locatie L07 is nog niet geimplementeerd, chassis in dit samenstelkaliber zijn in het rood weergegeven. ' +
+        'Chassis in de lijst "Belangrijke chassis" in het oranje zijn 7 dagen of meer in montage, in het rood 9 dagen of meer in montage.'
 });
 
 //Variables
 let focus = 0;
 let focus_dot = -1;
 
-//Functions
+//On load
 $(document).ready(function() {
 
-    //Search box
+    searchFunction();
+    createDot();
+    colorImportantChassis();
+});
+
+//Functions
+function searchFunction() {
+
     $("#search_input").on("keyup", function() {
         let value = $(this).val();
         $("#important_div p").filter(function() {
             $(this).toggle($(this).text().indexOf(value) > -1)
         });
     });
+}
 
-    //Create dots
+function createDot() {
+
     for(let i = 1; i < ChassisInMontage_lines.length; i++) {
 
         //Split the current line
@@ -68,23 +78,7 @@ $(document).ready(function() {
         //place the dot
         placeDot(id, position);
     }
-
-    //Give p elements color based on wdInMontage
-    let orange_start = 7;
-    let red_start = 9;
-
-    for(let i = 1; i < ChassisImportant_lines.length; i++) {
-        let line = ChassisImportant_lines[i].toString().split(/\t/);
-        if(orange_start <= parseInt(line[17].trim()) && parseInt(line[17].trim()) <= red_start) {
-            document.getElementById('chassis_' + i).style.color = 'orange';
-        }
-        else if(red_start < parseInt(line[17].trim())) {
-            document.getElementById('chassis_' + i).style.color = 'red';
-        }
-
-    }
-
-});
+}
 
 function placeDot(id, position) {
 
@@ -238,6 +232,22 @@ function placeDot(id, position) {
             document.getElementById(id).style.top = '22%';
             document.getElementById(id).style.right = '3.5%';
             document.getElementById(id).style.backgroundColor = 'red';
+    }
+}
+
+function colorImportantChassis() {
+
+    let orange_start = 7;
+    let red_start = 9;
+
+    for(let i = 1; i < ChassisImportant_lines.length; i++) {
+        let line = ChassisImportant_lines[i].toString().split(/\t/);
+        if(orange_start <= parseInt(line[17].trim()) && parseInt(line[17].trim()) <= red_start) {
+            document.getElementById('chassis_' + i).style.color = 'orange';
+        }
+        else if(red_start < parseInt(line[17].trim())) {
+            document.getElementById('chassis_' + i).style.color = 'red';
+        }
     }
 }
 

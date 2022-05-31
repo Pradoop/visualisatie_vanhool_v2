@@ -16,7 +16,10 @@
 <div id="map_div">
     <div id="afdelingNaam_div">
         <div id="afdelingNaam">
-            <h1>Industriële Voertuigen: hal 5 en hal 6</h1>
+            <h1>
+                Industriële Voertuigen: hal 5 en hal 6
+                <input type="image" id="icon_i_aantalWagens" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
+            </h1>
         </div>
     </div>
     <div id="searchBox">
@@ -30,7 +33,6 @@
 
 <div id="count_chassis">
     <label>Aantal wagens in montage: <?= sizeof($chassisInMontage_array) - 1 ?></label>
-    <input type="image" id="icon_i_aantalWagens" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
 </div>
 
 <div id="important_div">
