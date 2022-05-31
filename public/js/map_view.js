@@ -36,9 +36,22 @@ function searchFunction() {
 
     $("#search_input").on("keyup", function() {
         let value = $(this).val();
+        let dots = document.getElementsByClassName("dot")
+
+        //List
         $("#important_div p").filter(function() {
-            $(this).toggle($(this).text().indexOf(value) > -1)
+            $(this).toggle($(this).text().indexOf(value) > -1);
         });
+
+        //Dots
+        for(let i = 0; i < dots.length; i++) {
+            if(dots[i].id.indexOf(value) > -1) {
+                document.getElementById(dots[i].id).style.display = 'block';
+            }
+            else {
+                document.getElementById(dots[i].id).style.display = 'none';
+            }
+        }
     });
 }
 
