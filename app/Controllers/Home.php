@@ -29,8 +29,9 @@ class Home extends BaseController
     {
         $this->data['title_tab'] = 'Plattegrond';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Plattegrond');
+
         $data2["ChassisInKaliberIV"] = $this->file_model->readFile()[1];
-        $data2["chassisInMontage_array"] = $this->getChassisInMontage();
+        $data2["chassisInMontage_array"] = $this->getChassisInHal56();
         $data2["wdInMontageLimit"] = 5;
 
         $this->data['scripts_to_load'][] = 'map_view.js';
@@ -371,7 +372,7 @@ class Home extends BaseController
         return json_encode($output_array);
     }
 
-    public function getChassisInMontage(): array
+    public function getChassisInHal56(): array
     {
         $line_array = $this->file_model->readFile()[0];
         $output_array = array();
