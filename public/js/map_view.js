@@ -19,6 +19,15 @@ $('#icon_i_aantalWagens').popover({
         'Chassis in de lijst "Belangrijke chassis" in het oranje zijn 7 dagen of meer in montage, in het rood 9 dagen of meer in montage.'
 });
 
+//Clicking on map
+$('#map').click(function() {
+    for(let i = 1; i < ChassisInMontage_lines.length; i++) {
+        let line = ChassisInMontage_lines[i].toString().split(/\t/);
+        document.getElementById(line[0].trim()).style.display = 'block';
+    }
+    focus = 0;
+});
+
 //Variables
 let focus = 0;
 let focus_dot = -1;
@@ -76,12 +85,13 @@ function createDot() {
         let dot = document.createElement('span');
         dot.setAttribute('id', id);
         dot.setAttribute('class', 'dot');
+        dot.setAttribute('tabindex', '0');
         document.getElementById('image_div').appendChild(dot);
 
         //popover
         let titles = ChassisInMontage_lines[0].toString().split(/\t/);
         $('#' + id).popover({
-            trigger: 'hover',
+            trigger: 'focus',
             title: titles[0] + ': ' + line[0],
             content:
                 'Wagentype : ' + line[5] + '\n' +
