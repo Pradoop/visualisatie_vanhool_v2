@@ -48,7 +48,7 @@ class Home extends BaseController
         $data2["file_lines"] = $this->getChassisInfo()[0];
         $data2["extra_file_lines"] = $this->getChassisInfo()[1];
 
-        array_push($this->data['scripts_to_load'], 'chassis_view.js', 'jquery.dataTables.min.js');
+        array_push($this->data['scripts_to_load'], 'chassis_view.js', 'jquery.dataTables.min.js', 'date-uk.js');
         array_push($this->data['styles_to_load'], 'chassis_view.scss', 'jquery.dataTables.min.css');
         $this->data['content'] = view('chassis_view', $data2);
         return view('template', $this->data);
