@@ -10,8 +10,8 @@ class BurgerModel extends \CodeIgniter\Model
     {
         $this->menu_items_all= array(
             array('name'=> 'Plattegrond', 'title' => 'map_hover', 'link'=>'map_view', 'className'=>'active'),
-            array('name'=> 'Overzicht', 'title' => 'chassis_hover', 'link'=>'chassis_view', 'className'=>'inactive'),
             array('name'=> 'Dashboard', 'title' => 'analyze_hover', 'link'=>'analyze_view', 'className'=>'inactive'),
+            array('name'=> 'Overzicht', 'title' => 'chassis_hover', 'link'=>'chassis_view', 'className'=>'inactive'),
         );
     }
 
