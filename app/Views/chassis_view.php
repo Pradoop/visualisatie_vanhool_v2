@@ -12,7 +12,8 @@
 </div>
 
 <div id="info_div">
-    <p>Gegalvaniseerde wagens zijn in het groen aangeduid</p>
+    <p>Gegalvaniseerde wagens zijn in het groen aangeduid.</p>
+    <p>Gemetaliseerde wagens zijn in het geel aangeduid.</p>
 </div>
 
 <?php
