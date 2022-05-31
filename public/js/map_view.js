@@ -60,24 +60,9 @@ $(document).ready(function() {
         $('#' + id).popover({
             trigger: 'hover',
             title: titles[0] + ': ' + line[0],
-            content: titles[1] + ': ' + line[1] + '\n' +
-                titles[2] + ': ' + line[2] + '\n' +
-                titles[3] + ': ' + line[3] + '\n' +
-                titles[4] + ': ' + line[4] + '\n' +
-                titles[5] + ': ' + line[5] + '\n' +
-                titles[6] + ': ' + line[6] + '\n' +
-                titles[7] + ': ' + line[7] + '\n' +
-                titles[8] + ': ' + line[8] + '\n' +
-                titles[9] + ': ' + line[9] + '\n' +
-                titles[10] + ': ' + line[10] + '\n' +
-                titles[11] + ': ' + line[11] + '\n' +
-                titles[12] + ': ' + line[12] + '\n' +
-                titles[13] + ': ' + line[13] + '\n' +
-                titles[14] + ': ' + line[14] + '\n' +
-                titles[15] + ': ' + line[15] + '\n' +
-                titles[16] + ': ' + line[16] + '\n' +
-                titles[17] + ': ' + line[17] + '\n' +
-                titles[18] + ': ' + line[18] + '\n'
+            content:
+                'Wagentype : ' + line[5] + '\n' +
+                'Klant : ' + line[7] + '\n'
         });
 
         //place the dot
