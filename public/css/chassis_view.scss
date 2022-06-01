@@ -20,7 +20,7 @@
 
 /* Table content div */
 #table_content {
-  margin: 1%;
+  margin: 1% 1% 0%;
 }
 table {
   width: 100%;
@@ -38,6 +38,14 @@ td {
 }
 .hidden_row {
   display: none;
+}
+
+/* Count div */
+#count_div {
+  margin: 0% 1% 1%;
+}
+#count_div p{
+  font-weight: bold;
 }
 
 /* Algemeen */

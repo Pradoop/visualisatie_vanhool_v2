@@ -9,16 +9,31 @@ $(document).ready( function () {
 });
 
 //Search Box
-$(document).ready(function(){
+$(document).ready(function() {
+
     $("#search_input").on("keyup", function() {
         let value = $(this).val().toLowerCase();
         $("#myTable tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
+
+        let rows = document.getElementById("chassis_table").rows;
+        let rows_shown = 0;
+        for(let i = 1; i < rows.length; i++) {
+            if(rows[i].style.display !== "none") {
+                rows_shown++;
+            }
+        }
+        document.getElementById("count_div_text").innerHTML = rows_shown + " van " + (rows.length - 1) + " chassis weergegeven";
     });
+
 });
 
-//Popovers
+//Information popovers
+$('#icon_i').popover({
+    trigger: 'hover',
+    content: 'Het laden van de webpagina kan momenteel nog lang duren.'
+});
 $('#th0').popover({
     trigger: 'hover',
     placement: 'top',
