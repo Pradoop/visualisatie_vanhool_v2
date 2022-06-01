@@ -15,7 +15,6 @@ $('#icon_i_aantalWagens').popover({
     trigger: 'hover',
     content: 'In de bufferzones kunnen meerdere chassis liggen. ' +
         'Chassis die niet in een specifieke samenstelkaliber liggen zijn elk in een random bufferzone geplaatst. ' +
-        'Locatie L07 is nog niet geimplementeerd, chassis in dit samenstelkaliber zijn in het rood weergegeven. ' +
         'Chassis in de lijst "Belangrijke chassis" in het oranje zijn 7 dagen of meer in montage, in het rood 9 dagen of meer in montage.'
 });
 
@@ -32,7 +31,7 @@ $('#map').click(function() {
 let focus = 0;
 let focus_dot = -1;
 
-//On load
+//Document
 $(document).ready(function() {
 
     searchFunction();
@@ -44,8 +43,9 @@ $(document).ready(function() {
 function searchFunction() {
 
     $("#search_input").on("keyup", function() {
+        let possible_hits = 0;
         let value = $(this).val();
-        let dots = document.getElementsByClassName("dot")
+        let dots = document.getElementsByClassName("dot");
 
         //List
         $("#important_div p").filter(function() {
@@ -56,10 +56,19 @@ function searchFunction() {
         for(let i = 0; i < dots.length; i++) {
             if(dots[i].id.indexOf(value) > -1) {
                 document.getElementById(dots[i].id).style.display = 'block';
+                possible_hits++;
             }
             else {
                 document.getElementById(dots[i].id).style.display = 'none';
             }
+        }
+
+        //Show not found message
+        if(possible_hits === 0) {
+            document.getElementById("search_failure_div").style.display = "block";
+        }
+        else {
+            document.getElementById("search_failure_div").style.display = "none";
         }
     });
 }
@@ -88,14 +97,21 @@ function createDot() {
         dot.setAttribute('tabindex', '0');
         document.getElementById('image_div').appendChild(dot);
 
+        //Convert date
+        let parts = line[3].match(/.{1,2}/g);
+        let new_date = parts[2] + '/' + parts[1] + '/' + parts[0];
+
         //popover
-        let titles = ChassisInMontage_lines[0].toString().split(/\t/);
         $('#' + id).popover({
             trigger: 'focus',
-            title: titles[0] + ': ' + line[0],
+            title: 'Wagen : ' + line[0],
             content:
+                'Datum gepland : ' + new_date + '\n' +
                 'Wagentype : ' + line[5] + '\n' +
-                'Klant : ' + line[7] + '\n'
+                'Klant : ' + line[7] + '\n' +
+                'Land : ' + line[8] + '\n' +
+                'Reeks van : ' + line[10] + '\n' +
+                'Galva : ' + line[12] + '\n'
         });
 
         //place the dot

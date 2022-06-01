@@ -27,6 +27,10 @@
     </div>
 </div>
 
+<div id="search_failure_div">
+    <label>Chassis niet gevonden, check Mapper voor meer informatie.</label>
+</div>
+
 <div id="image_div">
     <img id="map" class="site-map" src="<?= base_url()?>/images/map_hal5_hal6.png" alt="...">
 </div>
