@@ -36,14 +36,15 @@
 </div>
 
 <div id="count_chassis">
-    <label>Aantal wagens in montage: <?= sizeof($chassisInMontage_array) - 1 ?></label>
+    <label>Aantal wagens in montage: <?= sizeof($chassisInMontage_array) ?></label>
+    <label>Aantal wagens in wachtkamer: <?= sizeof($chassisInWachtkamer_array) ?></label>
 </div>
 
 <div id="important_div">
     <h1>Belangrijke Chassis</h1>
     <div class="grid-container">
         <div class="grid-child col1">
-            <?php $i = 1; ?>
+            <?php $i = 0; ?>
             <?php while($i < sizeof($chassisImportant_array)): ?>
                 <?php $line_array = preg_split('/\t/', $chassisImportant_array[$i]); ?>
                     <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
@@ -51,7 +52,7 @@
             <?php endwhile; ?>
         </div>
         <div class="grid-child col2">
-            <?php $i = 2; ?>
+            <?php $i = 1; ?>
             <?php while($i < sizeof($chassisImportant_array)): ?>
                 <?php $line_array = preg_split('/\t/', $chassisImportant_array[$i]); ?>
                 <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
@@ -59,7 +60,7 @@
             <?php endwhile; ?>
         </div>
         <div class="grid-child col3">
-            <?php $i = 3; ?>
+            <?php $i = 2; ?>
             <?php while($i < sizeof($chassisImportant_array)): ?>
                 <?php $line_array = preg_split('/\t/', $chassisImportant_array[$i]); ?>
                 <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
@@ -67,7 +68,7 @@
             <?php endwhile; ?>
         </div>
         <div class="grid-child col4">
-            <?php $i = 4; ?>
+            <?php $i = 3; ?>
             <?php while($i < sizeof($chassisImportant_array)): ?>
                 <?php $line_array = preg_split('/\t/', $chassisImportant_array[$i]); ?>
                 <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>
@@ -75,7 +76,7 @@
             <?php endwhile; ?>
         </div>
         <div class="grid-child col5">
-            <?php $i = 5; ?>
+            <?php $i = 4; ?>
             <?php while($i < sizeof($chassisImportant_array)): ?>
                 <?php $line_array = preg_split('/\t/', $chassisImportant_array[$i]); ?>
                 <p id="<?= 'chassis_'.$i?>" onclick="focusDot(<?= $i ?>)"><?= $line_array[0] ?></p>

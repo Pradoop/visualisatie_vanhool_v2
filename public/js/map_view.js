@@ -14,8 +14,8 @@ let popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
 $('#icon_i_aantalWagens').popover({
     trigger: 'hover',
     content: 'In de bufferzones kunnen meerdere chassis liggen. ' +
-        'Chassis die niet in een specifieke samenstelkaliber liggen zijn elk in een random bufferzone geplaatst. ' +
-        'Chassis in de lijst "Belangrijke chassis" in het oranje zijn 7 dagen of meer in montage, in het rood 9 dagen of meer in montage.'
+             'Chassis die niet in een specifieke samenstelkaliber liggen zijn elk in een random bufferzone geplaatst. ' +
+             'Chassis in de lijst "Belangrijke chassis" in het oranje zijn 7 dagen of meer in montage, in het rood 9 dagen of meer in montage.'
 });
 
 //Clicking on map

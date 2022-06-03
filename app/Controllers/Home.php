@@ -31,8 +31,9 @@ class Home extends BaseController
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Plattegrond');
 
         $data2["ChassisInKaliberIV"] = $this->file_model->readFile()[1];
-        $data2["chassisInMontage_array"] = $this->getChassisInHal56();
-        $data2["wdInMontageLimit"] = 5;
+        $data2["chassisInMontage_array"] = $this->getChassisMap()[0];
+        $data2["chassisInWachtkamer_array"] = $this->getChassisMap()[1];
+        $data2["wdInMontageLimit"] = 0;
 
         $this->data['scripts_to_load'][] = 'map_view.js';
         $this->data['styles_to_load'][] = 'map_view.scss';
@@ -372,17 +373,28 @@ class Home extends BaseController
         return json_encode($output_array);
     }
 
-    public function getChassisInHal56(): array
+    public function getChassisMap(): array
     {
         $line_array = $this->file_model->readFile()[0];
+        $status_hal = array('07','83','85','86','10','12');
+        $status_wait = array('38');
+
         $output_array = array();
+        $hal_array = array();
+        $wait_array = array();
+
         foreach($line_array as $line) {
             $array = preg_split('/\t/', $line);
-            if(isset($array[17]) && $array[17] != '  ') {
-                $output_array[] = $line;
+            if(isset($array[14]) && in_array($array[14], $status_hal)) {
+                $hal_array[] = $line;
+            }
+            else if(isset($array[14]) && in_array($array[14], $status_wait)) {
+                $wait_array[] = $line;
             }
         }
 
+        $output_array[] = $hal_array;
+        $output_array[] = $wait_array;
         return $output_array;
     }
 
