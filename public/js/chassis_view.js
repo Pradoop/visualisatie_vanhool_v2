@@ -2,6 +2,7 @@
 $(document).ready( function () {
     $('#chassis_table').DataTable({
         columnDefs: [{ type: 'date-uk', targets: 0 }],
+        "language": {"url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/nl-NL.json"},
         "searching": false,
         paging: false,
         "info": false
@@ -24,7 +25,12 @@ $(document).ready(function() {
                 rows_shown++;
             }
         }
-        document.getElementById("count_div_text").innerHTML = rows_shown + " van " + (rows.length - 1) + " chassis weergegeven";
+        if(rows_shown === 0) {
+            document.getElementById("count_div_text").innerHTML = "0 van " + (rows.length - 1) + " resultaten";
+        }
+        else {
+            document.getElementById("count_div_text").innerHTML = "1 tot " + rows_shown + " van " + (rows.length - 1) + " resultaten";
+        }
     });
 
 });
@@ -74,8 +80,3 @@ $('#th7').popover({
     placement: 'top',
     content: 'Het aantal werkdagen dat de wagen reeds in de montage staat (= het verschil in werkdagen tussen de huidige dag en de dag waarop fase 4 opzetten is afgemeld)'
 });
-
-//Functions
-function showHideRow(row) {
-    //$("#secondary_" + row).toggle();
-}

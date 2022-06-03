@@ -2,6 +2,7 @@
 #table_title {
   display: flex;
   margin: 1% 1% 0.5%;
+  border: 2px solid green;
 }
 #afdelingNaam_div {
   float: left;
@@ -21,6 +22,7 @@
 /* Table content div */
 #table_content {
   margin: 1% 1% 0%;
+  border: 2px solid green;
 }
 table {
   width: 100%;
@@ -43,9 +45,6 @@ td {
 /* Count div */
 #count_div {
   margin: 0% 1% 1%;
-}
-#count_div p{
-  font-weight: bold;
 }
 
 /* Algemeen */

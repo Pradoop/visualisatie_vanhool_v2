@@ -12,20 +12,6 @@
     </div>
 </div>
 
-<?php
-    $primary_array = array();
-    $secondary_array = array();
-    $index = 0;
-    while($index < sizeof($file_lines)) {
-        $array = preg_split('/!/', $file_lines[$index]);
-        $primary_array[] = $array;
-
-        $array2 = preg_split('/!/', $extra_file_lines[$index]);
-        $secondary_array[] = $array2;
-        $index++;
-    }
-?>
-
 <div id="table_content">
     <table id="chassis_table" class="table table-striped table-hover">
         <thead>
@@ -43,19 +29,19 @@
         </thead>
         <tbody id="myTable">
             <?php $row_id = 0; ?>
-            <?php while($row_id < sizeof($primary_array)): ?>
-
-                <tr id="<?= 'primary_'.$row_id ?>" onclick="showHideRow(<?= $row_id ?>);">
+            <?php while($row_id < sizeof($file_lines)): ?>
+                <tr id="<?= 'primary_'.$row_id ?>">
                     <?php
-                        echo "<td>{$primary_array[$row_id][0]}</td>";
-                        echo "<td>{$primary_array[$row_id][1]}</td>";
-                        echo "<td>{$primary_array[$row_id][2]}</td>";
-                        echo "<td>{$primary_array[$row_id][3]}</td>";
-                        echo "<td>{$primary_array[$row_id][4]}</td>";
-                        echo "<td>{$primary_array[$row_id][5]}</td>";
-                        echo "<td>{$primary_array[$row_id][6]}</td>";
-                        echo "<td>{$primary_array[$row_id][7]}</td>";
-                        echo match ($primary_array[$row_id][8]) {
+                        $array = preg_split('/!/', $file_lines[$row_id]);
+                        echo "<td>{$array[0]}</td>";
+                        echo "<td>{$array[1]}</td>";
+                        echo "<td>{$array[2]}</td>";
+                        echo "<td>{$array[3]}</td>";
+                        echo "<td>{$array[4]}</td>";
+                        echo "<td>{$array[5]}</td>";
+                        echo "<td>{$array[6]}</td>";
+                        echo "<td>{$array[7]}</td>";
+                        echo match ($array[8]) {
                             "01" => "<td>Verkocht voertuig</td>",
                             "02" => "<td>Studie is gestart</td>",
                             "20" => "<td>Studie chassis is afgewerkt</td>",
@@ -76,14 +62,12 @@
                         };
                     ?>
                 </tr>
-
                 <?php $row_id++; ?>
-
             <?php endwhile; ?>
         </tbody>
     </table>
 </div>
 
 <div id="count_div">
-    <p id="count_div_text"><?= sizeof($primary_array) ?> van <?= sizeof($primary_array) ?> chassis weergegeven</p>
+    <p id="count_div_text">1 tot <?= sizeof($file_lines) ?> van <?= sizeof($file_lines) ?> resultaten</p>
 </div>
