@@ -12,27 +12,31 @@
     </div>
 </div>
 
+<h2 class="inspect-data-loading">
+    Bezig met laden...
+</h2>
+
 <div id="table_content">
     <table id="chassis_table" class="table table-striped table-hover">
         <thead>
             <tr>
-                <th id="th0">Gepland</th>
-                <th id="th1">Wagen</th>
-                <th id="th2">Wagentype</th>
-                <th id="th3">Klant</th>
-                <th id="th4">Reeks</th>
-                <th id="th5">Galva</th>
-                <th id="th6">DagenTot</th>
-                <th id="th7">WdInMont</th>
-                <th id="th8">Status</th>
+                <th>Gepland</th>
+                <th>Wagen</th>
+                <th>Wagentype</th>
+                <th>Klant</th>
+                <th>Reeks</th>
+                <th>Galva</th>
+                <th>DagenTot</th>
+                <th>WdInMont</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody id="myTable">
             <?php $row_id = 0; ?>
-            <?php while($row_id < sizeof($file_lines)): ?>
+            <?php while($row_id < sizeof($aantal_lines)): ?>
                 <tr id="<?= 'primary_'.$row_id ?>">
                     <?php
-                        $array = preg_split('/!/', $file_lines[$row_id]);
+                        $array = preg_split('/!/', $aantal_lines[$row_id]);
                         echo "<td>{$array[0]}</td>";
                         echo "<td>{$array[1]}</td>";
                         echo "<td>{$array[2]}</td>";
@@ -60,14 +64,13 @@
                             "12" => "<td>Keuring chassis is voorbij montage</td>",
                             default => "<td>Nog te implementeren</td>",
                         };
-                    ?>
+                        ?>
                 </tr>
                 <?php $row_id++; ?>
             <?php endwhile; ?>
         </tbody>
     </table>
-</div>
-
-<div id="count_div">
-    <p id="count_div_text">1 tot <?= sizeof($file_lines) ?> van <?= sizeof($file_lines) ?> resultaten</p>
+    <div id="count_div">
+        <p id="count_div_text">1 tot <?= sizeof($aantal_lines) ?> van <?= sizeof($aantal_lines) ?> resultaten</p>
+    </div>
 </div>

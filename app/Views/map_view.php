@@ -37,6 +37,7 @@
 
 <div id="count_chassis">
     <label>Aantal wagens in montage: <?= sizeof($chassisInMontage_array) ?></label>
+    <br>
     <label>Aantal wagens in wachtkamer: <?= sizeof($chassisInWachtkamer_array) ?></label>
 </div>
 

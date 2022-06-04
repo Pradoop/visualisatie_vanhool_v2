@@ -1,16 +1,16 @@
-//Table
-$(document).ready( function () {
+$(document).ready(function() {
+
     $('#chassis_table').DataTable({
         columnDefs: [{ type: 'date-uk', targets: 0 }],
         "language": {"url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/nl-NL.json"},
         "searching": false,
         paging: false,
-        "info": false
+        "info": false,
+        "fnInitComplete": function () {
+            $(".inspect-data-loading").hide();
+            $("#table_content").show();
+        }
     });
-});
-
-//Search Box
-$(document).ready(function() {
 
     $("#search_input").on("keyup", function() {
         let value = $(this).val().toLowerCase();
@@ -32,7 +32,6 @@ $(document).ready(function() {
             document.getElementById("count_div_text").innerHTML = "1 tot " + rows_shown + " van " + (rows.length - 1) + " resultaten";
         }
     });
-
 });
 
 //Information popovers

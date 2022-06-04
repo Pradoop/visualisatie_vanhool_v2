@@ -46,6 +46,7 @@ function searchFunction() {
         let possible_hits = 0;
         let value = $(this).val();
         let dots = document.getElementsByClassName("dot");
+        console.log("Number of dots = " + dots.length);
 
         //List
         $("#important_div p").filter(function() {
@@ -75,7 +76,7 @@ function searchFunction() {
 
 function createDot() {
 
-    for(let i = 1; i < ChassisInMontage_lines.length; i++) {
+    for(let i = 0; i < ChassisInMontage_lines.length; i++) {
 
         //Split the current line
         let line = ChassisInMontage_lines[i].toString().split(/\t/);

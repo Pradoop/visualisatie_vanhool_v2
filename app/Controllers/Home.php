@@ -46,7 +46,7 @@ class Home extends BaseController
         $this->data['title_tab'] = 'Overzicht';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Overzicht');
 
-        $data2["file_lines"] = $this->getChassisInfo();
+        $data2["aantal_lines"] = $this->getChassisInfo();
 
         array_push($this->data['scripts_to_load'], 'chassis_view.js', 'jquery.dataTables.min.js', 'date-uk.js');
         array_push($this->data['styles_to_load'], 'chassis_view.scss', 'jquery.dataTables.min.css');
@@ -375,8 +375,8 @@ class Home extends BaseController
     public function getChassisMap(): array
     {
         $line_array = $this->file_model->readFile()[0];
-        $status_hal = array('07','83','85','86','10','12');
-        $status_wait = array('38');
+        $status_hal = array('07','83','85','86','10','12');//TODO
+        $status_wait = array('38');//TODO
 
         $output_array = array();
         $hal_array = array();
