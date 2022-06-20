@@ -61,8 +61,8 @@ class Home extends BaseController
         $data2["file_lines"] = $this->file_model->readFile()[0];
 
         $data2["total_in_production"]  = $this->calculateTotalInProduction($this->file_model->fileColumnArrays($data2["file_lines"])[0]);
-        $data2["percentage_delayed"] = $this->calculatePercentageDelayed($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
-        $data2["average_delay"] = $this->calculateAverageDelay($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
+        $data2["amount_delayed"] = $this->calculateAmountDelayed($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
+        $data2["planned_today"] = $this->calculatePlannedToday($this->file_model->fileColumnArrays($data2["file_lines"])[3]);
         $data2["avg_mont"] = $this->calculateAverageWdInMont($this->file_model->fileColumnArrays($data2["file_lines"])[6]);
         $data2["total_welding_info"] = $this->getWeldingData();
         $data2["welding_info"] = $this->calculateTotalWeldingData();
@@ -94,13 +94,11 @@ class Home extends BaseController
             if(isset($my_array[$line_number][14])) {
                 switch ($my_array[$line_number][14]){
                     case 07:
-                    case 03:
+                    case 83:
                     case 85:
                     case 86:
                     case 8:
                     case 81:
-                    case 38:
-                    case 83:
                         $total_in_production++;
                         break;
                 }
@@ -115,25 +113,42 @@ class Home extends BaseController
     }
 
     /*
-    * Function to calculate the percentage of all chassis that are delayed.
+    * Function to calculate the amount of all chassis that are delayed.
     * Input: Array that contains all the information (so the textfile)
     * Output: Percentage of chassis that are delayed overall
     * Explanation: Function calculates the percentage of chassis that is delayed
     */
-    public function calculatePercentageDelayed($my_array)
+    public function calculateAmountDelayed($my_array): float
     {
-        $line_number = 1;
         $delayed = 0;
+        $montage_array = array();
+        $today = date('ymd');
 
-        while ($line_number < sizeof($my_array)):
-            if (isset($my_array[$line_number][16]) && $my_array[$line_number][16] < 0):
+
+
+        for ($i = 1; $i < sizeof($my_array); $i+=1){
+            if(isset($my_array[$i][14])) {
+                switch ($my_array[$i][14]){
+                    case 07:
+                    case 83:
+                    case 85:
+                    case 86:
+                    case 8:
+                    case 81:
+                        $montage_array[] = $my_array[$i][3];
+                        break;
+                }
+            }
+        }
+
+
+        for ($j = 0; $j < sizeof($montage_array); $j++){
+            if ($today - $montage_array[$j] > 0){
                 $delayed++;
-            else:
-                $delayed--;
-            endif;
-            $line_number++;
-        endwhile;
-        return round(($delayed/$line_number)*100, 2, PHP_ROUND_HALF_UP);
+            }
+        }
+
+        return $delayed;
     }
 
 
@@ -166,21 +181,20 @@ class Home extends BaseController
     * Output: Average amount of delays for all chassis
     * Explanation: Function calculates the average delay
     */
-    public function calculateAverageDelay($my_array)
+    public function calculatePlannedToday($my_array)
     {
         $line_number = 1;
-        $total_delay = 0;
-        $total_produced = 0;
+        $total_today = 0;
+        $today = date('ymd');
 
         while ($line_number < sizeof($my_array)):
-            if(isset($my_array[$line_number][16])) {
-                $total_delay += (int) $my_array[$line_number][16];
+            if(isset($my_array[$line_number][3]) && $my_array[$line_number][3] == $today) {
+                $total_today++;
             }
-            $total_produced++;
             $line_number++;
         endwhile;
 
-        return round(($total_delay / $total_produced)*(-1), 0,PHP_ROUND_HALF_UP );
+        return $total_today;
     }
 
     /* Function to calculate the amount of cars to be welded by hand, to be welded using the robot,
@@ -375,7 +389,7 @@ class Home extends BaseController
     public function getChassisMap(): array
     {
         $line_array = $this->file_model->readFile()[0];
-        $status_hal = array('07','83','85','86','10','12');//TODO
+        $status_hal = array('07','83','85','86','8','81');//TODO
         $status_wait = array('38');//TODO
 
         $output_array = array();

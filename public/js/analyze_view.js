@@ -72,6 +72,22 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
+        for (const i in total_welding_data){
+            switch (total_welding_data[i].stand_las){
+                case "L0":
+                    stand_las_0.push(total_welding_data[i]);
+                    break;
+                case "L1":
+                    stand_las_1.push(total_welding_data[i]);
+                    break;
+                case "L2":
+                    stand_las_2.push(total_welding_data[i]);
+                    break;
+                case "L3":
+                    stand_las_3.push(total_welding_data[i]);
+                    break;
+            }
+        }
         createWeekWeldingChart(total_welding_data, 2, 'fornight_welding_chart', 'Chassis per stand las in twee weken');
         createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Chassis per stand las volgende week');
         createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Chassis per stand las deze week');
@@ -142,8 +158,8 @@ $.ajax({
         createWeekBarChart(chassis_pln_date, 1, 'next_week_chart', "Aantal geplande chassis: volgende week");
         createWeekBarChart(chassis_pln_date, 2, 'fortnight_chart', "Aantal geplande chassis in twee weken");
         //createYearChart(chassis_pln_date);
-        createMonthChart(currentYear, chassis_pln_date);
-        createWeekChart(currentYear, currentMonth, chassis_pln_date);
+        //createMonthChart(currentYear, chassis_pln_date);
+        //createWeekChart(currentYear, currentMonth, chassis_pln_date);
         //createDateChart(currentYear, currentMonth, currentDate, chassis_pln_date);
     }
 });
@@ -181,8 +197,8 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        calculateChassisPlannedToday(chassisnr_pln_date);
-        calculateAmountDelayed(chassisnr_pln_date);
+        //calculateChassisPlannedToday(chassisnr_pln_date);
+        //calculateAmountDelayed(chassisnr_pln_date);
         //createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
         //createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
         //createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
@@ -744,22 +760,6 @@ function createYearChart(my_data){
 }
 
 function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title){
-    for (const i in my_data){
-        switch (my_data[i].stand_las){
-            case "L0":
-                stand_las_0.push(my_data[i]);
-                break;
-            case "L1":
-                stand_las_1.push(my_data[i]);
-                break;
-            case "L2":
-                stand_las_2.push(my_data[i]);
-                break;
-            case "L3":
-                stand_las_3.push(my_data[i]);
-                break;
-        }
-    }
     const week_stand_las_0 = new Array(5).fill(0);
     const week_stand_las_1 = new Array(5).fill(0);
     const week_stand_las_2 = new Array(5).fill(0);
@@ -791,12 +791,6 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
     let fifthDay = new Date();
     fifthDay.setTime(firstDay.getTime() + (4*864e5));
     fifthDay.setHours(0, 0, 0, 0);
-    let sixthDay = new Date();
-    sixthDay.setTime(firstDay.getTime() + (5*864e5));
-    sixthDay.setHours(0, 0, 0, 0);
-    let lastDay = new Date();
-    lastDay.setTime(firstDay.getTime() + (6*864e5));
-    lastDay.setHours(0, 0, 0, 0);
 
     const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay]
     const labels = [

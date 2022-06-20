@@ -22,13 +22,13 @@
             </div>
             <div class="card card-info">
                 <div class="information_3">
-                    <p class="information_value" id="chassis-planned-today"></p>
+                    <p class="information_value"><?= $planned_today?></p>
                     <p class="information_text">vandaag gepland</p>
                 </div>
             </div>
             <div class="card card-info">
                 <div class="information_2">
-                    <p class="information_value" id="chassis-delayed"></p>
+                    <p class="information_value"><?= $amount_delayed?> chassis</p>
                     <p class="information_text">te laat</p>
                 </div>
             </div>
@@ -43,7 +43,7 @@
         </div>-->
         <div class="grid-child col-2">
             <div class="grid-graph-child col4">
-                <div class="card chart chart-1" id="bar_chart">
+                <div class="card chart chart-row-1" id="bar_chart">
                     <canvas class="week-chart" id="this_week_chart"></canvas>
                 </div>
                 <div class="card chart" id="bar_chart">
@@ -57,13 +57,13 @@
 
         <div class="grid-child col-3">
             <div class="grid-graph-child col5">
-                <div class="card chart multi-bar chart-1" id="multiple_bar_chart">
+                <div class="card chart chart-row-1" id="multiple_bar_chart">
                     <canvas id="this_week_welding_chart"></canvas>
                 </div>
-                <div class="card chart multi-bar chart-1" id="multiple_bar_chart">
+                <div class="card chart chart-row-1" id="multiple_bar_chart">
                     <canvas id="next_week_welding_chart"></canvas>
                 </div>
-                <div class="card chart multi-bar" id="multiple_bar_chart">
+                <div class="card chart" id="multiple_bar_chart">
                     <canvas id="fornight_welding_chart"></canvas>
                 </div>
             </div>
