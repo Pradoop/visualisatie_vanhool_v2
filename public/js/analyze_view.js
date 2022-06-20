@@ -843,26 +843,30 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
             {
                 label: 'Nog te bepalen',
                 data: week_stand_las_0,
-                backgroundColor: 'rgb(16, 57, 93)',
+                backgroundColor: 'rgb(150,196,237)',
                 stack: 'Stack 0',
+                pointStyle: 'circle',
             },
             {
                 label: 'Handlas',
                 data: week_stand_las_1,
-                backgroundColor: 'rgb(90,16,93)',
+                backgroundColor: 'rgb(51,141,220)',
                 stack: 'Stack 1',
+                pointStyle: 'circle',
             },
             {
                 label: 'In robot',
                 data: week_stand_las_2,
-                backgroundColor: 'rgb(93,52,16)',
+                backgroundColor: 'rgb(30,108,176)',
                 stack: 'Stack 2',
+                pointStyle: 'circle',
             },
             {
                 label: 'In robot en programma af',
                 data: week_stand_las_3,
-                backgroundColor: 'rgb(19,93,16)',
+                backgroundColor: 'rgb(16, 57, 93)',
                 stack: 'Stack 3',
+                pointStyle: 'circle',
             },
         ]
     };
@@ -874,6 +878,11 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 title: {
                     display: true,
                     text: my_graph_title
+                },
+                legend: {
+                    position: "left", labels: {
+                        usePointStyle: true,
+                    },
                 },
             },
             interaction: {
@@ -936,7 +945,7 @@ function createWeldingChart(my_data){
 
     const data = {
         labels: sortedLabelArray, datasets: [{
-            label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: sortedDataArray,
+            label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', pointStyle: 'circle', data: sortedDataArray,
         }]
     };
     const config = {
