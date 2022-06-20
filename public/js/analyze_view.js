@@ -1,11 +1,6 @@
 const welding_data = [], total_welding_data = [], chassis_phase = [];
 const chassisnr_pln_date = [], chassis_pln_date = [], chassis_per_year = [];
 const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [];
-const chassis_per_month = new Array(12).fill(0);
-const chassis_per_week = new Array(4).fill(0);
-const chassis_per_dag = new Array(7).fill(0);
-const months = ['Jan', 'Feb', 'Ma', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sept', 'Okt', 'Nov', 'Dec']
-
 /*
  * Registration of the chartjs-plugin-datalabels plugin. Is required to make it work
  * Changing default options as well for the text in the bars
@@ -149,18 +144,9 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        let today = new Date();
-        let currentYear = today.getFullYear();
-        let currentMonth = today.getMonth() + 1;
-        let currentDate = today.getDate() + 1;
-
         createWeekBarChart(chassis_pln_date, 0, 'this_week_chart', "Aantal geplande chassis: deze week");
         createWeekBarChart(chassis_pln_date, 1, 'next_week_chart', "Aantal geplande chassis: volgende week");
         createWeekBarChart(chassis_pln_date, 2, 'fortnight_chart', "Aantal geplande chassis in twee weken");
-        //createYearChart(chassis_pln_date);
-        //createMonthChart(currentYear, chassis_pln_date);
-        //createWeekChart(currentYear, currentMonth, chassis_pln_date);
-        //createDateChart(currentYear, currentMonth, currentDate, chassis_pln_date);
     }
 });
 
@@ -197,8 +183,6 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        //calculateChassisPlannedToday(chassisnr_pln_date);
-        //calculateAmountDelayed(chassisnr_pln_date);
         //createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
         //createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
         //createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
@@ -212,7 +196,11 @@ function calculateWeekNumber(my_date){
     return Math.ceil((my_date.getDay() + 1 + numberOfDays) / 7)
 }
 
-function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id, my_title){
+function createTableChassisPlannedToday(){
+
+}
+
+function createTableChassisPlanned(my_data, next_week, my_table_id, my_title){
     const week_chassis = [[], [], [], [], [], [], []];
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
@@ -248,21 +236,14 @@ function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id, my_ti
     fifthDay.setTime(firstDay.getTime() + (4*864e5));
     fifthDay.setHours(0, 0, 0, 0);
     let sixthDay = new Date();
-    sixthDay.setTime(firstDay.getTime() + (5*864e5));
-    sixthDay.setHours(0, 0, 0, 0);
-    let lastDay = new Date();
-    lastDay.setTime(firstDay.getTime() + (6*864e5));
-    lastDay.setHours(0, 0, 0, 0);
 
-    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
+    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay]
     const labels = [
         firstDay.getDate() + '/' + (firstDay.getMonth() + 1),
         secondDay.getDate() + '/' + (secondDay.getMonth() + 1),
         thirdDay.getDate() + '/' + (thirdDay.getMonth() + 1),
         fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
         fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
-        sixthDay.getDate() + '/' + (sixthDay.getMonth() + 1),
-        lastDay.getDate() + '/' + (lastDay.getMonth() + 1),
     ]
 
     for (let i = 1; i <= my_data.length; i += 2) {
@@ -312,34 +293,6 @@ function createTableChassisPlannedPerWeek(my_data, next_week, my_table_id, my_ti
 }
 
 /*
- * Function to calculate the amount of chassis that are planned today
- * Input: array that contains the data with the different dates
- * Output: Amount of chassis that are planned for that day
- */
-function calculateChassisPlannedToday(my_data){
-    let today = new Date();
-    let count = 0;
-    for (let i = 1; i <= my_data.length; i += 2){
-        if ((today.getFullYear() === my_data[i].getFullYear()) && (today.getMonth() === my_data[i].getMonth()) && (today.getDate() === my_data[i].getDate())){
-            count++;
-        }
-    }
-    document.getElementById('chassis-planned-today').innerHTML = count+ " chassis";
-}
-
-function calculateAmountDelayed(my_data){
-    let today = new Date();
-    let count = 0;
-    for (let i = 1; i <= my_data.length; i += 2){
-        if (today.getTime() > my_data[i].getTime()){
-            count++;
-        }
-    }
-    document.getElementById('chassis-delayed').innerHTML = count+ " chassis";
-}
-
-
-/*
  * Function to create a chart for the amount of chassis for the current week and the next week
  * Input: array that contains the data with the different dates and the year that is required to calculate
  * the year, month and starting date that you want a chart to be created for
@@ -365,7 +318,6 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
 
     const weekNumber = calculateWeekNumber(firstDay);
     my_graph_title = my_graph_title + " (week " + weekNumber + ")"
-
 
     let secondDay = new Date();
     secondDay.setTime(firstDay.getTime() + 864e5);
@@ -448,317 +400,6 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
     const myChart = new Chart(document.getElementById(my_graph_id), config);
 }
 
-/*
- * Function to create a chart for the amount of chassis per day
- * in a given year, month and starting date for the next seven days
- * Input: array that contains the data with the different dates and the year that is required to calculate
- * the year, month and starting date that you want a chart to be created for
- * Output: Vertical bart chart with the amount of chassis that are planned per year
-
-function createDateChart(my_year, my_month, my_date, my_data){
-    my_month--;
-    let day_diff;
-    let day1, day2, day3, day4, day5, day6, day7;
-    for (const i in my_data){
-        if(my_year === my_data[i].getFullYear() && (my_month - my_data[i].getMonth() === 0)){
-            day_diff = my_data[i].getDate() - my_date;
-            switch (day_diff){
-                case 0:
-                    chassis_per_dag[0]++;
-                break;
-                case 1:
-                    chassis_per_dag[1]++;
-                    break;
-                case 2:
-                    chassis_per_dag[2]++;
-                    break;
-                case 3:
-                    chassis_per_dag[3]++;
-                    break;
-                case 4:
-                    chassis_per_dag[4]++;
-                    break;
-                case 5:
-                    chassis_per_dag[5]++;
-                    break;
-                case 6:
-                    chassis_per_dag[6]++;
-                    break;
-
-            }
-        }
-    }
-    my_month++;
-    day1 = (my_date).toString() + "/" + my_month.toString();
-    day2 = (my_date + 1).toString() + "/" + my_month.toString();
-    day3 = (my_date + 2).toString() + "/" + my_month.toString();
-    day4 = (my_date + 3).toString() + "/" + my_month.toString();
-    day5 = (my_date + 4).toString() + "/" + my_month.toString() ;
-    day6 = (my_date + 5).toString() + "/" + my_month.toString();
-    day7 = (my_date + 6).toString() + "/" + my_month.toString();
-    const labels = [day1, day2, day3, day4, day5, day6, day7];
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Aantal chassis',
-            backgroundColor: 'rgb(16, 57, 93)',
-            data: chassis_per_dag,
-        }]
-    };
-    const config = {
-        type: 'bar', data: data, options: {
-            scales: {
-                y: {
-                    ticks:{
-                        precision: 0,
-                        display: false
-                    },
-                    beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal chassis"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                },
-                x:{
-                    display: true, title:{
-                        display:true, text: "Datum"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                }
-            },
-            plugins:{
-                title:{
-                    display: true, text: 'Aantal geplande chassis per week voor de week van: ' + day1 + ' tot: ' + day7
-                },
-                legend:{
-                    display: false, position: "right", align: "center", labels:{
-                        boxWidth: 10, boxHeight: 10,
-                    }
-                }
-            }
-        },
-    }
-    const myChart = new Chart(document.getElementById('day_chart'), config);
-}
-*/
-
-/*
- * Function to create a chart for the amount of chassis per week in a given month and year
- * Input: array that contains the data with the different dates and the year that is required to calculate
- * the year and the month that you want a chart to be created for
- * Output: Vertical bart chart with the amount of chassis that are planned per year
- */
-function createWeekChart(my_year, my_month, my_data){
-    my_month--;
-    let week1, week2, week3, week4;
-    for (const i in my_data){
-        if(my_year === my_data[i].getFullYear() && (my_month - my_data[i].getMonth() === 0)){
-            let my_date = my_data[i].getDate();
-            if ( 1 <= my_date && my_date <= 7){
-                chassis_per_week[0]++;
-            }
-            if ( 8 <= my_date && my_date <= 14){
-                chassis_per_week[1]++;
-            }
-            if ( 15 <= my_date && my_date <= 21){
-                chassis_per_week[2]++;
-            }
-            if ( 22 <= my_date && my_date <= 31){
-                chassis_per_week[3]++;
-            }
-        }
-    }
-    my_month++;
-    week1 = "1/" + my_month.toString() + " - " + "7/" + my_month.toString();
-    week2 = "8/" + my_month.toString() + " - " + "14/" + my_month.toString();
-    week3 = "15/" + my_month.toString() + " - " + "21/" + my_month.toString();
-    week4 = "22/" + my_month.toString() + " - " + "31/" + my_month.toString();
-    const labels = [week1, week2, week3, week4];
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Aantal chassis',
-            backgroundColor: 'rgb(16,57,93)',
-            data: chassis_per_week,
-        }]
-    };
-    const config = {
-        type: 'bar',
-        data: data,
-        options: {
-            scales: {
-                y: {
-                    ticks:{
-                        precision: 0,
-                        display: false
-                    },
-                    beginAtZero: true, display: true, title:{
-                        display:false, text: "Aantal chassis"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                },
-                x:{
-                    display: true, title:{
-                        display:true, text: "Week"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                }
-            },
-            plugins:{
-                title:{
-                    display: true, text: 'Aantal geplande chassis per week in de maand: ' + months[my_month - 1] + " " + my_year.toString()
-                },
-                legend:{
-                    display: false, position: "right", align: "center", labels:{
-                        boxWidth: 10, boxHeight: 10,
-                    }
-                }
-            }
-        },
-    }
-    const myChart = new Chart(document.getElementById('week_chart'), config);
-}
-
-
-/*
- * Function to create a chart for the amount of chassis per month in a given year
- * Input: array that contains the data with the different dates and the year that is required to calculate
- * Output: Vertical bart chart with the amount of chassis that are planned per year
- */
-function createMonthChart(my_year, my_data){
-    for (const i in my_data){
-        if(my_year === my_data[i].getFullYear()){
-            chassis_per_month[my_data[i].getMonth()]++;
-        }
-    }
-    const data = {
-        labels: months,
-        datasets: [{
-            label: 'Aantal chassis',
-            backgroundColor: 'rgb(16, 57, 93)',
-            data: chassis_per_month,
-        }]
-    };
-    const config = {
-        type: 'bar', data: data, options: {
-            scales: {
-                y: {
-                    ticks:{
-                        precision: 0,
-                        display: false
-                    },
-                    beginAtZero: true, display: true, title:{
-                        display:false, text: "Aantal chassis"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                },
-                x:{
-                    display: true, title:{
-                        display:true, text: "Maand"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                }
-            },
-            plugins:{
-                title:{
-                    display: true, text: 'Aantal geplande chassis per maand in het jaar: ' + my_year.toString()
-                },
-                legend:{
-                    display: false, position: "right", align: "center", labels:{
-                        boxWidth: 10, boxHeight: 10,
-                    },
-
-                }
-            }
-        },
-    }
-    const myChart = new Chart(document.getElementById('month_chart'), config);
-}
-
-/*
- * Function to create a chart based on the dates that are planned
- * Input: array that contains the data with the different dates
- * Output: Vertical bart chart with the amount of chassis that are planned per year
- */
-function createYearChart(my_data){
-    for (const i in my_data){
-        let yearDiff = my_data[i].getFullYear() - new Date().getFullYear();
-        if (yearDiff >= chassis_per_year.length){
-            chassis_per_year[yearDiff] = 0;
-        }
-        chassis_per_year[yearDiff]++;
-    }
-    const labels = [];
-    for (const i in chassis_per_year){
-        labels[i] = (new Date().getFullYear() + +i).toString();
-    }
-    const data = {
-        labels: labels,
-        datasets: [{
-            label: 'Aantal ' +
-                'chassis',
-            backgroundColor: 'rgb(16, 57, 93)',
-            data: chassis_per_year,
-        }]
-    };
-    const config = {
-        type: 'bar', data: data, options: {
-            scales: {
-                y: {
-                    ticks:{
-                        precision: 0,
-                        display: false
-                    },
-                    beginAtZero: true, display: true, title:{
-                        display:false, text: "Aantal chassis"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                },
-                x:{
-                    display: true, title:{
-                        display:true, text: "Jaar"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                }
-            },
-            plugins:{
-                title:{
-                    display: true, text: 'Aantal geplande chassis per jaar'
-                },
-                legend:{
-                    display: false, position: "right", align: "center", labels:{
-                        boxWidth: 10, boxHeight: 10,
-                    }
-                }
-            }
-        },
-    };
-    const myChart = new Chart(document.getElementById('year_chart'), config);
-}
-
 function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title){
     const week_stand_las_0 = new Array(5).fill(0);
     const week_stand_las_1 = new Array(5).fill(0);
@@ -778,6 +419,8 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
         firstDay.setDate(firstDay.getDate() + 14);
         firstDay.setHours(0, 0, 0, 0);
     }
+
+
 
     let secondDay = new Date();
     secondDay.setTime(firstDay.getTime() + 864e5);
@@ -832,6 +475,9 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
             }
         }
     }
+    const weekNumber = calculateWeekNumber(firstDay);
+    my_graph_title = my_graph_title + " (week " + weekNumber + ")"
+
     const data = {
         labels: labels,
         datasets: [
@@ -913,150 +559,6 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
     const myChart = new Chart(document.getElementById(my_graph_id), config);
 
 }
-
-/*
- * Function to create a chart based on the welding data
- * Input: array that contains the data for welding
- * Output: Vertical bart chart with the amount of chassis per stand las
- */
-function createWeldingChart(my_data){
-    const labels = ['TBD', 'Hand', 'Robot', 'Robot+prgm af'];
-    let arrayOfObjects = labels.map(function (d, i) {
-        return {
-            label: d,
-            data: my_data[i] || 0
-        };
-    });
-    let sortedArrayOfObjects = arrayOfObjects.sort(function (a, b) {
-        return b.data > a.data;
-    });
-    let sortedLabelArray = [];
-    let sortedDataArray = [];
-
-    sortedArrayOfObjects.forEach(function(d){
-        sortedLabelArray.push(d.label);
-        sortedDataArray.push(d.data);
-    });
-
-    const data = {
-        labels: sortedLabelArray, datasets: [{
-            label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', pointStyle: 'circle', data: sortedDataArray,
-        }]
-    };
-    const config = {
-        type: 'bar', data: data, options: {
-            scales: {
-                y: {
-                    ticks:{
-                        precision: 0,
-                        display: false
-                    },
-                    beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal chassis"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                },
-                x:{
-                    display: true, title:{
-                        display:true, text: "Stand las"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                }
-            },
-            plugins:{
-                title:{
-                    display: true, text: 'Aantal chassis per per stand las'
-                },
-                legend:{
-                    display: false, position: "right", align: "center", labels:{
-                        boxWidth: 10, boxHeight: 10,
-                    }
-                }
-            }
-        },
-    }
-    const myChart = new Chart(document.getElementById('stand_las_chart'), config);
-}
-
-/*
- * Function to create a chart based on the phase data
- * Input: array that contains the chassis per phase
- * Output: Vertical bart chart with the amount of chassis per phase
- */
-function createPhaseChart(my_data){
-    const labels = [
-        'Verkocht', 'Start studie', 'Einde studie', 'Klaar voor werk', 'Start serie',
-        'Prognose prefab', 'Prognose basiss', 'Klaar vo montage', 'Start kaliber',
-        'Einde kaliber', 'Start lasrobot', 'Start aflassen', 'Morgen af', 'Vandaag af',
-    ];
-    let arrayOfObjects = labels.map(function (d, i) {
-        return {
-            label: d,
-            data: my_data[i] || 0
-        };
-    });
-    let sortedArrayOfObjects = arrayOfObjects.sort(function (a, b) {
-        return b.data > a.data;
-    });
-    let sortedLabelArray = [];
-    let sortedDataArray = [];
-
-    sortedArrayOfObjects.forEach(function(d){
-        sortedLabelArray.push(d.label);
-        sortedDataArray.push(d.data);
-    });
-    const data = {
-        labels: sortedLabelArray, datasets: [{
-            label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: sortedDataArray,
-        }]
-    };
-    const config = {
-        type: 'bar', data: data, options: {
-            scales: {
-                y: {
-                    ticks:{
-                        precision: 0,
-                        display: false
-                    },
-                    beginAtZero: true, display: true, title:{
-                        display:true, text: "Aantal chassis"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                },
-                x:{
-                    display: true, title:{
-                        display:true, text: "Status"
-                    },
-                    grid: {
-                        display: false,
-                        drawBorder: false,
-                    }
-                }
-            },
-            plugins:{
-                title:{
-                    display: true, text: 'Aantal chassis per status'
-                },
-                legend:{
-                    display: false, position: "right", align: "center", labels:{
-                        boxWidth: 10, boxHeight: 10,
-                    }
-                }
-            }
-        },
-    }
-    const myChart = new Chart(document.getElementById('status_chart'), config);
-}
-
 
 
 

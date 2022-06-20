@@ -5,13 +5,13 @@
             <div class="card card-1">
                 <div class="information_1">
                     <p class="information_value"><?= $total_in_production[0] ?></p>
-                    <p class="information_text">chassis in productie</p>
+                    <p class="information_text">chassis in montage</p>
                 </div>
             </div>
             <div class="card card-info">
                 <div class="information_4">
                     <p class="information_value"><?= $total_in_production[1] ?>%</p>
-                    <p class="information_text">in productie</p>
+                    <p class="information_text">in montage</p>
                 </div>
             </div>
             <div class="card card-info">
@@ -22,7 +22,7 @@
             </div>
             <div class="card card-info">
                 <div class="information_3">
-                    <p class="information_value"><?= $planned_today?></p>
+                    <p class="information_value"><?= $planned_today?> chassis</p>
                     <p class="information_text">vandaag gepland</p>
                 </div>
             </div>
