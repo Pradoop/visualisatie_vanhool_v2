@@ -10,13 +10,15 @@ h1 {
 #general_information {
   margin: 15px;
   text-align: center;
+  flex-wrap: wrap;
   //border: 2px solid green;
 }
 .grid-container {
   display: grid;
-  justify-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-columns: 15% 25% 60%;
 }
+
+
 .grid-child {
   margin-bottom: 5px;
   width: 100%;
@@ -41,29 +43,37 @@ h1 {
 }
 
 .card {
-  border-radius: 5px; /* 10px rounded corners */
+  border-radius: 5px;
   background-color: rgba(227, 228, 229, 0.5);
-  height: 37%;
-  width: 98%;
   display: flex;
   flex-wrap: wrap;
+  margin-top: 1%;
+}
+
+.card-1{
+  margin-top: 0;
+}
+
+.card-info{
+  margin-top: 5%;
+  height: 20%;
+  justify-content: center;
 }
 
 .grid-container-2 {
-  margin-top: 0.5%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  border-top: 1px dotted #10395d;
-  height: 98%;
   width: auto;
 }
 
 .chart{
-  width: 95%;
+  width: 98%;
   height: auto;
-  border-radius: 5px; /* 10px rounded corners */
-  margin-left: 1.5%;
-  border-left: 1px dotted #10395d;
+  margin-top: 1%;
+}
+
+.chart-1{
+  margin-top: 0;
 }
 
 .table-title{
@@ -119,4 +129,13 @@ td {
   text-align: left;
 }
 
+.col-2{
+  margin-left: 5%;
+}
+
+.col5{
+  margin-left: 3%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
 

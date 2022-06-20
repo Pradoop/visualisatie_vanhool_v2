@@ -72,8 +72,9 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Aantal chassis per stand las - volgende week');
-        createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Aantal chassis per stand las - deze week');
+        createWeekWeldingChart(total_welding_data, 2, 'fornight_welding_chart', 'Chassis per stand las in twee weken');
+        createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Chassis per stand las volgende week');
+        createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Chassis per stand las deze week');
     }
 });
 
@@ -182,9 +183,9 @@ $.ajax({
     complete: function(data){
         calculateChassisPlannedToday(chassisnr_pln_date);
         calculateAmountDelayed(chassisnr_pln_date);
-        createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
-        createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
-        createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
+        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
+        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
+        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
     }
 });
 
@@ -329,7 +330,7 @@ function calculateAmountDelayed(my_data){
  * Output: Vertical bart chart with the amount of chassis that are planned per year
  */
 function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
-    const week_chassis = new Array(7).fill(0);
+    const week_chassis = new Array(5).fill(0);
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
     let firstDay = new Date(curr.setDate(first));
@@ -369,15 +370,13 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
     lastDay.setTime(firstDay.getTime() + (6*864e5));
     lastDay.setHours(0, 0, 0, 0);
 
-    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
+    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay]
     const labels = [
         firstDay.getDate() + '/' + (firstDay.getMonth() + 1),
         secondDay.getDate() + '/' + (secondDay.getMonth() + 1),
         thirdDay.getDate() + '/' + (thirdDay.getMonth() + 1),
         fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
         fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
-        sixthDay.getDate() + '/' + (sixthDay.getMonth() + 1),
-        lastDay.getDate() + '/' + (lastDay.getMonth() + 1),
     ]
 
     for (const i in my_data){
@@ -761,10 +760,10 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 break;
         }
     }
-    const week_stand_las_0 = new Array(7).fill(0);
-    const week_stand_las_1 = new Array(7).fill(0);
-    const week_stand_las_2 = new Array(7).fill(0);
-    const week_stand_las_3 = new Array(7).fill(0);
+    const week_stand_las_0 = new Array(5).fill(0);
+    const week_stand_las_1 = new Array(5).fill(0);
+    const week_stand_las_2 = new Array(5).fill(0);
+    const week_stand_las_3 = new Array(5).fill(0);
 
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
@@ -773,6 +772,10 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
 
     if (next_week === 1){
         firstDay.setDate(firstDay.getDate() + 7);
+        firstDay.setHours(0, 0, 0, 0);
+    }
+    else if (next_week === 2){
+        firstDay.setDate(firstDay.getDate() + 14);
         firstDay.setHours(0, 0, 0, 0);
     }
 
@@ -795,15 +798,13 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
     lastDay.setTime(firstDay.getTime() + (6*864e5));
     lastDay.setHours(0, 0, 0, 0);
 
-    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay, sixthDay, lastDay]
+    const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay]
     const labels = [
         firstDay.getDate() + '/' + (firstDay.getMonth() + 1),
         secondDay.getDate() + '/' + (secondDay.getMonth() + 1),
         thirdDay.getDate() + '/' + (thirdDay.getMonth() + 1),
         fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
         fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
-        sixthDay.getDate() + '/' + (sixthDay.getMonth() + 1),
-        lastDay.getDate() + '/' + (lastDay.getMonth() + 1),
     ]
 
     for (const i in stand_las_0){
@@ -880,7 +881,7 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                     text: my_graph_title
                 },
                 legend: {
-                    position: "left", labels: {
+                    position: "top", labels: {
                         usePointStyle: true,
                     },
                 },
