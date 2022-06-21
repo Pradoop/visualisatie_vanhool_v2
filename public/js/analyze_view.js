@@ -308,7 +308,7 @@ function createTableChassisPlanned(my_data, my_date, my_table_id, my_title){
             let row_klantnaam = document.createElement('td');
             let row_wagentype = document.createElement('td');
             let temp = temp_chassis[j];
-            row_date.innerHTML = temp[1].getDate() + "/" + temp[1].getMonth();
+            row_date.innerHTML = temp[1].getDate() + "/" + (temp[1].getMonth()+1);
             row_wagennr.innerHTML = temp[0];
             row_klantnaam.innerHTML = temp[2];
             row_wagentype.innerHTML = temp[3];
@@ -319,6 +319,7 @@ function createTableChassisPlanned(my_data, my_date, my_table_id, my_title){
             tbody.appendChild(new_row);
         }
     }
+    document.getElementById("chassis-today-table").style.marginLeft = "2%";
 }
 
 /*

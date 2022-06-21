@@ -396,8 +396,7 @@ class Home extends BaseController
                 $temp[] = trim($my_array[$line_number][3]);
             }
             if(isset($my_array[$line_number][5])) {
-                $value = trim($my_array[$line_number][5]);
-                $temp[] = str_replace(".", "_", $value);
+                $temp[] = trim($my_array[$line_number][5]);
             }
             if(isset($my_array[$line_number][7])) {
                 $temp[] = trim($my_array[$line_number][7]);

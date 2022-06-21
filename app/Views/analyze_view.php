@@ -66,7 +66,7 @@
                 <div class="card chart" id="multiple_bar_chart">
                     <canvas id="fornight_welding_chart"></canvas>
                 </div>
-                <div class="table-container">
+                <div class="card table-container">
                     <p class="table-title" id="chassis-today-table-title"></p>
                     <table class="data-table" id="chassis-today-table"></table>
                 </div>
