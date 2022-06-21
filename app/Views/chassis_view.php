@@ -7,6 +7,17 @@
             </h1>
         </div>
     </div>
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Filters
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li>
+                <input class="form-check-input" type="checkbox" id="gegalvaniseerd-filter">
+                <label class="form-check-label" for="gegalvaniseerd-filter">Gegalvaniseerde wagens</label>
+            </li>
+        </ul>
+    </div>
     <div id="searchBox">
         <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">
     </div>
@@ -20,15 +31,15 @@
     <table id="chassis_table" class="table table-striped table-hover">
         <thead>
             <tr>
-                <th>Gepland</th>
-                <th>Wagen</th>
-                <th>Wagentype</th>
-                <th>Klant</th>
-                <th>Reeks</th>
-                <th>Galva</th>
-                <th>DagenTot</th>
-                <th>WdInMont</th>
-                <th>Status</th>
+                <th id="th0">Gepland</th>
+                <th id="th1">Wagen</th>
+                <th id="th2">Wagentype</th>
+                <th id="th3">Klant</th>
+                <th id="th4">Reeks</th>
+                <th id="th5">Galva</th>
+                <th id="th6">DagenTot</th>
+                <th id="th7">WdInMont</th>
+                <th id="th8">Status</th>
             </tr>
         </thead>
         <tbody id="myTable">
