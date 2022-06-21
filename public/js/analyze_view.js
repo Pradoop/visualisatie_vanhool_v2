@@ -7,8 +7,9 @@ const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [];
  */
 Chart.register(ChartDataLabels);
 Chart.defaults.set('plugins.datalabels', {
-    color: 'white'
+    color: 'white',
 });
+Chart.defaults.font.size = 16;
 
 /*
  * Ajax request to retrieve the data for welding
@@ -346,7 +347,9 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
     }
     const data = {
         labels: labels, datasets: [{
-            label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: week_chassis_count,
+            label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: week_chassis_count,font: {
+                size: 17,
+            }
         }]
     };
     const config = {
@@ -367,7 +370,7 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                 },
                 x:{
                     display: true, title:{
-                        display:true, text: "Datum"
+                        display:true, text: "Datum",
                     },
                     grid: {
                         display: false,
@@ -390,7 +393,9 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                     }
                 },
                 title:{
-                    display: true, text: my_graph_title
+                    display: true, text: my_graph_title, font:{
+                        size: 18
+                    },
                 },
                 legend:{
                     display: false, position: "right", align: "center", labels:{
@@ -399,7 +404,6 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                 },
 
             },
-            //hoverBackgroundColor: 'white',
         },
     }
     const myChart = new Chart(document.getElementById(my_graph_id), config);
@@ -424,8 +428,6 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
         firstDay.setDate(firstDay.getDate() + 14);
         firstDay.setHours(0, 0, 0, 0);
     }
-
-
 
     let secondDay = new Date();
     secondDay.setTime(firstDay.getTime() + 864e5);
@@ -522,12 +524,15 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
         options: {
             plugins: {
                 title: {
-                    display: true,
-                    text: my_graph_title
+                    display: true, text: my_graph_title, font: {
+                        size: 18,
+                    },
                 },
                 legend: {
                     position: "top", labels: {
-                        usePointStyle: true,
+                        usePointStyle: true, font: {
+                            size: 14,
+                        },
                     },
                 },
             },
@@ -538,12 +543,13 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 x: {
                     stacked: true, beginAtZero: true, display: true, categoryPercentage: 0.0, barPercentage: 0.0,
                     title:{
-                        display:true, text: "Datum"
+                        display:true, text: "Datum",
                     },
                     grid: {
                         display: false,
                         drawBorder: false,
-                    }
+                    },
+
                 },
                 y: {
                     stacked: true, beginAtZero: true, display: true, ticks:{
