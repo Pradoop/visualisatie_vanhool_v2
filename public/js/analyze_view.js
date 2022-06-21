@@ -118,24 +118,26 @@ $.ajax({
  * This call also executes the createPhaseChart() function based on the data that is retrieved
  */
 $.ajax({
-    url: BASE_URL + '/Home/getPlannedTime',
+    url: BASE_URL + '/Home/getWeekChartInfo',
     method: "get",
     dataType: 'text',
     success: function(response) {
         const responseObject = JSON.parse(response);
         let year = "";
         const tempYear = "";
-        for(const c in responseObject){
-
-            //reformat date
-            let temp = responseObject[c];
-            year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
-            let month = temp.substring(2, 4);
-            let day = temp.substring(4, 6);
-            let date = new Date(year, month - 1, day);
-            date.setHours(0, 0, 0, 0);
-
-            chassis_pln_date.push(date);
+        for(let i = 0; i < responseObject.length; i++){
+            if (i % 2 !== 0 ){
+                const temp = responseObject[i];
+                year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
+                const month = temp.substring(2, 4);
+                const day = temp.substring(4, 6);
+                let date = new Date(year, month - 1, day);
+                date.setHours(0, 0, 0, 0);
+                chassis_pln_date.push(date);
+            }
+            else{
+                chassis_pln_date.push(responseObject[i]);
+            }
         }
     },
     error: function (xhr, status, error) {
@@ -151,57 +153,15 @@ $.ajax({
 });
 
 /*
- * Ajax request to retrieve all the dtmGepland
- * This call also executes the createPhaseChart() function based on the data that is retrieved
- */
-/*
-$.ajax({
-    url: BASE_URL + '/Home/getPlannedChassisAndTime',
-    method: "get",
-    dataType: 'text',
-    success: function(response) {
-        const responseObject = JSON.parse(response);
-        let year = "";
-        const tempYear = "";
-        for(let i = 0; i < responseObject.length; i++){
-            if (i % 2 !== 0 ){
-                const temp = responseObject[i];
-                year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
-                const month = temp.substring(2, 4);
-                const day = temp.substring(4, 6);
-                let date = new Date(year, month - 1, day);
-                date.setHours(0, 0, 0, 0);
-                chassisnr_pln_date.push(date);
-            }
-            else{
-                chassisnr_pln_date.push(responseObject[i]);
-            }
-        }
-    },
-    error: function (xhr, status, error) {
-        console.log("ERROR")
-        console.log(xhr.responseText);
-        console.log(error.responseText);
-    },
-    complete: function(data){
-        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
-        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
-        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
-    }
-});
- */
-
-/*
  * Ajax request to retrieve wagennr, dtmGepland, wagTyp en klantNaam
  *
  */
 $.ajax({
-    url: BASE_URL + '/Home/getTableInfo',
+    url: BASE_URL + '/Home/getTableInfoToday',
     method: "get",
     dataType: 'text',
     success: function(response) {
         const responseObject = JSON.parse(response);
-        //console.log(responseObject);
         let year = "";
         const tempYear = "";
         for(let i = 0; i < responseObject.length; i++){
@@ -319,7 +279,6 @@ function createTableChassisPlanned(my_data, my_date, my_table_id, my_title){
             tbody.appendChild(new_row);
         }
     }
-    document.getElementById("chassis-today-table").style.marginLeft = "2%";
 }
 
 /*
@@ -329,7 +288,8 @@ function createTableChassisPlanned(my_data, my_date, my_table_id, my_title){
  * Output: Vertical bart chart with the amount of chassis that are planned per year
  */
 function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
-    const week_chassis = new Array(5).fill(0);
+    const week_chassis_count = new Array(5).fill(0);
+    const week_chassis_data = [[], [], [], [], []];
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
     let firstDay = new Date(curr.setDate(first));
@@ -376,17 +336,17 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
         fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
         fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
     ]
-
-    for (const i in my_data){
+    for (let i = 1; i<my_data.length; i+=2){
         for (const j in thisWeek){
             if ((my_data[i].getFullYear() === thisWeek[j].getFullYear()) && (my_data[i].getMonth() === thisWeek[j].getMonth()) && (my_data[i].getDate() === thisWeek[j].getDate())){
-                week_chassis[j]++;
+                week_chassis_count[j]++;
+                week_chassis_data[j].push(my_data[i-1]);
             }
         }
     }
     const data = {
         labels: labels, datasets: [{
-            label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: week_chassis,
+            label: 'Aantal chassis', backgroundColor: 'rgb(16, 57, 93)', data: week_chassis_count,
         }]
     };
     const config = {
@@ -416,6 +376,19 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                 }
             },
             plugins:{
+                tooltip:{
+                    callbacks: {
+                        beforeTitle: function (context){
+                            return `Gepland op ${context[0].label}:`;
+                        },
+                        title: function(context){
+                            return `Wagennr - KlantNaam - WagenType`;
+                        },
+                        beforeBody: function(context){
+                            return week_chassis_data[context[0].dataIndex];
+                        }
+                    }
+                },
                 title:{
                     display: true, text: my_graph_title
                 },
@@ -424,7 +397,9 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                         boxWidth: 10, boxHeight: 10,
                     }
                 },
-            }
+
+            },
+            //hoverBackgroundColor: 'white',
         },
     }
     const myChart = new Chart(document.getElementById(my_graph_id), config);
@@ -589,6 +564,4 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
     const myChart = new Chart(document.getElementById(my_graph_id), config);
 
 }
-
-
 

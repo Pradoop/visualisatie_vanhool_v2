@@ -68,8 +68,8 @@ class Home extends BaseController
         $data2["welding_info"] = $this->calculateTotalWeldingData();
         $data2["chassis_phase"] = $this->calculateChassisPerPhase();
         $data2["planned_dates"] = $this->getPlannedTime();
-        $data2["chassis_planned_dates"] = $this->getPlannedChassisAndTime();
-        $data2["table_info"] = $this->getTableInfo();
+        $data2["chassis_planned_dates"] = $this->getWeekChartInfo();
+        $data2["table_info"] = $this->getTableInfoToday();
 
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
@@ -363,7 +363,7 @@ class Home extends BaseController
         return json_encode($output_array);
     }
 
-    public function getPlannedChassisAndTime(): bool|string
+    public function getWeekChartInfo(): bool|string
     {
         $line_array = $this->file_model->readFile()[0];
         $my_array = $this->file_model->fileColumnArrays($line_array)[4];
@@ -371,17 +371,17 @@ class Home extends BaseController
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
             if(isset($my_array[$line_number][0])) {
-                $output_array[] = strval($my_array[$line_number][0]);
+                $output_array[] = trim($my_array[$line_number][0]);
             }
             if(isset($my_array[$line_number][3])) {
-                $output_array[] = strval($my_array[$line_number][3]);
+                $output_array[] = trim($my_array[$line_number][3]);
             }
             $line_number++;
         endwhile;
         return json_encode($output_array);
     }
 
-    public function getTableInfo()
+    public function getTableInfoToday()
     {
         $line_array = $this->file_model->readFile()[0];
         $my_array = $this->file_model->fileColumnArrays($line_array)[8];

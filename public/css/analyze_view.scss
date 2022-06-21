@@ -84,33 +84,8 @@ p{
   margin: 0;
 }
 
-/*thead{
-  border-bottom: 1px solid #ddd;
-}
-
-
-tbody {
-  display:inline-block; !* whatever, just  reset table layout display to go further *!
-}
-
-tr {
-  display:flex;
-  flex-wrap:wrap; !* allow to wrap on multiple rows *!
-  border-bottom: 1px dotted #ddd;
-
-}
-
-.test-tr{
-  flex-wrap: unset;
-}
-
-td {
-  display:contents;
-  flex:1; !* to evenly distribute flex elements *!
-  margin-left: 10%;
-}*/
-
-.table-container{
+.chassis-today-table{
+  margin-left: 2%;
 }
 
 .all-table-container{
