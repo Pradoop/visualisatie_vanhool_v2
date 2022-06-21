@@ -4,8 +4,8 @@
         <div class="grid-child col1">
             <div class="card card-1">
                 <div class="information_1">
-                    <p class="information_value"><?= $total_in_production[0] ?></p>
-                    <p class="information_text">chassis in montage</p>
+                    <p class="information_value"><?= $total_in_production[0] ?> chassis</p>
+                    <p class="information_text">in montage</p>
                 </div>
             </div>
             <div class="card card-info">
@@ -65,6 +65,10 @@
                 </div>
                 <div class="card chart" id="multiple_bar_chart">
                     <canvas id="fornight_welding_chart"></canvas>
+                </div>
+                <div class="table-container">
+                    <p class="table-title" id="chassis-today-table-title"></p>
+                    <table class="data-table" id="chassis-today-table"></table>
                 </div>
             </div>
         </div>

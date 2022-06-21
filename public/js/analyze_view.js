@@ -1,5 +1,5 @@
 const welding_data = [], total_welding_data = [], chassis_phase = [];
-const chassisnr_pln_date = [], chassis_pln_date = [], chassis_per_year = [];
+const chassisnr_pln_date = [], chassis_pln_date = [], chassis_table = [];
 const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [];
 /*
  * Registration of the chartjs-plugin-datalabels plugin. Is required to make it work
@@ -154,6 +154,7 @@ $.ajax({
  * Ajax request to retrieve all the dtmGepland
  * This call also executes the createPhaseChart() function based on the data that is retrieved
  */
+/*
 $.ajax({
     url: BASE_URL + '/Home/getPlannedChassisAndTime',
     method: "get",
@@ -188,6 +189,50 @@ $.ajax({
         //createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
     }
 });
+ */
+
+/*
+ * Ajax request to retrieve wagennr, dtmGepland, wagTyp en klantNaam
+ *
+ */
+$.ajax({
+    url: BASE_URL + '/Home/getTableInfo',
+    method: "get",
+    dataType: 'text',
+    success: function(response) {
+        const responseObject = JSON.parse(response);
+        //console.log(responseObject);
+        let year = "";
+        const tempYear = "";
+        for(let i = 0; i < responseObject.length; i++){
+            let currentObject = responseObject[i];
+            for (let j = 0;  j< currentObject.length; j++){
+                if (j % 3 === 1 ){
+                    const temp = currentObject[j];
+                    year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
+                    const month = temp.substring(2, 4);
+                    const day = temp.substring(4, 6);
+                    let date = new Date(year, month - 1, day);
+                    date.setHours(0, 0, 0, 0);
+                    currentObject[j] = date;
+                }
+            }
+            chassis_table.push(currentObject);
+        }
+    },
+    error: function (xhr, status, error) {
+        console.log("ERROR")
+        console.log(xhr.responseText);
+        console.log(error.responseText);
+    },
+    complete: function(data){
+        createTableChassisPlanned(chassis_table, new Date(), 'chassis-today-table', 'Chassis gepland vandaag');
+        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
+        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
+        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
+    }
+});
+
 
 function calculateWeekNumber(my_date){
     //To calculate week number
@@ -196,30 +241,12 @@ function calculateWeekNumber(my_date){
     return Math.ceil((my_date.getDay() + 1 + numberOfDays) / 7)
 }
 
-function createTableChassisPlannedToday(){
-
-}
-
-function createTableChassisPlanned(my_data, next_week, my_table_id, my_title){
-    const week_chassis = [[], [], [], [], [], [], []];
-    const curr = new Date; // get current date
-    const first = curr.getDate() - curr.getDay() + 1;
-    let firstDay = new Date(curr.setDate(first));
+function createTableChassisPlanned(my_data, my_date, my_table_id, my_title){
+    const week_chassis = [[], [], [], [], []];
+    let firstDay = my_date;
     firstDay.setHours(0, 0, 0, 0);
 
-    switch (next_week){
-        case 1:
-            firstDay.setDate(firstDay.getDate() + 7);
-            firstDay.setHours(0, 0, 0, 0);
-            break;
-        case 2:
-            firstDay.setDate(firstDay.getDate() + 14);
-            firstDay.setHours(0, 0, 0, 0);
-            break;
-    }
-
     const weekNumber = calculateWeekNumber(firstDay);
-    my_title = my_title + " (week " + weekNumber + ")";
     let table_title = document.getElementById(my_table_id + "-title");
     table_title.innerHTML = my_title;
 
@@ -235,25 +262,17 @@ function createTableChassisPlanned(my_data, next_week, my_table_id, my_title){
     let fifthDay = new Date();
     fifthDay.setTime(firstDay.getTime() + (4*864e5));
     fifthDay.setHours(0, 0, 0, 0);
-    let sixthDay = new Date();
 
     const thisWeek = [firstDay, secondDay, thirdDay, fourthDay, fifthDay]
-    const labels = [
-        firstDay.getDate() + '/' + (firstDay.getMonth() + 1),
-        secondDay.getDate() + '/' + (secondDay.getMonth() + 1),
-        thirdDay.getDate() + '/' + (thirdDay.getMonth() + 1),
-        fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
-        fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
-    ]
-
-    for (let i = 1; i <= my_data.length; i += 2) {
+    for (let i = 0; i < my_data.length; i++) {
+        let temp = [];
+        temp = my_data[i];
         for (const j in thisWeek) {
-            if ((thisWeek[j].getFullYear() === my_data[i].getFullYear()) && (thisWeek[j].getMonth() === my_data[i].getMonth()) && (thisWeek[j].getDate() === my_data[i].getDate())) {
-                week_chassis[j].push(my_data[i - 1]);
+            if((thisWeek[j].getFullYear() === temp[1].getFullYear())&&(thisWeek[j].getMonth() === temp[1].getMonth()) && (thisWeek[j].getDate() === temp[1].getDate())){
+                week_chassis[j].push(temp);
             }
         }
     }
-
 
     let table = document.createElement('table');
     let thead = document.createElement('thead');
@@ -263,32 +282,42 @@ function createTableChassisPlanned(my_data, next_week, my_table_id, my_title){
 
     let row_1 = document.createElement('tr');
     let heading_1 = document.createElement('th');
-    heading_1.innerHTML = "Datum";
     let heading_2 = document.createElement('th');
+    let heading_3 = document.createElement('th');
+    let heading_4 = document.createElement('th');
+
+    heading_1.innerHTML = "Datum";
     heading_2.innerHTML = "Wagennr";
+    heading_3.innerHTML = "Klantnaam";
+    heading_4.innerHTML = "WagenType";
     row_1.appendChild(heading_1);
     row_1.appendChild(heading_2);
+    row_1.appendChild(heading_3);
+    row_1.appendChild(heading_4);
     thead.appendChild(row_1);
 
 
     // Adding the entire table to the body tag
     document.getElementById(my_table_id).appendChild(table);
-
-    for (const i in week_chassis){
-        let new_row = document.createElement('tr');
-        let row_date = document.createElement('td');
-        row_date.innerHTML = labels[i];
-        row_date.style.cssText = "font-style:italic;border-right:2px#10395d;";
-        new_row.appendChild(row_date);
-        let next_row = document.createElement('tr');
-        for (const j in week_chassis[i]){
-            let new_row_data = document.createElement('td');
-            new_row_data.innerHTML = week_chassis[i][j] + ";";
-            next_row.appendChild(new_row_data);
+    for (let i =0; i<week_chassis.length; i++){
+        let temp_chassis = week_chassis[i];
+        for (let j = 0; j < temp_chassis.length; j++){
+            let new_row = document.createElement('tr');
+            let row_date = document.createElement('td');
+            let row_wagennr = document.createElement('td');
+            let row_klantnaam = document.createElement('td');
+            let row_wagentype = document.createElement('td');
+            let temp = temp_chassis[j];
+            row_date.innerHTML = temp[1].getDate() + "/" + temp[1].getMonth();
+            row_wagennr.innerHTML = temp[0];
+            row_klantnaam.innerHTML = temp[2];
+            row_wagentype.innerHTML = temp[3];
+            new_row.appendChild(row_date);
+            new_row.appendChild(row_wagennr);
+            new_row.appendChild(row_wagentype);
+            new_row.appendChild(row_klantnaam);
+            tbody.appendChild(new_row);
         }
-        tbody.appendChild(new_row);
-        new_row.appendChild(next_row);
-        next_row.style.cssText = "margin-left:10%;"
     }
 }
 

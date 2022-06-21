@@ -69,6 +69,7 @@ class Home extends BaseController
         $data2["chassis_phase"] = $this->calculateChassisPerPhase();
         $data2["planned_dates"] = $this->getPlannedTime();
         $data2["chassis_planned_dates"] = $this->getPlannedChassisAndTime();
+        $data2["table_info"] = $this->getTableInfo();
 
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
@@ -123,9 +124,6 @@ class Home extends BaseController
         $delayed = 0;
         $montage_array = array();
         $today = date('ymd');
-
-
-
         for ($i = 1; $i < sizeof($my_array); $i+=1){
             if(isset($my_array[$i][14])) {
                 switch ($my_array[$i][14]){
@@ -140,14 +138,11 @@ class Home extends BaseController
                 }
             }
         }
-
-
         for ($j = 0; $j < sizeof($montage_array); $j++){
             if ($today - $montage_array[$j] > 0){
                 $delayed++;
             }
         }
-
         return $delayed;
     }
 
@@ -383,6 +378,36 @@ class Home extends BaseController
             }
             $line_number++;
         endwhile;
+        return json_encode($output_array);
+    }
+
+    public function getTableInfo()
+    {
+        $line_array = $this->file_model->readFile()[0];
+        $my_array = $this->file_model->fileColumnArrays($line_array)[8];
+        $output_array = array();
+        $line_number = 1;
+        while ($line_number < sizeof($my_array)):
+            $temp = array();
+            if(isset($my_array[$line_number][0])) {
+                 $temp[] = trim($my_array[$line_number][0]);
+            }
+            if(isset($my_array[$line_number][3])) {
+                $temp[] = trim($my_array[$line_number][3]);
+            }
+            if(isset($my_array[$line_number][5])) {
+                $value = trim($my_array[$line_number][5]);
+                $temp[] = str_replace(".", "_", $value);
+            }
+            if(isset($my_array[$line_number][7])) {
+                $temp[] = trim($my_array[$line_number][7]);
+            }
+            $line_number++;
+            if (isset($temp[1]) && $temp[1] == date('ymd')){
+                $output_array[] = $temp;
+            }
+        endwhile;
+
         return json_encode($output_array);
     }
 

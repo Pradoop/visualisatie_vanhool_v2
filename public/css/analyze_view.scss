@@ -84,21 +84,18 @@ p{
   margin: 0;
 }
 
-thead{
+/*thead{
   border-bottom: 1px solid #ddd;
 }
 
-th{
-  margin-right: 25%;
-}
 
 tbody {
-  display:inline-block; /* whatever, just  reset table layout display to go further */
+  display:inline-block; !* whatever, just  reset table layout display to go further *!
 }
 
 tr {
   display:flex;
-  flex-wrap:wrap; /* allow to wrap on multiple rows */
+  flex-wrap:wrap; !* allow to wrap on multiple rows *!
   border-bottom: 1px dotted #ddd;
 
 }
@@ -109,9 +106,9 @@ tr {
 
 td {
   display:contents;
-  flex:1; /* to evenly distribute flex elements */
+  flex:1; !* to evenly distribute flex elements *!
   margin-left: 10%;
-}
+}*/
 
 .table-container{
   margin-left: 1%;

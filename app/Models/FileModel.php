@@ -21,7 +21,7 @@ class FileModel extends \CodeIgniter\Model
         * Large txtFile with columns: Wagen,Ew,Aantal,dtmGepland,wagtyp,naamWagTyp,KlantNr,naamKlant,Land,LijnNr,ReeksVan,Afdeling,Galva,DLnr,Status,CntrDtm,wdTeLaat,wdInMont,standLas
         */
         $planningMontage_array = array();
-        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\PlanningMontage.txt", "r");
+        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\planningMontage.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
@@ -60,6 +60,7 @@ class FileModel extends \CodeIgniter\Model
         $wdInMont_array = array();
         $wagennr_dtmGepland_standLas_array = array();
         $galva_array = array();
+        $table_info = array();
 
         /*
         * Gets the status of each line in array
@@ -133,6 +134,15 @@ class FileModel extends \CodeIgniter\Model
             array_push($wagennr_dtmGepland_standLas_array, $array);
         }
 
+        /*
+        * Gets the wagennr, dtmGepland and wagTyp and klantNaam of each line in array
+        */
+        foreach($file_by_line_array as $line) {
+            $array = preg_split('/\t/', $line);
+            unset($array[1],$array[2],$array[4],$array[6],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[16],$array[17],$array[18],$array[19]);
+            array_push($table_info, $array);
+        }
+
         $main_arrays[] = $status_array;
         $main_arrays[] = $wdTeLaat_array;
         $main_arrays[] = $standLas_array;
@@ -141,6 +151,7 @@ class FileModel extends \CodeIgniter\Model
         $main_arrays[] = $galva_array;
         $main_arrays[] = $wdInMont_array;
         $main_arrays[] = $wagennr_dtmGepland_standLas_array;
+        $main_arrays[] = $table_info;
 
 
         return $main_arrays;
