@@ -354,11 +354,29 @@ class Home extends BaseController
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
-            if(isset($my_array[$line_number][0]) && isset($my_array[$line_number][3]) && isset($my_array[$line_number][18]) && strlen(trim($my_array[$line_number][18])) > 0) {
-                $temp = array("chassis_nr"=>strval($my_array[$line_number][0]), "dtm_gepland"=>strval($my_array[$line_number][3]), "stand_las"=>strval($my_array[$line_number][18]));
+            $temp = array();
+            if(isset($my_array[$line_number][0])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][0]));
+            }
+            if(isset($my_array[$line_number][3])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][3]));
+            }
+            if(isset($my_array[$line_number][5])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][5]));
+            }
+            if(isset($my_array[$line_number][7])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][7]));
+            }
+            if(isset($my_array[$line_number][18])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][18]));
+            }
+            $period_start_date = strtotime('last Monday');
+            $period_end_date = strtotime('+3 weeks', $period_start_date);
+            $period_end_date = date('ymd', strtotime('-1 day', $period_end_date));
+            $line_number++;
+            if ((isset($temp[1])) && ($temp[1] < $period_end_date) && ($temp[1] >= date('ymd', $period_start_date))){
                 $output_array[] = $temp;
             }
-            $line_number++;
         endwhile;
         return json_encode($output_array);
     }

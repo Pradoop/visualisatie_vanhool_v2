@@ -47,19 +47,20 @@ $.ajax({
         const responseObject = JSON.parse(response);
         let year = "";
         const tempYear = "";
-        for(const c in responseObject){
-
-            let temp = responseObject[c].dtm_gepland;
-
-            //reformat date
-            year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
-            let month = temp.substring(2, 4);
-            let day = temp.substring(4, 6);
-            let date = new Date(year, month - 1, day);
-            date.setHours(0, 0, 0, 0);
-            responseObject[c].dtm_gepland = date;
-            total_welding_data.push(responseObject[c])
-
+        for(let i = 0; i < responseObject.length; i++) {
+            let currentObject = responseObject[i];
+            for (let j = 0; j < currentObject.length; j++) {
+                if (j % 6 === 1) {
+                    const temp = currentObject[j];
+                    year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
+                    const month = temp.substring(2, 4);
+                    const day = temp.substring(4, 6);
+                    let date = new Date(year, month - 1, day);
+                    date.setHours(0, 0, 0, 0);
+                    currentObject[j] = date;
+                }
+            }
+            total_welding_data.push(currentObject);
         }
     },
     error: function (xhr, status, error) {
@@ -69,7 +70,7 @@ $.ajax({
     },
     complete: function(data){
         for (const i in total_welding_data){
-            switch (total_welding_data[i].stand_las){
+            switch (total_welding_data[i][4]){
                 case "L0":
                     stand_las_0.push(total_welding_data[i]);
                     break;
@@ -421,6 +422,12 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
     const week_stand_las_1 = new Array(5).fill(0);
     const week_stand_las_2 = new Array(5).fill(0);
     const week_stand_las_3 = new Array(5).fill(0);
+    const tooltip_data_stand_0 = [[], [], [], [], []];
+    const tooltip_data_stand_1 = [[], [], [], [], []];
+    const tooltip_data_stand_2 = [[], [], [], [], []];
+    const tooltip_data_stand_3 = [[], [], [], [], []];
+    const all_tooltip_data = [[], [], [], []];
+
 
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
@@ -460,35 +467,62 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
 
     for (const i in stand_las_0){
         for (const j in thisWeek){
-            if ((stand_las_0[i].dtm_gepland.getFullYear() === thisWeek[j].getFullYear()) && (stand_las_0[i].dtm_gepland.getMonth() === thisWeek[j].getMonth()) && (stand_las_0[i].dtm_gepland.getDate() === thisWeek[j].getDate())){
+            if ((stand_las_0[i][1].getFullYear() === thisWeek[j].getFullYear()) && (stand_las_0[i][1].getMonth() === thisWeek[j].getMonth()) && (stand_las_0[i][1].getDate() === thisWeek[j].getDate())){
                 week_stand_las_0[j]++;
+                let tooltip_temp = [];
+                tooltip_temp.push(my_data[i][0]);
+                tooltip_temp.push(my_data[i][2]);
+                tooltip_temp.push(my_data[i][3]);
+                tooltip_data_stand_0[j].push(tooltip_temp);
             }
         }
     }
 
     for (const i in stand_las_1){
         for (const j in thisWeek){
-            if ((stand_las_1[i].dtm_gepland.getFullYear() === thisWeek[j].getFullYear()) && (stand_las_1[i].dtm_gepland.getMonth() === thisWeek[j].getMonth()) && (stand_las_1[i].dtm_gepland.getDate() === thisWeek[j].getDate())){
+            if ((stand_las_1[i][1].getFullYear() === thisWeek[j].getFullYear()) && (stand_las_1[i][1].getMonth() === thisWeek[j].getMonth()) && (stand_las_1[i][1].getDate() === thisWeek[j].getDate())){
                 week_stand_las_1[j]++;
+                let tooltip_temp = [];
+                tooltip_temp.push(my_data[i][0]);
+                tooltip_temp.push(my_data[i][2]);
+                tooltip_temp.push(my_data[i][3]);
+                tooltip_data_stand_1[j].push(tooltip_temp);
             }
         }
     }
 
     for (const i in stand_las_2){
         for (const j in thisWeek){
-            if ((stand_las_2[i].dtm_gepland.getFullYear() === thisWeek[j].getFullYear()) && (stand_las_2[i].dtm_gepland.getMonth() === thisWeek[j].getMonth()) && (stand_las_2[i].dtm_gepland.getDate() === thisWeek[j].getDate())){
+            if ((stand_las_2[i][1].getFullYear() === thisWeek[j].getFullYear()) && (stand_las_2[i][1].getMonth() === thisWeek[j].getMonth()) && (stand_las_2[i][1].getDate() === thisWeek[j].getDate())){
                 week_stand_las_2[j]++;
+                let tooltip_temp = [];
+                tooltip_temp.push(my_data[i][0]);
+                tooltip_temp.push(my_data[i][2]);
+                tooltip_temp.push(my_data[i][3]);
+                tooltip_data_stand_2[j].push(tooltip_temp);
             }
         }
     }
 
     for (const i in stand_las_3){
         for (const j in thisWeek){
-            if ((stand_las_3[i].dtm_gepland.getFullYear() === thisWeek[j].getFullYear()) && (stand_las_3[i].dtm_gepland.getMonth() === thisWeek[j].getMonth()) && (stand_las_3[i].dtm_gepland.getDate() === thisWeek[j].getDate())){
+            if ((stand_las_3[i][1].getFullYear() === thisWeek[j].getFullYear()) && (stand_las_3[i][1].getMonth() === thisWeek[j].getMonth()) && (stand_las_3[i][1].getDate() === thisWeek[j].getDate())){
                 week_stand_las_3[j]++;
+                let tooltip_temp = [];
+                tooltip_temp.push(my_data[i][0]);
+                tooltip_temp.push(my_data[i][2]);
+                tooltip_temp.push(my_data[i][3]);
+                tooltip_data_stand_3[j].push(tooltip_temp);
             }
         }
     }
+
+    all_tooltip_data[0].push(tooltip_data_stand_0);
+    all_tooltip_data[1].push(tooltip_data_stand_1);
+    all_tooltip_data[2].push(tooltip_data_stand_2);
+    all_tooltip_data[3].push(tooltip_data_stand_3);
+    console.log(all_tooltip_data);
+
     const weekNumber = calculateWeekNumber(firstDay);
     my_graph_title = my_graph_title + " (week " + weekNumber + ")"
 
@@ -542,6 +576,19 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                         },
                     },
                 },
+                tooltip:{
+                    callbacks: {
+                        beforeTitle: function (context){
+                            return `Gepland op ${context[0].label} - ${context[0].dataset.label}`;
+                        },
+                        title: function(context){
+                            return `Wagennr, KlantNaam, WagenType`;
+                        },
+                        beforeBody: function(context){
+                            return `${all_tooltip_data[context[0].datasetIndex][0][context[0].dataIndex]}`//todo: de juiste data wordt gepushed, maar het staat naast elkaar, moet onder elkaar komen te staan
+                        },
+                    }
+                },
             },
             interaction: {
                 intersect: false,
@@ -575,6 +622,5 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
         }
     };
     const myChart = new Chart(document.getElementById(my_graph_id), config);
-
 }
 

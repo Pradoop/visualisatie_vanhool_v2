@@ -72,7 +72,7 @@ class FileModel extends \CodeIgniter\Model
         $dtmGepland_array = array();
         $wagennr_dtmGepland_array = array();
         $wdInMont_array = array();
-        $wagennr_dtmGepland_standLas_array = array();
+        $weldingData_array = array();
         $galva_array = array();
         $table_info = array();
 
@@ -144,8 +144,8 @@ class FileModel extends \CodeIgniter\Model
         */
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
-            unset($array[1],$array[2],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[16],$array[17],$array[19]);
-            array_push($wagennr_dtmGepland_standLas_array, $array);
+            unset($array[1],$array[2],$array[4],$array[6],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[16],$array[17],$array[19]);
+            array_push($weldingData_array, $array);
         }
 
         /*
@@ -164,7 +164,7 @@ class FileModel extends \CodeIgniter\Model
         $main_arrays[] = $wagennr_dtmGepland_array;
         $main_arrays[] = $galva_array;
         $main_arrays[] = $wdInMont_array;
-        $main_arrays[] = $wagennr_dtmGepland_standLas_array;
+        $main_arrays[] = $weldingData_array;
         $main_arrays[] = $table_info;
 
         return $main_arrays;
