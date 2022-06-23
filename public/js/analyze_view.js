@@ -123,22 +123,23 @@ $.ajax({
     method: "get",
     dataType: 'text',
     success: function(response) {
-        const responseObject = JSON.parse(response);
+        let responseObject = JSON.parse(response);
         let year = "";
         const tempYear = "";
         for(let i = 0; i < responseObject.length; i++){
-            if (i % 2 !== 0 ){
-                const temp = responseObject[i];
-                year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
-                const month = temp.substring(2, 4);
-                const day = temp.substring(4, 6);
-                let date = new Date(year, month - 1, day);
-                date.setHours(0, 0, 0, 0);
-                chassis_pln_date.push(date);
+           let currentObject = responseObject[i];
+            for (let j = 0;  j< currentObject.length; j++){
+                if (j % 3 === 1 ){
+                    const temp = currentObject[j];
+                    year = parseInt(tempYear.concat("20", temp.substring(0, 2)));
+                    const month = temp.substring(2, 4);
+                    const day = temp.substring(4, 6);
+                    let date = new Date(year, month - 1, day);
+                    date.setHours(0, 0, 0, 0);
+                    currentObject[j] = date;
+                }
             }
-            else{
-                chassis_pln_date.push(responseObject[i]);
-            }
+            chassis_pln_date.push(currentObject);
         }
     },
     error: function (xhr, status, error) {
@@ -290,7 +291,7 @@ function createTableChassisPlanned(my_data, my_date, my_table_id, my_title){
  */
 function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
     const week_chassis_count = new Array(5).fill(0);
-    const week_chassis_data = [[], [], [], [], []];
+    const tooltip_data = [[], [], [], [], []];
     const curr = new Date; // get current date
     const first = curr.getDate() - curr.getDay() + 1;
     let firstDay = new Date(curr.setDate(first));
@@ -337,11 +338,17 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
         fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
         fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
     ]
-    for (let i = 1; i<my_data.length; i+=2){
+    for (let i = 1; i<my_data.length; i++){
+        let temp = [];
+        temp = my_data[i];
         for (const j in thisWeek){
-            if ((my_data[i].getFullYear() === thisWeek[j].getFullYear()) && (my_data[i].getMonth() === thisWeek[j].getMonth()) && (my_data[i].getDate() === thisWeek[j].getDate())){
+            if ((temp[1].getFullYear() === thisWeek[j].getFullYear()) && (temp[1].getMonth() === thisWeek[j].getMonth()) && (temp[1].getDate() === thisWeek[j].getDate())){
                 week_chassis_count[j]++;
-                week_chassis_data[j].push(my_data[i-1]);
+                let tooltip_temp = [];
+                tooltip_temp.push(my_data[i][0]);
+                tooltip_temp.push(my_data[i][2]);
+                tooltip_temp.push(my_data[i][3]);
+                tooltip_data[j].push(tooltip_temp);
             }
         }
     }
@@ -385,11 +392,11 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                             return `Gepland op ${context[0].label}:`;
                         },
                         title: function(context){
-                            return `Wagennr - KlantNaam - WagenType`;
+                            return `Wagennr, KlantNaam, WagenType`;
                         },
                         beforeBody: function(context){
-                            return week_chassis_data[context[0].dataIndex];
-                        }
+                            return tooltip_data[context[0].dataIndex];
+                        },
                     }
                 },
                 title:{

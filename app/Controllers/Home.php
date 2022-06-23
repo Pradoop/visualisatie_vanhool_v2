@@ -363,20 +363,33 @@ class Home extends BaseController
         return json_encode($output_array);
     }
 
-    public function getWeekChartInfo(): bool|string
+    public function getWeekChartInfo()
     {
         $line_array = $this->file_model->readFile()[0];
         $my_array = $this->file_model->fileColumnArrays($line_array)[4];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
+            $temp = array();
             if(isset($my_array[$line_number][0])) {
-                $output_array[] = trim($my_array[$line_number][0]);
+                $temp[] = utf8_encode(trim($my_array[$line_number][0]));
             }
             if(isset($my_array[$line_number][3])) {
-                $output_array[] = trim($my_array[$line_number][3]);
+                $temp[] = utf8_encode(trim($my_array[$line_number][3]));
             }
+            if(isset($my_array[$line_number][5])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][5]));
+            }
+            if(isset($my_array[$line_number][7])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][7]));
+            }
+            $period_start_date = strtotime('last Monday');
+            $period_end_date = strtotime('+3 weeks', $period_start_date);
+            $period_end_date = date('ymd', strtotime('-1 day', $period_end_date));
             $line_number++;
+            if ((isset($temp[1])) && ($temp[1] < $period_end_date) && ($temp[1] >= date('ymd', $period_start_date))){
+                $output_array[] = $temp;
+            }
         endwhile;
         return json_encode($output_array);
     }
@@ -402,11 +415,10 @@ class Home extends BaseController
                 $temp[] = trim($my_array[$line_number][7]);
             }
             $line_number++;
-            if (isset($temp[1]) && $temp[1] == date('ymd')){
+            if (isset($temp[1]) && ($temp[1] == date('ymd'))){
                 $output_array[] = $temp;
             }
         endwhile;
-
         return json_encode($output_array);
     }
 

@@ -74,42 +74,6 @@
         </div>
     </div>
 
-<!--    <div class="all-table-container">
-        <div class="table-container">
-            <p class="table-title" id="chassis-this-week-table-title"></p>
-            <table class="data-table" id="chassis-this-week-table"></table>
-        </div>
-        <div class="table-container">
-            <p class="table-title" id="chassis-next-week-table-title"></p>
-            <table class="data-table" id="chassis-next-week-table"></table>
-        </div>
-        <div class="table-container">
-            <p class="table-title" id="chassis-two-weeks-table-title"></p>
-            <table class="data-table" id="chassis-two-weeks-table"></table>
-        </div>
-    </div>-->
-
-
-
-<!--
-    <div class="chart" id="bar_chart">
-        <canvas id="status_chart"></canvas>
-    </div>
-
-
-<div class="chart" id="bar_chart">
-    <canvas id="day_chart"></canvas>
-</div>
-<div class="chart" id="bar_chart">
-    <canvas id="stand_las_chart"></canvas>
-</div>
-
-<div class="chart" id="bar_chart">
-    <canvas class="week-chart" id="year_chart"></canvas>
-</div>
--->
-
-
 </div>
 
 
