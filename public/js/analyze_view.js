@@ -393,7 +393,7 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                             return `Gepland op ${context[0].label}:`;
                         },
                         title: function(context){
-                            return `Wagennr, KlantNaam, WagenType`;
+                            return `Wagennr, Wagentype, Klantnaam`;
                         },
                         beforeBody: function(context){
                             return tooltip_data[context[0].dataIndex];
@@ -516,12 +516,10 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
             }
         }
     }
-
     all_tooltip_data[0].push(tooltip_data_stand_0);
     all_tooltip_data[1].push(tooltip_data_stand_1);
     all_tooltip_data[2].push(tooltip_data_stand_2);
     all_tooltip_data[3].push(tooltip_data_stand_3);
-    console.log(all_tooltip_data);
 
     const weekNumber = calculateWeekNumber(firstDay);
     my_graph_title = my_graph_title + " (week " + weekNumber + ")"
@@ -582,10 +580,10 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                             return `Gepland op ${context[0].label} - ${context[0].dataset.label}`;
                         },
                         title: function(context){
-                            return `Wagennr, KlantNaam, WagenType`;
+                            return `Wagennr, Wagentype, Klantnaam`;
                         },
                         beforeBody: function(context){
-                            return `${all_tooltip_data[context[0].datasetIndex][0][context[0].dataIndex]}`//todo: de juiste data wordt gepushed, maar het staat naast elkaar, moet onder elkaar komen te staan
+                            return all_tooltip_data[context[0].datasetIndex][0][context[0].dataIndex]
                         },
                     }
                 },
