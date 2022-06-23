@@ -1,5 +1,5 @@
 const welding_data = [], total_welding_data = [], chassis_phase = [];
-const chassisnr_pln_date = [], chassis_pln_date = [], chassis_table = [];
+const chassis_pln_date = [], chassis_table = [];
 const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [];
 /*
  * Registration of the chartjs-plugin-datalabels plugin. Is required to make it work
@@ -85,7 +85,7 @@ $.ajax({
                     break;
             }
         }
-        createWeekWeldingChart(total_welding_data, 2, 'fornight_welding_chart', 'Chassis per stand las in twee weken');
+        createWeekWeldingChart(total_welding_data, 2, 'fortnight_welding_chart', 'Chassis per stand las in twee weken');
         createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Chassis per stand las volgende week');
         createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Chassis per stand las deze week');
     }
@@ -190,9 +190,6 @@ $.ajax({
     },
     complete: function(data){
         createTableChassisPlanned(chassis_table, new Date(), 'chassis-today-table', 'Chassis gepland vandaag');
-        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 0, 'chassis-this-week-table', 'Chassis gepland deze week');
-        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 1, 'chassis-next-week-table', 'Chassis gepland volgende week');
-        //createTableChassisPlannedPerWeek(chassisnr_pln_date, 2, 'chassis-two-weeks-table', 'Chassis gepland in twee weken');
     }
 });
 
@@ -415,7 +412,9 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
         },
     }
     const myChart = new Chart(document.getElementById(my_graph_id), config);
+    const modalChart = new Chart(document.getElementById(my_graph_id + '_modal'), config);
 }
+
 
 function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title){
     const week_stand_las_0 = new Array(5).fill(0);
@@ -620,5 +619,101 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
         }
     };
     const myChart = new Chart(document.getElementById(my_graph_id), config);
+    const modalChart = new Chart(document.getElementById(my_graph_id + '_modal'), config);
+
 }
 
+
+/*
+   MODALS
+ */
+
+let modal_this_week = document.getElementById("modal_this_week");
+let this_week_chart = document.getElementById("this_week_chart");
+let close_this_week = document.getElementsByClassName("close this_week")[0];
+this_week_chart.onclick = function() {
+    modal_this_week.style.display = "block";
+}
+close_this_week.onclick = function() {
+    modal_this_week.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target === modal_this_week) {
+        modal_this_week.style.display = "none";
+    }
+}
+
+let modal_next_week = document.getElementById("modal_next_week");
+let next_week_chart = document.getElementById("next_week_chart");
+let close_next_week = document.getElementsByClassName("close next_week")[0];
+next_week_chart.onclick = function() {
+    modal_next_week.style.display = "block";
+}
+close_next_week.onclick = function() {
+    modal_next_week.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target === modal_next_week) {
+        modal_next_week.style.display = "none";
+    }
+}
+
+let modal_fortnight = document.getElementById("modal_fortnight");
+let fortnight_chart = document.getElementById("fortnight_chart");
+let close_fortnight = document.getElementsByClassName("close fortnight")[0];
+fortnight_chart.onclick = function() {
+    modal_fortnight.style.display = "block";
+}
+close_fortnight.onclick = function() {
+    modal_fortnight.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target === modal_fortnight) {
+        modal_fortnight.style.display = "none";
+    }
+}
+
+let modal_this_week_weld = document.getElementById("modal_this_week_weld");
+let this_week_welding_chart = document.getElementById("this_week_welding_chart");
+let this_week_weld = document.getElementsByClassName("close this_week_weld")[0];
+this_week_welding_chart.onclick = function() {
+    modal_this_week_weld.style.display = "block";
+}
+this_week_weld.onclick = function() {
+    modal_this_week_weld.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target === modal_this_week_weld) {
+        modal_this_week_weld.style.display = "none";
+    }
+}
+
+let modal_next_week_weld = document.getElementById("modal_next_week_weld");
+let next_week_welding_chart = document.getElementById("next_week_welding_chart");
+let next_week_weld = document.getElementsByClassName("close next_week_weld")[0];
+next_week_welding_chart.onclick = function() {
+    modal_next_week_weld.style.display = "block";
+}
+next_week_weld.onclick = function() {
+    modal_next_week_weld.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target === modal_next_week_weld) {
+        modal_next_week_weld.style.display = "none";
+    }
+}
+
+let modal_fortnight_weld = document.getElementById("modal_fortnight_weld");
+let fortnight_welding_chart = document.getElementById("fortnight_welding_chart");
+let fortnight_weld = document.getElementsByClassName("close fortnight_weld")[0];
+fortnight_welding_chart.onclick = function() {
+    modal_fortnight_weld.style.display = "block";
+}
+fortnight_weld.onclick = function() {
+    modal_fortnight_weld.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target === modal_fortnight_weld) {
+        modal_fortnight_weld.style.display = "none";
+    }
+}

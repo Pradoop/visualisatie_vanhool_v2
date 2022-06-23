@@ -32,15 +32,7 @@
                     <p class="information_text">te laat</p>
                 </div>
             </div>
-<!--            <div class="chart" id="bar_chart">
-                <canvas class="week-chart" id="month_chart"></canvas>
-            </div>-->
         </div>
-<!--        <div class="grid-child col2">
-            <div class="chart" id="bar_chart">
-                <canvas class="week-chart" id="week_chart"></canvas>
-            </div>
-        </div>-->
         <div class="grid-child col-2">
             <div class="grid-graph-child col4">
                 <div class="card chart chart-row-1" id="bar_chart">
@@ -64,13 +56,56 @@
                     <canvas id="next_week_welding_chart"></canvas>
                 </div>
                 <div class="card chart" id="multiple_bar_chart">
-                    <canvas id="fornight_welding_chart"></canvas>
+                    <canvas id="fortnight_welding_chart"></canvas>
                 </div>
                 <div class="card table-container">
                     <p class="table-title" id="chassis-today-table-title"></p>
                     <table class="data-table" id="chassis-today-table"></table>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modals for large charts -->
+    <div id="modal_this_week" class="modal">
+        <div class="modal-content">
+            <span class="close this_week">&times;</span>
+            <canvas id="this_week_chart_modal"></canvas>
+        </div>
+    </div>
+
+    <div id="modal_next_week" class="modal">
+        <div class="modal-content">
+            <span class="close next_week">&times;</span>
+            <canvas id="next_week_chart_modal"></canvas>
+        </div>
+    </div>
+
+    <div id="modal_fortnight" class="modal">
+        <div class="modal-content">
+            <span class="close fortnight">&times;</span>
+            <canvas id="fortnight_chart_modal"></canvas>
+        </div>
+    </div>
+
+    <div id="modal_this_week_weld" class="modal">
+        <div class="modal-content">
+            <span class="close this_week_weld">&times;</span>
+            <canvas id="this_week_welding_chart_modal"></canvas>
+        </div>
+    </div>
+
+    <div id="modal_next_week_weld" class="modal">
+        <div class="modal-content">
+            <span class="close next_week_weld">&times;</span>
+            <canvas id="next_week_welding_chart_modal"></canvas>
+        </div>
+    </div>
+
+    <div id="modal_fortnight_weld" class="modal">
+        <div class="modal-content">
+            <span class="close fortnight_weld">&times;</span>
+            <canvas id="fortnight_welding_chart_modal"></canvas>
         </div>
     </div>
 
