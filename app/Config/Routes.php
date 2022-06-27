@@ -35,6 +35,7 @@ $routes->get('/', 'MapController::index');
 $routes->get('/map_view', 'MapController::index');
 $routes->get('/chassis_view', 'ChassisController::chassis_view');
 $routes->get('/analyze_view', 'AnalyzeController::analyze_view');
+$routes->get('/rendement_view', 'RendementController::rendement_view');
 
 /*
  * --------------------------------------------------------------------
