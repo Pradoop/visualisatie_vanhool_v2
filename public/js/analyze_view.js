@@ -1,6 +1,6 @@
 const welding_data = [], total_welding_data = [], chassis_phase = [];
 const chassis_pln_date = [], chassis_table = [];
-const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [];
+const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [], stand_las_4 = [];
 /*
  * Registration of the chartjs-plugin-datalabels plugin. Is required to make it work
  * Changing default options as well for the text in the bars
@@ -69,6 +69,7 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
+        console.log(total_welding_data);
         for (const i in total_welding_data){
             switch (total_welding_data[i][4]){
                 case "L0":
@@ -83,8 +84,12 @@ $.ajax({
                 case "L3":
                     stand_las_3.push(total_welding_data[i]);
                     break;
+                case "":
+                    stand_las_4.push(total_welding_data[i]);
+
             }
         }
+        console.log(stand_las_4);
         createWeekWeldingChart(total_welding_data, 2, 'fortnight_welding_chart', 'Chassis per stand las in twee weken');
         createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Chassis per stand las volgende week');
         createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Chassis per stand las deze week');
@@ -421,11 +426,13 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
     const week_stand_las_1 = new Array(5).fill(0);
     const week_stand_las_2 = new Array(5).fill(0);
     const week_stand_las_3 = new Array(5).fill(0);
+    const week_stand_las_4 = new Array(5).fill(0);
     const tooltip_data_stand_0 = [[], [], [], [], []];
     const tooltip_data_stand_1 = [[], [], [], [], []];
     const tooltip_data_stand_2 = [[], [], [], [], []];
     const tooltip_data_stand_3 = [[], [], [], [], []];
-    const all_tooltip_data = [[], [], [], []];
+    const tooltip_data_stand_4 = [[], [], [], [], []];
+    const all_tooltip_data = [[], [], [], [], []];
 
 
     const curr = new Date; // get current date
@@ -515,10 +522,25 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
             }
         }
     }
+
+    for (const i in stand_las_4){
+        for (const j in thisWeek){
+            if ((stand_las_4[i][1].getFullYear() === thisWeek[j].getFullYear()) && (stand_las_4[i][1].getMonth() === thisWeek[j].getMonth()) && (stand_las_4[i][1].getDate() === thisWeek[j].getDate())){
+                week_stand_las_4[j]++;
+                let tooltip_temp = [];
+                tooltip_temp.push(my_data[i][0]);
+                tooltip_temp.push(my_data[i][2]);
+                tooltip_temp.push(my_data[i][3]);
+                tooltip_data_stand_4[j].push(tooltip_temp);
+            }
+        }
+    }
     all_tooltip_data[0].push(tooltip_data_stand_0);
     all_tooltip_data[1].push(tooltip_data_stand_1);
     all_tooltip_data[2].push(tooltip_data_stand_2);
     all_tooltip_data[3].push(tooltip_data_stand_3);
+    all_tooltip_data[4].push(tooltip_data_stand_4);
+
 
     const weekNumber = calculateWeekNumber(firstDay);
     my_graph_title = my_graph_title + " (week " + weekNumber + ")"
@@ -552,6 +574,13 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 data: week_stand_las_3,
                 backgroundColor: 'rgb(16, 57, 93)',
                 stack: 'Stack 3',
+                pointStyle: 'circle',
+            },
+            {
+                label: 'Geen gegevens',
+                data: week_stand_las_4,
+                backgroundColor: 'rgb(7,25,41)',
+                stack: 'Stack 4',
                 pointStyle: 'circle',
             },
         ]

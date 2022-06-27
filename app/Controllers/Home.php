@@ -370,7 +370,12 @@ class Home extends BaseController
             if(isset($my_array[$line_number][18])) {
                 $temp[] = utf8_encode(trim($my_array[$line_number][18]));
             }
-            $period_start_date = strtotime('last Monday');
+            if (date('l') == "Monday"){
+                $period_start_date = strtotime('now');
+            }
+            else{
+                $period_start_date = strtotime('last Monday');
+            }
             $period_end_date = strtotime('+3 weeks', $period_start_date);
             $period_end_date = date('ymd', strtotime('-1 day', $period_end_date));
             $line_number++;
@@ -401,7 +406,12 @@ class Home extends BaseController
             if(isset($my_array[$line_number][7])) {
                 $temp[] = utf8_encode(trim($my_array[$line_number][7]));
             }
-            $period_start_date = strtotime('last Monday');
+            if (date('l') == "Monday"){
+                $period_start_date = strtotime('now');
+            }
+            else{
+                $period_start_date = strtotime('last Monday');
+            }
             $period_end_date = strtotime('+3 weeks', $period_start_date);
             $period_end_date = date('ymd', strtotime('-1 day', $period_end_date));
             $line_number++;

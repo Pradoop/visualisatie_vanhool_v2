@@ -27,8 +27,6 @@ h1 {
 
 /* Algemene info bovenaan pagina */
 .information_1, .information_2, .information_3, .information_4, .information_5 {
-  width: 100%;
-  max-width: 100%;
   text-align: center;
 }
 
@@ -38,7 +36,7 @@ h1 {
 }
 
 .information_value{
-  font-size: 250%;
+  font-size: 225%;
   color: #212529;
 }
 
@@ -55,8 +53,8 @@ h1 {
 }
 
 .card-info{
-  margin-top: 5%;
-  height: 20%;
+  margin-top: 3%;
+  height: 15%;
   justify-content: center;
 }
 
