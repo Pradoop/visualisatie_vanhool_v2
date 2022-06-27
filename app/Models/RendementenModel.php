@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class WerkurenModel extends \CodeIgniter\Model
+class RendementenModel extends \CodeIgniter\Model
 {
 
     public function __construct()

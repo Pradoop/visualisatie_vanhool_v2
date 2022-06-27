@@ -144,7 +144,7 @@ class App extends BaseConfig
      * --------------------------------------------------------------------------
      *
      * The session storage driver to use:
-     * - `CodeIgniter\Session\Handlers\FileModel`
+     * - `CodeIgniter\Session\Handlers\AnalyzeModel`
      * - `CodeIgniter\Session\Handlers\DatabaseHandler`
      * - `CodeIgniter\Session\Handlers\MemcachedHandler`
      * - `CodeIgniter\Session\Handlers\RedisHandler`

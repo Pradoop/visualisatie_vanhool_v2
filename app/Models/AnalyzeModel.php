@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class FileModel extends \CodeIgniter\Model
+class AnalyzeModel extends \CodeIgniter\Model
 {
 
     public function __construct()
@@ -30,23 +30,7 @@ class FileModel extends \CodeIgniter\Model
             fclose($file);
         }
 
-        /*
-        * Small txtFile with columns: wagen,DLnr,Kaliber,NaamFase,NaamKlant,NaamType,Natie,StandInProd,ReeksVan,ReeksTot
-        */
-        $chassisInKaliberIV_array = array();
-        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\ChassisInKaliberIV.txt", "r");
-        if($file) {
-            while(!feof($file)) {
-                $line = fgets($file);
-                $chassisInKaliberIV_array[] = $line;
-            }
-            fclose($file);
-        }
-
-        $files_array[] = $planningMontage_array;
-        $files_array[] = $chassisInKaliberIV_array;
-
-        return $files_array;
+        return $planningMontage_array;
     }
 
     public function fileColumnArrays($file_by_line_array)

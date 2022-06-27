@@ -16,7 +16,7 @@ use CodeIgniter\Log\Handlers\FileHandler;
 /**
  * Class MockFileLogger
  *
- * Extends FileModel, exposing some inner workings
+ * Extends AnalyzeModel, exposing some inner workings
  */
 class MockFileLogger extends FileHandler
 {

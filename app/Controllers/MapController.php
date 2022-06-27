@@ -3,19 +3,22 @@
 namespace App\Controllers;
 
 use App\Models\BurgerModel;
-use App\Models\FileModel;
+use App\Models\AnalyzeModel;
+use App\Models\MapModel;
 
 class MapController extends BaseController
 {
 
     private $burger_menu;
-    private $file_model;
+    private $analyze_model;
+    private $map_model;
     private $data;
 
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
-        $this->file_model = new FileModel();
+        $this->analyze_model = new AnalyzeModel();
+        $this->map_model = new MapModel();
         $this->data['scripts_to_load'] = array('jquery-3.6.0.min.js','bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
@@ -30,7 +33,7 @@ class MapController extends BaseController
         $this->data['title_tab'] = 'Plattegrond';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Plattegrond');
 
-        $data2["ChassisInKaliberIV"] = $this->file_model->readFile()[1];
+        $data2["ChassisInKaliberIV"] = $this->map_model->readFile();
         $data2["chassisInMontage_array"] = $this->getChassisMap()[0];
         $data2["chassisInWachtkamer_array"] = $this->getChassisMap()[1];
         $data2["wdInMontageLimit"] = 0;
@@ -43,7 +46,7 @@ class MapController extends BaseController
 
     public function getChassisMap(): array
     {
-        $line_array = $this->file_model->readFile()[0];
+        $line_array = $this->analyze_model->readFile();
         $status_hal = array('07','83','85','86','8','81');//TODO
         $status_wait = array('38');//TODO
 

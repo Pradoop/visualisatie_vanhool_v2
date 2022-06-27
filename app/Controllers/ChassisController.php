@@ -3,18 +3,18 @@
 namespace App\Controllers;
 
 use App\Models\BurgerModel;
-use App\Models\FileModel;
+use App\Models\AnalyzeModel;
 
 class ChassisController extends BaseController
 {
     private $burger_menu;
-    private $file_model;
+    private $analyze_model;
     private $data;
 
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
-        $this->file_model = new FileModel();
+        $this->analyze_model = new AnalyzeModel();
         $this->data['scripts_to_load'] = array('jquery-3.6.0.min.js','bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
@@ -39,7 +39,7 @@ class ChassisController extends BaseController
 
     public function getChassisInfo(): array
     {
-        $line_array = $this->file_model->readFile()[0];
+        $line_array = $this->analyze_model->readFile();
         $primary_array = array();
         $line_number = 1;
         while($line_number < sizeof($line_array)) {

@@ -3,21 +3,19 @@
 namespace App\Controllers;
 
 use App\Models\BurgerModel;
-use App\Models\FileModel;
-use App\Models\WerkurenModel;
+use App\Models\AnalyzeModel;
+use App\Models\RendementenModel;
 
 class RendementController extends BaseController
 {
     private $burger_menu;
-    private $file_model;
     private $werkuren_model;
     private $data;
 
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
-        $this->file_model = new FileModel();
-        $this->werkuren_model = new WerkurenModel();
+        $this->werkuren_model = new RendementenModel();
         $this->data['scripts_to_load'] = array('jquery-3.6.0.min.js', 'bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }

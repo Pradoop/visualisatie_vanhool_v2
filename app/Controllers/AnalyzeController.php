@@ -3,20 +3,20 @@
 namespace App\Controllers;
 
 use App\Models\BurgerModel;
-use App\Models\FileModel;
+use App\Models\AnalyzeModel;
 
 
 class AnalyzeController extends BaseController
 {
 
     private $burger_menu;
-    private $file_model;
+    private $analyze_model;
     private $data;
 
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
-        $this->file_model = new FileModel();
+        $this->analyze_model = new AnalyzeModel();
         $this->data['scripts_to_load'] = array('jquery-3.6.0.min.js', 'bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
@@ -30,12 +30,12 @@ class AnalyzeController extends BaseController
     {
         $this->data['title_tab'] = 'Dashboard';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Dashboard');
-        $data2["file_lines"] = $this->file_model->readFile()[0];
+        $data2["file_lines"] = $this->analyze_model->readFile();
 
-        $data2["total_in_production"] = $this->calculateTotalInProduction($this->file_model->fileColumnArrays($data2["file_lines"])[0]);
-        $data2["amount_delayed"] = $this->calculateAmountDelayed($this->file_model->fileColumnArrays($data2["file_lines"])[1]);
-        $data2["planned_today"] = $this->calculatePlannedToday($this->file_model->fileColumnArrays($data2["file_lines"])[3]);
-        $data2["avg_mont"] = $this->calculateAverageWdInMont($this->file_model->fileColumnArrays($data2["file_lines"])[6]);
+        $data2["total_in_production"] = $this->calculateTotalInProduction($this->analyze_model->fileColumnArrays($data2["file_lines"])[0]);
+        $data2["amount_delayed"] = $this->calculateAmountDelayed($this->analyze_model->fileColumnArrays($data2["file_lines"])[1]);
+        $data2["planned_today"] = $this->calculatePlannedToday($this->analyze_model->fileColumnArrays($data2["file_lines"])[3]);
+        $data2["avg_mont"] = $this->calculateAverageWdInMont($this->analyze_model->fileColumnArrays($data2["file_lines"])[6]);
         $data2["total_welding_info"] = $this->getWeldingData();
         $data2["chassis_planned_dates"] = $this->getWeekChartInfo();
         $data2["table_info"] = $this->getTableInfoToday();
@@ -49,8 +49,8 @@ class AnalyzeController extends BaseController
 
     public function getTableInfoToday()
     {
-        $line_array = $this->file_model->readFile()[0];
-        $my_array = $this->file_model->fileColumnArrays($line_array)[8];
+        $line_array = $this->analyze_model->readFile();
+        $my_array = $this->analyze_model->fileColumnArrays($line_array)[8];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
@@ -190,8 +190,8 @@ class AnalyzeController extends BaseController
 
     public function getWeldingData(): bool|string
     {
-        $line_array = $this->file_model->readFile()[0];
-        $my_array = $this->file_model->fileColumnArrays($line_array)[7];
+        $line_array = $this->analyze_model->readFile();
+        $my_array = $this->analyze_model->fileColumnArrays($line_array)[7];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
@@ -229,8 +229,8 @@ class AnalyzeController extends BaseController
 
     public function getWeekChartInfo()
     {
-        $line_array = $this->file_model->readFile()[0];
-        $my_array = $this->file_model->fileColumnArrays($line_array)[4];
+        $line_array = $this->analyze_model->readFile();
+        $my_array = $this->analyze_model->fileColumnArrays($line_array)[4];
         $output_array = array();
         $line_number = 1;
         while ($line_number < sizeof($my_array)):
