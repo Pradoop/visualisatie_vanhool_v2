@@ -5,7 +5,7 @@ namespace App\Controllers;
 use App\Models\BurgerModel;
 use App\Models\FileModel;
 
-class Home extends BaseController
+class MapController extends BaseController
 {
 
     private $burger_menu;
@@ -41,19 +41,6 @@ class Home extends BaseController
         return view('template', $this->data);
     }
 
-    public function chassis_view()
-    {
-        $this->data['title_tab'] = 'Overzicht';
-        $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Overzicht');
-
-        $data2["aantal_lines"] = $this->getChassisInfo();
-
-        array_push($this->data['scripts_to_load'], 'chassis_view.js', 'jquery.dataTables.min.js', 'date-uk.js');
-        array_push($this->data['styles_to_load'], 'chassis_view.scss', 'jquery.dataTables.min.css');
-        $this->data['content'] = view('chassis_view', $data2);
-        return view('template', $this->data);
-    }
-
     public function getChassisMap(): array
     {
         $line_array = $this->file_model->readFile()[0];
@@ -77,30 +64,6 @@ class Home extends BaseController
         $output_array[] = $hal_array;
         $output_array[] = $wait_array;
         return $output_array;
-    }
-
-    public function getChassisInfo(): array
-    {
-        $line_array = $this->file_model->readFile()[0];
-        $primary_array = array();
-        $line_number = 1;
-        while($line_number < sizeof($line_array)) {
-            $array = preg_split('/\t/', $line_array[$line_number]);
-            //Primary
-            if(isset($array[3]) && isset($array[5]) && isset($array[7]) && isset($array[10]) && isset($array[12]) && isset($array[14]) && isset($array[17])) {
-                $today = date("Y-m-d");
-                $parts = str_split($array[3], 2);
-                $gepland_new = $parts[2].'/'.$parts[1].'/'.$parts[0];
-                $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
-                $diff = strtotime($planned_date) - strtotime($today);
-
-                $primary_string = $gepland_new.'!'.$array[0].'!'.$array[5].'!'.$array[7].'!'.$array[10].'!'.$array[12].'!'.round($diff/86400).'!'.$array[17].'!'.$array[14];
-                $primary_array[] = $primary_string;
-            }
-            $line_number++;
-        }
-
-        return $primary_array;
     }
 
 }

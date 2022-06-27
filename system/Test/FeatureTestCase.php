@@ -47,7 +47,7 @@ class FeatureTestCase extends CIUnitTestCase
      *
      * Example routes:
      * [
-     *    ['get', 'home', 'Home::index']
+     *    ['get', 'home', 'MapController::index']
      * ]
      *
      * @param array $routes
