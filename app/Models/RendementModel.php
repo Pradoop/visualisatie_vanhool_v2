@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-class RendementenModel extends \CodeIgniter\Model
+class RendementModel extends \CodeIgniter\Model
 {
 
     public function __construct()

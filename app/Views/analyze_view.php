@@ -3,7 +3,7 @@
         <div class="tab-div">
             <h1>Dashboard</h1>
         </div>
-        <div class="tabs">
+        <div class="tab">
             <button class="tablinks" onclick="showDashboard(event, 'general-info-dash')">Algemeen</button>
             <button class="tablinks" onclick="showDashboard(event, 'rendement-info-dash')">Rendementen</button>
         </div>

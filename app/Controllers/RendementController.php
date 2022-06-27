@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\BurgerModel;
 use App\Models\AnalyzeModel;
-use App\Models\RendementenModel;
+use App\Models\RendementModel;
 
 class RendementController extends BaseController
 {
@@ -15,7 +15,7 @@ class RendementController extends BaseController
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
-        $this->werkuren_model = new RendementenModel();
+        $this->werkuren_model = new RendementModel();
         $this->data['scripts_to_load'] = array('jquery-3.6.0.min.js', 'bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
