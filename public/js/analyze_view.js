@@ -2,7 +2,6 @@ const welding_data = [], total_welding_data = [], chassis_phase = [];
 const chassis_pln_date = [], chassis_table = [];
 const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [], stand_las_4 = [];
 /*
- * Registration of the chartjs-plugin-datalabels plugin. Is required to make it work
  * Changing default options as well for the text in the bars
  */
 Chart.register(ChartDataLabels);
@@ -45,7 +44,6 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        console.log(total_welding_data);
         for (const i in total_welding_data){
             switch (total_welding_data[i][4]){
                 case "L0":
@@ -65,34 +63,9 @@ $.ajax({
 
             }
         }
-        console.log(stand_las_4);
         createWeekWeldingChart(total_welding_data, 2, 'fortnight_welding_chart', 'Chassis per stand las in twee weken');
         createWeekWeldingChart(total_welding_data, 1, 'next_week_welding_chart', 'Chassis per stand las volgende week');
         createWeekWeldingChart(total_welding_data, 0, 'this_week_welding_chart', 'Chassis per stand las deze week');
-    }
-});
-
-/*
- * Ajax request to retrieve the chassis per phase
- * This call also executes the createPhaseChart() function based on the data that is retrieved
- */
-$.ajax({
-    url: BASE_URL + '/AnalyzeController/calculateChassisPerPhase',
-    method: "get",
-    dataType: 'text',
-    success: function(response) {
-        const responseObject = JSON.parse(response);
-        for(const c in responseObject){
-            chassis_phase.push(responseObject[c]);
-        }
-    },
-    error: function (xhr, status, error) {
-        console.log("ERROR")
-        console.log(xhr.responseText);
-        console.log(error.responseText);
-    },
-    complete: function(data){
-        //createPhaseChart(chassis_phase);
     }
 });
 
@@ -721,4 +694,18 @@ window.onclick = function(event) {
     if (event.target === modal_fortnight_weld) {
         modal_fortnight_weld.style.display = "none";
     }
+}
+
+function showDashboard(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("dashboard-options");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
 }
