@@ -32,9 +32,8 @@ class RendementController extends BaseController
 
         $data2["aantal_lines"] = $this->getRendementInfo();
 
-
-        array_push($this->data['scripts_to_load'], 'rendement_view.js');
-        array_push($this->data['styles_to_load'], 'rendement_view.scss');
+        array_push($this->data['scripts_to_load'], 'rendement_view.js', 'jquery.dataTables.min.js', 'date-uk.js');
+        array_push($this->data['styles_to_load'], 'rendement_view.scss', 'jquery.dataTables.min.css');
         $this->data['content'] = view('rendement_view', $data2);
         return view('template', $this->data);
     }

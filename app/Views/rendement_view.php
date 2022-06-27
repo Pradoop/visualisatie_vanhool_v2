@@ -43,14 +43,16 @@
         </tr>
         </thead>
         <tbody id="myTable">
-        <?php $row_id = 0; ?>
-        <script> console.log("<?=json_encode($file_lines);?>")</script>
+        <?php $row_id = 1; ?>
+        <script>console.log("<?=sizeof($file_lines);?>");</script>
+
+
         <?php while($row_id < sizeof($file_lines)): ?>
             <tr id="<?= 'primary_'.$row_id ?>">
                 <?php
-                $array = preg_split('/!/', $file_lines[$row_id]);
+                $array = preg_split('/\t/', $file_lines[$row_id]);
                 echo "<td>{$array[0]}</td>";
-/*                echo "<td>{$array[1]}</td>";
+                echo "<td>{$array[1]}</td>";
                 echo "<td>{$array[2]}</td>";
                 echo "<td>{$array[3]}</td>";
                 echo "<td>{$array[4]}</td>";
@@ -75,7 +77,8 @@
                     "10" => "<td>Vloer afwerking chassis is voorbij montage</td>",
                     "12" => "<td>Keuring chassis is voorbij montage</td>",
                     default => "<td>Nog te implementeren</td>",
-                };*/
+                };
+
                 ?>
             </tr>
             <?php $row_id++; ?>
