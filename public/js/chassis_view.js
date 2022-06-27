@@ -35,10 +35,6 @@ $(document).ready(function() {
 });
 
 //Information popovers
-$('#icon_i').popover({
-    trigger: 'hover',
-    content: 'Het laden van de webpagina kan momenteel nog lang duren.'
-});
 $('#th0').popover({
     trigger: 'hover',
     placement: 'top',

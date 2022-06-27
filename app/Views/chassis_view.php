@@ -36,7 +36,7 @@
                 <th id="th2">Wagentype</th>
                 <th id="th3">Klant</th>
                 <th id="th4">Reeks</th>
-                <th id="th5">Galva</th>
+                <th id="th5">Galva/Meta</th>
                 <th id="th6">DagenTot</th>
                 <th id="th7">WdInMont</th>
                 <th id="th8">Status</th>

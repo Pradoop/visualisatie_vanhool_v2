@@ -35,47 +35,38 @@ $(document).ready(function() {
 });
 
 //Information popovers
-$('#icon_i').popover({
-    trigger: 'hover',
-    content: 'Het laden van de webpagina kan momenteel nog lang duren.'
-});
 $('#th0').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Huidige datum gepland af in montage (datum formaat = dd/mm/yy)'
+    content: 'Constructienummer'
 });
 $('#th1').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'De constructienummer'
+    content: 'Datum waarop wagen gestart is in montage. Formaat: dd/mm/yy'
 });
 $('#th2').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Omschrijving van het wagentype'
+    content: 'Datum waarop wagen uit montage kwam. Formaat: dd/mm/yy'
 });
 $('#th3').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Naam van de klant'
+    content: 'Huidige kaliber van de wagen.'
 });
 $('#th4').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Reekshoofd'
+    content: 'Het aantal gepresteerde uren tot dusver.'
 });
 $('#th5').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Indien hier “y” staat gaat het om een gegalvaniseerde wagen, "m" voor een gemetalliseerde wagen'
-});
-$('#th6').popover({
-    trigger: 'hover',
-    placement: 'top',
-    content: 'Het aantal dagen tussen de huidige dag en de geplande dag (negatief aantal betekend dat geplande datum gepaseerd is)'
+    content: 'Het aantal geplande uren voor deze chassis.'
 });
 $('#th7').popover({
     trigger: 'hover',
     placement: 'top',
-    content: 'Het aantal werkdagen dat de wagen reeds in de montage staat (= het verschil in werkdagen tussen de huidige dag en de dag waarop fase 4 opzetten is afgemeld)'
+    content: 'Omschrijving van het wagentype'
 });

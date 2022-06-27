@@ -45,10 +45,10 @@ class RendementController extends BaseController
         $line_number = 1;
         while($line_number < sizeof($line_array)) {
             $array = preg_split('/\t/', $line_array[$line_number]);
-            //Primary
             if(isset($array[0]) && isset($array[2]) && isset($array[3]) && isset($array[4]) && isset($array[5]) && isset($array[6]) && isset($array[7]) && isset($array[8]) && isset($array[9]) && isset($array[10]) && isset($array[11])) {
                 $datumInMontParts = str_split($array[2], 2);
                 $datumInMontAfParts = str_split($array[2], 2);
+                $verhouding =
                 $datumInMont = $datumInMontParts[0].'/'.$datumInMontParts[1].'/'.$datumInMontParts[2];
                 $datumInMontAf = $datumInMontAfParts[0].'/'.$datumInMontAfParts[1].'/'.$datumInMontAfParts[2];
 

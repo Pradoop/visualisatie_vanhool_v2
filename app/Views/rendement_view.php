@@ -3,7 +3,6 @@
         <div id="afdelingNaam">
             <h1>
                 Industriële Voertuigen: hal 5 en hal 6
-                <input type="image" id="icon_i" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
             </h1>
         </div>
     </div>
@@ -31,7 +30,7 @@
     <table id="chassis_table" class="table table-striped table-hover">
         <thead>
         <tr>
-            <th id="th0">Wagen</th>
+            <th id="th0">Wagennummer</th>
             <th id="th1">Datum in Montage</th>
             <th id="th2">Datum uit Montage</th>
             <th id="th3">Kaliber</th>
