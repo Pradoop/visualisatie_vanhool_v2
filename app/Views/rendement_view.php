@@ -31,26 +31,25 @@
     <table id="chassis_table" class="table table-striped table-hover">
         <thead>
         <tr>
-            <th id="th0">Gepland</th>
-            <th id="th1">Wagen</th>
-            <th id="th2">Wagentype</th>
-            <th id="th3">Klant</th>
-            <th id="th4">Reeks</th>
-            <th id="th5">Galva</th>
-            <th id="th6">DagenTot</th>
-            <th id="th7">WdInMont</th>
-            <th id="th8">Status</th>
+            <th id="th0">Wagen</th>
+            <th id="th1">Datum in Montage</th>
+            <th id="th2">Datum uit Montage</th>
+            <th id="th3">Kaliber</th>
+            <th id="th4">Gewerkte uren</th>
+            <th id="th5">Geplande uren</th>
+            <th id="th6">Klantnaam</th>
+            <th id="th7">Naamtype</th>
+            <th id="th8">Land</th>
+            <th id="th9">Reekshoofd</th>
+            <th id="th10">Reekseinde</th>
         </tr>
         </thead>
         <tbody id="myTable">
         <?php $row_id = 1; ?>
-        <script>console.log("<?=sizeof($file_lines);?>");</script>
-
-
-        <?php while($row_id < sizeof($file_lines)): ?>
+        <?php while($row_id < sizeof($data_lines)): ?>
             <tr id="<?= 'primary_'.$row_id ?>">
                 <?php
-                $array = preg_split('/\t/', $file_lines[$row_id]);
+                $array = preg_split('/!/', $data_lines[$row_id]);
                 echo "<td>{$array[0]}</td>";
                 echo "<td>{$array[1]}</td>";
                 echo "<td>{$array[2]}</td>";
@@ -59,26 +58,9 @@
                 echo "<td>{$array[5]}</td>";
                 echo "<td>{$array[6]}</td>";
                 echo "<td>{$array[7]}</td>";
-                echo match ($array[8]) {
-                    "01" => "<td>Verkocht voertuig</td>",
-                    "02" => "<td>Studie is gestart</td>",
-                    "20" => "<td>Studie chassis is afgewerkt</td>",
-                    "03" => "<td>Studie volledig klaar, klaar voor werkvoorbereiding</td>",
-                    "04" => "<td>Serieploeg is gestart</td>",
-                    "40" => "<td>Prognosedatum prefab is bepaald</td>",
-                    "39" => "<td>Prognosedatum voor basisserie is bepaald</td>",
-                    "38" => "<td>Basisserieploeg en prefab klaar voor montage</td>",
-                    "07" => "<td>Gestart in de samenstelkaliber</td>",
-                    "83" => "<td>Uit de samenstelkaliber</td>",
-                    "85" => "<td>Gestart in de lasrobot</td>",
-                    "86" => "<td>Gestart met aflassen</td>",
-                    "8" => "<td>Morgen af in de montage afdeling</td>",
-                    "81" => "<td>Vandaag af in de montage afdeling</td>",
-                    "10" => "<td>Vloer afwerking chassis is voorbij montage</td>",
-                    "12" => "<td>Keuring chassis is voorbij montage</td>",
-                    default => "<td>Nog te implementeren</td>",
-                };
-
+                echo "<td>{$array[8]}</td>";
+                echo "<td>{$array[9]}</td>";
+                echo "<td>{$array[10]}</td>";
                 ?>
             </tr>
             <?php $row_id++; ?>
@@ -86,6 +68,6 @@
         </tbody>
     </table>
     <div id="count_div">
-        <p id="count_div_text">1 tot <?= sizeof($file_lines) ?> van <?= sizeof($file_lines) ?> resultaten</p>
+        <p id="count_div_text">1 tot <?= sizeof($data_lines) ?> van <?= sizeof($data_lines) ?> resultaten</p>
     </div>
 </div>

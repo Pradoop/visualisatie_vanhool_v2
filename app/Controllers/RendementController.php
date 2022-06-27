@@ -30,7 +30,7 @@ class RendementController extends BaseController
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Rendementen');
         $data2["file_lines"] = $this->file_model->readFile()[2];
 
-        $data2["aantal_lines"] = $this->getRendementInfo();
+        $data2["data_lines"] = $this->getRendementInfo();
 
         array_push($this->data['scripts_to_load'], 'rendement_view.js', 'jquery.dataTables.min.js', 'date-uk.js');
         array_push($this->data['styles_to_load'], 'rendement_view.scss', 'jquery.dataTables.min.css');
@@ -46,15 +46,15 @@ class RendementController extends BaseController
         while($line_number < sizeof($line_array)) {
             $array = preg_split('/\t/', $line_array[$line_number]);
             //Primary
-            if(isset($array[3]) && isset($array[5]) && isset($array[7]) && isset($array[10]) && isset($array[12]) && isset($array[14]) && isset($array[17])) {
-                $today = date("Y-m-d");
-                $parts = str_split($array[3], 2);
-                $gepland_new = $parts[2].'/'.$parts[1].'/'.$parts[0];
-                $planned_date = '20'.$parts[0].'-'.$parts[1].'-'.$parts[2];
-                $diff = strtotime($planned_date) - strtotime($today);
+            if(isset($array[0]) && isset($array[2]) && isset($array[3]) && isset($array[4]) && isset($array[5]) && isset($array[6]) && isset($array[7]) && isset($array[8]) && isset($array[9]) && isset($array[10]) && isset($array[11])) {
+                $datumInMontParts = str_split($array[2], 2);
+                $datumInMontAfParts = str_split($array[2], 2);
+                $datumInMont = $datumInMontParts[0].'/'.$datumInMontParts[1].'/'.$datumInMontParts[2];
+                $datumInMontAf = $datumInMontAfParts[0].'/'.$datumInMontAfParts[1].'/'.$datumInMontAfParts[2];
 
-                $primary_string = $gepland_new.'!'.$array[0].'!'.$array[5].'!'.$array[7].'!'.$array[10].'!'.$array[12].'!'.round($diff/86400).'!'.$array[17].'!'.$array[14];
+                $primary_string = $array[0].'!'.$datumInMont.'!'.$datumInMontAf.'!'.$array[4].'!'.$array[5].'!'.$array[6].'!'.$array[7].'!'.$array[8].'!'.$array[9].'!'.$array[10].'!'.$array[11];
                 $primary_array[] = $primary_string;
+
             }
             $line_number++;
         }
