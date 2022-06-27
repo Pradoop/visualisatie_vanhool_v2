@@ -43,22 +43,8 @@ class FileModel extends \CodeIgniter\Model
             fclose($file);
         }
 
-        /*
-        * Medium txtFile with columns: Wagen,DLnr,DatumInMont,DatumMontAf,Info,Gewerkt,Gepland,NaamKlant,NaamType,Natie,ReeksVan,ReeksTot
-        */
-        $werkurenMontOpl_array = array();
-        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\WerkurenMontOpl.txt", "r");
-        if($file) {
-            while(!feof($file)) {
-                $line = fgets($file);
-                $werkurenMontOpl_array[] = $line;
-            }
-            fclose($file);
-        }
-
         $files_array[] = $planningMontage_array;
         $files_array[] = $chassisInKaliberIV_array;
-        $files_array[] = $werkurenMontOpl_array;
 
         return $files_array;
     }

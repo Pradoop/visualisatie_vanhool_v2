@@ -4,17 +4,20 @@ namespace App\Controllers;
 
 use App\Models\BurgerModel;
 use App\Models\FileModel;
+use App\Models\WerkurenModel;
 
 class RendementController extends BaseController
 {
     private $burger_menu;
     private $file_model;
+    private $werkuren_model;
     private $data;
 
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
         $this->file_model = new FileModel();
+        $this->werkuren_model = new WerkurenModel();
         $this->data['scripts_to_load'] = array('jquery-3.6.0.min.js', 'bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
@@ -28,7 +31,7 @@ class RendementController extends BaseController
     {
         $this->data['title_tab'] = 'Rendementen';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Rendementen');
-        $data2["file_lines"] = $this->file_model->readFile()[2];
+        $data2["file_lines"] = $this->werkuren_model->readFile();
 
         $data2["data_lines"] = $this->getRendementInfo();
 
@@ -40,7 +43,7 @@ class RendementController extends BaseController
 
     public function getRendementInfo(): array
     {
-        $line_array = $this->file_model->readFile()[2];
+        $line_array = $this->werkuren_model->readFile();
         $primary_array = array();
         $line_number = 1;
         while($line_number < sizeof($line_array)) {
@@ -48,7 +51,6 @@ class RendementController extends BaseController
             if(isset($array[0]) && isset($array[2]) && isset($array[3]) && isset($array[4]) && isset($array[5]) && isset($array[6]) && isset($array[7]) && isset($array[8]) && isset($array[9]) && isset($array[10]) && isset($array[11])) {
                 $datumInMontParts = str_split($array[2], 2);
                 $datumInMontAfParts = str_split($array[2], 2);
-                $verhouding =
                 $datumInMont = $datumInMontParts[0].'/'.$datumInMontParts[1].'/'.$datumInMontParts[2];
                 $datumInMontAf = $datumInMontAfParts[0].'/'.$datumInMontAfParts[1].'/'.$datumInMontAfParts[2];
 
