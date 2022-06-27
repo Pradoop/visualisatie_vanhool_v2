@@ -12,30 +12,6 @@ Chart.defaults.set('plugins.datalabels', {
 Chart.defaults.font.size = 16;
 
 /*
- * Ajax request to retrieve the data for welding
- * This call also executes the createWeldingChart() function based on the data that is retrieved
- */
-$.ajax({
-    url: BASE_URL + '/AnalyzeController/calculateTotalWeldingData',
-    method: "get",
-    dataType: 'text',
-    success: function(response) {
-        const responseObject = JSON.parse(response);
-        for(const c in responseObject){
-            welding_data.push(responseObject[c]);
-        }
-    },
-    error: function (xhr, status, error) {
-        console.log("ERROR")
-        console.log(xhr.responseText);
-        console.log(error.responseText);
-    },
-    complete: function(data){
-        //createWeldingChart(welding_data);
-    }
-});
-
-/*
  * Ajax request to retrieve all the data for welding
  * This call also executes the createWeldingChart() function based on the data that is retrieved
  */
