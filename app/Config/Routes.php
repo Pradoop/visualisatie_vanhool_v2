@@ -34,7 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->get('/map_view', 'Home::index');
 $routes->get('/chassis_view', 'Home::chassis_view');
-$routes->get('/analyze_view', 'Home::analyze_view');
+$routes->get('/analyze_view', 'AnalyzeController::analyze_view');
 
 /*
  * --------------------------------------------------------------------

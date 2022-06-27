@@ -16,7 +16,7 @@ Chart.defaults.font.size = 16;
  * This call also executes the createWeldingChart() function based on the data that is retrieved
  */
 $.ajax({
-    url: BASE_URL + '/Home/calculateTotalWeldingData',
+    url: BASE_URL + '/AnalyzeController/calculateTotalWeldingData',
     method: "get",
     dataType: 'text',
     success: function(response) {
@@ -40,7 +40,7 @@ $.ajax({
  * This call also executes the createWeldingChart() function based on the data that is retrieved
  */
 $.ajax({
-    url: BASE_URL + '/Home/getWeldingData',
+    url: BASE_URL + '/AnalyzeController/getWeldingData',
     method: "get",
     dataType: 'text',
     success: function(response) {
@@ -101,7 +101,7 @@ $.ajax({
  * This call also executes the createPhaseChart() function based on the data that is retrieved
  */
 $.ajax({
-    url: BASE_URL + '/Home/calculateChassisPerPhase',
+    url: BASE_URL + '/AnalyzeController/calculateChassisPerPhase',
     method: "get",
     dataType: 'text',
     success: function(response) {
@@ -125,7 +125,7 @@ $.ajax({
  * This call also executes the createPhaseChart() function based on the data that is retrieved
  */
 $.ajax({
-    url: BASE_URL + '/Home/getWeekChartInfo',
+    url: BASE_URL + '/AnalyzeController/getWeekChartInfo',
     method: "get",
     dataType: 'text',
     success: function(response) {
@@ -165,7 +165,7 @@ $.ajax({
  *
  */
 $.ajax({
-    url: BASE_URL + '/Home/getTableInfoToday',
+    url: BASE_URL + '/AnalyzeController/getTableInfoToday',
     method: "get",
     dataType: 'text',
     success: function(response) {

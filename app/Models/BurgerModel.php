@@ -12,6 +12,8 @@ class BurgerModel extends \CodeIgniter\Model
             array('name'=> 'Plattegrond', 'title' => 'map_hover', 'link'=>'map_view', 'className'=>'active'),
             array('name'=> 'Dashboard', 'title' => 'analyze_hover', 'link'=>'analyze_view', 'className'=>'inactive'),
             array('name'=> 'Overzicht', 'title' => 'chassis_hover', 'link'=>'chassis_view', 'className'=>'inactive'),
+            array('name'=> 'Rendementen', 'title' => 'rendement_hover', 'link'=>'rendement_view', 'className'=>'inactive'),
+
         );
     }
 
