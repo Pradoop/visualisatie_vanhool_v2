@@ -44,12 +44,13 @@
         </thead>
         <tbody id="myTable">
         <?php $row_id = 0; ?>
-        <?php while($row_id < sizeof($aantal_lines)): ?>
+        <script> console.log("<?=json_encode($file_lines);?>")</script>
+        <?php while($row_id < sizeof($file_lines)): ?>
             <tr id="<?= 'primary_'.$row_id ?>">
                 <?php
-                $array = preg_split('/!/', $aantal_lines[$row_id]);
+                $array = preg_split('/!/', $file_lines[$row_id]);
                 echo "<td>{$array[0]}</td>";
-                echo "<td>{$array[1]}</td>";
+/*                echo "<td>{$array[1]}</td>";
                 echo "<td>{$array[2]}</td>";
                 echo "<td>{$array[3]}</td>";
                 echo "<td>{$array[4]}</td>";
@@ -74,7 +75,7 @@
                     "10" => "<td>Vloer afwerking chassis is voorbij montage</td>",
                     "12" => "<td>Keuring chassis is voorbij montage</td>",
                     default => "<td>Nog te implementeren</td>",
-                };
+                };*/
                 ?>
             </tr>
             <?php $row_id++; ?>
@@ -82,6 +83,6 @@
         </tbody>
     </table>
     <div id="count_div">
-        <p id="count_div_text">1 tot <?= sizeof($aantal_lines) ?> van <?= sizeof($aantal_lines) ?> resultaten</p>
+        <p id="count_div_text">1 tot <?= sizeof($file_lines) ?> van <?= sizeof($file_lines) ?> resultaten</p>
     </div>
 </div>
