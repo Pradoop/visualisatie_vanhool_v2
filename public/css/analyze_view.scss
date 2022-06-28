@@ -26,18 +26,13 @@ h1 {
 
 .rendement-grid-container {
   display: grid;
-  grid-template-columns: 25% 25% 50%;
+  grid-template-columns: 15% 25% 60%;
 }
 
 .grid-child {
   margin-bottom: 5px;
   width: 100%;
   height: auto;
-}
-
-.rendement-col1{
-  display: grid;
-  grid-template-columns: 50% 50%;
 }
 
 /* Algemene info bovenaan pagina */
@@ -181,7 +176,7 @@ p{
   border: 1px solid #ccc;
   background-color: #f1f1f1;
   float: right;
-  margin-left: 65%;
+  margin-left: 45%;
 }
 
 /* Style the buttons that are used to open the tab content */

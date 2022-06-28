@@ -5,7 +5,8 @@
         </div>
         <div class="tab">
             <button class="tablinks" onclick="showDashboard(event, 'general-info-dash')">Algemeen</button>
-            <button class="tablinks" onclick="showDashboard(event, 'rendement-info-dash')">Rendementen</button>
+            <button class="tablinks" onclick="showDashboard(event, 'historical-rendement-info-dash')">Historische Rendementen</button>
+            <button class="tablinks" onclick="showDashboard(event, 'rendement-info-dash')">Huidige Rendementen</button>
         </div>
     </div>
 
@@ -120,20 +121,14 @@
         </div>
     </div>
 
-    <div class="dashboard-options" id="rendement-info-dash">
+    <div class="dashboard-options" id="historical-rendement-info-dash">
         <p class="rendement-header-text">Laatste 20 werkdagen</p>
         <div class="rendement-grid-container">
-            <div class="grid-child rendement-col1">
+            <div class="grid-child col1">
                 <div class="card card-1">
                     <div class="information_1">
                         <p class="information_value"><?= $average_planned_hours[0] ?> uren </p>
                         <p class="information_text">gemiddeld gepland voor afgewerkte wagens</p>
-                    </div>
-                </div>
-                <div class="card card-1 rendement-col2">
-                    <div class="information_4">
-                        <p class="information_value"><?= $average_planned_hours[1] ?> uren </p>
-                        <p class="information_text">gemiddeld gepland voor wagens in montage</p>
                     </div>
                 </div>
                 <div class="card rendement-card-info">
@@ -142,7 +137,32 @@
                         <p class="information_text">gemiddeld gewerkt voor afgewerkte wagens</p>
                     </div>
                 </div>
-                <div class="card rendement-card-info rendement-col2">
+                <div class="card rendement-card-info">
+                    <div class="information_2">
+                        <p class="information_value"><?= $amount_overtime[0]?> chassis</p>
+                        <p class="information_text">af geplande uren overschreden</p>
+                    </div>
+                </div>
+                <div class="card rendement-card-info">
+                    <div class="information_2">
+                        <p class="information_value"><?= $amount_montage[0]?> chassis</p>
+                        <p class="information_text">af laatste 20 werkdagen</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-options" id="rendement-info-dash">
+        <div class="rendement-grid-container">
+            <div class="grid-child col1">
+                <div class="card card-1">
+                    <div class="information_4">
+                        <p class="information_value"><?= $average_planned_hours[1] ?> uren </p>
+                        <p class="information_text">gemiddeld gepland voor wagens in montage</p>
+                    </div>
+                </div>
+                <div class="card rendement-card-info">
                     <div class="information_3">
                         <p class="information_value"><?=$average_worked_hours[1]?> uren </p>
                         <p class="information_text">gemiddeld gewerkt voor wagens in montage</p>
@@ -150,23 +170,11 @@
                 </div>
                 <div class="card rendement-card-info">
                     <div class="information_2">
-                        <p class="information_value"><?= $amount_overtime[0]?> chassis</p>
-                        <p class="information_text">af geplande uren overschreden</p>
-                    </div>
-                </div>
-                <div class="card rendement-card-info rendement-col2">
-                    <div class="information_2">
                         <p class="information_value"><?= $amount_overtime[1]?> chassis </p>
                         <p class="information_text">in montage geplande uren overschreden</p>
                     </div>
                 </div>
                 <div class="card rendement-card-info">
-                    <div class="information_2">
-                        <p class="information_value"><?= $amount_montage[0]?> chassis</p>
-                        <p class="information_text">afgewerkt laatste 20 werkdagen</p>
-                    </div>
-                </div>
-                <div class="card rendement-card-info rendement-col2">
                     <div class="information_2">
                         <p class="information_value"><?= $amount_montage[1]?> chassis </p>
                         <p class="information_text">in montage</p>
