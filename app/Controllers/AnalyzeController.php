@@ -385,7 +385,13 @@ class AnalyzeController extends BaseController
                 $temp[] = utf8_encode(trim($my_array[$line_number][3]));
             }
             if(isset($my_array[$line_number][4])) {
-                $temp[] = utf8_encode(trim($my_array[$line_number][4]));
+                $value = utf8_encode(trim($my_array[$line_number][4]));
+                if($value == ""){
+                    $temp[] = "buffer";
+                }
+                else{
+                    $temp[] = $value;
+                }
             }
             if(isset($my_array[$line_number][5]) && isset($my_array[$line_number][6])) {
                 $worked =   intval(trim($my_array[$line_number][5]));
