@@ -484,6 +484,8 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
             }
         }
     }
+    console.log(tooltip_data_stand_0);
+
     all_tooltip_data[0].push(tooltip_data_stand_0);
     all_tooltip_data[1].push(tooltip_data_stand_1);
     all_tooltip_data[2].push(tooltip_data_stand_2);

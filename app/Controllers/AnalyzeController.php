@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\BurgerModel;
 use App\Models\AnalyzeModel;
+use App\Models\RendementModel;
 
 
 class AnalyzeController extends BaseController
@@ -11,12 +12,14 @@ class AnalyzeController extends BaseController
 
     private $burger_menu;
     private $analyze_model;
+    private $rendement_model;
     private $data;
 
     public function __construct()
     {
         $this->burger_menu = new BurgerModel();
         $this->analyze_model = new AnalyzeModel();
+        $this->rendement_model = new RendementModel();
         $this->data['scripts_to_load'] = array('jquery-3.6.0.min.js', 'bootstrap.bundle.min.js'); //js used everywhere
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
@@ -31,7 +34,10 @@ class AnalyzeController extends BaseController
         $this->data['title_tab'] = 'Dashboard';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Dashboard');
         $data2["file_lines"] = $this->analyze_model->readFile();
+        $data2["rendement_lines"] = $this->rendement_model->readFile();
 
+
+        //Data for "algemeen"tab in dashboard
         $data2["total_in_production"] = $this->calculateTotalInProduction($this->analyze_model->fileColumnArrays($data2["file_lines"])[0]);
         $data2["amount_delayed"] = $this->calculateAmountDelayed($this->analyze_model->fileColumnArrays($data2["file_lines"])[1]);
         $data2["planned_today"] = $this->calculatePlannedToday($this->analyze_model->fileColumnArrays($data2["file_lines"])[3]);
@@ -39,6 +45,12 @@ class AnalyzeController extends BaseController
         $data2["total_welding_info"] = $this->getWeldingData();
         $data2["chassis_planned_dates"] = $this->getWeekChartInfo();
         $data2["table_info"] = $this->getTableInfoToday();
+
+        //Data for "rendementen" tab in dashboard
+        $data2["average_planned_hours"] = $this->calculateAveragePlannedHours($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[0]);
+        $data2["average_worked_hours"] = $this->calculateAverageWorkedHours($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[1]);
+        $data2["amount_overtime"] = $this->calculateAmountOvertime($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[2]);
+        $data2["amount_montage"] = $this->calculateAmountMontage($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[3]);
 
 
         array_push($this->data['scripts_to_load'], 'analyze_view.js');
@@ -261,6 +273,98 @@ class AnalyzeController extends BaseController
             }
         endwhile;
         return json_encode($output_array);
+    }
+
+    public function calculateAveragePlannedHours($my_array){
+        $average_planned_hours = array();
+        $line_number = 1;
+        $average_planned_hours_complete = 0;
+        $count_complete = 0;
+        $average_planned_hours_in_progress = 0;
+        $count_in_progress = 0;
+        while ($line_number < sizeof($my_array)):
+            if(isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) != "" && isset($my_array[$line_number][6])){
+                $average_planned_hours_complete+= ($my_array[$line_number][6]);
+                $count_complete++;
+            }
+            else if (isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) == "" && isset($my_array[$line_number][6])){
+                $average_planned_hours_in_progress+= ($my_array[$line_number][6]);
+                $count_in_progress++;
+            }
+            $line_number++;
+        endwhile;
+
+        $average_planned_hours[0] = round($average_planned_hours_complete/$count_complete, 2, PHP_ROUND_HALF_UP);
+        $average_planned_hours[1] = round($average_planned_hours_in_progress/$count_in_progress, 2, PHP_ROUND_HALF_UP);
+        return $average_planned_hours;
+    }
+
+    public function calculateAverageWorkedHours($my_array){
+        $average_worked_hours = array();
+        $line_number = 1;
+        $average_worked_hours_complete = 0;
+        $count_complete = 0;
+        $average_worked_hours_in_progress = 0;
+        $count_in_progress = 0;
+        while ($line_number < sizeof($my_array)):
+            if(isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) != "" && isset($my_array[$line_number][5])){
+                $average_worked_hours_complete+= ($my_array[$line_number][5]);
+                $count_complete++;
+            }
+            else if (isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) == "" && isset($my_array[$line_number][5])){
+                $average_worked_hours_in_progress+= ($my_array[$line_number][5]);
+                $count_in_progress++;
+            }
+            $line_number++;
+        endwhile;
+
+        $average_worked_hours[0] = round($average_worked_hours_complete/$count_complete, 2, PHP_ROUND_HALF_UP);
+        $average_worked_hours[1] = round($average_worked_hours_in_progress/$count_in_progress, 2, PHP_ROUND_HALF_UP);
+        return $average_worked_hours;
+    }
+
+    public function calculateAmountOvertime($my_array){
+        $amount_overtime = array();
+        $line_number = 1;
+        $amount_overtime_complete = 0;
+        $amount_overtime_in_progress = 0;
+        while ($line_number < sizeof($my_array)):
+            if(isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) != "" && isset($my_array[$line_number][5]) && isset($my_array[$line_number][6])){
+                if(($my_array[$line_number][5] - $my_array[$line_number][6]) > 0){
+                    $amount_overtime_complete++;
+                }
+            }
+            else if (isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) == "" && isset($my_array[$line_number][5]) && isset($my_array[$line_number][6])){
+                if(($my_array[$line_number][5] - $my_array[$line_number][6]) > 0) {
+                    $amount_overtime_in_progress++;
+                }
+            }
+            $line_number++;
+        endwhile;
+
+        $amount_overtime[0] = $amount_overtime_complete;
+        $amount_overtime[1] = $amount_overtime_in_progress;
+        return $amount_overtime;
+    }
+
+    public function calculateAmountMontage($my_array){
+        $amount_montage = array();
+        $line_number = 1;
+        $amount_montage_complete = 0;
+        $amount_montage_in_progress = 0;
+        while ($line_number < sizeof($my_array)):
+            if(isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) != ""){
+                    $amount_montage_complete++;
+            }
+            else if (isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) == ""){
+                    $amount_montage_in_progress++;
+            }
+            $line_number++;
+        endwhile;
+
+        $amount_montage[0] = $amount_montage_complete;
+        $amount_montage[1] = $amount_montage_in_progress;
+        return $amount_montage;
     }
 
 }
