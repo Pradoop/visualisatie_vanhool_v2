@@ -26,7 +26,7 @@ h1 {
 
 .rendement-grid-container {
   display: grid;
-  grid-template-columns: 15% 25% 60%;
+  grid-template-columns: 15% 45% 40%;
 }
 
 .grid-child {
@@ -99,7 +99,7 @@ h1 {
 
 .table-title{
   color: #10395d;
-  font-size: 21.33px;
+  font-size: 150%;
 }
 
 .rendement-col2{
@@ -121,6 +121,20 @@ p{
   margin-top: 1%;
 }
 
+.rendement-table-container{
+  overflow-x: auto;
+}
+
+.card-rendement-table{
+  border-radius: 5px;
+  background-color: rgba(227, 228, 229, 0.5);
+  border: 1px solid rgba(0,0,0,.125);
+  display: block;
+  float: left;
+  margin-top: 0;
+  margin-left: 3%;
+}
+
 .data-table{
   text-align: left;
 }
@@ -134,9 +148,6 @@ p{
   display: grid;
   grid-template-columns: 50% 50%;
 }
-
-
-
 
 /* The Modal (background) */
 .modal {

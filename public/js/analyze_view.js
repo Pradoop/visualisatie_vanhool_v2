@@ -1,4 +1,4 @@
-const welding_data = [], total_welding_data = [], chassis_phase = [];
+const total_welding_data = [];
 const chassis_pln_date = [], chassis_table = [];
 const stand_las_0 = [], stand_las_1 = [], stand_las_2 = [], stand_las_3 = [], stand_las_4 = [];
 /*
@@ -160,7 +160,6 @@ function createTableChassisPlanned(my_data, my_date, my_table_id, my_title){
     let firstDay = my_date;
     firstDay.setHours(0, 0, 0, 0);
 
-    const weekNumber = calculateWeekNumber(firstDay);
     let table_title = document.getElementById(my_table_id + "-title");
     table_title.innerHTML = my_title;
 
@@ -484,8 +483,6 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
             }
         }
     }
-    console.log(tooltip_data_stand_0);
-
     all_tooltip_data[0].push(tooltip_data_stand_0);
     all_tooltip_data[1].push(tooltip_data_stand_1);
     all_tooltip_data[2].push(tooltip_data_stand_2);

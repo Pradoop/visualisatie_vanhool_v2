@@ -33,6 +33,7 @@ class RendementModel extends \CodeIgniter\Model
         $gewerkte_uren_array = array();
         $uren_array = array();
         $montage_array = array();
+        $chassis_info_array = array();
 
 
         foreach($file_by_line_array as $line) {
@@ -59,10 +60,17 @@ class RendementModel extends \CodeIgniter\Model
             $montage_array[] = $array;
         }
 
+        foreach($file_by_line_array as $line) {
+            $array = preg_split('/\t/', $line);
+            unset($array[1],$array[2],$array[9],$array[10],$array[11]);
+            $chassis_info_array[] = $array;
+        }
+
         $main_arrays[] = $geplande_uren_array;
         $main_arrays[] = $gewerkte_uren_array;
         $main_arrays[] = $uren_array;
         $main_arrays[] = $montage_array;
+        $main_arrays[] = $chassis_info_array;
 
         return $main_arrays;
 

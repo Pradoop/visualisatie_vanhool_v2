@@ -126,27 +126,29 @@
         <div class="rendement-grid-container">
             <div class="grid-child col1">
                 <div class="card card-1">
-                    <div class="information_1">
-                        <p class="information_value"><?= $average_planned_hours[0] ?> uren </p>
-                        <p class="information_text">gemiddeld gepland voor afgewerkte wagens</p>
+                    <div class="information_2">
+                        <p class="information_value"><?= $amount_montage[0]?> chassis</p>
+                        <p class="information_text">af laatste 20 werkdagen</p>
                     </div>
-                </div>
-                <div class="card rendement-card-info">
-                    <div class="information_5">
-                        <p class="information_value"><?= $average_worked_hours[0]?> uren </p>
-                        <p class="information_text">gemiddeld gewerkt voor afgewerkte wagens</p>
-                    </div>
+
                 </div>
                 <div class="card rendement-card-info">
                     <div class="information_2">
                         <p class="information_value"><?= $amount_overtime[0]?> chassis</p>
-                        <p class="information_text">af geplande uren overschreden</p>
+                        <p class="information_text">geplande uren overschreden</p>
+                    </div>
+
+                </div>
+                <div class="card rendement-card-info">
+                    <div class="information_5">
+                        <p class="information_value"><?= $average_worked_hours[0]?> uren </p>
+                        <p class="information_text">gemiddeld gewerkt</p>
                     </div>
                 </div>
                 <div class="card rendement-card-info">
-                    <div class="information_2">
-                        <p class="information_value"><?= $amount_montage[0]?> chassis</p>
-                        <p class="information_text">af laatste 20 werkdagen</p>
+                    <div class="information_1">
+                        <p class="information_value"><?= $average_planned_hours[0] ?> uren </p>
+                        <p class="information_text">gemiddeld gepland</p>
                     </div>
                 </div>
             </div>
@@ -159,13 +161,13 @@
                 <div class="card card-1">
                     <div class="information_4">
                         <p class="information_value"><?= $average_planned_hours[1] ?> uren </p>
-                        <p class="information_text">gemiddeld gepland voor wagens in montage</p>
+                        <p class="information_text">gemiddeld gepland</p>
                     </div>
                 </div>
                 <div class="card rendement-card-info">
                     <div class="information_3">
                         <p class="information_value"><?=$average_worked_hours[1]?> uren </p>
-                        <p class="information_text">gemiddeld gewerkt voor wagens in montage</p>
+                        <p class="information_text">gemiddeld gewerkt</p>
                     </div>
                 </div>
                 <div class="card rendement-card-info">
@@ -181,6 +183,13 @@
                     </div>
                 </div>
             </div>
+            <div class = "card-rendement-table">
+                <p class="table-title" id="current-rendement-table-title"></p>
+                <div class="rendement-table-container">
+                    <table class="data-table" id="current-rendement-table"></table>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

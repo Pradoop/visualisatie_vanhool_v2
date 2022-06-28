@@ -51,10 +51,12 @@ class AnalyzeController extends BaseController
         $data2["average_worked_hours"] = $this->calculateAverageWorkedHours($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[1]);
         $data2["amount_overtime"] = $this->calculateAmountOvertime($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[2]);
         $data2["amount_montage"] = $this->calculateAmountMontage($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[3]);
+        $data2["rendementen_info"] = $this->getCurrentRendementData();
 
 
-        array_push($this->data['scripts_to_load'], 'analyze_view.js');
-        array_push($this->data['styles_to_load'], 'analyze_view.scss');
+        $this->data['scripts_to_load'][] = 'analyze_view.js';
+        $this->data['scripts_to_load'][] = 'analyze_view_rendementen.js';
+        $this->data['styles_to_load'][] = 'analyze_view.scss';
         $this->data['content'] = view('analyze_view', $data2);
         return view('template', $this->data);
     }
@@ -366,5 +368,54 @@ class AnalyzeController extends BaseController
         $amount_montage[1] = $amount_montage_in_progress;
         return $amount_montage;
     }
+
+    public function getCurrentRendementData(){
+        $line_array = $this->rendement_model->readFile();
+        $my_array = $this->rendement_model->fileColumnArrays($line_array)[4];
+        $output_array = array();
+        $sorted_output_array = array();
+        $line_number = 1;
+        $status = "";
+        while ($line_number < sizeof($my_array)):
+            $temp = array();
+            if(isset($my_array[$line_number][0])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][0]));
+            }
+            if((isset($my_array[$line_number][3])) && (trim($my_array[$line_number][3]) == "")) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][3]));
+            }
+            if(isset($my_array[$line_number][4])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][4]));
+            }
+            if(isset($my_array[$line_number][5]) && isset($my_array[$line_number][6])) {
+                $worked =   intval(trim($my_array[$line_number][5]));
+                $planned =  intval(trim($my_array[$line_number][6]));
+
+                if ($worked > $planned){
+                    $status = "dringend";
+                }
+                else{
+                    $status = "OK";
+                }
+                $temp[] = $worked;
+                $temp[] = $planned;
+            }
+            if(isset($my_array[$line_number][7]) && isset($my_array[$line_number][8])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][7]));
+                $temp[] = utf8_encode(trim($my_array[$line_number][8]));
+            }
+            if (sizeof($temp) != 7){
+                array_splice($temp, 1, 1);
+            }
+            if ($status != "OK" && trim($my_array[$line_number][3]) == ""){
+                $output_array[] = $temp;
+            }
+            $line_number++;
+        endwhile;
+
+        return json_encode($output_array);
+    }
+
+
 
 }
