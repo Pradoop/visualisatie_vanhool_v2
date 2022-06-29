@@ -19,7 +19,17 @@ h1 {
   text-align: center;
   flex-wrap: wrap;
 }
+
+.dashboard-options {
+  margin-top: 0.25%;
+}
+
 .grid-container {
+  display: grid;
+  grid-template-columns: 15% 25% 60%;
+}
+
+.historical-rendement-grid-container {
   display: grid;
   grid-template-columns: 15% 25% 60%;
 }

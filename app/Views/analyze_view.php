@@ -122,33 +122,51 @@
     </div>
 
     <div class="dashboard-options" id="historical-rendement-info-dash">
-        <p class="rendement-header-text">Laatste 20 werkdagen</p>
-        <div class="rendement-grid-container">
+        <div class="historical-rendement-grid-container">
             <div class="grid-child col1">
                 <div class="card card-1">
                     <div class="information_2">
                         <p class="information_value"><?= $amount_montage[0]?> chassis</p>
                         <p class="information_text">af laatste 20 werkdagen</p>
                     </div>
-
                 </div>
                 <div class="card rendement-card-info">
                     <div class="information_2">
                         <p class="information_value"><?= $amount_overtime[0]?> chassis</p>
-                        <p class="information_text">geplande uren overschreden</p>
+                        <p class="information_text">geplande uren overschreden laatste 20 werkdagen</p>
                     </div>
 
                 </div>
                 <div class="card rendement-card-info">
                     <div class="information_5">
                         <p class="information_value"><?= $average_worked_hours[0]?> uren </p>
-                        <p class="information_text">gemiddeld gewerkt</p>
+                        <p class="information_text">gemiddeld gewerkt laatste 20 werkdagen</p>
                     </div>
                 </div>
                 <div class="card rendement-card-info">
                     <div class="information_1">
                         <p class="information_value"><?= $average_planned_hours[0] ?> uren </p>
-                        <p class="information_text">gemiddeld gepland</p>
+                        <p class="information_text">gemiddeld gepland laatste 20 werkdagen</p>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-child col-2">
+                <div class="grid-graph-child col4">
+                    <div class="card chart chart-row-1" id="bar_chart">
+                        <canvas class="week-chart" id="three_weeks_ago_rendement_chart"></canvas>
+                    </div>
+                    <div class="card chart" id="bar_chart">
+                        <canvas class="week-chart" id="two_weeks_ago_rendement_chart"></canvas>
+                    </div>
+                    <div class="card chart" id="bar_chart">
+                        <canvas class="week-chart" id="last_week_rendement_chart"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-child col-3">
+                <div class="grid-graph-child col5">
+                    <div class="card chart chart-row-1" id="bar_chart">
+                        <canvas class="week-chart" id="this_week_rendement_chart"></canvas>
                     </div>
                 </div>
             </div>
@@ -189,7 +207,6 @@
                     <table class="data-table" id="current-rendement-table"></table>
                 </div>
             </div>
-
         </div>
     </div>
 </div>

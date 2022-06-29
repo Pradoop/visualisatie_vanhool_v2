@@ -52,10 +52,13 @@ class AnalyzeController extends BaseController
         $data2["amount_overtime"] = $this->calculateAmountOvertime($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[2]);
         $data2["amount_montage"] = $this->calculateAmountMontage($this->rendement_model->fileColumnArrays($data2["rendement_lines"])[3]);
         $data2["rendementen_info"] = $this->getCurrentRendementData();
+        $data2["historical_rendementen_info"] = $this->getHistoricalRendementData();
+
 
 
         $this->data['scripts_to_load'][] = 'analyze_view.js';
-        $this->data['scripts_to_load'][] = 'analyze_view_rendementen.js';
+        $this->data['scripts_to_load'][] = 'analyze_view_huidige_rendementen.js';
+        $this->data['scripts_to_load'][] = 'analyze_view_historische_rendementen.js';
         $this->data['styles_to_load'][] = 'analyze_view.scss';
         $this->data['content'] = view('analyze_view', $data2);
         return view('template', $this->data);
@@ -367,6 +370,46 @@ class AnalyzeController extends BaseController
         $amount_montage[0] = $amount_montage_complete;
         $amount_montage[1] = $amount_montage_in_progress;
         return $amount_montage;
+    }
+
+    public function getHistoricalRendementData()
+    {
+        $line_array = $this->rendement_model->readFile();
+        $my_array = $this->rendement_model->fileColumnArrays($line_array)[5];
+        $line_number = 1;
+        $output_array = array();
+
+        while ($line_number < sizeof($my_array)):
+            $temp = array();
+            if (isset($my_array[$line_number][0])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][0]));
+            }
+            if(isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) != ""){
+                $temp[] = utf8_encode(trim($my_array[$line_number][3]));
+            }
+            if (isset($my_array[$line_number][5])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][5]));
+            }
+            if (isset($my_array[$line_number][6])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][6]));
+            }
+            if (isset($my_array[$line_number][7])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][7]));
+            }
+            if (isset($my_array[$line_number][8])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][8]));
+            }
+            if (isset($my_array[$line_number][9])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][9]));
+            }
+            $line_number++;
+            $output_array[] = $temp;
+        endwhile;
+
+        //required as the file contains 2 blank lines
+        array_splice($output_array, sizeof($output_array)-2, 2);
+
+        return json_encode($output_array);
     }
 
     public function getCurrentRendementData(){
