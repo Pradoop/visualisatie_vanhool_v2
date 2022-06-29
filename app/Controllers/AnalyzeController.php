@@ -419,7 +419,44 @@ class AnalyzeController extends BaseController
             $line_number++;
         endwhile;
 
-        return json_encode($output_array);
+        for ($i = 0; $i < sizeof($output_array); $i++){
+            $current_chassis = $output_array[$i];
+            $diff = $current_chassis[3] - $current_chassis[4];
+            if (sizeof($sorted_output_array) == 0){
+                $sorted_output_array[] = $current_chassis;
+            }
+            elseif (sizeof($sorted_output_array) == 1){
+                $sorted_chassis = $sorted_output_array[0];
+                $sorted_diff = $sorted_chassis[3] - $sorted_chassis[4];
+                if ($diff > $sorted_diff){
+                    array_splice( $sorted_output_array, 0, 0, array($current_chassis));
+                }
+                else{
+                    array_splice( $sorted_output_array, 1, 0, array($current_chassis));
+                }
+            }
+            else{
+                for($j = 0; $j < sizeof($sorted_output_array) ; $j++){
+                    $sorted_chassis = $sorted_output_array[$j];
+                    if ($j+1 < sizeof($sorted_output_array)){
+                        $next_sorted_chassis = $sorted_output_array[($j+1)];
+                    }
+                    else{
+                        $next_sorted_chassis = $sorted_output_array[sizeof($sorted_output_array)-1];
+                    }
+                    $sorted_diff = $sorted_chassis[3] - $sorted_chassis[4];
+                    $next_sorted_diff = $next_sorted_chassis[3] - $next_sorted_chassis[4];
+                    if (($diff <= $sorted_diff) && ($diff > $next_sorted_diff)){
+                        $sorted_output_array[] = $current_chassis;
+                    }
+                    elseif ($diff < $next_sorted_diff){
+                        $sorted_output_array[] = $current_chassis;
+                    }
+                }
+            }
+
+        }
+        return json_encode($sorted_output_array);
     }
 
 

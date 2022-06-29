@@ -1,4 +1,4 @@
-let rendement_data = [], sorted_rendement_data = [];
+let rendement_data = [];
 
 $.ajax({
     url: BASE_URL + '/AnalyzeController/getCurrentRendementData',
@@ -16,32 +16,10 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        sorted_rendement_data = sortRendementData(rendement_data);
         createTableRendement(rendement_data,'current-rendement-table', 'Rendementen van opleggers in montage');
     }
 });
 
-function sortRendementData(my_data){
-    let output_data = [];
-    console.log(my_data);
-    for (let i = 0; i < my_data.length; i++){
-        let chassis = my_data[i];
-        let diff = chassis[3] - chassis[4];
-        if (output_data.length === 0){
-            output_data.push(chassis);
-        }
-        console.log(chassis);
-        for (let j = 0; j < output_data.length; j++){
-            let sortedChassis = output_data[j]
-            let sortedDiff = sortedChassis[3] - sortedChassis[4];
-            if (diff >= sortedDiff){
-                output_data[j-1] = chassis;
-            }
-        }
-    }
-    console.log(output_data);
-    return output_data
-}
 
 function createTableRendement(my_data, my_table_id, my_title){
     let table_title = document.getElementById(my_table_id + "-title");
@@ -81,7 +59,8 @@ function createTableRendement(my_data, my_table_id, my_title){
     document.getElementById(my_table_id).appendChild(table);
     for (let i =0;  i < my_data.length; i++){
         let temp_chassis = my_data[i];
-        let row_wagennr, row_kaliber, row_gewerkt, row_gepland, row_toestand, row_klantnaam, row_wagentype;
+        console.log(temp_chassis)
+        let row_wagennr, row_kaliber, row_gewerkt, row_gepland, row_klantnaam, row_wagentype;
         let new_row = document.createElement('tr');
         for (let j = 0; j < temp_chassis.length; j++){
             row_wagennr = document.createElement('td');
