@@ -4,7 +4,7 @@
             <h1>Dashboard</h1>
         </div>
         <div class="tab">
-            <button class="tablinks" onclick="showDashboard(event, 'general-info-dash')">Planning</button>
+            <button class="tablinks active" onclick="showDashboard(event, 'general-info-dash')">Planning</button>
             <button class="tablinks" onclick="showDashboard(event, 'historical-rendement-info-dash')">Historische Rendementen</button>
             <button class="tablinks" onclick="showDashboard(event, 'rendement-info-dash')">Huidige Rendementen</button>
         </div>
@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <div class="dashboard-options" id="historical-rendement-info-dash">
+    <div class="dashboard-options" id="historical-rendement-info-dash" style="display: none">
         <div class="historical-rendement-grid-container">
             <div class="grid-child col1">
                 <div class="card card-1">
@@ -173,7 +173,7 @@
         </div>
     </div>
 
-    <div class="dashboard-options" id="rendement-info-dash">
+    <div class="dashboard-options" id="rendement-info-dash"  style="display: none">
         <div class="rendement-grid-container">
             <div class="grid-child col1">
                 <div class="card card-1">
