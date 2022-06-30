@@ -47,7 +47,7 @@ class MapController extends BaseController
     public function getChassisMap(): array
     {
         $line_array = $this->analyze_model->readFile();
-        $status_hal = array('07','83','85','86','8','81');//TODO
+        $status_hal = array('07','83','85','86','8','81');
         $status_wait = array('38');//TODO
 
         $output_array = array();

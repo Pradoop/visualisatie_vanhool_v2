@@ -4,7 +4,7 @@
             <h1>Dashboard</h1>
         </div>
         <div class="tab">
-            <button class="tablinks" onclick="showDashboard(event, 'general-info-dash')">Algemeen</button>
+            <button class="tablinks" onclick="showDashboard(event, 'general-info-dash')">Planning</button>
             <button class="tablinks" onclick="showDashboard(event, 'historical-rendement-info-dash')">Historische Rendementen</button>
             <button class="tablinks" onclick="showDashboard(event, 'rendement-info-dash')">Huidige Rendementen</button>
         </div>
