@@ -283,10 +283,10 @@ function colorImportantChassis() {
     for(let i = 1; i < ChassisImportant_lines.length; i++) {
         let line = ChassisImportant_lines[i].toString().split(/\t/);
         if(orange_start <= parseInt(line[17].trim()) && parseInt(line[17].trim()) <= red_start) {
-            document.getElementById('chassis_' + i).style.color = 'orange';
+            //document.getElementById('chassis_' + i).style.color = 'orange';
         }
         else if(red_start < parseInt(line[17].trim())) {
-            document.getElementById('chassis_' + i).style.color = 'red';
+            //document.getElementById('chassis_' + i).style.color = 'red';
         }
     }
 }
