@@ -7,13 +7,13 @@ class MapModel extends \CodeIgniter\Model
     /*
 * Opens txtFile and puts each file line as 1 string in array element
 */
-    public function readFile()
+    public function readFile(): array
     {
         /*
         * Small txtFile with columns: wagen,DLnr,Kaliber,NaamFase,NaamKlant,NaamType,Natie,StandInProd,ReeksVan,ReeksTot
         */
         $chassisInKaliberIV_array = array();
-        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\ChassisInKaliberIV.txt", "r");
+        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\ChassisInKaliberIV.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
@@ -25,7 +25,4 @@ class MapModel extends \CodeIgniter\Model
         return $chassisInKaliberIV_array;
     }
 
-    public function fileColumnArrays($file_by_line_array){
-
-    }
 }

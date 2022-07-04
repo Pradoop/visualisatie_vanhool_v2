@@ -3,25 +3,39 @@
   display: flex;
   margin: 1% 1% 0.5%;
 }
+
 #afdelingNaam_div {
   float: left;
-  width: 80%;
+  width: 81%;
 }
 #afdelingNaam {
   display: inline-block
 }
 
+#dropdownFilter_div {
+  width: 7%;
+  min-width: 130px;
+}
+#filter-dropdown-button {
+  float: right;
+  width: 100px;
+}
 .filter .dropdown-menu{
   padding: 0.5rem 0.5rem;
   min-width: 25rem;
 }
+.filter .dropdown-header{
+  padding: 0.5rem 0;
+}
 
-#searchBox {
+#searchBox_div {
   float: right;
-  width: 20%;
+  min-width: 250px;
+  width: 12%;
 }
 #search_input {
   float: right;
+  width: 220px;
 }
 
 .inspect-data-loading{
@@ -31,7 +45,7 @@
 
 /* Table content div */
 #table_content {
-  margin: 1% 1% 0%;
+  margin: 1% 1% 0;
   //border: 2px solid green;
   display: none;
 }
@@ -52,7 +66,7 @@ td {
 
 /* Count div */
 #count_div {
-  margin: 0% 1% 1%;
+  margin: 0 1% 1%;
 }
 
 /* Algemeen */
