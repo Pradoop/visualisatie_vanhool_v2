@@ -32,7 +32,7 @@ class RendementController extends BaseController
 
         $data2["data_lines"] = $this->getRendementInfo();
 
-        array_push($this->data['scripts_to_load'], 'rendement_view.js', 'jquery.dataTables.min.js', 'date-uk.js');
+        array_push($this->data['scripts_to_load'], 'rendement_view.js', 'jquery.dataTables.min.js', 'date-uk.js', 'percent.js');
         array_push($this->data['styles_to_load'], 'rendement_view.scss', 'jquery.dataTables.min.css');
         $this->data['content'] = view('rendement_view', $data2);
         return view('template', $this->data);
@@ -57,7 +57,15 @@ class RendementController extends BaseController
                     $datumInMontAf = ' ';
                 }
 
-                $primary_string = $array[0].'!'.$datumInMont.'!'.$datumInMontAf.'!'.$array[4].'!'.$array[5].'!'.$array[6].'!'.$array[7].'!'.$array[8].'!'.$array[9].'!'.$array[10].'!'.$array[11];
+                if($array[6] != 0) {
+                    $percentage = round(($array[5]/$array[6])*100,2).'%';
+                }
+                else {
+                    $percentage = '0%';
+                }
+
+                $primary_string = $percentage.'!'.$array[5].'!'.$array[6].'!'.$array[0].'!'.$array[4].'!'.$array[7].'!'.$array[8].'!'.$array[10].'!'.$array[11].'!'.$array[9].'!'.$datumInMont.'!'.$datumInMontAf;
+                //$primary_string = $array[0].'!'.$datumInMont.'!'.$datumInMontAf.'!'.$array[4].'!'.$array[5].'!'.$array[6].'!'.$array[7].'!'.$array[8].'!'.$array[9].'!'.$array[10].'!'.$array[11];
                 $primary_array[] = $primary_string;
 
             }
