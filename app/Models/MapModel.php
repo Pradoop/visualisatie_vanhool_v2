@@ -4,9 +4,15 @@ namespace App\Models;
 
 class MapModel extends \CodeIgniter\Model
 {
+
+    public function __construct()
+    {
+
+    }
+
     /*
-* Opens txtFile and puts each file line as 1 string in array element
-*/
+    * Opens txtFile and puts each file line as 1 string in array element
+    */
     public function readFile(): array
     {
         /*

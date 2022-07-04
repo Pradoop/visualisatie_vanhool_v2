@@ -10,7 +10,8 @@ class RendementModel extends \CodeIgniter\Model
 
     }
 
-    public function readFile(){
+    public function readFile(): array
+    {
         /*
         * Medium txtFile with columns: Wagen,DLnr,DatumInMont,DatumMontAf,Info,Gewerkt,Gepland,NaamKlant,NaamType,Natie,ReeksVan,ReeksTot
         */
@@ -27,7 +28,8 @@ class RendementModel extends \CodeIgniter\Model
         return $werkurenMontOpl_array;
     }
 
-    public function fileColumnArrays($file_by_line_array){
+    public function fileColumnArrays($file_by_line_array): array
+    {
         $main_arrays = array();
         $geplande_uren_array = array();
         $gewerkte_uren_array = array();

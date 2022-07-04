@@ -30,7 +30,7 @@ class BurgerModel extends \CodeIgniter\Model
         }
     }
 
-    public function get_menuitems($menutitle)
+    public function get_menuitems($menutitle): array
     {
         $this->set_active($menutitle);
         return $this->menu_items_all;

@@ -3,13 +3,12 @@
 namespace App\Controllers;
 
 use App\Models\BurgerModel;
-use App\Models\AnalyzeModel;
 use App\Models\RendementModel;
 
 class RendementController extends BaseController
 {
-    private $burger_menu;
-    private $werkuren_model;
+    private BurgerModel $burger_menu;
+    private RendementModel $werkuren_model;
     private $data;
 
     public function __construct()
@@ -64,7 +63,7 @@ class RendementController extends BaseController
             }
             $line_number++;
         }
-
         return $primary_array;
     }
+
 }

@@ -10,9 +10,9 @@ use App\Models\RendementModel;
 class AnalyzeController extends BaseController
 {
 
-    private $burger_menu;
-    private $analyze_model;
-    private $rendement_model;
+    private BurgerModel $burger_menu;
+    private AnalyzeModel $analyze_model;
+    private RendementModel $rendement_model;
     private $data;
 
     public function __construct()
@@ -29,7 +29,7 @@ class AnalyzeController extends BaseController
         return $this->map_view();
     }
 
-    public function analyze_view()
+    public function analyze_view(): string
     {
         $this->data['title_tab'] = 'Dashboard';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Dashboard');
@@ -54,8 +54,7 @@ class AnalyzeController extends BaseController
         $data2["rendementen_info"] = $this->getCurrentRendementData();
         $data2["historical_rendementen_info"] = $this->getHistoricalRendementData();
 
-
-
+        //Passing files and variables to page
         $this->data['scripts_to_load'][] = 'analyze_view.js';
         $this->data['scripts_to_load'][] = 'analyze_view_huidige_rendementen.js';
         $this->data['scripts_to_load'][] = 'analyze_view_historische_rendementen.js';
@@ -64,7 +63,7 @@ class AnalyzeController extends BaseController
         return view('template', $this->data);
     }
 
-    public function getTableInfoToday()
+    public function getTableInfoToday(): bool|string
     {
         $line_array = $this->analyze_model->readFile();
         $my_array = $this->analyze_model->fileColumnArrays($line_array)[8];
@@ -99,7 +98,7 @@ class AnalyzeController extends BaseController
 * Explanation: Function searches based on the following statuses:
 * 38, 07, 83, 85, 86, 8, 81. If there is a match, then the chassis is in production and value is incremented
 */
-    public function calculateTotalInProduction($my_array)
+    public function calculateTotalInProduction($my_array): array
     {
         $production_array = array();
         $line_number = 1;
@@ -166,7 +165,7 @@ class AnalyzeController extends BaseController
     * Output: Average amount of delays for all chassis
     * Explanation: Function calculates the average delay
     */
-    public function calculateAverageWdInMont($my_array)
+    public function calculateAverageWdInMont($my_array): float
     {
         $line_number = 1;
         $total_delay = 0;
@@ -189,7 +188,7 @@ class AnalyzeController extends BaseController
     * Output: Average amount of delays for all chassis
     * Explanation: Function calculates the average delay
     */
-    public function calculatePlannedToday($my_array)
+    public function calculatePlannedToday($my_array): int
     {
         $line_number = 1;
         $total_today = 0;
@@ -244,7 +243,7 @@ class AnalyzeController extends BaseController
         return json_encode($output_array);
     }
 
-    public function getWeekChartInfo()
+    public function getWeekChartInfo(): bool|string
     {
         $line_array = $this->analyze_model->readFile();
         $my_array = $this->analyze_model->fileColumnArrays($line_array)[4];
@@ -280,7 +279,8 @@ class AnalyzeController extends BaseController
         return json_encode($output_array);
     }
 
-    public function calculateAveragePlannedHours($my_array){
+    public function calculateAveragePlannedHours($my_array): array
+    {
         $average_planned_hours = array();
         $line_number = 1;
         $average_planned_hours_complete = 0;
@@ -304,7 +304,8 @@ class AnalyzeController extends BaseController
         return $average_planned_hours;
     }
 
-    public function calculateAverageWorkedHours($my_array){
+    public function calculateAverageWorkedHours($my_array): array
+    {
         $average_worked_hours = array();
         $line_number = 1;
         $average_worked_hours_complete = 0;
@@ -328,7 +329,8 @@ class AnalyzeController extends BaseController
         return $average_worked_hours;
     }
 
-    public function calculateAmountOvertime($my_array){
+    public function calculateAmountOvertime($my_array): array
+    {
         $amount_overtime = array();
         $line_number = 1;
         $amount_overtime_complete = 0;
@@ -352,7 +354,8 @@ class AnalyzeController extends BaseController
         return $amount_overtime;
     }
 
-    public function calculateAmountMontage($my_array){
+    public function calculateAmountMontage($my_array): array
+    {
         $amount_montage = array();
         $line_number = 1;
         $amount_montage_complete = 0;
@@ -372,7 +375,7 @@ class AnalyzeController extends BaseController
         return $amount_montage;
     }
 
-    public function getHistoricalRendementData()
+    public function getHistoricalRendementData(): bool|string
     {
         $line_array = $this->rendement_model->readFile();
         $my_array = $this->rendement_model->fileColumnArrays($line_array)[5];
@@ -412,7 +415,8 @@ class AnalyzeController extends BaseController
         return json_encode($output_array);
     }
 
-    public function getCurrentRendementData(){
+    public function getCurrentRendementData(): bool|string
+    {
         $line_array = $this->rendement_model->readFile();
         $my_array = $this->rendement_model->fileColumnArrays($line_array)[4];
         $output_array = array();
@@ -456,7 +460,7 @@ class AnalyzeController extends BaseController
             if (sizeof($temp) != 7){
                 array_splice($temp, 1, 1);
             }
-            if ($status != "OK" && trim($my_array[$line_number][3]) == ""){
+            if ($status != "OK" && isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) == ""){
                 $output_array[] = $temp;
             }
             $line_number++;
