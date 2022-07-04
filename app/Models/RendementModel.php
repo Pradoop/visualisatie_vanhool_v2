@@ -71,12 +71,6 @@ class RendementModel extends \CodeIgniter\Model
 
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
-            unset($array[1],$array[2],$array[9],$array[10],$array[11]);
-            $chassis_info_array[] = $array;
-        }
-
-        foreach($file_by_line_array as $line) {
-            $array = preg_split('/\t/', $line);
             unset($array[1],$array[2],$array[4],$array[10],$array[11]);
             $rendement_info_array[] = $array;
         }
