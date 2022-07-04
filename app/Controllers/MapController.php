@@ -9,9 +9,9 @@ use App\Models\MapModel;
 class MapController extends BaseController
 {
 
-    private $burger_menu;
-    private $analyze_model;
-    private $map_model;
+    private BurgerModel $burger_menu;
+    private AnalyzeModel $analyze_model;
+    private MapModel $map_model;
     private $data;
 
     public function __construct()
@@ -23,12 +23,12 @@ class MapController extends BaseController
         $this->data['styles_to_load'] = array('bootstrap.min.css'); //css used everywhere
     }
 
-    public function index()
+    public function index(): string
     {
         return $this->map_view();
     }
 
-    public function map_view()
+    public function map_view(): string
     {
         $this->data['title_tab'] = 'Plattegrond';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Plattegrond');

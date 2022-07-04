@@ -13,15 +13,13 @@ class AnalyzeModel extends \CodeIgniter\Model
     /*
     * Opens txtFile and puts each file line as 1 string in array element
     */
-    public function readFile()
+    public function readFile(): array
     {
-        $files_array = array();
-
         /*
         * Large txtFile with columns: Wagen,Ew,Aantal,dtmGepland,wagtyp,naamWagTyp,KlantNr,naamKlant,Land,LijnNr,ReeksVan,Afdeling,Galva,DLnr,Status,CntrDtm,wdTeLaat,wdInMont,standLas
         */
         $planningMontage_array = array();
-        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\planningMontage.txt", "r");
+        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\planningMontage.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
@@ -33,7 +31,7 @@ class AnalyzeModel extends \CodeIgniter\Model
         return $planningMontage_array;
     }
 
-    public function fileColumnArrays($file_by_line_array)
+    public function fileColumnArrays($file_by_line_array): array
     {
         $main_arrays = array();
         $status_array = array();
@@ -70,7 +68,7 @@ class AnalyzeModel extends \CodeIgniter\Model
         foreach($file_by_line_array as $line) {
             $array = preg_split('/\t/', $line);
             unset($array[0],$array[1],$array[2],$array[3],$array[4],$array[5],$array[6],$array[7],$array[8],$array[9],$array[10],$array[11],$array[12],$array[13],$array[14],$array[15],$array[16],$array[18],$array[19]);
-            array_push($wdInMont_array, $array);
+            $wdInMont_array[] = $array;
         }
 
         /*

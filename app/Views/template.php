@@ -31,7 +31,7 @@
     <div class="menu">
         <ul>
             <li class="logo">
-                <a href="<?= base_url()?>/MapController/map_view">
+                <a href="<?= base_url()?>/map_view">
                     <img id="logo" class="site-logo" src="<?= base_url()?>/images/logo_VanHool.png" alt="...">
                 </a>
             </li>

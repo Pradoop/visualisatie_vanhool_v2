@@ -280,7 +280,7 @@ function colorImportantChassis() {
     let orange_start = 7;
     let red_start = 9;
 
-    for(let i = 1; i < ChassisImportant_lines.length; i++) {
+    for(let i = 0; i < ChassisImportant_lines.length; i++) {
         let line = ChassisImportant_lines[i].toString().split(/\t/);
         if(orange_start <= parseInt(line[17].trim()) && parseInt(line[17].trim()) <= red_start) {
             //document.getElementById('chassis_' + i).style.color = 'orange';
@@ -301,14 +301,14 @@ function focusDot(line_nr) {
     }
 
     if(focus === 0) {
-        for(let i = 1; i < ChassisImportant_lines.length; i++) {
+        for(let i = 0; i < ChassisImportant_lines.length; i++) {
             let line = ChassisImportant_lines[i].toString().split(/\t/);
             if(line_nr === i) {
                 chassis_nr = line[0].trim();
                 document.getElementById(line[0].trim()).style.display = 'block';
             }
         }
-        for(let i = 1; i < ChassisInMontage_lines.length; i++) {
+        for(let i = 0; i < ChassisInMontage_lines.length; i++) {
             let line = ChassisInMontage_lines[i].toString().split(/\t/);
             if(line[0].trim() !== chassis_nr) {
                 document.getElementById(line[0].trim()).style.display = 'none';
@@ -317,7 +317,7 @@ function focusDot(line_nr) {
         }
     }
     else {
-        for(let i = 1; i < ChassisInMontage_lines.length; i++) {
+        for(let i = 0; i < ChassisInMontage_lines.length; i++) {
             let line = ChassisInMontage_lines[i].toString().split(/\t/);
             document.getElementById(line[0].trim()).style.display = 'block';
         }

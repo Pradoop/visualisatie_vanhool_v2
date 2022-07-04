@@ -7,8 +7,8 @@ use App\Models\AnalyzeModel;
 
 class ChassisController extends BaseController
 {
-    private $burger_menu;
-    private $analyze_model;
+    private BurgerModel $burger_menu;
+    private AnalyzeModel $analyze_model;
     private $data;
 
     public function __construct()
@@ -24,7 +24,7 @@ class ChassisController extends BaseController
         return $this->map_view();
     }
 
-    public function chassis_view()
+    public function chassis_view(): string
     {
         $this->data['title_tab'] = 'Overzicht';
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Overzicht');
@@ -60,6 +60,5 @@ class ChassisController extends BaseController
 
         return $primary_array;
     }
-
 
 }
