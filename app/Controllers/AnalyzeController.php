@@ -36,6 +36,9 @@ class AnalyzeController extends BaseController
         $data2["file_lines"] = $this->analyze_model->readFile();
         $data2["rendement_lines"] = $this->rendement_model->readFile();
 
+        $data2["test"] = $this->rendement_model->fileColumnArrays($this->rendement_model->readFile())[4];
+        $data2["model_test"] = $this->test();
+
 
         //Data for "algemeen"tab in dashboard
         $data2["total_in_production"] = $this->calculateTotalInProduction($this->analyze_model->fileColumnArrays($data2["file_lines"])[0]);
@@ -55,9 +58,7 @@ class AnalyzeController extends BaseController
         $data2["historical_rendementen_info"] = $this->getHistoricalRendementData();
 
         //Passing files and variables to page
-        $this->data['scripts_to_load'][] = 'analyze_view.js';
-        $this->data['scripts_to_load'][] = 'analyze_view_huidige_rendementen.js';
-        $this->data['scripts_to_load'][] = 'analyze_view_historische_rendementen.js';
+        array_push($this->data['scripts_to_load'], 'analyze_view.js','analyze_view_huidige_rendementen.js','analyze_view_historische_rendementen.js');
         $this->data['styles_to_load'][] = 'analyze_view.scss';
         $this->data['content'] = view('analyze_view', $data2);
         return view('template', $this->data);
@@ -415,6 +416,62 @@ class AnalyzeController extends BaseController
         return json_encode($output_array);
     }
 
+    public function test()
+    {
+        $line_array = $this->rendement_model->readFile();
+        $my_array = $this->rendement_model->fileColumnArrays($line_array)[4];
+        $output_array = array();
+        $sorted_output_array = array();
+        $line_number = 1;
+        $status = "";
+        while ($line_number < sizeof($my_array)):
+            $temp = array();
+            if(isset($my_array[$line_number][0])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][0]));
+            }
+            if((isset($my_array[$line_number][3])) && (trim($my_array[$line_number][3]) == "")) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][3]));
+            }
+            if(isset($my_array[$line_number][4])) {
+                $value = utf8_encode(trim($my_array[$line_number][4]));
+                if($value == ""){
+                    $temp[] = "buffer";
+                }
+                else{
+                    $temp[] = $value;
+                }
+            }
+            if(isset($my_array[$line_number][5]) && isset($my_array[$line_number][6])) {
+                $worked =   intval(trim($my_array[$line_number][5]));
+                $planned =  intval(trim($my_array[$line_number][6]));
+                $dif = $worked - $planned;
+
+                if ($worked > $planned){
+                    $status = "dringend";
+                }
+                else{
+                    $status = "OK";
+                }
+                $temp[] = $worked;
+                $temp[] = $planned;
+                $temp[] = $dif;
+            }
+            if(isset($my_array[$line_number][7]) && isset($my_array[$line_number][8])) {
+                $temp[] = utf8_encode(trim($my_array[$line_number][7]));
+                $temp[] = utf8_encode(trim($my_array[$line_number][8]));
+            }
+            if (sizeof($temp) != 7){
+                array_splice($temp, 1, 1);
+            }
+            if ($status != "OK" && isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) == ""){
+                $output_array[] = $temp;
+            }
+            $line_number++;
+        endwhile;
+
+        return $output_array;
+    }
+
     public function getCurrentRendementData(): bool|string
     {
         $line_array = $this->rendement_model->readFile();
@@ -443,6 +500,7 @@ class AnalyzeController extends BaseController
             if(isset($my_array[$line_number][5]) && isset($my_array[$line_number][6])) {
                 $worked =   intval(trim($my_array[$line_number][5]));
                 $planned =  intval(trim($my_array[$line_number][6]));
+                $dif = $worked - $planned;
 
                 if ($worked > $planned){
                     $status = "dringend";
@@ -452,6 +510,7 @@ class AnalyzeController extends BaseController
                 }
                 $temp[] = $worked;
                 $temp[] = $planned;
+                $temp[] = $dif;
             }
             if(isset($my_array[$line_number][7]) && isset($my_array[$line_number][8])) {
                 $temp[] = utf8_encode(trim($my_array[$line_number][7]));
@@ -466,46 +525,33 @@ class AnalyzeController extends BaseController
             $line_number++;
         endwhile;
 
-        for ($i = 0; $i < sizeof($output_array); $i++){
+        for($i = 0; $i < sizeof($output_array); $i++) { //sizeof($output_array)
             $current_chassis = $output_array[$i];
-            $diff = $current_chassis[3] - $current_chassis[4];
-            if (sizeof($sorted_output_array) == 0){
+            if(sizeof($sorted_output_array) == 0) {
                 $sorted_output_array[] = $current_chassis;
             }
-            elseif (sizeof($sorted_output_array) == 1){
+            elseif(sizeof($sorted_output_array) == 1) {
                 $sorted_chassis = $sorted_output_array[0];
-                $sorted_diff = $sorted_chassis[3] - $sorted_chassis[4];
-                if ($diff > $sorted_diff){
+                if($current_chassis[4] > $sorted_chassis[4]) {
                     array_splice( $sorted_output_array, 0, 0, array($current_chassis));
                 }
                 else{
                     array_splice( $sorted_output_array, 1, 0, array($current_chassis));
                 }
             }
-            else{
-                for($j = 0; $j < sizeof($sorted_output_array) ; $j++){
+            else {
+                for($j = 0; $j < sizeof($sorted_output_array) ; $j++) {
                     $sorted_chassis = $sorted_output_array[$j];
-                    if ($j+1 < sizeof($sorted_output_array)){
-                        $next_sorted_chassis = $sorted_output_array[($j+1)];
+                    if($current_chassis[4] > $sorted_chassis[4]) {
+                        array_splice( $sorted_output_array, $j, 0, array($current_chassis));
+                        break;
                     }
-                    else{
-                        $next_sorted_chassis = $sorted_output_array[sizeof($sorted_output_array)-1];
-                    }
-                    $sorted_diff = $sorted_chassis[3] - $sorted_chassis[4];
-                    $next_sorted_diff = $next_sorted_chassis[3] - $next_sorted_chassis[4];
-                    if (($diff <= $sorted_diff) && ($diff > $next_sorted_diff)){
-                        $sorted_output_array[] = $current_chassis;
-                    }
-                    elseif ($diff < $next_sorted_diff){
-                        $sorted_output_array[] = $current_chassis;
-                    }
+
                 }
             }
-
         }
+
         return json_encode($sorted_output_array);
     }
-
-
 
 }
