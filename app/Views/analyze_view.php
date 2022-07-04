@@ -127,7 +127,7 @@
                 <div class="card card-1">
                     <div class="information_2">
                         <p class="information_value"><?= $amount_montage[0]?> chassis</p>
-                        <p class="information_text">af laatste 20 werkdagen</p>
+                        <p class="information_text">uit montage laatste 20 werkdagen</p>
                     </div>
                 </div>
                 <div class="card rendement-card-info">

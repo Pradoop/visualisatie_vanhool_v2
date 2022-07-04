@@ -30,11 +30,11 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        createPastRendementChart(historical_rendement_data, 0, 'this_week_rendement_chart', "Aantal afgewerkte chassis: deze week");
-        createPastRendementChart(historical_rendement_data, 1, 'last_week_rendement_chart', "Aantal afgewerkte chassis: vorige week");
-        createPastRendementChart(historical_rendement_data, 2, 'two_weeks_ago_rendement_chart', "Aantal afgewerkte chassis: twee weken geleden");
-        createPastRendementChart(historical_rendement_data, 3, 'three_weeks_ago_rendement_chart', "Aantal afgewerkte chassis: drie weken geleden");
-        createCompletedLineChart(historical_rendement_data, 'completed_chart', "Aantal afgewerkte chassis: laatste 20 werkdagen")
+        createPastRendementChart(historical_rendement_data, 0, 'this_week_rendement_chart', "Aantal uit montage chassis: deze week");
+        createPastRendementChart(historical_rendement_data, 1, 'last_week_rendement_chart', "Aantal uit montage chassis: vorige week");
+        createPastRendementChart(historical_rendement_data, 2, 'two_weeks_ago_rendement_chart', "Aantal uit montage chassis: twee weken geleden");
+        createPastRendementChart(historical_rendement_data, 3, 'three_weeks_ago_rendement_chart', "Aantal uit montage chassis: drie weken geleden");
+        createCompletedLineChart(historical_rendement_data, 'completed_chart', "Aantal uit montage chassis: laatste 20 werkdagen")
     }
 });
 
