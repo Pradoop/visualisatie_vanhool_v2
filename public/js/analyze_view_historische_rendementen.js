@@ -34,6 +34,7 @@ $.ajax({
         createPastRendementChart(historical_rendement_data, 1, 'last_week_rendement_chart', "Aantal afgewerkte chassis: vorige week");
         createPastRendementChart(historical_rendement_data, 2, 'two_weeks_ago_rendement_chart', "Aantal afgewerkte chassis: twee weken geleden");
         createPastRendementChart(historical_rendement_data, 3, 'three_weeks_ago_rendement_chart', "Aantal afgewerkte chassis: drie weken geleden");
+        createCompletedLineChart(historical_rendement_data, 'completed_chart', "Aantal afgewerkte chassis: laatste 20 werkdagen")
     }
 });
 
@@ -180,6 +181,9 @@ function createPastRendementChart(my_data, previous_week, my_graph_id, my_graph_
     }
     const myChart = new Chart(document.getElementById(my_graph_id), config);
     //const modalChart = new Chart(document.getElementById(my_graph_id + '_modal'), config);
+}
+
+function createCompletedLineChart(my_data, my_graph_id, my_graph_title){
 
 }
 

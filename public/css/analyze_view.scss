@@ -164,16 +164,17 @@ p{
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */;
-  width: 80%; /* Full width */
-  height: 80%; /* Full height */
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
 }
 
 /* Modal Content/Box */
 .modal-content {
+  margin: 1% 1% 1% 2%;
   background-color: #fefefe;
-  margin: 5%;
   border: 1px solid #888;
-  width: 60%;
+  width: 85%;
+  height: auto;
 }
 
 /* The Close Button */

@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        <!-- Modals for large charts -->
+        <!-- Modals for large charts on planning dashboard -->
         <div id="modal_this_week" class="modal">
             <div class="modal-content">
                 <span class="close this_week">&times;</span>
