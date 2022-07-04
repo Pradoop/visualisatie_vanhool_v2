@@ -289,7 +289,7 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
         fourthDay.getDate() + '/' + (fourthDay.getMonth() + 1),
         fifthDay.getDate() + '/' + (fifthDay.getMonth() + 1),
     ]
-    for (let i = 1; i<my_data.length; i++){
+    for (let i = 0; i<my_data.length; i++){
         let temp = [];
         temp = my_data[i];
         for (const j in thisWeek){
