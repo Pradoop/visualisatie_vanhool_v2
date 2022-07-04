@@ -36,10 +36,6 @@ class AnalyzeController extends BaseController
         $data2["file_lines"] = $this->analyze_model->readFile();
         $data2["rendement_lines"] = $this->rendement_model->readFile();
 
-        $data2["test"] = $this->rendement_model->fileColumnArrays($this->rendement_model->readFile())[4];
-        $data2["model_test"] = $this->test();
-
-
         //Data for "algemeen"tab in dashboard
         $data2["total_in_production"] = $this->calculateTotalInProduction($this->analyze_model->fileColumnArrays($data2["file_lines"])[0]);
         $data2["amount_delayed"] = $this->calculateAmountDelayed($this->analyze_model->fileColumnArrays($data2["file_lines"])[1]);
@@ -416,62 +412,6 @@ class AnalyzeController extends BaseController
         return json_encode($output_array);
     }
 
-    public function test()
-    {
-        $line_array = $this->rendement_model->readFile();
-        $my_array = $this->rendement_model->fileColumnArrays($line_array)[4];
-        $output_array = array();
-        $sorted_output_array = array();
-        $line_number = 1;
-        $status = "";
-        while ($line_number < sizeof($my_array)):
-            $temp = array();
-            if(isset($my_array[$line_number][0])) {
-                $temp[] = utf8_encode(trim($my_array[$line_number][0]));
-            }
-            if((isset($my_array[$line_number][3])) && (trim($my_array[$line_number][3]) == "")) {
-                $temp[] = utf8_encode(trim($my_array[$line_number][3]));
-            }
-            if(isset($my_array[$line_number][4])) {
-                $value = utf8_encode(trim($my_array[$line_number][4]));
-                if($value == ""){
-                    $temp[] = "buffer";
-                }
-                else{
-                    $temp[] = $value;
-                }
-            }
-            if(isset($my_array[$line_number][5]) && isset($my_array[$line_number][6])) {
-                $worked =   intval(trim($my_array[$line_number][5]));
-                $planned =  intval(trim($my_array[$line_number][6]));
-                $dif = $worked - $planned;
-
-                if ($worked > $planned){
-                    $status = "dringend";
-                }
-                else{
-                    $status = "OK";
-                }
-                $temp[] = $worked;
-                $temp[] = $planned;
-                $temp[] = $dif;
-            }
-            if(isset($my_array[$line_number][7]) && isset($my_array[$line_number][8])) {
-                $temp[] = utf8_encode(trim($my_array[$line_number][7]));
-                $temp[] = utf8_encode(trim($my_array[$line_number][8]));
-            }
-            if (sizeof($temp) != 7){
-                array_splice($temp, 1, 1);
-            }
-            if ($status != "OK" && isset($my_array[$line_number][3]) && trim($my_array[$line_number][3]) == ""){
-                $output_array[] = $temp;
-            }
-            $line_number++;
-        endwhile;
-
-        return $output_array;
-    }
-
     public function getCurrentRendementData(): bool|string
     {
         $line_array = $this->rendement_model->readFile();
@@ -546,7 +486,6 @@ class AnalyzeController extends BaseController
                         array_splice( $sorted_output_array, $j, 0, array($current_chassis));
                         break;
                     }
-
                 }
             }
         }

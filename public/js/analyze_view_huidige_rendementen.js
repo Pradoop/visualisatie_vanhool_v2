@@ -1,4 +1,4 @@
-let rendement_data = [], sorted_rendement_data = [];
+let rendement_data = [];
 
 $.ajax({
     url: BASE_URL + '/AnalyzeController/getCurrentRendementData',
@@ -15,59 +15,10 @@ $.ajax({
         console.log(xhr.responseText);
         console.log(error.responseText);
     },
-    complete: function(data){
-        //sorted_rendement_data = sortRendementData(rendement_data);
-        console.log(rendement_data);
+    complete: function(){
         createTableRendement(rendement_data,'current-rendement-table', 'Rendementen van opleggers in montage');
     }
 });
-
-function sortRendementData(my_data){
-    let sortedData = [];
-    let sortedChassis, sortedDiff, nextStoredChassis, nextSortedDiff;
-    for (let i = 0; i < my_data.length; i++){
-        let chassis = my_data[i];
-        let diff = chassis[3] - chassis[4];
-        if (sortedData.length === 0){
-            sortedData.push(chassis);
-        }
-        else if(sortedData.length === 1){
-            sortedChassis = sortedData[0];
-            sortedDiff = sortedChassis[3] - sortedChassis[4];
-            if (diff > sortedDiff){
-                sortedData.splice( 0, 0, chassis);
-            }
-            else{
-                sortedData.splice( 1, 0, chassis);
-            }
-        }
-        else{
-            for (let j = 0; j < sortedData.length; j++){
-                sortedChassis = sortedData[j];
-                if (j+1 < sortedData.length){
-                    nextStoredChassis = sortedData[j+1];
-                }
-                else{
-                    nextStoredChassis = sortedData[(sortedData.length)-1];
-                }
-                sortedDiff = sortedChassis[3] - sortedChassis[4];
-                nextSortedDiff = nextStoredChassis[3] - nextStoredChassis[4];
-                if ((diff <= sortedDiff) && (diff > nextSortedDiff)){
-                    sortedData.splice( j, 0, chassis);
-                }
-                else if (diff < nextSortedDiff){
-                    sortedData.splice( j, 0, chassis);
-                }
-                else if (diff > sortedDiff){
-                    sortedData.splice( j, 0, chassis);
-                }
-            }
-        }
-
-    }
-    console.log(sortedData);
-    return sortedData
-}
 
 function createTableRendement(my_data, my_table_id, my_title) {
 
@@ -111,7 +62,7 @@ function createTableRendement(my_data, my_table_id, my_title) {
     document.getElementById(my_table_id).appendChild(table);
     for (let i =0;  i < my_data.length; i++){
         let temp_chassis = my_data[i];
-        let row_wagennr, row_kaliber, row_gewerkt, row_gepland, row_verschil, row_toestand, row_klantnaam, row_wagentype;
+        let row_wagennr, row_kaliber, row_gewerkt, row_gepland, row_verschil, row_klantnaam, row_wagentype;
         let new_row = document.createElement('tr');
         for (let j = 0; j < temp_chassis.length; j++){
             row_wagennr = document.createElement('td');

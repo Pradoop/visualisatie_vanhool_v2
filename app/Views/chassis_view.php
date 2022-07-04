@@ -23,9 +23,6 @@
             </li>
 
             <li><hr class="dropdown-divider"></li>
-            <li><h6 class="dropdown-header">Wagentypes</h6></li>
-
-            <li><hr class="dropdown-divider"></li>
             <li><h6 class="dropdown-header">Status</h6></li>
             <li>
                 <input class="form-check-input overzicht-filter" type="checkbox" id="status-01-filter" checked>
@@ -91,10 +88,6 @@
                 <input class="form-check-input overzicht-filter" type="checkbox" id="status-12-filter" checked>
                 <label class="form-check-label" for="status-12-filter">Keuring chassis is voorbij montage</label>
             </li>
-
-            <li><hr class="dropdown-divider"></li>
-            <li><h6 class="dropdown-header">Klant</h6></li>
-
         </ul>
     </div>
     <div id="searchBox_div">
