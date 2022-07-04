@@ -525,7 +525,7 @@ class AnalyzeController extends BaseController
             $line_number++;
         endwhile;
 
-        for($i = 0; $i < sizeof($output_array); $i++) { //sizeof($output_array)
+        for($i = 0; $i < sizeof($output_array); $i++) {
             $current_chassis = $output_array[$i];
             if(sizeof($sorted_output_array) == 0) {
                 $sorted_output_array[] = $current_chassis;
