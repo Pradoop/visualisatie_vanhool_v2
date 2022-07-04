@@ -123,7 +123,7 @@
         </tr>
         </thead>
         <tbody id="myTable">
-        <?php $row_id = 1; ?>
+        <?php $row_id = 0; ?>
         <?php while($row_id < sizeof($data_lines)): ?>
             <tr id="<?= 'primary_'.$row_id ?>">
                 <?php
