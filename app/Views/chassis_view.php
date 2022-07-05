@@ -8,7 +8,7 @@
         </div>
     </div>
     <div id="dropdownFilter_div" class="dropdown filter">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="filter-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="filter-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false">
             Filters
         </button>
         <ul class="dropdown-menu" aria-labelledby="filter-dropdown-button">
@@ -20,6 +20,10 @@
             <li>
                 <input class="form-check-input overzicht-filter" type="checkbox" id="gemetalliseerd-filter" checked>
                 <label class="form-check-label" for="gemetalliseerd-filter">Gemetalliseerde wagens</label>
+            </li>
+            <li>
+                <input class="form-check-input overzicht-filter" type="checkbox" id="geen-filter" checked>
+                <label class="form-check-label" for="geen-filter">Geen van beide</label>
             </li>
 
             <li><hr class="dropdown-divider"></li>

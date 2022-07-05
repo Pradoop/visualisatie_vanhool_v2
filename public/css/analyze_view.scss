@@ -23,6 +23,10 @@ h1 {
   flex-wrap: wrap;
 }
 
+#bar_chart:hover, #multiple_bar_chart:hover {
+  cursor: pointer;
+}
+
 .dashboard-options {
   margin-top: 0.25%;
 }

@@ -19,12 +19,6 @@
                         <p class="information_text">in montage</p>
                     </div>
                 </div>
-<!--                <div class="card card-info">
-                    <div class="information_4">
-                        <p class="information_value">/*= $total_in_production[1] */?>%</p>
-                        <p class="information_text">in montage</p>
-                    </div>
-                </div>-->
                 <div class="card card-info">
                     <div class="information_5">
                         <p class="information_value"><?= $avg_mont?> Werkdagen</p>
