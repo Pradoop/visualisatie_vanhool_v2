@@ -127,87 +127,92 @@ function placeDot(id, position) {
     switch(position) {
         //Kalibers
         case "Kal S01  ":
-            document.getElementById(id).style.bottom = '9.25%';
+            document.getElementById(id).style.bottom = '8%';
             document.getElementById(id).style.left = '23.25%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S02  ":
-            document.getElementById(id).style.bottom = '9.25%';
+            document.getElementById(id).style.bottom = '8%';
             document.getElementById(id).style.left = '30.75%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S03  ":
-            document.getElementById(id).style.bottom = '9.25%';
+            document.getElementById(id).style.bottom = '8%';
             document.getElementById(id).style.left = '38.25%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S04  ":
-            document.getElementById(id).style.bottom = '9.25%';
+            document.getElementById(id).style.bottom = '8%';
             document.getElementById(id).style.left = '45.75%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S05  ":
-            document.getElementById(id).style.bottom = '39%';
+            document.getElementById(id).style.bottom = '40%';
             document.getElementById(id).style.left = '29%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S06  ":
-            document.getElementById(id).style.bottom = '39%';
+            document.getElementById(id).style.bottom = '40%';
             document.getElementById(id).style.left = '36.5%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S07  ":
-            document.getElementById(id).style.top = '38.5%';
+            document.getElementById(id).style.top = '40%';
             document.getElementById(id).style.left = '45.75%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S08  ":
-            document.getElementById(id).style.top = '9%';
+            document.getElementById(id).style.top = '8%';
             document.getElementById(id).style.left = '45.75%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S10  ":
-            document.getElementById(id).style.top = '9%';
+            document.getElementById(id).style.top = '8%';
             document.getElementById(id).style.right = '44.5%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S11  ":
-            document.getElementById(id).style.top = '9%';
-            document.getElementById(id).style.right = '38.75%';
+            document.getElementById(id).style.top = '8%';
+            document.getElementById(id).style.right = '38.5%';
+            document.getElementById(id).style.backgroundColor = '#10395d';
+            break;
+        case "Kal S12  ":
+            document.getElementById(id).style.top = '8%';
+            document.getElementById(id).style.right = '32.5%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L01  ":
-            document.getElementById(id).style.bottom = '39%';
-            document.getElementById(id).style.right = '43.25%';
+            document.getElementById(id).style.bottom = '40%';
+            document.getElementById(id).style.right = '43%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L02  ":
-            document.getElementById(id).style.bottom = '39%';
-            document.getElementById(id).style.right = '34%';
+            document.getElementById(id).style.bottom = '40%';
+            document.getElementById(id).style.right = '33.75%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L03  ":
-            document.getElementById(id).style.bottom = '39%';
-            document.getElementById(id).style.right = '14.5%';
+            document.getElementById(id).style.bottom = '40%';
+            document.getElementById(id).style.right = '14.25%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L04  ":
-            document.getElementById(id).style.bottom = '9.25%';
-            document.getElementById(id).style.right = '4.75%';
+            document.getElementById(id).style.bottom = '8%';
+            document.getElementById(id).style.right = '4.5%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L05  ":
-            document.getElementById(id).style.top = '9%';
-            document.getElementById(id).style.right = '22.5%';
+            document.getElementById(id).style.top = '8%';
+            document.getElementById(id).style.right = '22.25%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L06  ":
-            document.getElementById(id).style.top = '9%';
+            document.getElementById(id).style.top = '8%';
             document.getElementById(id).style.right = '13.5%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L07  ":
-            document.getElementById(id).style.top = '9%'
+            document.getElementById(id).style.top = '8%'
             document.getElementById(id).style.right = '4.5%';
             document.getElementById(id).style.backgroundColor = '#10395d';
             break;
@@ -215,57 +220,57 @@ function placeDot(id, position) {
         case "-":
             document.getElementById(id).style.top = '23.5%';
             document.getElementById(id).style.right = '38.75%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "0":
             document.getElementById(id).style.top = '23.5%';
             document.getElementById(id).style.right = '31.5%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "1":
             document.getElementById(id).style.bottom = '24%';
             document.getElementById(id).style.right = '38.75%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "2":
             document.getElementById(id).style.bottom = '24%';
             document.getElementById(id).style.right = '31.5%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "3":
             document.getElementById(id).style.bottom = '24%';
             document.getElementById(id).style.right = '25%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "4":
             document.getElementById(id).style.bottom = '24%';
             document.getElementById(id).style.right = '19%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "5":
             document.getElementById(id).style.bottom = '24%';
             document.getElementById(id).style.right = '14%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "6":
             document.getElementById(id).style.bottom = '24%';
             document.getElementById(id).style.right = '9%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "7":
             document.getElementById(id).style.top = '23.5%';
             document.getElementById(id).style.right = '25%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "8":
             document.getElementById(id).style.top = '23.5%';
             document.getElementById(id).style.right = '19%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         case "9":
             document.getElementById(id).style.top = '23.5%';
             document.getElementById(id).style.right = '14%';
-            document.getElementById(id).style.backgroundColor = '#10395d';
+            document.getElementById(id).style.backgroundColor = 'orange';
             break;
         //Default
         default :

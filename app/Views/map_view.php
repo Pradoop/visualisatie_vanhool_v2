@@ -32,7 +32,7 @@
 </div>
 
 <div id="image_div">
-    <img id="map" class="site-map" src="<?= base_url()?>/images/plattegrond_v2.png" alt="...">
+    <img id="map" class="site-map" src="<?= base_url()?>/images/plattegrond_v3.png" alt="...">
 </div>
 
 <div id="count_chassis">
