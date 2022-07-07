@@ -5,12 +5,9 @@
   margin-left: 1%;
   margin-right: 1%;
 }
-#afdelingNaam_div {
+#count_chassis {
   float: left;
   width: 80%;
-}
-#afdelingNaam {
-  display: inline-block
 }
 #searchBox {
   float: right;
@@ -39,14 +36,6 @@
   width: 100%;
 }
 
-#count_chassis {
-  text-align: center;
-  margin-left: 1%;
-  margin-right: 1%;
-  margin-bottom: 0.5%;
-  //border: 2px solid green;
-}
-
 /* Lijst chassis */
 #important_div {
   text-align: center;
@@ -72,12 +61,25 @@
 }
 
 /* Round dots */
-.dot {
+.dot_kalibers {
   display: inline-block;
-  height: 13px;
-  width: 13px;
   background-color: #10395d;
   border-radius: 50%;
+  height: 13px;
+  width: 13px;
+}
+.dot_buffers {
+  display: inline-block;
+  background-color: #10395d;
+  height: 12px;
+  width: 12px;
+}
+.dot_wachtkamer {
+  display: inline-block;
+  background-color: green;
+  border-radius: 50%;
+  height: 13px;
+  width: 13px;
 }
 
 /* Algemeen */

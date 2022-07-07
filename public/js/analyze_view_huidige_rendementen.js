@@ -41,7 +41,7 @@ function createTableRendement(my_data, my_table_id, my_title) {
     let heading_extra = document.createElement('th');
 
     heading_1.innerHTML = "Wagennr";
-    heading_2.innerHTML = "Oplegger/kaliber";
+    heading_2.innerHTML = "Kaliber";
     heading_3.innerHTML = "Gewerkte uren";
     heading_4.innerHTML = "Geplande uren";
     heading_extra.innerHTML = "Verschil uren"
