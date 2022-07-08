@@ -42,25 +42,14 @@
 /* Lijst chassis */
 #important_div {
   text-align: center;
-  margin-left: 1%;
-  margin-right: 1%;
-  margin-bottom: 1%;
-  //border: 2px solid green;
+  margin: 2% 1% 1%;
 }
 #important_div p:hover {
   color: #10395d;
   cursor: pointer;
 }
-.grid-container {
-  display: grid;
-  justify-items: center;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-}
-.grid-child {
-  margin-top: 0.5%;
-  margin-bottom: 0.5%;
-  width: 35%;
-  //border: 2px solid yellow;
+#list_chassis {
+  column-count: 5;
 }
 
 /* Dots */
@@ -99,7 +88,6 @@
 p {
   font-size: 20px;
   margin: 5px;
-  //border: 2px solid red;
 }
 h1 {
   font-size: 2em;

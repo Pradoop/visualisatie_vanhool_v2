@@ -56,7 +56,6 @@ $.ajax({
 
 function createImportantList() {
 
-    let column = 0;
     for(let i = 0; i < chassisInMontage_lines.length; i++) {
 
         //Split the current line
@@ -68,12 +67,7 @@ function createImportantList() {
         p.setAttribute('id', 'chassis_' + i);
         p.setAttribute('onclick', "focusDot(" + i + ")");
         p.innerHTML = id;
-        document.getElementById('column_' + column).appendChild(p);
-
-        column++;
-        if(column === 5) {
-            column = 0;
-        }
+        document.getElementById('list_chassis').appendChild(p);
     }
 }
 

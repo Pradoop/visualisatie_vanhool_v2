@@ -41,11 +41,6 @@
 
 <div id="important_div">
     <h1>Belangrijke Chassis</h1>
-    <div class="grid-container">
-        <div id="column_0" class="grid-child col1"></div>
-        <div id="column_1" class="grid-child col2"></div>
-        <div id="column_2" class="grid-child col3"></div>
-        <div id="column_3" class="grid-child col4"></div>
-        <div id="column_4" class="grid-child col5"></div>
+    <div id="list_chassis">
     </div>
 </div>
