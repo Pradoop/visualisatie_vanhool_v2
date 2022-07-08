@@ -16,6 +16,16 @@ let focus_dot = -1;
 let chassisInMontage_lines = [];
 let chassisInWachtkamer = [];
 
+//I-icons
+$('#wachtkamer_i').popover({
+    trigger: 'hover',
+    content: 'Chassis met de fase "Basisserieploeg en prefab klaar voor montage". Hier is geen locatie van beschikbaar.'
+});
+$('#buffer_i').popover({
+    trigger: 'hover',
+    content: 'Chassis zijn random in groepen verdeeld, hier is geen exacte locatie van beschikbaar.'
+});
+
 //Ajax for arrays
 $.ajax({
     url: BASE_URL + '/MapController/getChassisMap',
@@ -130,57 +140,46 @@ function placeDot(id, position) {
         case "Kal S01  ":
             document.getElementById(id).style.bottom = '8%';
             document.getElementById(id).style.left = '23.25%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S02  ":
             document.getElementById(id).style.bottom = '8%';
             document.getElementById(id).style.left = '30.75%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S03  ":
             document.getElementById(id).style.bottom = '8%';
             document.getElementById(id).style.left = '38.25%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S04  ":
             document.getElementById(id).style.bottom = '8%';
             document.getElementById(id).style.left = '45.75%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S05  ":
             document.getElementById(id).style.bottom = '40%';
             document.getElementById(id).style.left = '29%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S06  ":
             document.getElementById(id).style.bottom = '40%';
             document.getElementById(id).style.left = '36.5%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S07  ":
             document.getElementById(id).style.top = '40%';
             document.getElementById(id).style.left = '45.75%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S08  ":
             document.getElementById(id).style.top = '8%';
             document.getElementById(id).style.left = '45.75%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S10  ":
             document.getElementById(id).style.top = '8%';
             document.getElementById(id).style.right = '44.5%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S11  ":
             document.getElementById(id).style.top = '8%';
             document.getElementById(id).style.right = '38.5%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal S12  ":
             document.getElementById(id).style.top = '8%';
             document.getElementById(id).style.right = '32.5%';
-            //document.getElementById(id).style.backgroundColor = '#10395d';
             break;
         case "Kal L01  ":
             document.getElementById(id).style.bottom = '40%';

@@ -20,6 +20,7 @@
         <br>
         <span id="legende_buffer" class="dot_buffers" tabindex="0"></span>
         <label>Chassis in bufferzone</label>
+        <input type="image" id="buffer_i" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
     </div>
     <div id="legende_3">
         
