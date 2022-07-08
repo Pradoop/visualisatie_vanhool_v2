@@ -10,6 +10,7 @@ Chart.defaults.set('plugins.datalabels', {
 });
 Chart.defaults.font.size = 16;
 
+
 /*
  * Ajax request to retrieve all the data for welding
  * This call also executes the createWeldingChart() function based on the data that is retrieved
@@ -103,6 +104,7 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
+        console.log(chassis_pln_date);
         createWeekBarChart(chassis_pln_date, 0, 'this_week_chart', "Aantal geplande chassis: deze week");
         createWeekBarChart(chassis_pln_date, 1, 'next_week_chart', "Aantal geplande chassis: volgende week");
         createWeekBarChart(chassis_pln_date, 2, 'fortnight_chart', "Aantal geplande chassis in twee weken");
@@ -297,8 +299,8 @@ function createWeekBarChart(my_data, next_week, my_graph_id, my_graph_title){
                 week_chassis_count[j]++;
                 let tooltip_temp = [];
                 tooltip_temp.push(my_data[i][0]);
-                tooltip_temp.push(my_data[i][2]);
-                tooltip_temp.push(my_data[i][3]);
+                tooltip_temp.push("\t" + "\t" +  my_data[i][2]);
+                tooltip_temp.push("\t" + "\t" +  my_data[i][3]);
                 tooltip_data[j].push(tooltip_temp);
             }
         }
@@ -425,8 +427,8 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 week_stand_las_0[j]++;
                 let tooltip_temp = [];
                 tooltip_temp.push(my_data[i][0]);
-                tooltip_temp.push(my_data[i][2]);
-                tooltip_temp.push(my_data[i][3]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][2]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][3]);
                 tooltip_data_stand_0[j].push(tooltip_temp);
             }
         }
@@ -438,8 +440,8 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 week_stand_las_1[j]++;
                 let tooltip_temp = [];
                 tooltip_temp.push(my_data[i][0]);
-                tooltip_temp.push(my_data[i][2]);
-                tooltip_temp.push(my_data[i][3]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][2]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][3]);
                 tooltip_data_stand_1[j].push(tooltip_temp);
             }
         }
@@ -451,8 +453,8 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 week_stand_las_2[j]++;
                 let tooltip_temp = [];
                 tooltip_temp.push(my_data[i][0]);
-                tooltip_temp.push(my_data[i][2]);
-                tooltip_temp.push(my_data[i][3]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][2]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][3]);
                 tooltip_data_stand_2[j].push(tooltip_temp);
             }
         }
@@ -464,8 +466,8 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 week_stand_las_3[j]++;
                 let tooltip_temp = [];
                 tooltip_temp.push(my_data[i][0]);
-                tooltip_temp.push(my_data[i][2]);
-                tooltip_temp.push(my_data[i][3]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][2]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][3]);
                 tooltip_data_stand_3[j].push(tooltip_temp);
             }
         }
@@ -477,8 +479,8 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                 week_stand_las_4[j]++;
                 let tooltip_temp = [];
                 tooltip_temp.push(my_data[i][0]);
-                tooltip_temp.push(my_data[i][2]);
-                tooltip_temp.push(my_data[i][3]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][2]);
+                tooltip_temp.push("\t" + "\t" + "\t" + "\t" + my_data[i][3]);
                 tooltip_data_stand_4[j].push(tooltip_temp);
             }
         }
@@ -574,7 +576,7 @@ function createWeekWeldingChart(my_data, next_week, my_graph_id, my_graph_title)
                         display:true, text: "Datum",
                     },
                     grid: {
-                        display: false,
+                        display: true,
                         drawBorder: false,
                     },
 
