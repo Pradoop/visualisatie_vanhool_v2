@@ -34,9 +34,6 @@ class MapController extends BaseController
         $this->data['burger_menu'] = $this->burger_menu->get_menuitems('Plattegrond');
 
         $data2["ChassisInKaliberIV"] = $this->map_model->readFile();
-        $data2["chassisInMontage_array"] = $this->getChassisMap()[0];
-        $data2["chassisInWachtkamer_array"] = $this->getChassisMap()[1];
-        $data2["wdInMontageLimit"] = 0;
 
         $this->data['scripts_to_load'][] = 'map_view.js';
         $this->data['styles_to_load'][] = 'map_view.scss';
@@ -44,7 +41,7 @@ class MapController extends BaseController
         return view('template', $this->data);
     }
 
-    public function getChassisMap(): array
+    public function getChassisMap()
     {
         $line_array = $this->analyze_model->readFile();
         $status_hal = array('07','83','85','86','8','81');
@@ -57,16 +54,17 @@ class MapController extends BaseController
         foreach($line_array as $line) {
             $array = preg_split('/\t/', $line);
             if(isset($array[14]) && in_array($array[14], $status_hal)) {
-                $hal_array[] = $line;
+                $hal_array[] = utf8_encode($line);
             }
             else if(isset($array[14]) && in_array($array[14], $status_wait)) {
-                $wait_array[] = $line;
+                $wait_array[] = utf8_encode($line);
             }
         }
 
         $output_array[] = $hal_array;
         $output_array[] = $wait_array;
-        return $output_array;
+
+        return json_encode($output_array);
     }
 
 }
