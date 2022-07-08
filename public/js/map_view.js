@@ -338,6 +338,10 @@ function focusDot(line_nr) {
     }
 
     if(focus === 0) {
+        for(let i = 0; i < chassisInWachtkamer.length; i++) {
+            let line = chassisInWachtkamer[i].toString().split(/\t/);
+            document.getElementById(line[0].trim()).style.display = 'none';
+        }
         for(let i = 0; i < chassisInMontage_lines.length; i++) {
             let line = chassisInMontage_lines[i].toString().split(/\t/);
             if(line_nr === i) {
@@ -354,6 +358,10 @@ function focusDot(line_nr) {
         }
     }
     else {
+        for(let i = 0; i < chassisInWachtkamer.length; i++) {
+            let line = chassisInWachtkamer[i].toString().split(/\t/);
+            document.getElementById(line[0].trim()).style.display = 'block';
+        }
         for(let i = 0; i < chassisInMontage_lines.length; i++) {
             let line = chassisInMontage_lines[i].toString().split(/\t/);
             document.getElementById(line[0].trim()).style.display = 'block';

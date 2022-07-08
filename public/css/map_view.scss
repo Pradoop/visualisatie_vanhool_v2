@@ -7,11 +7,25 @@
 }
 #count_chassis {
   float: left;
-  width: 80%;
+  width: 20%;
+  border: 2px solid green;
+}
+#legende_1 {
+  width: 20%;
+  border: 2px solid green;
+}
+#legende_2 {
+  width: 20%;
+  border: 2px solid green;
+}
+#legende_3 {
+  width: 20%;
+  border: 2px solid green;
 }
 #searchBox {
   float: right;
   width: 20%;
+  border: 2px solid green;
 }
 #search_input {
   float: right;
@@ -60,7 +74,7 @@
   //border: 2px solid yellow;
 }
 
-/* Round dots */
+/* Dots */
 .dot_kalibers {
   display: inline-block;
   background-color: #10395d;
@@ -68,9 +82,16 @@
   height: 13px;
   width: 13px;
 }
+.dot_kalibers_las {
+  display: inline-block;
+  background-color: yellow;
+  border-radius: 50%;
+  height: 13px;
+  width: 13px;
+}
 .dot_buffers {
   display: inline-block;
-  background-color: #10395d;
+  background-color: purple;
   height: 12px;
   width: 12px;
 }

@@ -6,6 +6,24 @@
         <br>
         <label id="aantalWachtkamer"></label>
     </div>
+    <div id="legende_1">
+        <span id="legende_wachtkamer" class="dot_wachtkamer" tabindex="0"></span>
+        <label>Chassis klaar voor montage</label>
+        <input type="image" id="wachtkamer_i" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
+        <br>
+        <span id="legende_kalibers" class="dot_kalibers" tabindex="0"></span>
+        <label>Chassis in samenstelkaliber</label>
+    </div>
+    <div id="legende_2">
+        <span id="legende_kalibers_las" class="dot_kalibers_las" tabindex="0"></span>
+        <label>Chassis in laskaliber</label>
+        <br>
+        <span id="legende_buffer" class="dot_buffers" tabindex="0"></span>
+        <label>Chassis in bufferzone</label>
+    </div>
+    <div id="legende_3">
+        
+    </div>
     <div id="searchBox">
         <input id="search_input" type="text" class="form-control" placeholder="Typ wagennummer om te zoeken">
     </div>

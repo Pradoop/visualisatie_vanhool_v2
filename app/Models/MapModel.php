@@ -19,7 +19,7 @@ class MapModel extends \CodeIgniter\Model
         * Small txtFile with columns: wagen,DLnr,Kaliber,NaamFase,NaamKlant,NaamType,Natie,StandInProd,ReeksVan,ReeksTot
         */
         $chassisInKaliberIV_array = array();
-        $file = fopen("C:\Users\pradk\Documents\Uni\Thesis\ChassisInKaliberIV.txt", "r");
+        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\ChassisInKaliberIV.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);
