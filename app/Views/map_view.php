@@ -44,7 +44,7 @@
 
     <label for="dagen_montage_limit">Wagens vanaf </label>
     <input type="number" id="dagen_montage_limit" name="dagen_montage_limit">
-    <label> dagen in montage.</label>
+    <label> dagen in montage:</label>
 
     <div id="list_chassis">
     </div>
