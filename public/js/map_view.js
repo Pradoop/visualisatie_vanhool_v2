@@ -58,8 +58,8 @@ $.ajax({
 
 function createImportantList() {
 
-    // let max = 0;
-    // let min = 999;
+    let max = 0;
+    let min = 999;
 
     for(let i = 0; i < chassisInMontage_lines.length; i++) {
 
@@ -68,12 +68,12 @@ function createImportantList() {
         let id = line[0].trim();
 
         //Max and min
-        // if(parseInt(line[17].trim()) < min) {
-        //     min = parseInt(line[17].trim());
-        // }
-        // if(parseInt(line[17].trim()) > max) {
-        //     max = parseInt(line[17].trim());
-        // }
+        if(parseInt(line[17].trim()) < min) {
+            min = parseInt(line[17].trim());
+        }
+        if(parseInt(line[17].trim()) > max) {
+            max = parseInt(line[17].trim());
+        }
 
         //create p
         let p = document.createElement('p');
@@ -83,11 +83,28 @@ function createImportantList() {
         document.getElementById('list_chassis').appendChild(p);
     }
 
-    // let montage_limit = document.getElementById("dagen_montage_limit");
-    // montage_limit.min = min;
-    // montage_limit.max = max;
-    // montage_limit.value = max;
+    let montage_limit = document.getElementById("dagen_montage_limit");
+    montage_limit.min = min;
+    montage_limit.max = max;
+    montage_limit.value = min;
 }
+
+document.getElementById("dagen_montage_limit").addEventListener('change', function() {
+
+    for(let i = 0; i < chassisInMontage_lines.length; i++) {
+
+        //Split the current line
+        let line = chassisInMontage_lines[i].split(/\t/);
+        let dagenInMontage = parseInt(line[17].trim());
+
+        if(document.getElementById("dagen_montage_limit").value <= dagenInMontage) {
+            document.getElementById("chassis_" + i).style.display = "block";
+        }
+        else {
+            document.getElementById("chassis_" + i).style.display = "none";
+        }
+    }
+})
 
 function createDot(chassis_array) {
 
@@ -251,20 +268,21 @@ function placeDot(id, position) {
             document.getElementById(id).style.top = buffer_dot_top + '%';
             document.getElementById(id).style.right = buffer_dot_right + '%';
             buffer_dot_right = buffer_dot_right - 1;
-            //Naar begin buffer rechts boven
-            if(buffer_dot_right === 29 && buffer_dot_top === 26) {
-                buffer_dot_right = 26;
-                buffer_dot_top = 21;
-            }
             //Naar begin buffer links onder
-            if(buffer_dot_right === 0 && buffer_dot_top === 26) {
+            if(buffer_dot_right === 29 && buffer_dot_top === 26) {
                 buffer_dot_right = 47;
                 buffer_dot_top = 69;
             }
             //Naar begin buffer rechts onder
-            if(buffer_dot_right === 29 && buffer_dot_top === 74) {
+
+            if(buffer_dot_right === 0 && buffer_dot_top === 26) {
                 buffer_dot_right = 26;
                 buffer_dot_top = 69;
+            }
+            //Naar begin buffer rechts boven
+            if(buffer_dot_right === 29 && buffer_dot_top === 74) {
+                buffer_dot_right = 26;
+                buffer_dot_top = 21;
             }
             //Naar begin buffer links boven
             if(buffer_dot_right === 0 && buffer_dot_top === 74) {
@@ -288,21 +306,23 @@ $("#search_input").on("keyup", function() {
 
     let possible_hits = 0;
     let value = $(this).val();
-    let dots = document.querySelectorAll(".dot_K_kaliber, .dot_L_kaliber,.dot_buffer, .dot_wachtkamer");
 
     //List
     $("#important_div p").filter(function() {
         $(this).toggle($(this).text().indexOf(value) > -1);
     });
 
-    //Dots
-    for(let i = 0; i < dots.length; i++) {
-        if(dots[i].id.indexOf(value) > -1) {
-            document.getElementById(dots[i].id).style.display = 'block';
+    let all = chassisInMontage_lines.concat(chassisInWachtkamer);
+    for(let i = 0; i < all.length; i++) {
+        let line = all[i].split(/\t/);
+        let id = line[0].trim();
+
+        if(id.indexOf(value) > -1) {
+            document.getElementById(id).style.display = 'block';
             possible_hits++;
         }
         else {
-            document.getElementById(dots[i].id).style.display = 'none';
+            document.getElementById(id).style.display = 'none';
         }
     }
 
@@ -315,7 +335,6 @@ $("#search_input").on("keyup", function() {
     }
 });
 
-//Clicking on map
 $('#map').click(function() {
 
     for(let i = 0; i < chassisInWachtkamer.length; i++) {
@@ -325,7 +344,10 @@ $('#map').click(function() {
     for(let i = 0; i < chassisInMontage_lines.length; i++) {
         let line = chassisInMontage_lines[i].toString().split(/\t/);
         document.getElementById(line[0].trim()).style.display = 'block';
-        document.getElementById("chassis_" + i).style.display = 'block';
+        let dagenInMontage = parseInt(line[17].trim());
+        if(document.getElementById("dagen_montage_limit").value <= dagenInMontage) {
+            document.getElementById("chassis_" + i).style.display = 'block';
+        }
     }
     document.getElementById("search_input").value = "";
     focus = 0;

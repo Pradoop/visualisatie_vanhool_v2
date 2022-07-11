@@ -104,7 +104,7 @@ $.ajax({
         console.log(error.responseText);
     },
     complete: function(data){
-        console.log(chassis_pln_date);
+        //console.log(chassis_pln_date);
         createWeekBarChart(chassis_pln_date, 0, 'this_week_chart', "Aantal geplande chassis: deze week");
         createWeekBarChart(chassis_pln_date, 1, 'next_week_chart', "Aantal geplande chassis: volgende week");
         createWeekBarChart(chassis_pln_date, 2, 'fortnight_chart', "Aantal geplande chassis in twee weken");
