@@ -301,10 +301,15 @@ $("#search_input").on("keyup", function() {
 
 //Clicking on map
 $('#map').click(function() {
-    for(let i = 1; i < chassisInMontage_lines.length; i++) {
+
+    for(let i = 0; i < chassisInWachtkamer.length; i++) {
+        let line = chassisInWachtkamer[i].toString().split(/\t/);
+        document.getElementById(line[0].trim()).style.display = 'block';
+    }
+    for(let i = 0; i < chassisInMontage_lines.length; i++) {
         let line = chassisInMontage_lines[i].toString().split(/\t/);
         document.getElementById(line[0].trim()).style.display = 'block';
-        document.getElementById("chassis_" + (i-1)).style.display = 'block';
+        document.getElementById("chassis_" + i).style.display = 'block';
     }
     document.getElementById("search_input").value = "";
     focus = 0;
