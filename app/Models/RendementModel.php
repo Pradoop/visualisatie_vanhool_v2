@@ -16,7 +16,7 @@ class RendementModel extends \CodeIgniter\Model
         * Medium txtFile with columns: Wagen,DLnr,DatumInMont,DatumMontAf,Info,Gewerkt,Gepland,NaamKlant,NaamType,Natie,ReeksVan,ReeksTot
         */
         $werkurenMontOpl_array = array();
-        $file = fopen("C:\Users\Yanni\OneDrive\Documenten\Master's Thesis (20sp)\WerkurenMontOpl.txt", "r");
+        $file = fopen("D:\KU Leuven Group T\Master in de industriele wetenschappen elektronica-ICT\Gemeenschappelijk deel\Master's Thesis (20sp)\WerkurenMontOpl.txt", "r");
         if($file) {
             while(!feof($file)) {
                 $line = fgets($file);

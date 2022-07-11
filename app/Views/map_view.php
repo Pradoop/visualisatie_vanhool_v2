@@ -1,29 +1,29 @@
 <script> let ChassisInKaliberIV_lines = <?php echo json_encode($ChassisInKaliberIV); ?>;</script>
 
 <div id="map_div">
-    <div id="count_chassis">
-        <label id="aantalMontage"></label>
-        <br>
-        <label id="aantalWachtkamer"></label>
-    </div>
     <div id="legende_1">
-        <span id="legende_wachtkamer" class="dot_wachtkamer" tabindex="0"></span>
-        <label>Chassis klaar voor montage</label>
-        <input type="image" id="wachtkamer_i" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
+        <label id="aantalWachtkamer"></label>
         <br>
-        <span id="legende_kalibers" class="dot_kalibers" tabindex="0"></span>
-        <label>Chassis in samenstelkaliber</label>
+        <span id="legende_wachtkamer" class="dot_wachtkamer" tabindex="0"></span>
+        <label>Wagens klaar voor montage</label>
+        <input type="image" id="wachtkamer_i" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
     </div>
     <div id="legende_2">
-        <span id="legende_kalibers_las" class="dot_kalibers_las" tabindex="0"></span>
-        <label>Chassis in laskaliber</label>
+        <label id="aantalBuffer"></label>
         <br>
-        <span id="legende_buffer" class="dot_buffers" tabindex="0"></span>
-        <label>Chassis in bufferzone</label>
+        <span id="legende_buffer" class="dot_buffer" tabindex="0"></span>
+        <label>Wagens in bufferzone</label>
         <input type="image" id="buffer_i" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
     </div>
     <div id="legende_3">
-        
+        <span id="legende_kalibers" class="dot_K_kaliber" tabindex="0"></span>
+        <label>Wagens in K-kaliber</label>
+        <br>
+        <span id="legende_kalibers_las" class="dot_L_kaliber" tabindex="0"></span>
+        <label>Wagens in L-kaliber</label>
+    </div>
+    <div id="legende_4">
+        <label id="aantalMontage"></label>
     </div>
     <div id="searchBox">
         <input id="search_input" type="text" class="form-control" placeholder="Typ wagennummer om te zoeken">

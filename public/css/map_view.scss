@@ -1,16 +1,18 @@
-/* Map */
+/* Legende + search */
 #map_div {
   display: flex;
   margin-top: 1%;
-  margin-left: 1%;
-  margin-right: 1%;
-}
-#count_chassis {
-  float: left;
-  width: 20%;
+  margin-left: 1.5%;
+  margin-right: 1.5%;
 }
 #legende_1, #legende_2, #legende_3 {
-  width: 20%;
+  float: left;
+  width: 15%;
+  min-width: 275px;
+}
+#legende_4 {
+  width: 35%;
+  min-width: 275px;
 }
 #searchBox {
   float: right;
@@ -19,7 +21,6 @@
 #search_input {
   float: right;
 }
-
 #search_failure_div {
   text-align: right;
   margin-left: 1%;
@@ -30,6 +31,7 @@
   color: red;
 }
 
+/* Map */
 #image_div {
   position: relative;
   margin: 0.5% 1%;
@@ -53,21 +55,21 @@
 }
 
 /* Dots */
-.dot_kalibers {
+.dot_K_kaliber {
   display: inline-block;
   background-color: #10395d;
   border-radius: 50%;
   height: 13px;
   width: 13px;
 }
-.dot_kalibers_las {
+.dot_L_kaliber {
   display: inline-block;
-  background-color: yellow;
+  background-color: orange;
   border-radius: 50%;
   height: 13px;
   width: 13px;
 }
-.dot_buffers {
+.dot_buffer {
   display: inline-block;
   background-color: purple;
   height: 12px;
@@ -76,7 +78,6 @@
 .dot_wachtkamer {
   display: inline-block;
   background-color: green;
-  border-radius: 50%;
   height: 13px;
   width: 13px;
 }
