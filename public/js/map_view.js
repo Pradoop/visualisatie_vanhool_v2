@@ -58,11 +58,22 @@ $.ajax({
 
 function createImportantList() {
 
+    // let max = 0;
+    // let min = 999;
+
     for(let i = 0; i < chassisInMontage_lines.length; i++) {
 
         //Split the current line
         let line = chassisInMontage_lines[i].split(/\t/);
         let id = line[0].trim();
+
+        //Max and min
+        // if(parseInt(line[17].trim()) < min) {
+        //     min = parseInt(line[17].trim());
+        // }
+        // if(parseInt(line[17].trim()) > max) {
+        //     max = parseInt(line[17].trim());
+        // }
 
         //create p
         let p = document.createElement('p');
@@ -71,6 +82,11 @@ function createImportantList() {
         p.innerHTML = id;
         document.getElementById('list_chassis').appendChild(p);
     }
+
+    // let montage_limit = document.getElementById("dagen_montage_limit");
+    // montage_limit.min = min;
+    // montage_limit.max = max;
+    // montage_limit.value = max;
 }
 
 function createDot(chassis_array) {
