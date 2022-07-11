@@ -34,7 +34,7 @@
             <th id="th7">Reekshoofd</th>
             <th id="th8">Reekseinde</th>
             <th id="th9">Land</th>
-            <th id="th10">Datum in Montage</th>
+            <th id="th10">Datum opgezet</th>
             <th id="th11">Datum uit Montage</th>
         </tr>
         </thead>
