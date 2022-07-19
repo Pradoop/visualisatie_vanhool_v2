@@ -1,10 +1,6 @@
 <div id="table_title">
     <div id="afdelingNaam_div">
         <div id="afdelingNaam">
-            <h1>
-                Industriële Voertuigen: hal 5 en hal 6
-                <input type="image" id="icon_i" class="info_icon" src="<?= base_url()?>/images/icons8-information-15.png" alt="...">
-            </h1>
         </div>
     </div>
     <div id="dropdownFilter_div" class="dropdown filter">

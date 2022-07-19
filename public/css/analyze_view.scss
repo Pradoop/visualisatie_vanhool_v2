@@ -6,12 +6,9 @@ h1 {
 
 .dash-title {
   display: flex;
+  justify-content: center;
 }
 
-.tab-div{
-  float: left;
-  width: 20%;
-}
 .tab {
   border-radius: 5px;
 }
@@ -205,7 +202,6 @@ p{
   border: 1px solid #ccc;
   background-color: #f1f1f1;
   float: right;
-  margin-left: 45%;
 }
 
 /* Style the buttons that are used to open the tab content */

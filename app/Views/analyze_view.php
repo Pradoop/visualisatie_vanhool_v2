@@ -1,8 +1,5 @@
 <div id="general_information">
     <div class="dash-title">
-        <div class="tab-div">
-            <h1>Dashboard</h1>
-        </div>
         <div class="tab">
             <button class="tablinks active" onclick="showDashboard(event, 'general-info-dash')">Planning</button>
             <button class="tablinks" onclick="showDashboard(event, 'historical-rendement-info-dash')">Historische Rendementen</button>
