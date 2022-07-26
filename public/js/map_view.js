@@ -15,6 +15,7 @@ let focus = 0;
 let focus_dot = -1;
 let chassisInMontage_lines = [];
 let chassisInWachtkamer = [];
+let ChassisInKaliberIV_lines = [];
 let wachtkamer_dot_top = 15;
 let wachtkamer_dot_left = 2;
 let buffer_dot_top = 21;
@@ -42,6 +43,9 @@ $.ajax({
         }
         for(let j = 0; j < responseObject[1].length; j++) {
             chassisInWachtkamer.push(responseObject[1][j]);
+        }
+        for(let k = 0; k < responseObject[2].length; k++) {
+            ChassisInKaliberIV_lines.push(responseObject[2][k]);
         }
     },
     error: function (xhr, status, error) {

@@ -43,6 +43,7 @@ class MapController extends BaseController
 
     public function getChassisMap()
     {
+        $kaliber_lines = $this->map_model->readFile();
         $line_array = $this->analyze_model->readFile();
         $status_hal = array('07','83','85','86','8','81');
         $status_wait = array('38');//TODO
@@ -50,6 +51,11 @@ class MapController extends BaseController
         $output_array = array();
         $hal_array = array();
         $wait_array = array();
+        $kaliber_array = array();
+
+        foreach($kaliber_lines as $l) {
+            $kaliber_array[] = utf8_encode($l);
+        }
 
         foreach($line_array as $line) {
             $array = preg_split('/\t/', $line);
@@ -63,6 +69,7 @@ class MapController extends BaseController
 
         $output_array[] = $hal_array;
         $output_array[] = $wait_array;
+        $output_array[] = $kaliber_array;
 
         return json_encode($output_array);
     }
