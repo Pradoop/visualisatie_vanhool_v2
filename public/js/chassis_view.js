@@ -1,7 +1,8 @@
 $(document).ready(function() {
 
     $('#chassis_table').DataTable({
-        columnDefs: [{ type: 'date-uk', targets: 0 }],
+        autoWidth: false,
+        columnDefs: [{ type: 'date-uk', targets: 0 },],
         "language": {"url": "//cdn.datatables.net/plug-ins/1.12.1/i18n/nl-NL.json"},
         "searching": false,
         paging: false,

@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
     $('#chassis_table').DataTable({
+        autoWidth: false,
         columnDefs: [
             { type: 'date-uk', targets: 10 },
             { type: 'date-uk', targets: 11 },
