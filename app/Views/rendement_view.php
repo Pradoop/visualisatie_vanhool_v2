@@ -3,11 +3,6 @@
         <div id="afdelingNaam">
         </div>
     </div>
-    <div id="dropdownFilter_div" class="dropdown filter">
-        <button class="btn btn-secondary dropdown-toggle" type="button" id="filter-dropdown-button" data-bs-toggle="dropdown" aria-expanded="false" disabled>
-            Filters
-        </button>
-    </div>
     <div id="searchBox_div">
         <input id="search_input" type="text" class="form-control" placeholder="Typ om te zoeken">
     </div>

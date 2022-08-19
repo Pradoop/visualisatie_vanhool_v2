@@ -6,32 +6,16 @@
 
 #afdelingNaam_div {
   float: left;
-  width: 81%;
+  width: 80%;
 }
 #afdelingNaam {
   display: inline-block
 }
 
-#dropdownFilter_div {
-  width: 7%;
-  min-width: 130px;
-}
-#filter-dropdown-button {
-  float: right;
-  width: 100px;
-}
-.filter .dropdown-menu{
-  padding: 0.5rem 0.5rem;
-  min-width: 25rem;
-}
-.filter .dropdown-header{
-  padding: 0.5rem 0;
-}
-
 #searchBox_div {
   float: right;
   min-width: 250px;
-  width: 12%;
+  width: 20%;
 }
 #search_input {
   float: right;
